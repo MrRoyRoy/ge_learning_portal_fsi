@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Gemini Enterprise Education Adoption Portal - Discover pro tips, custom agent templates, and robust use case references to accelerate generative AI adoption in your school.">
+  <title>Google Gemini Enterprise Education Adoption Portal</title>
+  
+  <!-- Preload Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Google Material Symbols Outlined Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  
+  <!-- Custom Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Custom Application Logic -->
+  <script src="app.js" defer></script>
+</head>
+<body>
+
+  <!-- ONBOARDING WELCOME WIZARD (First-load only, settings can be updated anytime) -->
+  <div class="wizard-overlay" id="wizardOverlay" aria-modal="true" role="dialog">
+    <div class="wizard-card glass-panel">
+      <div class="wizard-header">
+        <div class="wizard-logo">
+          <span class="material-symbols-outlined" style="font-size: 32px; color: white;">school</span>
+        </div>
+        <h1 class="wizard-title" id="wizardTitle">Google Gemini Enterprise</h1>
+        <h2 id="wizardSubtitle" style="font-size: 16px; color: var(--color-primary); font-weight: 700; margin-top: 4px;">Education Adoption & Playbook Portal</h2>
+        <p class="wizard-desc" id="wizardDesc">Unlock specialized AI agent templates, prompt sandboxes, and administrative integration guides customized to your role and school level.</p>
+      </div>
+
+      <div class="wizard-form">
+        <!-- Role Selection -->
+        <div class="form-group">
+          <label class="form-label" for="wizardRole" id="labelRole">Identify Your Role</label>
+          <select class="select-control" id="wizardRole">
+            <option value="Lecturer" selected>Lecturer / Educator</option>
+            <option value="TA">Teaching Assistant (TA)</option>
+            <option value="Student">Student Representative / Club Leader</option>
+            <option value="Program Leader">Program Leader / Department Head</option>
+            <option value="Dean">Dean / Educational Leader</option>
+            <option value="IT Admin">IT Director / System Administrator</option>
+            <option value="SAO">Student Affairs Office (SAO) Staff</option>
+            <option value="Security">Campus Security Officer</option>
+            <option value="Finance">Institutional Finance / Auditor</option>
+          </select>
+        </div>
+
+        <!-- Institution Level Selection -->
+        <div class="form-group" id="levelFormGroup">
+          <label class="form-label" for="wizardLevel" id="labelLevel">Institution / School Level</label>
+          <select class="select-control" id="wizardLevel">
+            <option value="Generic" style="display: none;">Generic (Cross-Level Adaptable)</option>
+            <option value="University & College" selected>University & College (Higher Edu)</option>
+            <option value="High School">High School (Grades 6-12)</option>
+            <option value="Primary School">Primary School (Grades K-5)</option>
+          </select>
+          <p id="levelHelperText" style="font-size: 11px; color: var(--text-muted); margin-top: 4px;"></p>
+        </div>
+
+        <!-- Language Selection -->
+        <div class="form-group">
+          <label class="form-label" for="wizardLang" id="labelLang">Select Language / 選擇語言</label>
+          <select class="select-control" id="wizardLang">
+            <option value="en" selected>English</option>
+            <option value="zh-TW">繁體中文</option>
+            <option value="zh-CN">简体中文</option>
+          </select>
+        </div>
+
+        <!-- Action Button -->
+        <div class="wizard-actions">
+          <button class="nav-button nav-button-primary btn-wide" id="btnStart">
+            Enter Workspace <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN APPLICATION LAYOUT -->
+  <div class="app-container">
+    
+    <!-- LEFT SIDEBAR: Context Profile & Filters -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="logo-icon">
+          <span class="material-symbols-outlined">cognition</span>
+        </div>
+        <div class="brand-text-wrapper">
+          <div class="brand-text">Gemini Enterprise</div>
+          <div style="font-size: 10px; color: var(--color-secondary); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;">Edu Portal</div>
+        </div>
+      </div>
+
+      <!-- Current Selected Profile Context -->
+      <div class="sidebar-section">
+        <div class="sidebar-title" id="sidebarProfileTitle">My Context Profile</div>
+        <div class="context-profile-card">
+          <div class="profile-role-name" id="sidebarRole">Lecturer</div>
+          <div class="profile-institution" id="sidebarLevel">University & College</div>
+        </div>
+      </div>
+
+      <!-- ACTIVE CONNECTOR CONTROLLER PANELS -->
+      <div class="sidebar-section">
+        <div class="sidebar-title" id="sidebarConnectorsTitle">Active GE Connectors</div>
+        
+        <!-- Drive Connector -->
+        <div class="connector-item">
+          <div class="connector-name-wrapper">
+            <div class="connector-indicator" id="indicator-onedrive"></div>
+            <span>Drive Connector</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="toggleOneDrive" aria-label="Toggle Drive Connector">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <!-- Email Connector -->
+        <div class="connector-item">
+          <div class="connector-name-wrapper">
+            <div class="connector-indicator" id="indicator-outlook"></div>
+            <span>Email Connector</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="toggleOutlook" aria-label="Toggle Email Connector">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <!-- LMS Connector -->
+        <div class="connector-item">
+          <div class="connector-name-wrapper">
+            <div class="connector-indicator" id="indicator-lms"></div>
+            <span>LMS Connector</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="toggleLMS" aria-label="Toggle LMS Connector">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <!-- Calendar Connector -->
+        <div class="connector-item">
+          <div class="connector-name-wrapper">
+            <div class="connector-indicator" id="indicator-google"></div>
+            <span>Calendar Connector</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="toggleGoogle" aria-label="Toggle Calendar Connector">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- FEATURES TAGS FILTERS -->
+      <div class="sidebar-section" style="margin-top: 8px;">
+        <div class="sidebar-title" id="sidebarFeaturesTitle">Filter by GE Feature</div>
+        <ul class="filter-menu-list">
+          <li class="filter-menu-item feature-filter-item active" data-feature="all">
+            <span class="material-symbols-outlined">grid_view</span> All Capabilities
+          </li>
+          <li class="filter-menu-item feature-filter-item" data-feature="NotebookLM">
+            <span class="material-symbols-outlined">book_4</span> NotebookLM
+          </li>
+          <li class="filter-menu-item feature-filter-item" data-feature="Canvas Mode">
+            <span class="material-symbols-outlined">edit_note</span> Canvas Mode
+          </li>
+          <li class="filter-menu-item feature-filter-item" data-feature="Deep Research">
+            <span class="material-symbols-outlined">manage_search</span> Deep Research
+          </li>
+          <li class="filter-menu-item feature-filter-item" data-feature="Agent Designer">
+            <span class="material-symbols-outlined">smart_toy</span> Agent Designer
+          </li>
+          <li class="filter-menu-item feature-filter-item" data-feature="Image Generation">
+            <span class="material-symbols-outlined">image</span> Image Generation
+          </li>
+          <li class="filter-menu-item feature-filter-item" data-feature="Video Generation">
+            <span class="material-symbols-outlined">video_camera_back</span> Video Generation
+          </li>
+        </ul>
+      </div>
+
+      <!-- WORKSPACE CARD STATUS FILTERS -->
+      <div class="sidebar-section">
+        <div class="sidebar-title" id="sidebarStatusTitle">Integration Status</div>
+        <ul class="filter-menu-list">
+          <li class="filter-menu-item status-filter-item active" data-status="all">
+            <span class="material-symbols-outlined">view_cozy</span> Show All Cases
+          </li>
+          <li class="filter-menu-item status-filter-item" data-status="standard">
+            <span class="material-symbols-outlined">offline_pin</span> Standalone Tools Only
+          </li>
+          <li class="filter-menu-item status-filter-item" data-status="integration">
+            <span class="material-symbols-outlined">lock_open_right</span> Requires Connectors
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- RIGHT MAIN WORKSPACE -->
+    <main class="workspace">
+      
+      <!-- TOP NAVIGATION NAVBAR -->
+      <header class="navbar">
+        <div class="navbar-left">
+          <div class="search-wrapper">
+            <span class="material-symbols-outlined search-icon">search</span>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search prompts, agent templates, roles, or capabilities...">
+          </div>
+        </div>
+        <div class="navbar-right">
+          <span style="font-size: 13px; color: var(--text-muted); font-weight: 500; margin-left: 32px;" id="navbarWelcomeText">Edu GE Adoption Portal</span>
+          
+          <!-- Theme Toggle Button -->
+          <button class="nav-button" id="btnThemeToggle" aria-label="Toggle Theme" style="padding: 0; width: 44px; justify-content: center; flex-shrink: 0;">
+            <span class="material-symbols-outlined" id="themeIcon" style="font-size: 20px;">dark_mode</span>
+          </button>
+
+          <!-- Language Selection Dropdown -->
+          <select class="select-control" id="navLang" style="width: auto; height: 44px; padding: 0 12px; font-size: 13px; border-radius: 12px; flex-shrink: 0;">
+            <option value="en">English</option>
+            <option value="zh-TW">繁體中文</option>
+            <option value="zh-CN">简体中文</option>
+          </select>
+
+          <button class="nav-button" id="btnChangeContext" style="flex-shrink: 0;">
+            <span class="material-symbols-outlined" style="font-size: 18px;">manage_accounts</span> <span id="btnChangeContextText">Switch Profile</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- DASHBOARD CORE CONTENTS CONTAINER -->
+      <article class="content-area">
+        <div class="dashboard-header">
+          <div class="dashboard-title-row">
+            <div>
+              <h1 class="welcome-msg" id="welcomeMsg">Adoption Playbook & Reference Hub</h1>
+              <p class="welcome-subtitle" id="welcomeSubtitle">Explore battle-tested prompt recipes, custom Agent instructions, and configuration guidelines tailored specifically to support your educational role.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- DYNAMIC CARDS CONTAINER BY HUB CATEGORY -->
+        <section class="hubs-grid" id="useCasesContainer">
+          <!-- Dynamic category boxes will be rendered here by app.js -->
+        </section>
+      </article>
+    </main>
+  </div>
+
+  <!-- INTERACTIVE DETAILS MODAL SLIDER -->
+  <div class="modal-overlay" id="modalOverlay" aria-modal="true" role="dialog">
+    <div class="modal-content-card">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div id="modalTags" style="display: flex; gap: 6px; flex-wrap: wrap;"></div>
+          <h3 class="modal-title" id="modalTitle">Use Case Details</h3>
+        </div>
+        <button class="close-btn" id="modalClose" aria-label="Close details">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <!-- SCROLLABLE DETAIL DATA AREA -->
+      <div class="modal-body" id="modalDynamicContent">
+        <!-- Dynamic content blocks (Overview, Steps, Prompt, ProTips) will be written here by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- PREMIUM INTERACTIVE TOAST NOTIFICATION POPUP -->
+  <div class="toast" id="toastNotification" role="status">
+    <span class="material-symbols-outlined" id="toastIcon" style="font-size: 20px;">check_circle</span>
+    <span id="toastMsg">Action completed successfully!</span>
+  </div>
+
+</body>
+</html>
