@@ -1,0 +1,726 @@
+/* ==========================================================================
+   INTERACTIVE ADOPTION ROADMAP TIMELINE LOGIC (REDESIGNED V2)
+   ========================================================================== */
+
+const TIMELINE_STAGES_STORAGE_KEY = "ge_adoption_stages_v3";
+const VERIFICATION_STORAGE_KEY = "ge_verification_checkpoints_v3";
+
+const defaultTimelineStages = [
+  {
+    id: "day0",
+    title: "Day 0 Configuration (IdP & connectors setup)",
+    titleZh: "Day 0 技術配置（IdP與連接器設定）",
+    subtitle: "Setup Phase",
+    subtitleZh: "基礎配置期",
+    color: "#6366f1", // Indigo
+    description: "Initialize backend environments, configure Identity Provider (IdP) authentication loops, and map baseline database structures before the academic year begins.",
+    descriptionZh: "初始化後端環境、配置身份提供商 (IdP) 認證迴路，並在學期前建立基礎資料庫結構。",
+    playbookIds: ["finance_compliance", "workforce_federation"]
+  },
+  {
+    id: "pre",
+    title: "Tech Provisioning & Prep (Syllabi & documents preparation)",
+    titleZh: "學期準備（課程大綱與教材編寫）",
+    subtitle: "Pre-Semester (Aug)",
+    subtitleZh: "學期前（八月）",
+    color: "#f59e0b", // Amber
+    description: "Align core teaching materials, upload syllabus structures, and coordinate initial AI assistant designs ahead of active teaching cohorts.",
+    descriptionZh: "在開學前整理核心教材、上傳教學大綱結構，並協調 AI 輔助助理之基礎設計。",
+    playbookIds: ["socratic_tutor", "lab_manual_creator"]
+  },
+  {
+    id: "sem1",
+    title: "Launch & Onboard (Onboard faculty and cohorts)",
+    titleZh: "正式啟動與引導（教職員工與學生引導）",
+    subtitle: "Sem 1 (Sep)",
+    subtitleZh: "第一學期（九月）",
+    color: "#10b981", // Emerald
+    description: "Onboard students and faculty, establish baseline AI familiarity, and register support queues.",
+    descriptionZh: "引導學生與教職員工、建立對 AI 的基礎熟練度並登記服務支援佇列。",
+    playbookIds: ["curriculum_design", "su_helpdesk"]
+  },
+  {
+    id: "mid",
+    title: "Evaluation Pilot (Roll out learning evaluations)",
+    titleZh: "期中試點評估（期中考試推廣與學習表現試點）",
+    subtitle: "Mid-Semester (Oct-Nov 15)",
+    subtitleZh: "期中（十月至十一月十五）",
+    color: "#3b82f6", // Blue
+    description: "Launch targeted pilots for course evaluations, rubric-based grading assistance, and classroom performance audits.",
+    descriptionZh: "啟動課程評估、基於量規的評分協助和課堂表現審計的針對性試點。",
+    playbookIds: ["rubric_grading", "at_risk_cohort", "accreditation_reports"]
+  },
+  {
+    id: "end",
+    title: "Exam Prep & Audit (Admin audits, secure repositories)",
+    titleZh: "期末準備與審計（行政審核與高安全儲存庫清掃）",
+    subtitle: "End-of-Semester (Nov 16-Jan 15)",
+    subtitleZh: "期末（十一月十六至一月十五）",
+    color: "#ef4444", // Coral/Red
+    description: "Secure data repository sweeps, audit exam papers, compile accreditation data, and lock assessment portals.",
+    descriptionZh: "執行安全數據儲存庫清理、審計考卷、編譯認證數據並鎖定評估門戶。",
+    playbookIds: ["sao_scavenger_hunt"]
+  },
+  {
+    id: "track2",
+    title: "Continuous Initiatives (Student developer hubs, ongoing audits)",
+    titleZh: "持續推進（學生社團與滾動式優化）",
+    subtitle: "Continuous (Track 2)",
+    subtitleZh: "軌道二：滾動式推進",
+    color: "#a855f7", // Purple
+    description: "Ongoing non-semester restricted milestones, student-led co-curricular development, and constant optimization reviews.",
+    descriptionZh: "持續進行的非學期限制里程碑、學生主導的共建計畫以及持續的安全與運營優化審查。",
+    playbookIds: ["club_funding", "security_simulator"]
+  }
+];
+
+const roleVerificationCheckpoints = {
+  "IT Admin": {
+    day0: [
+      { id: "ita_d0_1", text: "Configure federated IdP single sign-on (SSO) loops with university directories", textZh: "與學校帳號目錄配置 IdP 聯邦單一登入 (SSO) 整合" },
+      { id: "ita_d0_2", text: "Establish enterprise workspace secure tenant boundaries for cloud data", textZh: "為雲端數據與 AI 工作空間建立企業級安全租戶隔離邊界" }
+    ],
+    pre: [
+      { id: "ita_pre_1", text: "Validate LMS REST API endpoints and webhooks connectivity", textZh: "驗證與測試 LMS 系統 REST API 端點與 Webhooks 連接性" },
+      { id: "ita_pre_2", text: "Verify core cloud drive connector sharing permissions and scope rules", textZh: "審查與驗證雲端硬碟連接器的共用存取規則與範圍設定" }
+    ],
+    sem1: [
+      { id: "ita_sem1_1", text: "Monitor system performance and API quota usage logs in cloud console", textZh: "在雲端控制台監控系統效能、請求延遲與 API 配額使用日誌" },
+      { id: "ita_sem1_2", text: "Review onboarding group provisioning metrics for faculty and student bodies", textZh: "審查教職員與學生群體之自動化帳號配置與群組導入指標" }
+    ],
+    mid: [
+      { id: "ita_mid_1", text: "Audit active workspace sharing metrics and restrict public access links", textZh: "審計活動中的工作區共享指標並限制公開存取連結" },
+      { id: "ita_mid_2", text: "Verify automated LMS enrollment synchronization scripts", textZh: "驗證 LMS 選課名單與 AI 平台之自動化同步排程腳本" }
+    ],
+    end: [
+      { id: "ita_end_1", text: "Coordinate database administrative audit locks on assessment materials", textZh: "協調並鎖定評估與期末考卷檔案之管理稽核權限" },
+      { id: "ita_end_2", text: "Compile platform API usage metrics and generate usage reports", textZh: "彙整平台 API 與運算資源之使用指標並產生使用分析報告" }
+    ],
+    track2: [
+      { id: "ita_t2_1", text: "Conduct rolling security and network routing vulnerability scans", textZh: "定期執行滾動式安全與網路路由弱點掃描" },
+      { id: "ita_t2_2", text: "Maintain and update connector integration frameworks for cloud resources", textZh: "維護並更新各項雲端資源連接器整合框架" }
+    ]
+  },
+  "Lecturer": {
+    day0: [
+      { id: "lec_d0_1", text: "Acquire role-based instructor access tokens and verify sign-in loops", textZh: "取得授課教師權限 Token 並驗證登入整合迴路" },
+      { id: "lec_d0_2", text: "Complete teacher-level platform onboarding tutorials", textZh: "完成教師級 AI 平台應用導入教學與教程" }
+    ],
+    pre: [
+      { id: "lec_pre_1", text: "Prepare and review lecture slides, readings, and syllabi for LMS upload", textZh: "在 LMS 中整理並審查教學大綱、投影片與課程材料" },
+      { id: "lec_pre_2", text: "Draft classroom prompt recipes and custom Agent instructions in Canvas Mode", textZh: "在 Canvas Mode 中編寫教學專用 Prompt 配方與客製化 Agent 指令" }
+    ],
+    sem1: [
+      { id: "lec_sem1_1", text: "Publish Socratic Tutor Agent links on the LMS platform", textZh: "在 LMS 平台顯著位置發布 Socratic 導師 Agent 存取連結" },
+      { id: "lec_sem1_2", text: "Deliver introductory classroom lectures on AI safety and prompting", textZh: "向學生講授關於 AI 使用倫理、限制與 Prompt 技巧之導論課" }
+    ],
+    mid: [
+      { id: "lec_mid_1", text: "Deploy Rubric-Feedback agents to help students review mid-term outlines", textZh: "部署 Rubric-Feedback 評分助理協助學生審查期中作業大綱" },
+      { id: "lec_mid_2", text: "Review student feedback reports regarding Tutor Agent helpfulness", textZh: "收集並審查學生關於 Socratic Tutor 導師助理實用性之問卷" }
+    ],
+    end: [
+      { id: "lec_end_1", text: "Create structured practice examination study-guides inside NotebookLM", textZh: "在 NotebookLM 中建立結構化的期末溫習與備考學習指南" },
+      { id: "lec_end_2", text: "Audit secure document folders to ensure zero exam-prep leakages", textZh: "稽核安全檔案目錄夾，確保備考資訊零外洩" }
+    ],
+    track2: [
+      { id: "lec_t2_1", text: "Analyze course enrollment and final student participation metrics", textZh: "分析課程註冊、AI 互動率與學生成就轉化指標" },
+      { id: "lec_t2_2", text: "Attend end-of-semester academic AI adoption roundtables", textZh: "出席學期末教職員學術 AI 導入與成效分享圓桌會議" }
+    ]
+  },
+  "TA": {
+    day0: [
+      { id: "ta_d0_1", text: "Confirm instructor-assistant account provisioning on the platform", textZh: "確認助教帳號權限已在平台上成功配置" },
+      { id: "ta_d0_2", text: "Establish secure collaborative folders for laboratory guidelines", textZh: "為實驗教學與評分建立安全協作雲端目錄" }
+    ],
+    pre: [
+      { id: "ta_pre_1", text: "Draft comprehensive grading rubrics and safety instruction manuals", textZh: "編寫詳細評分量規指南與實驗室安全操作手冊" },
+      { id: "ta_pre_2", text: "Test custom lab manual illustration prompt parameters inside Canvas Mode", textZh: "在 Canvas Mode 中測試實驗手冊專用插圖 Prompt 產生參數" }
+    ],
+    sem1: [
+      { id: "ta_sem1_1", text: "Distribute interactive laboratory guides to students", textZh: "向學生分發互動式實驗指南與觀察記錄表" },
+      { id: "ta_sem1_2", text: "Setup active weekly office hour AI assistance support queues", textZh: "建立每週助教 AI 答疑服務佇列與線上諮詢時間" }
+    ],
+    mid: [
+      { id: "ta_mid_1", text: "Utilize secure NotebookLM instances to aggregate student mid-term progress", textZh: "利用安全 NotebookLM 彙整學生的期中學習表現趨勢" },
+      { id: "ta_mid_2", text: "Calibrate rubric assistant prompt guidelines to align feedback consistency", textZh: "校準評分助理 Prompt 指令，確保多位評分助教反饋一致性" }
+    ],
+    end: [
+      { id: "ta_end_1", text: "Generate student performance dashboards for teacher evaluations", textZh: "生成學生整體表現儀表板供授課教師教學評估參考" },
+      { id: "ta_end_2", text: "Clean and purge personal TA storage workspaces of student submissions", textZh: "清理與封存個人助教工作空間中的學生作業檔案" }
+    ],
+    track2: [
+      { id: "ta_t2_1", text: "Document course AI assistance best practices for departmental handovers", textZh: "撰寫課程 AI 輔導實務指南，留作院系經驗傳承文檔" },
+      { id: "ta_t2_2", text: "Monitor ongoing student compliance with safety and integrity guides", textZh: "持續監控學生在作業中對學術誠信與 AI 引用規則之遵循情況" }
+    ]
+  },
+  "Student": {
+    day0: [
+      { id: "stu_d0_1", text: "Confirm registration and activate school-issued platform account", textZh: "確認註冊並啟用學校發放之 AI 平台帳戶" },
+      { id: "stu_d0_2", text: "Register student-led clubs and interest groups in the main directory", textZh: "在學生社團目錄中登記本學期學生活動或社團資訊" }
+    ],
+    pre: [
+      { id: "stu_pre_1", text: "Establish secure collaborative cloud folders for club operations", textZh: "為社團日常運營建立安全協作雲端資料夾" },
+      { id: "stu_pre_2", text: "Set up study portals with links to uploaded syllabus guides", textZh: "建立個人學習入口，彙整學科大綱與參考指南" }
+    ],
+    sem1: [
+      { id: "stu_sem1_1", text: "Complete student introductory prompt engineering tutorial videos", textZh: "完成學生入門級 Prompt 提示工程與 AI 倫理微課程" },
+      { id: "stu_sem1_2", text: "Link personal course notebooks to verified cloud storage directories", textZh: "將個人學科筆記與校端雲端安全硬碟連結" }
+    ],
+    mid: [
+      { id: "stu_mid_1", text: "Utilize collaborative NotebookLM study hubs for mid-term group study sessions", textZh: "利用 NotebookLM 小組共享學習空間進行期中考小組複習" },
+      { id: "stu_mid_2", text: "Compile student feedback surveys regarding platform utility", textZh: "填寫並整理學生對於平台軟硬體與 AI 助理功能之滿意度問卷" }
+    ],
+    end: [
+      { id: "stu_end_1", text: "Verify cloud folders contain correct materials for year-end club audits", textZh: "確認社團雲端資料夾已彙整期末稽核與評鑑所需文檔" },
+      { id: "stu_end_2", text: "Synthesize personal study summaries from verified lecture recordings", textZh: "利用 AI 筆記摘要期末重點，建立學科備考專題" }
+    ],
+    track2: [
+      { id: "stu_t2_1", text: "Track and log certificate completions for co-curricular workshops", textZh: "登錄並存檔個人在共建 AI 工作坊中取得之證書" },
+      { id: "stu_t2_2", text: "Participate in student-led hackathons or custom agent competitions", textZh: "參加學生會主導之校園黑客松或客製化 AI 應用競賽" }
+    ]
+  },
+  "Security": {
+    day0: [
+      { id: "sec_d0_1", text: "Initialize active security credentials for safety response teams", textZh: "啟用校園安全應變團隊專用安全登入憑證" },
+      { id: "sec_d0_2", text: "Map secure communications and dispatcher roles in the command system", textZh: "在指揮系統中配置各項緊急安全通訊與值班調度角色" }
+    ],
+    pre: [
+      { id: "sec_pre_1", text: "Draft emergency simulator guidelines inside Gemini Canvas Mode", textZh: "在 Gemini Canvas Mode 中編寫緊急狀況模擬訓練大綱" },
+      { id: "sec_pre_2", text: "Establish secure data parameters for campus crisis reference playbooks", textZh: "為校園應變與安全防護操作手冊設定安全邊界" }
+    ],
+    sem1: [
+      { id: "sec_sem1_1", text: "Run crisis dispatcher roleplay simulations with incoming personnel", textZh: "與新進人員開展緊急應變調度角色扮演與 AI 互動模擬訓練" },
+      { id: "sec_sem1_2", text: "Distribute emergency reference guidelines on the support portal", textZh: "在校端支援門戶發布更新後之緊急事故通報指引" }
+    ],
+    mid: [
+      { id: "sec_mid_1", text: "Conduct mid-term physical drills and coordinate AI safety logging", textZh: "進行期中實地演練，並配合 AI 自動化安全事故通報與紀錄" },
+      { id: "sec_mid_2", text: "Extract safety incident trends using secure text summary tools", textZh: "使用安全文本分析工具，彙整分析期中安全事故通報趨勢" }
+    ],
+    end: [
+      { id: "sec_end_1", text: "Audit physical security systems during winter examination schedules", textZh: "在期末冬季考試週期間加強校園各大考場與設施之實體巡邏安全審計" },
+      { id: "sec_end_2", text: "Audit command hub network routing and verify lines are active", textZh: "對安全指揮中心與警衛通訊網路進行通訊測試與線路稽核" }
+    ],
+    track2: [
+      { id: "sec_t2_1", text: "Collaborate on campus-safety training reviews", textZh: "共同參與校園防護應變教育訓練與案例回顧會議" },
+      { id: "sec_t2_2", text: "Optimize emergency logging custom Agents for faster dispatch", textZh: "優化安全調度 Agent 指令，提高報案分類與派單速度" }
+    ]
+  },
+  "Finance": {
+    day0: [
+      { id: "fin_d0_1", text: "Establish finance-grade credentials and verify local storage boundaries", textZh: "建立財務等級之安全登入憑證並確認本地數據邊界" },
+      { id: "fin_d0_2", text: "Set audit rules for departmental spending ledger checks", textZh: "設定各部門學科建設經費之自動化審計與預算稽核規則" }
+    ],
+    pre: [
+      { id: "fin_pre_1", text: "Draft pre-semester budget spreadsheets inside Gemini Canvas Mode", textZh: "在 Gemini Canvas Mode 中編寫新學年預算籌劃與科目配置表" },
+      { id: "fin_pre_2", text: "Verify approved status of student club and co-curricular projects", textZh: "審查與確認各項社團活動與共建項目之經費核撥許可" }
+    ],
+    sem1: [
+      { id: "fin_sem1_1", text: "Distribute standard procurement checklists on the admin portal", textZh: "在行政系統發布新版採購與經費報銷電子核對清單" },
+      { id: "fin_sem1_2", text: "Onboard student club treasurers to standard spending forms", textZh: "對學生社團財務負責人開展標準化預算與核銷流程引導" }
+    ],
+    mid: [
+      { id: "fin_mid_1", text: "Conduct midterm budget spending audits across major departments", textZh: "進行期中經費支用與預算執行進度中期稽核" },
+      { id: "fin_mid_2", text: "Compile expenditure summaries and audit logs with data models", textZh: "使用數據模型彙整各類經費支出報表並分析核銷異常值" }
+    ],
+    end: [
+      { id: "fin_end_1", text: "Verify spending logs match internal compliance mandates", textZh: "查核各項報銷經費，確保其完全符合校端財務內控制度" },
+      { id: "fin_end_2", text: "Publish year-end budget reconciliation reports", textZh: "彙整並發布年終預算執行與績效審查報告" }
+    ],
+    track2: [
+      { id: "fin_t2_1", text: "Run continuous spending audits to check for billing outliers", textZh: "常態化執行經費審查，偵測重複報銷或異常採購數據" },
+      { id: "fin_t2_2", text: "Optimize next-semester budget prediction models", textZh: "優化下學期預算預測模型，提升資金調度效率" }
+    ]
+  },
+  "SAO": {
+    day0: [
+      { id: "sao_d0_1", text: "Initialize counselor accounts with high-security privacy controls", textZh: "啟用學務與心理輔導專用高隱私安全等級登入帳戶" },
+      { id: "sao_d0_2", text: "Verify secure student-activity storage repositories are active", textZh: "驗證學生活動檔案與敏感名單安全存儲目錄已正常啟用" }
+    ],
+    pre: [
+      { id: "sao_pre_1", text: "Draft student orientation guidance packages inside Gemini Canvas Mode", textZh: "在 Gemini Canvas Mode 中編寫新生生活指引與輔導指南手冊" },
+      { id: "sao_pre_2", text: "Upload scavenger hunt interactive check-point rules and clues", textZh: "上傳新生迎新宿營 scavenger hunt 互動關卡規則與提示線索" }
+    ],
+    sem1: [
+      { id: "sao_sem1_1", text: "Activate Campus Scavenger Hunt Agent for freshman onboarding", textZh: "發布並啟用新生專用校園探索解謎 Scavenger Hunt 導覽 Agent" },
+      { id: "sao_sem1_2", text: "Deploy active support hotline contacts on the counselor page", textZh: "在學務輔導網頁發布最新的心理與生活支援熱線聯絡資訊" }
+    ],
+    mid: [
+      { id: "sao_mid_1", text: "Review counselor service engagement statistics using text-summary metrics", textZh: "利用學務數據工具摘要分析期中輔導個案與活動反饋趨勢" },
+      { id: "sao_mid_2", text: "Verify orientation event log archives and compile feedback responses", textZh: "歸檔迎新活動之問卷調查與互動指標數據" }
+    ],
+    end: [
+      { id: "sao_end_1", text: "Coordinate stress-relief resources for student final examination periods", textZh: "協調並提供期末考週減壓資源與心理諮詢急診服務" },
+      { id: "sao_end_2", text: "Audit and purge sensitive orientation personal detail temporary logs", textZh: "清理與刪除迎新活動暫存檔案中涉及學生個人隱私之臨時紀錄" }
+    ],
+    track2: [
+      { id: "sao_t2_1", text: "Analyze co-curricular workshop and club certificate completion stats", textZh: "統計並分析通識教育工作坊與社團幹部認證完成率" },
+      { id: "sao_t2_2", text: "Maintain custom student mental wellness supportive bots", textZh: "維護並微調客製化學生生活支持與暖心輔導 AI 機器人" }
+    ]
+  }
+};
+
+let timelineStages = [];
+
+// Initialize or load configuration
+function initTimeline() {
+  const savedStages = localStorage.getItem(TIMELINE_STAGES_STORAGE_KEY);
+  if (savedStages) {
+    try {
+      timelineStages = JSON.parse(savedStages);
+    } catch (e) {
+      timelineStages = JSON.parse(JSON.stringify(defaultTimelineStages));
+    }
+  } else {
+    timelineStages = JSON.parse(JSON.stringify(defaultTimelineStages));
+  }
+
+  if (!appState.roadmapActiveStage) {
+    appState.roadmapActiveStage = localStorage.getItem("ge_roadmap_active_stage_v2") || "day0";
+    if (!timelineStages.some(s => s.id === appState.roadmapActiveStage)) {
+      appState.roadmapActiveStage = "day0";
+    }
+  }
+}
+
+// Save states to local storage
+function saveTimeline() {
+  localStorage.setItem(TIMELINE_STAGES_STORAGE_KEY, JSON.stringify(timelineStages));
+}
+
+// Dynamic role-related use case filter helper
+function isUsecaseRelatedToRole(useCase, role) {
+  if (!role) return true;
+  if (appState.isAdmin === true) return true;
+  
+  // IT Admins have administrative rights to map all cases
+  if (role === "IT Admin") return true;
+  
+  // Lecturer has academic-level supervisor responsibilities (includes TAs)
+  if (role === "Lecturer") {
+    return useCase.role === "Lecturer" || useCase.role === "TA" || useCase.category === "academic";
+  }
+  // TAs see their own and academic tasks
+  if (role === "TA") {
+    return useCase.role === "TA" || useCase.role === "Lecturer" || useCase.category === "academic";
+  }
+  // Student sees Student & club operations
+  if (role === "Student") {
+    return useCase.role === "Student" || useCase.category === "student";
+  }
+  // Support roles see their exact roles
+  return useCase.role === role;
+}
+
+// Core Roadmap Rendering Router
+function renderTimeline() {
+  initTimeline();
+  const container = document.getElementById("unifiedRoadmapContainer");
+  if (!container) return;
+
+  const isZh = appState.activeLanguage === "zh-TW" || appState.activeLanguage === "zh-CN";
+  const role = appState.userRole || "Lecturer";
+
+  // Calculate stats for each stage
+  const stageStats = {};
+  timelineStages.forEach(stage => {
+    // Checklist Stats
+    const tasks = roleVerificationCheckpoints[role]?.[stage.id] || [];
+    const totalTasks = tasks.length;
+    let completedTasks = 0;
+    tasks.forEach(t => {
+      const key = `ge_roadmap_chk_${role}_${stage.id}_${t.id}`;
+      if (localStorage.getItem(key) === "true") {
+        completedTasks++;
+      }
+    });
+    const isCompleted = totalTasks > 0 ? (completedTasks === totalTasks) : true;
+    const checklistPercent = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 100;
+
+    // Playbook stats
+    let totalPlaybooks = 0;
+    let deployedPlaybooks = 0;
+    stage.playbookIds.forEach(id => {
+      const uc = useCasesDb.find(u => u.id === id);
+      if (uc && isUsecaseRelatedToRole(uc, role)) {
+        totalPlaybooks++;
+        if (uc.isDeployed === true || uc.isDeployed === 1) {
+          deployedPlaybooks++;
+        }
+      }
+    });
+    const playbookPercent = totalPlaybooks > 0 ? Math.round((deployedPlaybooks / totalPlaybooks) * 100) : 0;
+
+    stageStats[stage.id] = {
+      totalTasks,
+      completedTasks,
+      isCompleted,
+      checklistPercent,
+      totalPlaybooks,
+      deployedPlaybooks,
+      playbookPercent
+    };
+  });
+
+  // Calculate Alternating Timeline Progress Width (Inspired by timeline2.webp)
+  const stageOrder = ["day0", "pre", "sem1", "mid", "end", "track2"];
+  const positions = [5, 23, 41, 59, 77, 95];
+  let progressWidth = 5; // starting node 0 is day 0
+  for (let i = 0; i < stageOrder.length; i++) {
+    if (stageStats[stageOrder[i]].isCompleted) {
+      progressWidth = positions[i];
+    } else {
+      break;
+    }
+  }
+
+  // 1. Desktop Alternating Horizontal Timeline
+  let desktopHtml = `
+    <div class="alternating-timeline-container">
+      <div class="timeline-horizontal-track">
+        <div class="timeline-track-progress" style="width: ${progressWidth}%;"></div>
+  `;
+
+  stageOrder.forEach((id, index) => {
+    const stage = timelineStages.find(s => s.id === id);
+    const stats = stageStats[id];
+    const isActive = appState.roadmapActiveStage === id;
+    const isCompleted = stats.isCompleted;
+    const isUp = index % 2 === 0; // Alternating height layouts! Even UP, Odd DOWN
+    const pos = positions[index];
+
+    const stageSubtitle = isZh ? stage.subtitleZh : stage.subtitle;
+    
+    // Custom label inside card
+    let shortName = id === "day0" ? (isZh ? "Day 0 配置" : "Day 0 Setup")
+                  : id === "pre" ? (isZh ? "學期準備" : "Pre-Semester")
+                  : id === "sem1" ? (isZh ? "正式啟動" : "Sem 1 Launch")
+                  : id === "mid" ? (isZh ? "期中試點" : "Mid-Term Pilot")
+                  : id === "end" ? (isZh ? "期末審計" : "Exam Audit")
+                  : (isZh ? "滾動項目" : "Rolling Projects");
+
+    desktopHtml += `
+      <!-- Node Joint ${index} -->
+      <div class="timeline-node-joint ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}" 
+           style="left: ${pos}%;" 
+           onclick="selectRoadmapStage('${id}')">
+        <span class="material-symbols-outlined node-joint-icon">
+          ${isCompleted ? 'check' : (id === 'day0' ? 'settings' : 'pending')}
+        </span>
+      </div>
+
+      <!-- Connector line -->
+      <div class="alternating-marker-pin ${isUp ? 'pin-up' : 'pin-down'}" style="left: ${pos}%;"></div>
+
+      <!-- Floating Schedule Flag -->
+      <div class="floating-schedule-flag ${isUp ? 'flag-up' : 'flag-down'} ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}" 
+           style="left: ${pos}%;"
+           onclick="selectRoadmapStage('${id}')">
+        <div class="flag-date-label">${stageSubtitle}</div>
+        <div class="flag-title-label">${shortName}</div>
+        <div class="flag-subtitle-label">${stats.completedTasks}/${stats.totalTasks} ${isZh ? '已驗證' : 'Verified'}</div>
+      </div>
+    `;
+  });
+
+  desktopHtml += `
+      </div>
+    </div>
+  `;
+
+  // 2. Mobile vertical stream layout
+  let mobileHtml = `<div class="chronological-timeline-mobile">`;
+  stageOrder.forEach(id => {
+    const stage = timelineStages.find(s => s.id === id);
+    const stats = stageStats[id];
+    const isActive = appState.roadmapActiveStage === id;
+    const isCompleted = stats.isCompleted;
+
+    const stageTitle = isZh ? stage.titleZh : stage.title;
+    const stageSubtitle = isZh ? stage.subtitleZh : stage.subtitle;
+
+    mobileHtml += `
+      <div class="mobile-timeline-item ${isActive ? 'active' : ''}" onclick="selectRoadmapStage('${id}')">
+        <div class="mobile-timeline-connector"></div>
+        <div class="mobile-timeline-badge" style="background: ${stage.color};"></div>
+        <div class="mobile-timeline-content-card">
+          <div class="mobile-card-header">
+            <span class="mobile-card-subtitle" style="color: ${stage.color};">${stageSubtitle}</span>
+            ${isCompleted ? '<span class="material-symbols-outlined" style="color: #10b981; font-size:18px;">verified</span>' : ''}
+          </div>
+          <h4 class="mobile-card-title">${stageTitle}</h4>
+          <div class="mobile-card-progress">
+            <div class="mobile-card-progress-bar" style="width: ${stats.checklistPercent}%; background: ${stage.color};"></div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+  mobileHtml += `</div>`;
+
+  // Write base layout structure into DOM
+  container.innerHTML = `
+    ${desktopHtml}
+    ${mobileHtml}
+    <div class="roadmap-split-dashboard">
+      <!-- Left Column: Verification Checklists -->
+      <div class="roadmap-dashboard-card" id="roadmapChecklistCard"></div>
+      
+      <!-- Right Column: Role-Specific Use-Case Playbooks -->
+      <div class="roadmap-dashboard-card" id="roadmapPlaybookCard"></div>
+    </div>
+  `;
+
+  renderRoadmapDashboardDetails();
+}
+
+// Select milestone trigger
+window.selectRoadmapStage = function(stageId) {
+  appState.roadmapActiveStage = stageId;
+  localStorage.setItem("ge_roadmap_active_stage_v2", stageId);
+
+  // Quick state sync without full rebuilds
+  document.querySelectorAll(".timeline-node-joint, .floating-schedule-flag, .mobile-timeline-item").forEach(el => {
+    if (el.getAttribute("onclick") && el.getAttribute("onclick").includes(`'${stageId}'`)) {
+      el.classList.add("active");
+    } else {
+      el.classList.remove("active");
+    }
+  });
+
+  renderRoadmapDashboardDetails();
+};
+
+// Render Stage Details dual-column dashboards
+function renderRoadmapDashboardDetails() {
+  const checkCard = document.getElementById("roadmapChecklistCard");
+  const playCard = document.getElementById("roadmapPlaybookCard");
+  if (!checkCard || !playCard) return;
+
+  const stageId = appState.roadmapActiveStage || "day0";
+  const stage = timelineStages.find(s => s.id === stageId);
+  if (!stage) return;
+
+  const isZh = appState.activeLanguage === "zh-TW" || appState.activeLanguage === "zh-CN";
+  const role = appState.userRole || "Lecturer";
+
+  const stageTitle = isZh ? stage.titleZh : stage.title;
+  const stageDesc = isZh ? stage.descriptionZh : stage.description;
+
+  // Render Left Column: Checkbox Checklist
+  const tasks = roleVerificationCheckpoints[role]?.[stageId] || [];
+  let checkedCount = 0;
+  let checklistHtml = "";
+
+  tasks.forEach(t => {
+    const key = `ge_roadmap_chk_${role}_${stageId}_${t.id}`;
+    const isChecked = localStorage.getItem(key) === "true";
+    if (isChecked) checkedCount++;
+
+    const taskText = isZh ? t.textZh : t.text;
+
+    checklistHtml += `
+      <label class="roadmap-task-label ${isChecked ? 'checked' : ''}">
+        <input type="checkbox" 
+               onchange="handleRoadmapTaskToggle('${stageId}', '${t.id}', this)" 
+               ${isChecked ? 'checked' : ''} />
+        <div class="roadmap-checkbox-indicator"></div>
+        <span class="roadmap-task-text">${taskText}</span>
+      </label>
+    `;
+  });
+
+  if (tasks.length === 0) {
+    checklistHtml = `<p class="empty-playbook-msg">${isZh ? '此階段對您的角色無特定驗證項目。' : 'No verification items for your role in this phase.'}</p>`;
+  }
+
+  const checklistPercent = tasks.length > 0 ? Math.round((checkedCount / tasks.length) * 100) : 100;
+  const isChecklistCompleted = checklistPercent === 100;
+
+  checkCard.innerHTML = `
+    <div class="roadmap-card-header-bar" style="background: ${stage.color};"></div>
+    <div class="roadmap-card-body">
+      <div class="roadmap-section-meta-row">
+        <h4 class="roadmap-section-title">${isZh ? '階段驗證檢查清單' : 'Phase Verification Checklist'}</h4>
+        <span class="roadmap-section-badge ${isChecklistCompleted ? 'verified' : 'pending'}">
+          ${isChecklistCompleted ? (isZh ? '已完全驗證' : 'Verified') : (isZh ? '待驗證' : 'Pending Verification')} (${checklistPercent}%)
+        </span>
+      </div>
+      <p class="roadmap-section-desc">${stageDesc}</p>
+      <div class="roadmap-checklist-container">
+        ${checklistHtml}
+      </div>
+    </div>
+  `;
+
+  // Render Right Column: Associated Use Cases Playbooks
+  let deployedCount = 0;
+  let playbooksHtml = "";
+  let rolePlaybookCount = 0;
+
+  stage.playbookIds.forEach(id => {
+    const uc = useCasesDb.find(u => u.id === id);
+    // Filter strictly based on active user role
+    if (uc && isUsecaseRelatedToRole(uc, role)) {
+      rolePlaybookCount++;
+      const isUcDeployed = uc.isDeployed === true || uc.isDeployed === 1;
+      if (isUcDeployed) deployedCount++;
+
+      const ucTitle = uc.translations && uc.translations[appState.activeLanguage] && uc.translations[appState.activeLanguage].title 
+        ? uc.translations[appState.activeLanguage].title 
+        : uc.title;
+
+      playbooksHtml += `
+        <div class="milestone-playbook-item">
+          <div class="milestone-playbook-info">
+            <div class="milestone-playbook-status-dot ${isUcDeployed ? 'active' : ''}"></div>
+            <span class="milestone-playbook-title ${isUcDeployed ? 'completed' : ''}" title="${ucTitle}">
+              ${ucTitle}
+            </span>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <button class="btn-toggle-deploy-mini ${isUcDeployed ? 'active' : ''}" 
+                    onclick="toggleTimelinePlaybookDeploy('${stageId}', '${id}', ${isUcDeployed})"
+                    title="${isUcDeployed ? (isZh ? '停用部署' : 'Mark Inactive') : (isZh ? '啟用部署' : 'Mark Active')}">
+              <span class="material-symbols-outlined" style="font-size: 15px;">rocket_launch</span>
+            </button>
+            <button class="btn-remove-playbook" onclick="removePlaybookFromStage('${stageId}', '${id}')" title="${isZh ? '解除關聯' : 'Remove play'}">
+              <span class="material-symbols-outlined" style="font-size: 15px;">close</span>
+            </button>
+          </div>
+        </div>
+      `;
+    }
+  });
+
+  if (rolePlaybookCount === 0) {
+    playbooksHtml = `<p class="empty-playbook-msg">${isZh ? '此階段對您的角色目前無關聯使用案例。' : 'No playbooks mapped to your role in this phase.'}</p>`;
+  }
+
+  const progressPercent = rolePlaybookCount > 0 ? Math.round((deployedCount / rolePlaybookCount) * 100) : 0;
+  const progressText = isZh 
+    ? `已部署 ${deployedCount} / ${rolePlaybookCount} 個案例 (${progressPercent}%)` 
+    : `${deployedCount} of ${rolePlaybookCount} playbooks deployed (${progressPercent}%)`;
+
+  // Compile strictly filtered dropdown selection option list
+  let dropdownOptionsHtml = `<option value="">${isZh ? '+ 關聯新場景案例到此階段' : '+ Assign Playbook to Phase...'}</option>`;
+  
+  const sortedUseCases = [...useCasesDb]
+    .filter(uc => isUsecaseRelatedToRole(uc, role))
+    .sort((a, b) => {
+      const titleA = a.translations && a.translations[appState.activeLanguage] && a.translations[appState.activeLanguage].title 
+        ? a.translations[appState.activeLanguage].title 
+        : a.title;
+      const titleB = b.translations && b.translations[appState.activeLanguage] && b.translations[appState.activeLanguage].title 
+        ? b.translations[appState.activeLanguage].title 
+        : b.title;
+      return titleA.localeCompare(titleB);
+    });
+
+  let hasUnassigned = false;
+  sortedUseCases.forEach(uc => {
+    if (!stage.playbookIds.includes(uc.id)) {
+      hasUnassigned = true;
+      const ucTitle = uc.translations && uc.translations[appState.activeLanguage] && uc.translations[appState.activeLanguage].title 
+        ? uc.translations[appState.activeLanguage].title 
+        : uc.title;
+      dropdownOptionsHtml += `<option value="${uc.id}">${ucTitle}</option>`;
+    }
+  });
+
+  playCard.innerHTML = `
+    <div class="roadmap-card-header-bar" style="background: ${stage.color};"></div>
+    <div class="roadmap-card-body">
+      <div class="roadmap-section-meta-row">
+        <h4 class="roadmap-section-title">${isZh ? '角色關聯使用場景' : 'Role-Specific Playbooks'}</h4>
+        <span class="roadmap-section-badge verified" style="background: ${stage.color}15; color: ${stage.color};">
+          ${progressPercent}%
+        </span>
+      </div>
+      
+      <!-- Progress meter -->
+      <div class="milestone-progress-wrapper" style="margin-top: 14px; margin-bottom: 24px;">
+        <div class="milestone-progress-text" style="display: flex; justify-content: space-between; font-size: 11px; font-weight:700; color: var(--text-secondary); margin-bottom:6px;">
+          <span>${isZh ? '部署進度' : 'Deployment Progress'}</span>
+          <span>${progressText}</span>
+        </div>
+        <div class="milestone-progress-bar" style="height:6px; background: rgba(0,0,0,0.05); border-radius:3px; overflow:hidden;">
+          <div class="milestone-progress-fill" style="width: ${progressPercent}%; height:100%; background: ${stage.color}; transition: width 0.3s ease;"></div>
+        </div>
+      </div>
+
+      <!-- Playbook assignments list -->
+      <div class="milestone-playbooks-list">
+        ${playbooksHtml}
+      </div>
+
+      <!-- Assignment dropdown -->
+      <div class="add-playbook-dropdown-wrapper">
+        <select class="select-add-playbook" style="border-color: ${stage.color}40;" onchange="handleAssignPlaybook(this, '${stageId}')" ${!hasUnassigned ? 'disabled' : ''}>
+          ${dropdownOptionsHtml}
+        </select>
+      </div>
+    </div>
+  `;
+}
+
+// Checkbox change handler
+window.handleRoadmapTaskToggle = function(stageId, taskId, checkboxEl) {
+  const role = appState.userRole || "Lecturer";
+  const key = `ge_roadmap_chk_${role}_${stageId}_${taskId}`;
+  localStorage.setItem(key, checkboxEl.checked ? "true" : "false");
+
+  // Re-run entire rendering loop to fill timeline segments and re-calculate percents instantly
+  renderTimeline();
+};
+
+// Toggle playbook deployment status
+window.toggleTimelinePlaybookDeploy = async function(stageId, playbookId, currentStatus) {
+  const uc = useCasesDb.find(u => u.id === playbookId);
+  if (!uc) return;
+
+  const newStatus = !currentStatus;
+  const success = await syncUserPreference(playbookId, 'deploy', newStatus);
+  if (success) {
+    uc.isDeployed = newStatus;
+    showToast(newStatus 
+      ? (appState.activeLanguage === "zh-TW" || appState.activeLanguage === "zh-CN" ? "部署場景已啟用！" : "Deployment marked active!") 
+      : (appState.activeLanguage === "zh-TW" || appState.activeLanguage === "zh-CN" ? "部署場景已停用" : "Deployment marked inactive")
+    );
+    
+    renderTimeline();
+  }
+};
+
+// Assign unassigned playbook to phase
+window.handleAssignPlaybook = function(selectEl, stageId) {
+  const ucId = selectEl.value;
+  if (ucId) {
+    // Ensure playbook only belongs to one stage
+    timelineStages.forEach(stage => {
+      stage.playbookIds = stage.playbookIds.filter(id => id !== ucId);
+    });
+
+    const stage = timelineStages.find(s => s.id === stageId);
+    if (stage) {
+      stage.playbookIds.push(ucId);
+      saveTimeline();
+      renderTimeline();
+      showToast(appState.activeLanguage === "zh-TW" || appState.activeLanguage === "zh-CN" 
+        ? "案例分配成功！" 
+        : "Playbook assigned to phase!");
+    }
+  }
+};
+
+// Remove playbook association
+window.removePlaybookFromStage = function(stageId, useCaseId) {
+  const stage = timelineStages.find(s => s.id === stageId);
+  if (stage) {
+    stage.playbookIds = stage.playbookIds.filter(id => id !== useCaseId);
+    saveTimeline();
+    renderTimeline();
+    showToast(appState.activeLanguage === "zh-TW" || appState.activeLanguage === "zh-CN" 
+      ? "已解除此關聯" 
+      : "Playbook association removed!");
+  }
+};
