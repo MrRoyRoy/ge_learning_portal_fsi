@@ -1,6 +1,9 @@
 # Multi-stage build for absolute security and minimal container footprint
 FROM node:20-alpine AS builder
 
+# Install build-essential dependencies for native node addons (sqlite3)
+RUN apk add --no-cache python3 make g++ gcc libc-dev
+
 # Set active working directory
 WORKDIR /usr/src/app
 
