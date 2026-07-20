@@ -12,7 +12,8 @@ resource "google_project_service" "apis" {
     "sqladmin.googleapis.com",
     "artifactregistry.googleapis.com",
     "cloudresourcemanager.googleapis.com",
-    "iam.googleapis.com"
+    "iam.googleapis.com",
+    "compute.googleapis.com"
   ])
   project            = var.project_id
   service            = each.key
