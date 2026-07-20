@@ -11,12 +11,11 @@ Welcome to the **Gemini Enterprise FSI Adoption & Playbook Portal**, a high-fide
 ## 📖 Table of Contents
 1. [Core Features](#-core-features)
 2. [Technology Stack](#-technology-stack)
-3. [Architecture & DB Schemas](#-architecture--db-schemas)
-4. [Role-Specific Onboarding & Workflows](#-role-specific-onboarding--workflows)
-5. [Local Development & Setup](#-local-development--setup)
-6. [Cloud Production Deployment](#-cloud-production-deployment)
-7. [Automated Provisioning (Terraform)](#-automated-infrastructure-provisioning-terraform)
-8. [Version Control & Release Workflow](#-release--code-update-workflows)
+3. [Architecture, Database Schema & Entity-Relationship (ER) Diagram](#-architecture-database-schema--entity-relationship-er-diagram)
+4. [Local Development & Setup](#-local-development--setup)
+5. [Cloud Production Deployment](#-cloud-production-deployment)
+6. [Automated Infrastructure Provisioning (Terraform)](#%EF%B8%8F-automated-infrastructure-provisioning-terraform)
+7. [Release & Code Update Workflows](#-release--code-update-workflows)
 
 ---
 
