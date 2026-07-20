@@ -21,6 +21,19 @@ resource "google_project_service" "apis" {
 }
 
 # ==========================================
+# 1.5 Artifact Registry Repository Setup
+# ==========================================
+resource "google_artifact_registry_repository" "cloud_run_source_deploy" {
+  location      = var.region
+  repository_id = "cloud-run-source-deploy"
+  description   = "Docker repository for Cloud Run source deployments"
+  format        = "DOCKER"
+  project       = var.project_id
+
+  depends_on = [google_project_service.apis]
+}
+
+# ==========================================
 # 2. Cloud SQL PostgreSQL Instance & Database
 # ==========================================
 resource "google_sql_database_instance" "postgres_instance" {
@@ -116,7 +129,8 @@ resource "google_cloud_run_service" "portal_service" {
   depends_on = [
     google_project_service.apis,
     google_sql_database.portal_db,
-    google_sql_user.db_user
+    google_sql_user.db_user,
+    google_artifact_registry_repository.cloud_run_source_deploy
   ]
 
   template {
