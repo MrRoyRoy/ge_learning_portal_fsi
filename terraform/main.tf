@@ -85,6 +85,26 @@ resource "google_project_iam_member" "compute_storage_viewer" {
   depends_on = [google_project_service.apis]
 }
 
+# Grant Default Compute Service Account (used by Cloud Build) Artifact Registry Writer permission
+# to prevent "Permission denied" errors when uploading compiled containers to Artifact Registry.
+resource "google_project_iam_member" "compute_artifact_writer" {
+  project = var.project_id
+  role    = "roles/artifactregistry.writer"
+  member  = "serviceAccount:${data.google_project.project.number}-compute@developer.gserviceaccount.com"
+  
+  depends_on = [google_project_service.apis]
+}
+
+# Grant dedicated Cloud Build Service Account Artifact Registry Writer permission
+# to ensure fallback Cloud Build service identities can push compiled images.
+resource "google_project_iam_member" "build_artifact_writer" {
+  project = var.project_id
+  role    = "roles/artifactregistry.writer"
+  member  = "serviceAccount:${data.google_project.project.number}@cloudbuild.gserviceaccount.com"
+  
+  depends_on = [google_project_service.apis]
+}
+
 # ==========================================
 # 4. Cloud Run Serverless Container Service
 # ==========================================
