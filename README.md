@@ -70,7 +70,9 @@ An advanced engineering checklist system built on top of a futuristic grid layou
 
 ---
 
-## 🏗 Architecture & DB Schemas
+## 🏗 Architecture, Database Schema & Entity-Relationship (ER) Diagram
+
+### System Architecture Pipeline
 
 ```mermaid
 graph TD
@@ -81,33 +83,180 @@ graph TD
   Express -->|Isolated Context Extraction| VM[Node.js VM Sandbox Seeder]
 ```
 
+### Entity-Relationship (ER) Diagram
+
+```mermaid
+erDiagram
+  users {
+    VARCHAR email PK
+    VARCHAR password_hash
+    BOOLEAN is_temp_password
+    VARCHAR role
+    VARCHAR institution_level
+    TIMESTAMP created_at
+  }
+  use_cases {
+    VARCHAR id PK
+    VARCHAR category
+    VARCHAR title
+    TEXT summary
+    TEXT features "JSON array"
+    TEXT connectors "JSON array"
+    VARCHAR role
+    TEXT level "JSON array"
+    TEXT steps "JSON array"
+    TEXT prompt
+    TEXT pro_tip
+    TEXT connector_guide
+    TEXT translations "JSON structure"
+    BOOLEAN is_verified
+    TIMESTAMP created_at
+    TIMESTAMP updated_at
+  }
+  user_preferences {
+    VARCHAR user_email PK, FK
+    VARCHAR use_case_id PK, FK
+    BOOLEAN is_liked
+    BOOLEAN is_deployed
+  }
+  analytics {
+    SERIAL id PK
+    TIMESTAMP timestamp
+    VARCHAR action "view / like / deploy"
+    VARCHAR use_case_id FK
+    VARCHAR user_email FK
+  }
+  feedbacks {
+    SERIAL id PK
+    VARCHAR user_email FK
+    TEXT feedback_text
+    TIMESTAMP created_at
+  }
+  verification_checkpoints {
+    VARCHAR id PK
+    VARCHAR role
+    VARCHAR phase
+    TEXT text
+    TEXT text_zh
+    TEXT text_cn
+  }
+
+  users ||--o{ user_preferences : "manages"
+  use_cases ||--o{ user_preferences : "binds"
+  users ||--o{ analytics : "triggers"
+  use_cases ||--o{ analytics : "records"
+  users ||--o{ feedbacks : "submits"
+```
+
 ### Database Schema Table Definitions
 
 #### 1. Users Table (`users`)
-Stores authorization credentials, context configurations, and force-reset onboarding status:
+Stores user session credentials, authorization, onboarding role configurations, and temporary password parameters:
 * `email` (Primary Key, VARCHAR/TEXT)
 * `password_hash` (TEXT, Not Null)
-* `is_temp_password` (BOOLEAN/INTEGER, Default True)
-* `role` (VARCHAR/TEXT, Default Null)
-* `institution_level` (VARCHAR/TEXT, Default Null)
+* `is_temp_password` (BOOLEAN, Default True)
+* `role` (VARCHAR, Default Null)
+* `institution_level` (VARCHAR, Default Null)
 * `created_at` (TIMESTAMP)
 
 #### 2. Editable Playbooks (`use_cases`)
-* `id` (Primary Key, VARCHAR/TEXT)
-* `category` (VARCHAR/TEXT)
-* `is_verified` (BOOLEAN/INTEGER, Default False)
-* `translations` (JSONB/TEXT) - Holds multilingual strings.
-* `likes` (INTEGER, Default 0)
-* `deployments` (INTEGER, Default 0)
+Stores the dynamic FSI use case playbook structures, localized translations, and user popularity counters:
+* `id` (Primary Key, VARCHAR)
+* `category` (VARCHAR, Not Null)
+* `title` (VARCHAR, Not Null)
+* `summary` (TEXT, Not Null)
+* `features` (TEXT, Not Null) - JSON-encoded string list.
+* `connectors` (TEXT, Not Null) - JSON-encoded string list.
+* `role` (VARCHAR, Not Null) - Target professional institutional persona.
+* `level` (TEXT, Not Null) - Target expertise tier JSON.
+* `steps` (TEXT, Not Null) - Playbook execution steps JSON.
+* `prompt` (TEXT, Not Null) - Base optimized system/assistant prompt string.
+* `pro_tip` (TEXT, Not Null) - Advanced pro-tip guidance.
+* `connector_guide` (TEXT) - Explanations for dynamic connector integrations.
+* `translations` (TEXT, Not Null) - Full localization JSON dictionary.
+* `is_verified` (BOOLEAN, Default False)
+* `created_at` (TIMESTAMP)
+* `updated_at` (TIMESTAMP)
 
-#### 3. User Feedbacks (`feedbacks`)
-Manages suggestions sent by portal users:
+#### 3. User Preferences (`user_preferences`)
+Keeps track of high-fidelity user actions (bookmarks/likes and cloud deployments) to prevent duplication:
+* `user_email` (Primary Key, VARCHAR, Foreign Key referencing `users(email)`)
+* `use_case_id` (Primary Key, VARCHAR, Foreign Key referencing `use_cases(id)`)
+* `is_liked` (BOOLEAN, Default False)
+* `is_deployed` (BOOLEAN, Default False)
+
+#### 4. Telemetry Analytics (`analytics`)
+Collects and aggregates metrics to display continuous rolling trends in the admin dashboard:
 * `id` (Primary Key, SERIAL/AUTOINCREMENT)
-* `user_email` (VARCHAR/TEXT, Not Null)
+* `timestamp` (TIMESTAMP, Default Current Time)
+* `action` (VARCHAR, Not Null) - Event type: `'view'`, `'like'`, or `'deploy'`.
+* `use_case_id` (VARCHAR, Nullable, Foreign Key)
+* `user_email` (VARCHAR, Nullable, Foreign Key)
+
+#### 5. Feedbacks Table (`feedbacks`)
+Stores and compiles persistent suggestions submitted via the floating glassmorphic feedback component:
+* `id` (Primary Key, SERIAL/AUTOINCREMENT)
+* `user_email` (VARCHAR, Not Null)
 * `feedback_text` (TEXT, Not Null)
 * `created_at` (TIMESTAMP)
 
+#### 6. Verification Checkpoints Table (`verification_checkpoints`)
+Caches dynamic, role-specific milestone checklist items for visual rendering in the metallic SVG timeline view:
+* `id` (Primary Key, VARCHAR)
+* `role` (VARCHAR, Not Null)
+* `phase` (VARCHAR, Not Null)
+* `text` (TEXT, Not Null) - English checkbox description.
+* `text_zh` (TEXT, Not Null) - Traditional Chinese description.
+* `text_cn` (TEXT, Not Null) - Simplified Chinese description.
+
 ---
+
+## 💻 Local Development & Setup
+
+This application is built with vanilla aesthetics and zero heavy compilation steps, making it incredibly fast and lightweight to spin up locally.
+
+### Prerequisites:
+* **Node.js**: Recommended version `18.x` or later.
+* **NPM**: Package manager (comes bundled with Node.js).
+* **Git**: Version control client.
+
+### Step-by-Step Installation:
+
+#### 1. Clone the Repository:
+```bash
+git clone https://github.com/MrRoyRoy/ge_learning_portal_fsi.git
+cd ge_learning_portal_fsi
+```
+
+#### 2. Install Server Dependencies:
+```bash
+npm install
+```
+
+#### 3. (Optional) Configure Environment Variables:
+If you want to configure custom admin credentials, set up environment variables or a local `.env` file:
+```bash
+export SUPER_ADMIN_PASSWORD="YourSecureSuperAdminPassword"
+export ADMIN_PASSWORD="YourSecureAdminAssistantPassword"
+```
+*Note: If no variables are supplied, development sessions automatically fall back to safe local-only development placeholders (`SuperAdmin_ChangeMe_2027` and `Admin_ChangeMe_2027`).*
+
+#### 4. Launch the Server:
+```bash
+npm start
+```
+Upon booting, the application will automatically:
+1. Detect that there is no local database file.
+2. Initialize and seed a clean file-based SQLite database (`fsi_portal.db`) in the root.
+3. Use the VM isolated seeder module to parse and backfill all 15 FSI playbooks and custom checklists.
+4. Populate a 6-month synthetic log telemetry dataset so visual graphs load instantly.
+5. Start listening on `http://localhost:8080`.
+
+#### 5. Open in Web Browser:
+Navigate to **[http://localhost:8080](http://localhost:8080)** to start testing!
+
+---
+
 
 ## ☁️ Cloud Production Deployment
 
