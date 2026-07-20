@@ -173,6 +173,9 @@ To compile and deploy updates or new releases of the portal to the live producti
 * **Log-First Bug-Fixing Rule Integration (100% Complete):**
   * Enforced a strict debugging standard inside `AGENT.md` to always read live container logs (using `gcloud logging read`) before guessing or deploying code changes.
   * Extracted and audited latest Google Cloud Run request logs and startup logs to guide future diagnostics.
+* **Global `appState` Declaration in Client Logic (100% Complete):**
+  * Discovered that the global client-side state manager `appState` was completely undeclared, throwing severe `ReferenceError` crashes in the browser console when writing authenticated session properties immediately after a successful login.
+  * Declared and initialized the complete `appState` schema cleanly at the top of `app.js`, restoring login dashboard navigation and correcting the visual freeze.
 
 ### Next Steps & Continuous Polish
 1. **Interactive UI Verification & Testing:** Run manual navigation tests across the 12 FSI roles and 4 category hubs (Investment Research, Client Advisory, Credit & Operations, Risk & Compliance).

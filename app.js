@@ -1,5 +1,27 @@
 /* app.js - GE Adoption Portal Application Logic and Database */
 
+// Application Global State object
+const appState = {
+  activeLanguage: 'en',
+  isAdmin: false,
+  isAssist: false,
+  userEmail: '',
+  userRole: '',
+  institutionLevel: '',
+  activeFilterCategory: 'all',
+  activeFilterFeature: 'all',
+  activeFilterStatus: 'all',
+  searchQuery: '',
+  activeConnectors: {
+    onedrive: false,
+    outlook: false,
+    lms: false,
+    google: false
+  },
+  loadedAdminUseCases: [],
+  roadmapActiveStage: 'day0'
+};
+
 // Core Datastore - Comprehensive, Generalized Use Case Database (English defaults)
 const useCasesDb = [
   {
