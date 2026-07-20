@@ -26,19 +26,16 @@ variable "db_password" {
   description = "The password for the PostgreSQL master admin user."
   type        = string
   sensitive   = true
-  ephemeral   = true
 }
 
 variable "super_admin_password" {
   description = "The custom password for the fsi_portal_s_admin account."
   type        = string
   sensitive   = true
-  ephemeral   = true
 }
 
 variable "admin_password" {
   description = "The custom password for the fsi_portal_admin assistant account."
   type        = string
   sensitive   = true
-  ephemeral   = true
 }

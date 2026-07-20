@@ -290,7 +290,7 @@ The scripts reside in the `/terraform` subdirectory and provision:
 cd terraform
 ```
 
-#### 2. Initialize the Providers & Modules:
+#### 2. Initialize the Providers:
 ```bash
 terraform init
 ```
@@ -299,10 +299,12 @@ terraform init
 Create a custom `terraform.tfvars` file to override default settings for non-sensitive configurations (GCP project, region, database name). 
 
 > [!IMPORTANT]
-> **Credential Security Best Practices (Terraform 1.10+):**
-> We configure all secret parameters (`db_password`, `super_admin_password`, and `admin_password`) with `sensitive = true` and `ephemeral = true` in `variables.tf`. This ensures that they are **never stored or persisted inside your `terraform.tfstate` state file**.
+> **Credential Security Best Practices:**
+> All secret parameters (`db_password`, `super_admin_password`, and `admin_password`) are configured with **`sensitive = true`** in `variables.tf`. This ensures that they are obfuscated as `(sensitive value)` in terminal output.
 >
-> To maintain strict hygiene, **never store passwords inside your `.tfvars` files**. Instead, choose one of the following secure options to inject them during runtime:
+> *Note on `ephemeral = true`*: In Terraform 1.10+, input variables can be flagged as `ephemeral = true` only if they are passed exclusively to write-only resources or actions. Because standard managed resources (like `google_sql_user` and `google_cloud_run_v2_service`) require persisting resource configuration details in your `terraform.tfstate` state file to detect drift and handle updates, **ephemeral values cannot be directly assigned to them** (doing so triggers an `Invalid use of ephemeral value` compilation error).
+>
+> To secure your state, use a secure remote backend (like encrypted Google Cloud Storage buckets) and **never store passwords inside your `.tfvars` files** (which keeps secrets completely off your physical disk and out of version control). Instead, choose one of the following dynamic injection options:
 
 ##### Option A: Secure Shell Environment Variables (Recommended)
 Export the credentials as in-memory environment variables prefixed with `TF_VAR_` in your terminal. They remain in shell memory and are never written to disk:
