@@ -16,15 +16,25 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Express Session Management
+const isProduction = process.env.NODE_ENV === 'production' || !!process.env.DATABASE_URL;
+
+if (isProduction) {
+  // Trust first proxy (Cloud Run, load balancers, etc.) to pass HTTPS header correctly
+  app.set('trust proxy', 1);
+}
+
 app.use(session({
   secret: process.env.SESSION_SECRET || 'edu-gemini-enterprise-swiss-minimalist-secret',
   resave: false,
   saveUninitialized: false,
+  name: 'fsi_portal_sid', // Custom session cookie name to avoid generic connect.sid
   cookie: {
-    secure: false, // Set to true in production if running behind HTTPS/SSL
+    secure: isProduction, // Enabled only in production HTTPS environment
+    sameSite: isProduction ? 'lax' : undefined,
     maxAge: 24 * 60 * 60 * 1000 // 1 day session longevity
   }
 }));
+
 
 // Serve static assets from project root and public subdirectories
 app.use(express.static(__dirname));
@@ -496,13 +506,25 @@ app.post('/api/auth/login', async (req, res) => {
   // Admin bypass credentials
   if (email.trim() === 'fsi_portal_s_admin' && password === superAdminPassword) {
     req.session.user = { email: 'fsi_portal_s_admin', isAdmin: true, isAssist: false };
-    return res.json({ success: true, isAdmin: true });
+    return req.session.save((err) => {
+      if (err) {
+        console.error('Session save error for super admin:', err);
+        return res.status(500).json({ success: false, message: 'Server session storage error.' });
+      }
+      res.json({ success: true, isAdmin: true });
+    });
   }
 
   // Admin Assist bypass credentials
   if (email.trim() === 'fsi_portal_admin' && password === adminPassword) {
     req.session.user = { email: 'fsi_portal_admin', isAdmin: true, isAssist: true };
-    return res.json({ success: true, isAdmin: true });
+    return req.session.save((err) => {
+      if (err) {
+        console.error('Session save error for admin assistant:', err);
+        return res.status(500).json({ success: false, message: 'Server session storage error.' });
+      }
+      res.json({ success: true, isAdmin: true });
+    });
   }
 
   try {
@@ -529,13 +551,19 @@ app.post('/api/auth/login', async (req, res) => {
       institutionLevel: user.institution_level
     };
 
-    res.json({
-      success: true,
-      isAdmin: false,
-      isTemp: isTemp,
-      email: user.email,
-      role: user.role,
-      institutionLevel: user.institution_level
+    req.session.save((err) => {
+      if (err) {
+        console.error('Session save error for standard user:', err);
+        return res.status(500).json({ success: false, message: 'Server session storage error.' });
+      }
+      res.json({
+        success: true,
+        isAdmin: false,
+        isTemp: isTemp,
+        email: user.email,
+        role: user.role,
+        institutionLevel: user.institution_level
+      });
     });
 
   } catch (error) {
@@ -579,7 +607,13 @@ app.post('/api/auth/reset-password', async (req, res) => {
     req.session.user.role = role || null;
     req.session.user.institutionLevel = institutionLevel || null;
 
-    res.json({ success: true, role: role, institutionLevel: institutionLevel });
+    req.session.save((err) => {
+      if (err) {
+        console.error('Session save error during password reset:', err);
+        return res.status(500).json({ success: false, message: 'Server session storage error.' });
+      }
+      res.json({ success: true, role: role, institutionLevel: institutionLevel });
+    });
   } catch (error) {
     console.error('Password reset / profile setup error:', error);
     res.status(500).json({ success: false, message: 'Server database error during password reset / profile setup.' });

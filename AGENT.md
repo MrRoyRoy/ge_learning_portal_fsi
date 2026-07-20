@@ -115,20 +115,32 @@ To compile and deploy updates or new releases of the portal to the live producti
    * Ensure that `style.css`, `app.js`, `index.html`, and `server.js` contain no syntax errors and all dynamic references are correct.
    * Verify that local testing configurations do not override the production database environment values.
 
-2. **Authenticate with Google Cloud SDK:**
+2. **Update Developer Guidelines (`AGENT.md`):**
+   * Before committing, always update the **App State & Progress** section of `AGENT.md` to document the completed changes, bug fixes, or new features, along with any concrete next steps.
+
+3. **Commit and Push Code to Remote Repository:**
+   * Stage all updated files including modified codebase assets and the updated `AGENT.md` file.
+   * Commit with a descriptive message and push to the remote git branch:
+     ```bash
+     git add .
+     git commit -m "feat/fix: descriptive release commit message"
+     git push
+     ```
+
+4. **Authenticate with Google Cloud SDK:**
    * Ensure you are authenticated with your authorized Google Cloud developer account:
      ```bash
      gcloud auth login
      ```
 
-3. **Deploy Codebase to Google Cloud Run:**
+5. **Deploy Codebase to Google Cloud Run:**
    * Execute the standardized source-deployment command in your terminal within the root directory of the repository:
      ```bash
      gcloud run deploy fsi-ge-learning-portal --source . --region asia-east2 --allow-unauthenticated --project ge-fsi-demo
      ```
 
-4. **Verify Access & Organization Policies:**
-    * If organization policies block public unauthenticated access, log in using your workspace domain credentials to access the production URL.
+6. **Verify Access & Organization Policies:**
+   * If organization policies block public unauthenticated access, log in using your workspace domain credentials to access the production URL.
 
 ---
 
@@ -151,8 +163,13 @@ To compile and deploy updates or new releases of the portal to the live producti
 * **Local Schema Bootstrap Verification (100% Complete):**
   * Deleted the old `edu_portal.db` file.
   * Verified that the server compiles `app.js` dynamic seeder scripts without any syntax errors, seeds `fsi_portal.db` use cases, and starts listening on port 8080 cleanly.
+* **Cloud Run Session & Login Persistence Fix (100% Complete):**
+  * Set up `trust proxy` inside Express when running on Google Cloud Run to correctly parse SSL headers.
+  * Migrated the session configuration to dynamically enable `secure` cookies in production HTTPS.
+  * Updated `/api/auth/login` and `/api/auth/reset-password` endpoints to use explicit, blocking `req.session.save()` operations, guaranteeing the browser successfully receives and persists the active cookie before client-side page reload.
 
 ### Next Steps & Continuous Polish
 1. **Interactive UI Verification & Testing:** Run manual navigation tests across the 12 FSI roles and 4 category hubs (Investment Research, Client Advisory, Credit & Operations, Risk & Compliance).
 2. **Terraform Integration Verification:** Initiate dry-run Terraform runs to verify variables and PostgreSQL environment structures on GCP.
 3. **Connectors Integration Demo:** Connect live document stores or active calendars to evaluate CRM and Email draft generation loops.
+
