@@ -55,18 +55,18 @@ resource "google_sql_user" "db_user" {
 # ==========================================
 # 3. IAM Roles & Permissions Setup
 # ==========================================
-# Cloud Run Default Compute Service Account
-data "google_project" "project" {
-  project_id = var.project_id
+# Dedicated Custom Service Account for Cloud Run Service to prevent reliance on missing Compute Engine SA
+resource "google_service_account" "run_sa" {
+  account_id   = "fsi-portal-runner"
+  display_name = "FSI Adoption Portal Cloud Run Runner Service Account"
+  project      = var.project_id
 }
 
-resource "google_project_iam_binding" "cloudsql_client" {
+# Grant Cloud Run Service Account Client Access to Cloud SQL Database
+resource "google_project_iam_member" "cloudsql_client" {
   project = var.project_id
   role    = "roles/cloudsql.client"
-
-  members = [
-    "serviceAccount:${data.google_project.project.number}-compute@developer.gserviceaccount.com"
-  ]
+  member  = "serviceAccount:${google_service_account.run_sa.email}"
 }
 
 # ==========================================
@@ -126,7 +126,7 @@ resource "google_cloud_run_service" "portal_service" {
         }
       }
 
-      service_account_name = "${data.google_project.project.number}-compute@developer.gserviceaccount.com"
+      service_account_name = google_service_account.run_sa.email
     }
 
     metadata {
@@ -147,10 +147,12 @@ resource "google_cloud_run_service" "portal_service" {
 # ==========================================
 # 5. Public Access Policy (Optional/Configurable)
 # ==========================================
-resource "google_cloud_run_service_iam_member" "public_access" {
-  service  = google_cloud_run_service.portal_service.name
-  location = google_cloud_run_service.portal_service.location
-  project  = var.project_id
-  role     = "roles/run.invoker"
-  member   = "allUsers"
-}
+# Commented out by default to bypass strict enterprise Domain Restricted Sharing policies (allowedPolicyMemberDomains).
+# To enable public access if permitted, uncomment this block or bind a domain member (e.g., "domain:yourcompany.com").
+# resource "google_cloud_run_service_iam_member" "public_access" {
+#   service  = google_cloud_run_service.portal_service.name
+#   location = google_cloud_run_service.portal_service.location
+#   project  = var.project_id
+#   role     = "roles/run.invoker"
+#   member   = "allUsers"
+# }
