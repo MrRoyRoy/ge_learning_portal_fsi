@@ -57,6 +57,10 @@ resource "google_sql_user" "db_user" {
 # ==========================================
 # 3. IAM Roles & Permissions Setup
 # ==========================================
+data "google_project" "project" {
+  project_id = var.project_id
+}
+
 # Dedicated Custom Service Account for Cloud Run Service to prevent reliance on missing Compute Engine SA
 resource "google_service_account" "run_sa" {
   account_id   = "fsi-portal-runner"
@@ -69,6 +73,16 @@ resource "google_project_iam_member" "cloudsql_client" {
   project = var.project_id
   role    = "roles/cloudsql.client"
   member  = "serviceAccount:${google_service_account.run_sa.email}"
+}
+
+# Grant Default Compute Service Account (used by Cloud Build) Storage Object Viewer permission
+# to prevent "Permission denied on resource" errors when compiling containers from source.
+resource "google_project_iam_member" "compute_storage_viewer" {
+  project = var.project_id
+  role    = "roles/storage.objectViewer"
+  member  = "serviceAccount:${data.google_project.project.number}-compute@developer.gserviceaccount.com"
+  
+  depends_on = [google_project_service.apis]
 }
 
 # ==========================================
