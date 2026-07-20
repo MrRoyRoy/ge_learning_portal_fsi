@@ -39,7 +39,7 @@ resource "google_sql_database_instance" "postgres_instance" {
 }
 
 resource "google_sql_database" "portal_db" {
-  name     = "edu_portal"
+  name     = "fsi_portal"
   instance = google_sql_database_instance.postgres_instance.name
   project  = var.project_id
 }
@@ -94,7 +94,7 @@ resource "google_cloud_run_service" "portal_service" {
 
         env {
           name  = "DATABASE_URL"
-          value = "postgres://${google_sql_user.db_user.name}:${var.db_password}@/edu_portal?host=/cloudsql/${var.project_id}:${var.region}:${google_sql_database_instance.postgres_instance.name}"
+          value = "postgres://${google_sql_user.db_user.name}:${var.db_password}@/fsi_portal?host=/cloudsql/${var.project_id}:${var.region}:${google_sql_database_instance.postgres_instance.name}"
         }
 
         env {

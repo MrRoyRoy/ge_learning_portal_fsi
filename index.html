@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Google Gemini Enterprise - Education Adoption & Playbook Portal</title>
-  <meta name="description" content="A premium Swiss-style resource hub and adoption portal for Google Gemini Enterprise in educational environments.">
+  <title>Google Gemini Enterprise - FSI Adoption & Playbook Portal</title>
+  <meta name="description" content="A premium Swiss-style resource hub and adoption portal for Google Gemini Enterprise in financial services environments.">
   
   <!-- Material Symbols Outlined for razor-thin icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -21,11 +21,11 @@
     <div class="wizard-card glass-panel" id="loginCard">
       <div class="wizard-header">
         <div class="wizard-logo">
-          <span class="material-symbols-outlined" style="font-size: 32px; color: white;">school</span>
+          <span class="material-symbols-outlined" style="font-size: 32px; color: white;">account_balance</span>
         </div>
         <h1 class="wizard-title" id="loginTitle">Google Gemini Enterprise</h1>
-        <h2 id="loginSubtitle" style="font-size: 15px; color: var(--color-primary); font-weight: 700; margin-top: 4px;">Education Adoption & Playbook Portal</h2>
-        <p class="wizard-desc" id="loginDesc">Unlock customized AI agent templates, prompt sandboxes, and administrative integration guides tailored to your school role.</p>
+        <h2 id="loginSubtitle" style="font-size: 15px; color: var(--color-primary); font-weight: 700; margin-top: 4px;">FSI Adoption & Playbook Portal</h2>
+        <p class="wizard-desc" id="loginDesc">Unlock customized AI agent templates, prompt sandboxes, and administrative integration guides tailored to your FSI role.</p>
       </div>
 
       <div class="wizard-form">
@@ -35,7 +35,7 @@
 
         <div class="form-group">
           <label class="form-label" for="loginEmail" id="labelEmail">Institutional Email</label>
-          <input type="text" class="select-control" id="loginEmail" placeholder="e.g. academic@edu.hk">
+          <input type="text" class="select-control" id="loginEmail" placeholder="e.g. analyst@fsi.hk">
         </div>
 
         <div class="form-group">
@@ -89,7 +89,7 @@
           <span class="material-symbols-outlined" style="font-size: 32px; color: white;">account_circle</span>
         </div>
         <h1 class="wizard-title" id="wizardTitle">Identify Your Context</h1>
-        <p class="wizard-desc" id="wizardDesc">Customizing your reference workspace filters to match your educational objectives and student audience.</p>
+        <p class="wizard-desc" id="wizardDesc">Customizing your reference workspace filters to match your financial services objectives and customer segments.</p>
       </div>
 
       <div class="wizard-form">
@@ -97,26 +97,29 @@
         <div class="form-group">
           <label class="form-label" for="wizardRole" id="labelRole">Select Your Role</label>
           <select class="select-control" id="wizardRole">
-            <option value="Lecturer" selected>Lecturer / Educator</option>
-            <option value="TA">Teaching Assistant (TA)</option>
-            <option value="Student">Student Representative / Club Leader</option>
-            <option value="Program Leader">Program Leader / Department Head</option>
-            <option value="Dean">Dean / Educational Leader</option>
-            <option value="IT Admin">IT Director / System Administrator</option>
-            <option value="SAO">Student Affairs Office (SAO) Staff</option>
-            <option value="Security">Campus Security Officer</option>
-            <option value="Finance">Institutional Finance / Auditor</option>
+            <option value="Financial Analyst" selected>Financial & Equity Research Analyst</option>
+            <option value="Relationship Manager">Relationship Manager / Financial Advisor</option>
+            <option value="Claims Processor">Insurance Claims Processor & Adjuster</option>
+            <option value="Customer Service">Customer Service Representative</option>
+            <option value="HR Consultant">Human Resources & People Consultant</option>
+            <option value="IT Operator">IT Support & Operations Professional</option>
+            <option value="Compliance Officer">Compliance Officer & Audit Manager</option>
+            <option value="Loan Officer">Commercial Lending & Credit Officer</option>
+            <option value="Underwriter">Credit Risk & Loan Underwriter</option>
+            <option value="Risk Manager">Risk Management & Financial Crime</option>
+            <option value="Investment Banker">Investment Banking / Corporate Finance</option>
+            <option value="Security Officer">Information & Cybersecurity Officer</option>
           </select>
         </div>
 
         <!-- Institution Level Selection -->
         <div class="form-group" id="levelFormGroup">
-          <label class="form-label" for="wizardLevel" id="labelLevel">Institution / School Level</label>
+          <label class="form-label" for="wizardLevel" id="labelLevel">Target FSI Sector / Segment</label>
           <select class="select-control" id="wizardLevel">
-            <option value="Generic" style="display: none;">Generic (Cross-Level Adaptable)</option>
-            <option value="University & College" selected>University & College (Higher Edu)</option>
-            <option value="High School">High School (Grades 6-12)</option>
-            <option value="Primary School">Primary School (Grades K-5)</option>
+            <option value="Generic" style="display: none;">Generic (Cross-Sector Adaptable)</option>
+            <option value="Banking" selected>Retail & Commercial Banking</option>
+            <option value="Insurance">Life & Property Insurance</option>
+            <option value="Capital Markets">Investment & Capital Markets</option>
           </select>
           <p id="levelHelperText" style="font-size: 11px; color: var(--text-muted); margin-top: 4px;"></p>
         </div>
@@ -151,9 +154,9 @@
     <aside class="sidebar" id="appSidebar">
       <div class="sidebar-brand">
         <div class="logo-icon">
-          <span class="material-symbols-outlined">school</span>
+          <span class="material-symbols-outlined">account_balance</span>
         </div>
-        <span class="brand-text">GE Adoption Hub</span>
+        <span class="brand-text">FSI Adoption Hub</span>
         <button id="btnMobileSidebarClose" class="nav-button" aria-label="Close menu" style="margin-left: auto; border: none; background: transparent; padding: 4px; min-width: auto; height: auto;">
           <span class="material-symbols-outlined" style="font-size: 20px; color: var(--text-primary);">close</span>
         </button>
@@ -163,8 +166,8 @@
       <div class="sidebar-section">
         <div class="sidebar-title" id="titleContextProfile">Active Context</div>
         <div class="context-profile-card">
-          <div class="profile-role-name" id="profileRoleName">Lecturer</div>
-          <div class="profile-institution" id="profileInstitutionName">Higher Education</div>
+          <div class="profile-role-name" id="profileRoleName">Financial Analyst</div>
+          <div class="profile-institution" id="profileInstitutionName">Retail & Commercial Banking</div>
         </div>
       </div>
 
@@ -188,11 +191,11 @@
         </div>
         
         <div id="connectorList">
-          <!-- Drive integration item -->
+          <!-- Document Store integration item -->
           <div class="connector-item">
             <div class="connector-name-wrapper">
               <div class="connector-indicator" id="indicator-onedrive"></div>
-              <span>Drive Connector</span>
+              <span>Document Store Connector</span>
             </div>
             <label class="switch">
               <input type="checkbox" id="toggleOneDrive">
@@ -212,11 +215,11 @@
             </label>
           </div>
 
-          <!-- LMS integration item -->
+          <!-- CRM integration item -->
           <div class="connector-item">
             <div class="connector-name-wrapper">
               <div class="connector-indicator" id="indicator-lms"></div>
-              <span>LMS Connector</span>
+              <span>CRM Connector</span>
             </div>
             <label class="switch">
               <input type="checkbox" id="toggleLMS">
@@ -235,6 +238,18 @@
               <span class="slider"></span>
             </label>
           </div>
+
+          <!-- Service Desk & KB integration item -->
+          <div class="connector-item">
+            <div class="connector-name-wrapper">
+              <div class="connector-indicator" id="indicator-service"></div>
+              <span>Service Desk & KB Connector</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="toggleService">
+              <span class="slider"></span>
+            </label>
+          </div>
         </div>
       </div>
 
@@ -246,16 +261,16 @@
             <span class="material-symbols-outlined">dashboard</span> <span id="navAll">All Templates</span>
           </li>
           <li class="filter-menu-item category-filter-item" data-category="academic">
-            <span class="material-symbols-outlined">menu_book</span> <span id="navAcademic">Academic Portal</span>
+            <span class="material-symbols-outlined">trending_up</span> <span id="navAcademic">Investment Research</span>
           </li>
           <li class="filter-menu-item category-filter-item" data-category="student">
-            <span class="material-symbols-outlined">groups</span> <span id="navStudent">Student Support</span>
+            <span class="material-symbols-outlined">handshake</span> <span id="navStudent">Client Advisory</span>
           </li>
           <li class="filter-menu-item category-filter-item" data-category="operational">
-            <span class="material-symbols-outlined">settings_suggest</span> <span id="navOperational">Operations & Services</span>
+            <span class="material-symbols-outlined">account_balance_wallet</span> <span id="navOperational">Credit & Operations</span>
           </li>
           <li class="filter-menu-item category-filter-item" data-category="admin">
-            <span class="material-symbols-outlined">shield_person</span> <span id="navAdmin">System & Admin</span>
+            <span class="material-symbols-outlined">gavel</span> <span id="navAdmin">Risk & Compliance</span>
           </li>
         </ul>
       </div>
@@ -325,7 +340,7 @@
           </div>
         </div>
         <div class="navbar-right">
-          <span style="font-size: 13px; color: var(--text-muted); font-weight: 500; margin-left: 32px;" id="navbarWelcomeText">Edu GE Adoption Portal</span>
+          <span style="font-size: 13px; color: var(--text-muted); font-weight: 500; margin-left: 32px;" id="navbarWelcomeText">FSI GE Adoption Portal</span>
           
           <!-- Theme Toggle Button -->
           <button class="nav-button" id="btnThemeToggle" aria-label="Toggle Theme" style="padding: 0; width: 44px; justify-content: center; flex-shrink: 0;">
@@ -359,7 +374,7 @@
             <div class="dashboard-title-row">
               <div>
                 <h1 class="welcome-msg" id="welcomeMsg">Adoption Playbook & Reference Hub</h1>
-                <p class="welcome-subtitle" id="welcomeSubtitle">Explore battle-tested prompt recipes, custom Agent instructions, and configuration guidelines tailored specifically to support your educational role.</p>
+                <p class="welcome-subtitle" id="welcomeSubtitle">Explore battle-tested prompt recipes, custom Agent instructions, and configuration guidelines tailored specifically to support your financial services role.</p>
               </div>
             </div>
           </div>
@@ -469,8 +484,8 @@
               <span class="material-symbols-outlined" style="font-size: 24px;">menu</span>
             </button>
             <div>
-              <h1 id="adminPortalTitle" style="font-size: 24px; font-weight: 600; letter-spacing: -0.02em;">GEMINI EDUCATION MANAGEMENT</h1>
-              <p id="adminPortalSubtitle" style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Configure users, update learning playbooks, and analyze the last 6 months deployment metrics.</p>
+              <h1 id="adminPortalTitle" style="font-size: 24px; font-weight: 600; letter-spacing: -0.02em;">GEMINI FSI ADOPTION MANAGEMENT</h1>
+              <p id="adminPortalSubtitle" style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Configure users, update adoption playbooks, and analyze the last 6 months deployment metrics.</p>
             </div>
           </div>
           <div style="display: flex; align-items: center; gap: 8px;">
@@ -498,7 +513,7 @@
             <form id="formAddUser" style="display: flex; gap: 12px; align-items: flex-end; max-width: 500px;">
               <div class="form-group" style="flex-grow: 1;">
                 <label id="adminProvisionLabelEmail" class="form-label">User Email Address</label>
-                <input type="text" class="select-control" id="inputNewUserEmail" placeholder="e.g. prof1@edu.hk, prof2@edu.hk" required style="width: 100%;">
+                <input type="text" class="select-control" id="inputNewUserEmail" placeholder="e.g. analyst1@fsi.hk, manager2@fsi.hk" required style="width: 100%;">
               </div>
               <button id="adminBtnProvision" class="nav-button nav-button-primary" type="submit" style="height: 40px; flex-shrink: 0;">
                 Provision <span class="material-symbols-outlined">person_add</span>
@@ -555,7 +570,7 @@
           <!-- Gorgeous native SVG Line Chart mapping the last 6 months metrics -->
           <div class="glass-panel" style="padding: 24px;">
             <h2 id="adminChartTitle" style="font-size: 16px; margin-bottom: 4px;">6-Month Portal Adoption Metrics</h2>
-            <p id="adminChartDesc" style="font-size: 11px; color: var(--text-muted); margin-bottom: 20px;">Detailed aggregation charting Views, Likes, and Deployed actions across the academic term.</p>
+            <p id="adminChartDesc" style="font-size: 11px; color: var(--text-muted); margin-bottom: 20px;">Detailed aggregation charting Views, Likes, and Deployed actions across the rollout phase.</p>
             
             <div style="display: flex; gap: 24px; margin-bottom: 12px; font-size: 11px; font-weight: 700;">
               <div id="adminLabelViewsLegend" style="display: flex; align-items: center; gap: 6px;"><span style="display: inline-block; width: 12px; height: 3px; background: var(--color-secondary);"></span> PAGE VIEWS</div>
@@ -575,7 +590,7 @@
               <span class="material-symbols-outlined" style="color: var(--color-danger);">star</span>
               <span>Most Popular Playbooks (Leaderboard)</span>
             </h2>
-            <p id="adminLeaderboardDesc" style="font-size: 11px; color: var(--text-muted); margin-bottom: 20px;">Top-performing educational use cases ranked by collective user appreciation likes.</p>
+            <p id="adminLeaderboardDesc" style="font-size: 11px; color: var(--text-muted); margin-bottom: 20px;">Top-performing financial services playbooks ranked by collective user appreciation likes.</p>
             
             <div id="adminMostLikedList" style="display: grid; grid-template-columns: 1fr; gap: 12px;">
               <!-- App.js renders dynamically here -->
@@ -624,7 +639,7 @@
           </div>
         </section>
 
-        <!-- TAB 4: USER FEEDBACKS PANEL (EDU_PORTAL_S_ADMIN ONLY) -->
+        <!-- TAB 4: USER FEEDBACKS PANEL (FSI_PORTAL_S_ADMIN ONLY) -->
         <section class="admin-tab-content" id="adminTabFeedbacks" style="display: none;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
             <h2 id="adminFeedbackTitle" style="font-size: 16px;">User Feedbacks & Suggestions</h2>
@@ -722,7 +737,7 @@
               </button>
             </div>
             <p style="font-size: 11px; color: var(--text-muted); margin: 0;" id="adminFormLabelGeminiPromptDesc">Specify what you want to create, or describe the edits you'd like to apply to this playbook. Gemini will generate high-fidelity, localized playbooks, system prompts, steps, and tips.</p>
-            <textarea class="select-control" id="formCaseGeminiInstruction" style="height: 60px; padding: 8px 12px; resize: none; font-size: 12px; border-color: rgba(79, 70, 229, 0.2);" placeholder="e.g. Create a rubric grading guide for high school chemistry lab reports using Canvas Mode, focusing on safety..."></textarea>
+            <textarea class="select-control" id="formCaseGeminiInstruction" style="height: 60px; padding: 8px 12px; resize: none; font-size: 12px; border-color: rgba(79, 70, 229, 0.2);" placeholder="e.g. Create an equity research and analysis guide using NotebookLM focusing on regulatory compliance..."></textarea>
           </div>
 
           <!-- DUAL-MODE ADVANCED & STANDALONE NOTIFICATION INDICATOR -->
@@ -732,16 +747,16 @@
           <!-- ID and Category Row -->
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
             <div class="form-group">
-              <label id="adminFormLabelId" class="form-label">ID (Unique, Immutable)</label>
-              <input type="text" class="select-control" id="formCaseId" required placeholder="e.g. research_agent">
+               <label id="adminFormLabelId" class="form-label">ID (Unique, Immutable)</label>
+               <input type="text" class="select-control" id="formCaseId" required placeholder="e.g. research_agent">
             </div>
             <div class="form-group">
               <label id="adminFormLabelCategory" class="form-label">Category Hub</label>
               <select class="select-control" id="formCaseCategory" required>
-                <option value="academic">Academic Portal</option>
-                <option value="student">Student Support</option>
-                <option value="operational">Operations & Services</option>
-                <option value="admin">System & Admin</option>
+                <option value="academic">Investment Research</option>
+                <option value="student">Client Advisory</option>
+                <option value="operational">Credit & Operations</option>
+                <option value="admin">Risk & Compliance</option>
               </select>
             </div>
           </div>
@@ -750,20 +765,23 @@
           <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;">
             <div class="form-group">
               <label id="adminFormLabelTitle" class="form-label">Template Title</label>
-              <input type="text" class="select-control" id="formCaseTitle" required placeholder="e.g. Chemistry Lab Safety Agent">
+              <input type="text" class="select-control" id="formCaseTitle" required placeholder="e.g. Equity Research Copilot">
             </div>
             <div class="form-group">
               <label id="adminFormLabelRole" class="form-label">Primary Role Context</label>
               <select class="select-control" id="formCaseRole" required>
-                <option value="Lecturer">Lecturer / Educator</option>
-                <option value="TA">Teaching Assistant (TA)</option>
-                <option value="Student">Student / Club Leader</option>
-                <option value="Program Leader">Program Leader / Department Head</option>
-                <option value="Dean">Dean / Educational Leader</option>
-                <option value="IT Admin">IT Administrator / SysAdmin</option>
-                <option value="SAO">Student Affairs Officer (SAO)</option>
-                <option value="Security">Campus Security Officer</option>
-                <option value="Finance">Financial Administrator</option>
+                <option value="Financial Analyst">Financial & Equity Research Analyst</option>
+                <option value="Relationship Manager">Relationship Manager / Financial Advisor</option>
+                <option value="Claims Processor">Insurance Claims Processor & Adjuster</option>
+                <option value="Customer Service">Customer Service Representative</option>
+                <option value="HR Consultant">Human Resources & People Consultant</option>
+                <option value="IT Operator">IT Support & Operations Professional</option>
+                <option value="Compliance Officer">Compliance Officer & Audit Manager</option>
+                <option value="Loan Officer">Commercial Lending & Credit Officer</option>
+                <option value="Underwriter">Credit Risk & Loan Underwriter</option>
+                <option value="Risk Manager">Risk Management & Financial Crime</option>
+                <option value="Investment Banker">Investment Banking / Corporate Finance</option>
+                <option value="Security Officer">Information & Cybersecurity Officer</option>
               </select>
             </div>
           </div>
@@ -811,10 +829,11 @@
             <div class="form-group">
               <label id="adminFormLabelConnectors" class="form-label">Required Connectors</label>
               <div class="glass-panel" style="padding: 10px; display: grid; grid-template-columns: 1fr; gap: 4px; font-size: 12px;">
-                <label style="display: flex; align-items: center; gap: 6px;"><input type="checkbox" name="formConnectors" value="Drive Connector"> Drive Connector</label>
+                <label style="display: flex; align-items: center; gap: 6px;"><input type="checkbox" name="formConnectors" value="Drive Connector"> Document Store Connector</label>
                 <label style="display: flex; align-items: center; gap: 6px;"><input type="checkbox" name="formConnectors" value="Email Connector"> Email Connector</label>
-                <label style="display: flex; align-items: center; gap: 6px;"><input type="checkbox" name="formConnectors" value="LMS Connector"> LMS Connector</label>
+                <label style="display: flex; align-items: center; gap: 6px;"><input type="checkbox" name="formConnectors" value="LMS Connector"> CRM Connector</label>
                 <label style="display: flex; align-items: center; gap: 6px;"><input type="checkbox" name="formConnectors" value="Calendar Connector"> Calendar Connector</label>
+                <label style="display: flex; align-items: center; gap: 6px;"><input type="checkbox" name="formConnectors" value="Service Desk & KB Connector"> Service Desk & KB Connector</label>
               </div>
             </div>
           </div>

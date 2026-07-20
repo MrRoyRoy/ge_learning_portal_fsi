@@ -49,7 +49,7 @@ if (pgConnectionString) {
   console.log('⚡ Using Cloud/Production PostgreSQL Connection Layer.');
 } else {
   const sqlite3 = require('sqlite3').verbose();
-  const dbPath = path.join(__dirname, 'edu_portal.db');
+  const dbPath = path.join(__dirname, 'fsi_portal.db');
   sqliteDb = new sqlite3.Database(dbPath);
   dbType = 'sqlite';
   console.log(`⚡ Using Local File-Based SQLite Fallback DB: ${dbPath}`);
@@ -359,18 +359,18 @@ async function seedDatabase() {
       }
       console.log('✅ Use cases database seeded successfully.');
     } else {
-      console.log('📊 Database already contains seeded use cases. Synchronizing "su_helpdesk" and "at_risk_cohort" configurations...');
-      const suHelpdesk = useCases.find(uc => uc.id === 'su_helpdesk');
-      if (suHelpdesk) {
-        await query("DELETE FROM use_cases WHERE id = 'su_helpdesk'");
-        await insertUseCase(suHelpdesk, translations['su_helpdesk']);
-        console.log('✅ "su_helpdesk" dual-mode prompt configurations synchronized successfully.');
+      console.log('📊 Database already contains seeded use cases. Synchronizing "compliance_assistance_bot" and "credit_risk_assessment" configurations...');
+      const complianceAssistanceBot = useCases.find(uc => uc.id === 'compliance_assistance_bot');
+      if (complianceAssistanceBot) {
+        await query("DELETE FROM use_cases WHERE id = 'compliance_assistance_bot'");
+        await insertUseCase(complianceAssistanceBot, translations['compliance_assistance_bot']);
+        console.log('✅ "compliance_assistance_bot" dual-mode prompt configurations synchronized successfully.');
       }
-      const atRiskCohort = useCases.find(uc => uc.id === 'at_risk_cohort');
-      if (atRiskCohort) {
-        await query("DELETE FROM use_cases WHERE id = 'at_risk_cohort'");
-        await insertUseCase(atRiskCohort, translations['at_risk_cohort']);
-        console.log('✅ "at_risk_cohort" configurations synchronized successfully.');
+      const creditRiskAssessment = useCases.find(uc => uc.id === 'credit_risk_assessment');
+      if (creditRiskAssessment) {
+        await query("DELETE FROM use_cases WHERE id = 'credit_risk_assessment'");
+        await insertUseCase(creditRiskAssessment, translations['credit_risk_assessment']);
+        console.log('✅ "credit_risk_assessment" configurations synchronized successfully.');
       }
     }
 
@@ -394,7 +394,7 @@ async function seedDatabase() {
     }
 
     // Clean up any previously pre-seeded mock analytics data to reflect actual adoption metrics
-    await query("DELETE FROM analytics WHERE user_email = 'academic_trial@edu.hk'");
+    await query("DELETE FROM analytics WHERE user_email = 'analyst_trial@fsi.hk'");
 
     // Seed standard trial user test-user@google.com with password 12345678 if missing
     const existingTestUser = await query('SELECT count(*) as count FROM users WHERE email = ?', ['test-user@google.com']);
@@ -470,7 +470,7 @@ async function seedAnalytics() {
 
         await query(
           'INSERT INTO analytics (timestamp, action, use_case_id, user_email) VALUES (?, ?, ?, ?)',
-          [timestampStr, act, ucId, 'academic_trial@edu.hk']
+          [timestampStr, act, ucId, 'analyst_trial@fsi.hk']
         );
       }
     }
@@ -490,18 +490,18 @@ app.post('/api/auth/login', async (req, res) => {
     return res.status(400).json({ success: false, message: 'Please provide both email and password.' });
   }
 
-  const superAdminPassword = process.env.SUPER_ADMIN_PASSWORD || 'HKEduDemo2026';
-  const adminPassword = process.env.ADMIN_PASSWORD || 'HKEduDemo';
+  const superAdminPassword = process.env.SUPER_ADMIN_PASSWORD || 'SuperAdmin_ChangeMe_2027';
+  const adminPassword = process.env.ADMIN_PASSWORD || 'Admin_ChangeMe_2027';
 
   // Admin bypass credentials
-  if (email.trim() === 'edu_portal_s_admin' && password === superAdminPassword) {
-    req.session.user = { email: 'edu_portal_s_admin', isAdmin: true, isAssist: false };
+  if (email.trim() === 'fsi_portal_s_admin' && password === superAdminPassword) {
+    req.session.user = { email: 'fsi_portal_s_admin', isAdmin: true, isAssist: false };
     return res.json({ success: true, isAdmin: true });
   }
 
   // Admin Assist bypass credentials
-  if (email.trim() === 'edu_portal_admin' && password === adminPassword) {
-    req.session.user = { email: 'edu_portal_admin', isAdmin: true, isAssist: true };
+  if (email.trim() === 'fsi_portal_admin' && password === adminPassword) {
+    req.session.user = { email: 'fsi_portal_admin', isAdmin: true, isAssist: true };
     return res.json({ success: true, isAdmin: true });
   }
 
@@ -822,7 +822,7 @@ app.get('/api/feedbacks', async (req, res) => {
 // Delete Feedback (Strictly Super-Admin ONLY)
 app.post('/api/feedbacks/delete', async (req, res) => {
   try {
-    if (!req.session.user || req.session.user.email !== 'edu_portal_s_admin') {
+    if (!req.session.user || req.session.user.email !== 'fsi_portal_s_admin') {
       return res.status(403).json({ error: 'Unauthorized access. Super-admin role required.' });
     }
     const { id } = req.body;
@@ -1258,16 +1258,16 @@ app.post('/api/admin/generate-gemini', requireAdmin, async (req, res) => {
     }
 
     const token = await getGcpAccessToken();
-    const url = 'https://aiplatform.googleapis.com/v1/projects/ge-edu-demo/locations/global/publishers/google/models/gemini-3.5-flash:generateContent';
+    const url = 'https://aiplatform.googleapis.com/v1/projects/ge-fsi-demo/locations/global/publishers/google/models/gemini-3.5-flash:generateContent';
 
     let promptText = `
-You are the AI Playbook Architect for "Gemini Enterprise - Edu Portal".
-Generate a high-fidelity educational/operational playbook based on the following input parameters:
+You are the AI Playbook Architect for "Gemini Enterprise - FSI Portal".
+Generate a high-fidelity financial/operational playbook based on the following input parameters:
 - Playbook Title: "${title || 'Suggest a professional, high-fidelity playbook title based on instructions'}"
 - Category: "${category || 'academic'}"
 - Gemini Features: ${JSON.stringify(features || [])} (You may update or add features based on custom instructions)
 - Connected Data Connectors: ${JSON.stringify(connectors || [])} (You may update or add connectors based on custom instructions)
-- Target User Role: "${role || 'Lecturer'}"
+- Target User Role: "${role || 'Financial Analyst'}"
 - Target Institutional Levels: ${JSON.stringify(level || [])}
 - Enable Dual-Mode Connectors Workflow: ${isDualMode ? 'Yes' : 'No'} (You may enable or disable this flag if instructions request/imply it)
 `;
@@ -1304,9 +1304,9 @@ The JSON object MUST EXACTLY follow this schema:
 {
   "id": "suggested_lowercase_kebab_case_id_matching_the_title",
   "category": "academic",
-  "role": "Lecturer",
+  "role": "Financial Analyst",
   "features": ["NotebookLM", "Canvas Mode", "Deep Research", "Agent Designer", "Image Generation", "Video Generation"], // Choose recommended features based on instructions and input
-  "connectors": ["Drive Connector", "Email Connector", "LMS Connector", "Calendar Connector"], // Choose recommended connectors based on instructions and input, use product-agnostic naming exactly!
+  "connectors": ["Drive Connector", "Email Connector", "LMS Connector", "Calendar Connector", "Service Desk & KB Connector"], // Choose recommended connectors based on instructions and input, use product-agnostic naming exactly!
   "isDualMode": true, // Boolean flag (true or false) indicating if this is a dual-mode playbook. Set true if the user's instruction asks for active connectors or dual mode template.
   "en": {
     "title": "Suggested High-Fidelity English Title",

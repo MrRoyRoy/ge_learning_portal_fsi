@@ -2,1733 +2,1287 @@
 
 // Core Datastore - Comprehensive, Generalized Use Case Database (English defaults)
 const useCasesDb = [
-  // HUB 1: ACADEMIC PORTAL (Lecturers & TAs)
   {
-    id: "socratic_tutor",
-    title: "Socratic AI Tutor Agent Creation",
-    category: "academic",
-    summary: "Ground a custom course Agent in your lecture notes and syllabi to act as a 24/7 Socratic learning companion.",
-    features: ["Agent Designer", "NotebookLM"],
-    connectors: [],
-    role: "Lecturer",
-    level: ["University & College", "High School", "Generic"],
-    steps: [
-      "In NotebookLM, create a 'Read-Only Course Hub' and upload all syllabus documents, lecture slides, and key readings.",
-      "Navigate to Gemini Enterprise Agent Designer and create a new Custom Agent. Name it '[Course Name] Coach'.",
-      "Copy the Socratic persona instructions into the Agent prompt window and link the read-only NotebookLM hub in the data configuration.",
-      "Test the Agent by asking basic syllabus questions (e.g. 'What is mitosis?') and ensuring it guides you to find the answer rather than directly giving it.",
-      "Generate a shareable link for the Agent and post it prominently on your school LMS (Canvas, Moodle, etc.) for student access."
+    "id": "equity_research_copilot",
+    "title": "Equity Research Analyst Copilot",
+    "category": "academic",
+    "summary": "Ground an equity research Agent in 10-K filings, annual statements, and earnings call transcripts to build a financial analyst assistant.",
+    "features": [
+      "Agent Designer",
+      "NotebookLM"
     ],
-    prompt: `You are the '[Course Code] Coach,' a friendly and encouraging Socratic tutor for this course. Your sole objective is to guide students to find answers themselves.
-Follow these rules strictly:
-1. **Ground all your responses** in the provided course materials only.
-2. When a student asks a question (e.g., 'What is the answer to question 3?'), do NOT give the direct answer. Instead, respond with a probing, contextual question that helps them think critically.
-3. Reference specific files/pages in the course materials (e.g., 'Can you look at slide 4 of Lecture 2 and tell me what the first stage is called?').
-4. If a student demonstrates correct understanding, praise them and provide a complete, rich explanation.
-5. If asked about topics outside this course, politely decline, stating: 'I can only assist you with [Course Name] topics.'
-6. Cite your sources for every answer.`,
-    proTip: "By connecting NotebookLM as the grounding layer, you ensure the Agent never hallucinates answers, restricts responses to authorized curriculum text, and provides verified inline citations.",
-    connectorGuide: null
+    "connectors": [],
+    "role": "Financial Analyst",
+    "level": [
+      "Capital Markets",
+      "Banking",
+      "Generic"
+    ],
+    "steps": [
+      "In NotebookLM, upload your target public company's latest 10-K statement, balance sheet, and earnings call transcripts.",
+      "Navigate to Gemini Enterprise Agent Designer and build a custom Agent named '[Company Ticker] Analyst Agent'.",
+      "Insert the specialized equity research persona instructions into the Agent's prompt guidelines and link the read-only NotebookLM folder.",
+      "Conduct query testing by asking the Agent to synthesize debt-to-equity ratios and key risks mentioned in the transcript.",
+      "Share the custom analyst agent link with your advisory or portfolio team for real-time market analysis."
+    ],
+    "prompt": "You are a Senior Equity Research Analyst Agent. Your objective is to assist analysts with deep company financial assessments.\nFollow these rules strictly:\n1. **Ground all answers** exclusively in the provided 10-K, balance sheet, and transcript sources.\n2. If asked for a ratio or metric, provide the exact calculation, referencing the page and source file.\n3. Call out any discrepancies between management's remarks in the earnings call and the actual figures in the 10-K balance sheet.\n4. If a query is outside the scope of the provided sources, state: 'I can only analyze the provided filings.'\n5. Provide professional financial citations for all data points.",
+    "proTip": "By connecting NotebookLM as the grounding layer, you ensure the research assistant never hallucinates calculations and restricts responses to authorized compliance-checked filing text.",
+    "connectorGuide": null
   },
   {
-    id: "rubric_grading",
-    title: "Rubric-Aligned Essay Feedback Assistant",
-    category: "academic",
-    summary: "Analyze student essays against a complex grading rubric in NotebookLM and generate formative constructive feedback.",
-    features: ["NotebookLM", "Canvas Mode"],
-    connectors: [],
-    role: "TA",
-    level: ["Generic"],
-    steps: [
-      "Create a private, secure workspace in NotebookLM dedicated to the assignment.",
-      "Upload the detailed grading rubric (PDF/Doc) and the assignment instructions as the primary source documents.",
-      "Upload a student's submission (Word or PDF). To protect data privacy, strip student names or use anonymized IDs.",
-      "Paste the rubric-alignment prompt in the chat. NotebookLM will review the essay against each rubric criterion.",
-      "Review the generated feedback. Add your personal pedagogical insights and adjust the tone to maintain the critical 'human-in-the-loop' standard."
+    "id": "client_meeting_brief",
+    "title": "Client Portfolio Briefing Assistant",
+    "category": "student",
+    "summary": "Synthesize client asset positions, previous interaction notes, and financial objectives in NotebookLM to draft custom meeting briefs.",
+    "features": [
+      "NotebookLM",
+      "Canvas Mode"
     ],
-    prompt: `Acting as an expert academic teaching assistant, analyze the attached student essay against the uploaded grading rubric. Generate a first draft of constructive, high-quality feedback.
-The feedback MUST adhere to the following structure:
-1. **Rubric Performance Summary**: Provide a tentative level/score for each rubric criterion, directly referencing specific evidence from the student's submission.
-2. **Key Strengths (1-2)**: Identify specific aspects of the paper that were executed exceptionally well, quoting 1-2 examples from the text.
-3. **Areas for Growth (2-3)**: Identify specific logical, grammatical, or structural issues. Explain how they relate to the rubric requirements.
-4. **Actionable Recommendations**: Provide 2-3 specific, progressive steps the student can take in their next draft to improve.
-Maintain a supportive, pedagogical, and highly encouraging tone throughout.`,
-    proTip: "Because NotebookLM operates in a secure cloud tenant, student intellectual property and data remain completely confidential and are never used to train public LLM models.",
-    connectorGuide: null
+    "connectors": [],
+    "role": "Relationship Manager",
+    "level": [
+      "Banking",
+      "Capital Markets",
+      "Generic"
+    ],
+    "steps": [
+      "Create a private, secure workspace in NotebookLM dedicated to your high-net-worth client portfolio.",
+      "Upload past meeting memos, wealth objective notes, and current portfolio spreadsheets as primary documents.",
+      "Switch to Canvas Mode in Gemini Enterprise to compile a comprehensive, polished client meeting prep brief.",
+      "Ask the model to draft a customized pre-meeting checklist and wealth allocation suggestions tailored to the client's risk profile.",
+      "Export the completed briefing sheet directly to Google Docs to prepare for the live client advisory meeting."
+    ],
+    "prompt": "Acting as an elite Relationship Manager Assistant, analyze the provided client wealth portfolio and past interaction history.\nGenerate a high-fidelity client briefing document structured as follows:\n1. **Executive Profile & Wealth Summary**: Synthesize the client's current asset allocations, investment horizons, and risk tolerance.\n2. **Key Discussion Goals**: Propose 3 major objectives for the upcoming meeting based on previous goals (e.g. tax planning, trust setups).\n3. **Tailored Recommendations**: Propose 2-3 specific portfolio adjustments aligned with their risk profile (conservative, balanced, aggressive).\n4. **Objection Handling**: Anticipate 2 objections they might raise regarding market volatility or fee structures and draft persuasive, compliant advisor responses.",
+    "proTip": "Because NotebookLM operates in a secure enterprise cloud tenant, high-net-worth client financial records remain strictly confidential and are never used to train public LLM models.",
+    "connectorGuide": null
   },
   {
-    id: "curriculum_design",
-    title: "Industry-Aligned Curriculum Architect",
-    category: "academic",
-    summary: "Conduct market research and analyze industry trends to design a comprehensive, modern course syllabus from scratch.",
-    features: ["Deep Research", "Canvas Mode"],
-    connectors: [],
-    role: "Lecturer",
-    level: ["University & College", "High School"],
-    steps: [
-      "Open Gemini Enterprise and launch a 'Deep Research' session targeting emerging skills in your course domain.",
-      "Prompt the model to synthesize job market reports, professional certifications, and academic publications into core competency outcomes.",
-      "Transfer the results to Canvas Mode to brainstorm the week-by-week syllabus content, recommended textbook readings, and project briefs.",
-      "Co-create interactive grading rubrics directly inside Canvas Mode, then export the completed syllabus package to Google Docs."
+    "id": "portfolio_advisory_architect",
+    "title": "Strategic Asset Allocation & Portfolio Architect",
+    "category": "academic",
+    "summary": "Conduct secure, real-time market research and analyze macroeconomic trends to design customized investment portfolios.",
+    "features": [
+      "Deep Research",
+      "Canvas Mode"
     ],
-    prompt: `Act as a senior instructional designer. I want to build a brand new, highly modern course syllabus for [Course Title].
-Phase 1: Research. Search the web for the top 5 most in-demand technical and soft skills requested by employers in this field over the past 12 months.
-Phase 2: Learning Outcomes. Design 5 measurable learning outcomes mapped directly to Bloom's Taxonomy based on these skills.
-Phase 3: Syllabus Draft. Create a comprehensive 14-week topic outline, specifying major lecture themes, in-class active learning tasks, and project milestones.
-Phase 4: Assessment. Propose a project-based grading framework that bypasses traditional exam formats in favor of authentic proof-of-work assignments.`,
-    proTip: "Use Deep Research's capability to search hundreds of academic and corporate portals simultaneously, providing you with a high-fidelity summary report citing actual job-post statistics.",
-    connectorGuide: null
+    "connectors": [],
+    "role": "Financial Analyst",
+    "level": [
+      "Capital Markets",
+      "Banking"
+    ],
+    "steps": [
+      "Open Gemini Enterprise and launch a 'Deep Research' session targeting emerging market sectors and bond yield curves.",
+      "Prompt the model to synthesize macroeconomic trends, inflation adjustments, and index performance metrics.",
+      "Transfer the researched market trends to Canvas Mode to draft a tailored asset allocation model.",
+      "Co-create a diversified portfolio recommendation table inside Canvas Mode and export the final brief to Google Sheets."
+    ],
+    "prompt": "Act as a Senior Investment Advisor and Portfolio Architect. I want to build a modern investment portfolio recommendations document.\nPhase 1: Research. Search the web for the top 5 macroeconomic drivers and asset class trends over the past 3 months.\nPhase 2: Asset Allocation. Design 3 distinct allocation profiles (Conservative Income, Balanced Growth, Capital Appreciation) mapped to these drivers.\nPhase 3: Portfolio Draft. Create a comprehensive asset class breakdown, specifying equity ratios, fixed-income yields, and alternative assets.\nPhase 4: Risk Analysis. Propose a downside stress-testing framework simulating a 10% market correction scenario.",
+    "proTip": "Deep Research enables you to scan hundreds of corporate filings, central bank statements, and analyst briefs simultaneously, outputting a high-fidelity summary report.",
+    "connectorGuide": null
   },
   {
-    id: "lab_manual_creator",
-    title: "Interactive Lab Guide & Safety Manual",
-    category: "academic",
-    summary: "Create student-facing lab manuals with step-by-step procedures, safety icons, and visual layout prompts in Canvas mode.",
-    features: ["Canvas Mode", "Image Generation"],
-    connectors: [],
-    role: "TA",
-    level: ["University & College", "High School"],
-    steps: [
-      "Open Gemini Enterprise Canvas Mode and outline the learning objectives for your chemistry or computer science lab session.",
-      "Prompt the AI to write clear, step-by-step experimental procedures and corresponding safety hazard alerts.",
-      "Use the 'Help me visualize' feature (Image Generation) to generate custom, clear illustrations of laboratory equipment layouts.",
-      "Co-create a lab observation sheet table inside Canvas Mode and export the final guide as an interactive student worksheet."
+    "id": "underwriting_manual_creator",
+    "title": "Commercial Credit Underwriting Standards Manual",
+    "category": "operational",
+    "summary": "Generate standardized credit underwriting manuals with step-by-step audit procedures, checklist tables, and risk indicators.",
+    "features": [
+      "Canvas Mode",
+      "Image Generation"
     ],
-    prompt: `You are a university biology lab coordinator. Write an engaging, student-facing lab guide for a 'DNA Extraction' experiment.
-The document should include:
-1. **Introduction**: A brief, captivating summary of the biological relevance of DNA extraction.
-2. **Learning Objectives**: 3 clear outcomes.
-3. **Safety First Box**: Explicit hazards, clothing requirements, and chemical disposal protocols.
-4. **Step-by-step Procedure**: An easy-to-follow, numbered checklist of steps.
-5. **Observation & Reflection Journal**: Propose a set of 3 thought-provoking prediction prompts and blank tables for students to record measurements.`,
-    proTip: "Use bold text and alerts (e.g. [!CAUTION]) inside Canvas Mode to ensure safety steps stand out visually to prevent accidents during high-risk physical labs.",
-    connectorGuide: null
+    "connectors": [],
+    "role": "Underwriter",
+    "level": [
+      "Banking",
+      "Generic"
+    ],
+    "steps": [
+      "Open Gemini Enterprise Canvas Mode and outline the standard credit risk assessment criteria for commercial loan applicants.",
+      "Prompt the AI to write clear, step-by-step financial ratio checks (DSCR, leverage, quick ratio) and safety buffer thresholds.",
+      "Use built-in image generation to create clean visual diagrams representing risk warning levels (Green, Amber, Red).",
+      "Co-create an underwriting evaluation checklist table directly inside Canvas Mode and export the guide as an interactive PDF manual."
+    ],
+    "prompt": "You are a Commercial Credit Risk Officer. Draft a clear, professional Credit Underwriting and Evaluation Manual for loan processors.\nThe manual must include:\n1. **Introduction**: A concise explanation of the corporate credit underwriting mandate and standard leverage compliance.\n2. **Core Ratios Directory**: Formulas and compliance thresholds for Debt Service Coverage Ratio (DSCR), debt-to-equity, and current ratio.\n3. **Risk Warning Framework**: A highly formatted visual representation of warning levels, detailing Amber and Red thresholds.\n4. **Underwriting Checklist**: A multi-step structured evaluation grid for auditing applicant balance sheets and corporate tax filings.\nMaintain a precise, risk-focused, and highly compliant tone throughout.",
+    "proTip": "Utilize structured markdown lists and caution alerts inside Canvas Mode to ensure high-risk credit assessment steps stand out to loan auditing teams.",
+    "connectorGuide": null
   },
-
-  // HUB 2: STUDENT CENTER (Students & Clubs)
   {
-    id: "su_advocacy",
-    title: "Student Feedback Sentiment Dashboard",
-    category: "student",
-    summary: "Consolidate massive volumes of unstructured student feedback from surveys and town halls to synthesize advocacy data.",
-    features: ["NotebookLM", "Deep Research"],
-    connectors: ["Drive Connector"],
-    role: "Student",
-    level: ["University & College", "High School", "Generic"],
-    steps: [
-      "Consolidate unstructured student feedback text files, town hall audio recordings, and survey responses in a folder.",
-      "Ground a NotebookLM workspace directly on this folder using the secure Drive Connector.",
-      "Query NotebookLM to extract the top 5 pressing student concerns (e.g., dining hours, library quiet spaces) and compute overall sentiment.",
-      "Use Gemini in Google Docs to write a structured, data-driven advocacy proposal to submit to the school administration."
+    "id": "customer_sentiment_auditor",
+    "title": "Client Service Sentiment & Feedback Auditor",
+    "category": "student",
+    "summary": "Consolidate volumes of unstructured client call transcripts and support tickets to identify service issues and sentiment trends.",
+    "features": [
+      "NotebookLM",
+      "Deep Research"
     ],
-    prompt: `Acting as the Student Union Advocacy Director, analyze the uploaded collection of town hall transcripts and anonymous student survey comments.
-Generate a comprehensive, evidence-based report that includes:
-1. **Thematic Clustering**: Identify and group the top 5 most frequently complained-about campus issues.
-2. **Sentiment Assessment**: For each issue, categorize the emotional tone (highly negative, frustrated, neutral) and extract 3 powerful, representative anonymized student quotes.
-3. **Data-Driven Solutions**: Based on successful practices at benchmark peer schools, suggest 2 realistic, low-cost policy changes for each issue.
-4. **Negotiation Preparation**: Draft a list of 5 anticipated objections from school deans regarding budget constraints, and provide persuasive, data-backed rebuttals.`,
-    proTip: "Linking your student feedback database directly via the Drive Connector keeps the data federated, secure, and up-to-the-minute without copying local files.",
-    connectorGuide: {
-      name: "Drive Connector",
-      steps: [
-        "Go to Google Cloud Console > Gemini Enterprise > Data Connectors.",
-        "Select the Drive Connector source.",
-        "Provide your institution's access authorization credentials.",
-        "Grant the necessary read permissions to your files and directories.",
-        "Enable 'Federated Search' connection mode to respect live user access permissions without data ingestion."
+    "connectors": [
+      "Drive Connector"
+    ],
+    "role": "Customer Service",
+    "level": [
+      "Banking",
+      "Insurance",
+      "Generic"
+    ],
+    "steps": [
+      "Store client interaction records, email tickets, and call transcripts in a secure folder.",
+      "Ground your NotebookLM workspace in this folder using the secure Document Store Connector.",
+      "Query NotebookLM to extract the top 5 recurring service friction points and customer sentiment scores.",
+      "Use Gemini in Google Docs to draft an operational service improvement proposal for banking heads."
+    ],
+    "prompt": "Acting as a Client Experience and Service Improvement Director, analyze the collection of customer support tickets and chat transcripts.\nGenerate a structured, evidence-backed service assessment report:\n1. **Friction Clustering**: Identify and group the top 5 most frequent client complaints or platform difficulties.\n2. **Sentiment Assessment**: For each category, identify the customer pain level and cite 3 anonymized client quotes as evidence.\n3. **Operational Solutions**: Suggest 2 actionable service improvements or bot training tweaks for each issue based on industry best practices.\n4. **Management Presentation**: Draft a list of 5 executive questions regarding cost-to-benefit ratio, and provide persuasive responses.",
+    "proTip": "Linking your client service logs directly via the Document Store Connector ensures that analytics dashboards always display live sentiment trends without copying sensitive logs.",
+    "connectorGuide": {
+      "name": "Document Store Connector",
+      "steps": [
+        "Navigate to Google Cloud Console > Data Connectors > Document Store Connector.",
+        "Authorize connection to your secure enterprise workspace (SharePoint / OneDrive / Google Drive).",
+        "Configure folder read scopes, mapping only anonymized client feedback directories.",
+        "Enable Federated Search to respect active organizational data access rules."
       ]
     }
   },
   {
-    id: "club_funding",
-    title: "Annual Club Calendar & Budget Justifier",
-    category: "student",
-    summary: "Brainstorm an annual activities calendar and draft detailed, compliant student government funding proposals.",
-    features: ["Canvas Mode", "NotebookLM"],
-    connectors: ["Drive Connector"],
-    role: "Student",
-    level: ["University & College", "High School", "Generic"],
-    steps: [
-      "Open NotebookLM and upload your club's past event templates and the official Student Union funding guidelines.",
-      "In Canvas Mode, prompt Gemini to brainstorm a calendar of 12 highly engaging club activities aligned with your club's core mission.",
-      "Feed the calendar and past expense records from your shared Drive spreadsheet into the prompt to generate a formatted budget table.",
-      "Ask Gemini to write a formal budget justification narrative, detailing how each event benefits the wider campus student community."
+    "id": "commercial_loan_proposal",
+    "title": "Commercial Loan Credit Proposal Builder",
+    "category": "operational",
+    "summary": "Draft comprehensive, regulatory-compliant commercial credit proposals and financial justifications using historical templates.",
+    "features": [
+      "Canvas Mode",
+      "NotebookLM"
     ],
-    prompt: `Act as a professional grant and proposal writer. Help our university [Club Name] draft a detailed funding proposal for the upcoming academic year.
-Inputs:
-- Annual activities calendar: [List of 4 major workshops, 1 public exhibition, 2 guest lectures, and 1 social event]
-- Approved funding guidelines: [Max $200 per workshop, Max $500 for exhibition, strict food and beverage limits]
-Task:
-1. Create an **Executive Summary** detailing the club's mission and how these events boost student engagement.
-2. Compile a detailed **Line-Item Budget Table**, calculating total costs and verifying compliance with the provided funding rules.
-3. Write a compelling **Impact Statement** justifying why the Student Union should allocate resources to our club, detailing student outcomes.`,
-    proTip: "Upload the Student Union's official constitutional funding guidelines to NotebookLM first. This prevents your proposal from getting rejected for violating obscure spend-limit policies.",
-    connectorGuide: {
-      name: "Drive Connector",
-      steps: [
-        "Select the Drive Connector in your enterprise storage console.",
-        "Generate a client access key and add read permissions for secure file queries.",
-        "In Gemini Enterprise settings, link your club’s shared Drive folder where past budget templates are kept.",
-        "Activate the connector to allow live data queries during proposal creation."
+    "connectors": [
+      "Drive Connector"
+    ],
+    "role": "Loan Officer",
+    "level": [
+      "Banking",
+      "Generic"
+    ],
+    "steps": [
+      "Open NotebookLM and upload your bank's approved credit proposal templates and corporate debt guidelines.",
+      "In Canvas Mode, prompt Gemini to draft a structured credit proposal outline for a commercial applicant.",
+      "Link your secure Document Store containing the applicant's historical tax forms and financial statements to extract details.",
+      "Generate a formatted credit assessment table and write a professional debt justification statement.",
+      "Export the completed proposal directly to Google Docs to submit to the Underwriting Committee."
+    ],
+    "prompt": "Act as an expert Commercial Loan Officer and proposal writer. Help our commercial banking division draft a detailed credit proposal.\nInputs:\n- Applicant financials: [Corporate assets, annual revenue, requested debt amount, current interest cover]\n- Credit risk parameters: [Max leverage ratio of 3.5x, minimum DSCR of 1.25x, collateral requirements]\nTask:\n1. Write an **Executive Summary** detailing the applicant's business model and the purpose of the credit facility.\n2. Compile a detailed **Credit Assessment Table**, verifying debt-to-equity compliance with the bank's criteria.\n3. Write a compelling **Risk Mitigation Statement** explaining why the credit committee should authorize this loan, outlining collateral buffers.",
+    "proTip": "First upload your bank's credit risk guidelines to NotebookLM to prevent the AI from generating recommendations that violate loan concentration policies.",
+    "connectorGuide": {
+      "name": "Document Store Connector",
+      "steps": [
+        "In your corporate storage console, select the Document Store Connector.",
+        "Link the folder containing approved underwriting templates and applicant dossiers.",
+        "Activate the connector in Gemini Enterprise settings to allow real-time cross-referencing."
       ]
     }
   },
   {
-    id: "su_helpdesk",
-    title: "24/7 Student Union Policy Agent",
-    category: "student",
-    summary: "Build an AI support bot trained on club policy handbooks to answer operational and venue booking questions.",
-    features: ["Agent Designer", "NotebookLM"],
-    connectors: ["Email Connector"],
-    connectorEssential: false,
-    role: "Student",
-    level: ["University & College", "High School", "Generic"],
-    steps: [
-      "In NotebookLM, compile all Student Union club policies, room booking rules, and equipment reservation forms.",
-      "Use Gemini Agent Designer to build a conversational agent named 'Student Union Support Assistant'.",
-      "Connect the agent to the policy knowledge base to serve static queries.",
-      "Test the agent's ability to handle complex queries (e.g. 'Can we book a room after 9 PM?').",
-      "Embed the agent on the Student Union portal or social media page for 24/7 club leader support."
+    "id": "compliance_assistance_bot",
+    "title": "Regulatory Compliance & Audit Assistance Agent",
+    "category": "admin",
+    "summary": "Build an internal regulatory compliance chatbot trained on standard banking guidelines to answer policy queries.",
+    "features": [
+      "Agent Designer",
+      "NotebookLM"
     ],
-    advancedSteps: [
-      "In NotebookLM, compile all Student Union club policies, room booking rules, and equipment reservation forms.",
-      "Use Gemini Agent Designer to build a conversational agent named 'Student Union Support Assistant'.",
-      "Connect the agent to the policy knowledge base and configure custom escalate-by-email instructions via the Email Connector.",
-      "Test the agent's ability to automatically draft escalation messages.",
-      "Embed the agent on the Student Union portal for automated, end-to-end integration."
+    "connectors": [
+      "Email Connector"
     ],
-    prompt: `You are the 'Student Union Support Assistant.' Your job is to help student club leaders navigate room booking, funding applications, and event risk forms.
-1. **Ground your answers strictly** in the uploaded club handbooks. Never guess policies.
-2. Provide direct, step-by-step instructions (e.g., 'To book the Student Common Room, follow these 3 steps...').
-3. Cite the section number of the policy you are referencing.
-4. If a query is highly complex, involves sensitive disputes, or requires manual human approval, provide a clear, pre-formatted draft escalation email on-screen for the user to copy and send manually to the Student Affairs Officer.
-5. Maintain a professional, supportive, and efficient tone.`,
-    advancedPrompt: `You are the 'Student Union Support Assistant' integrated with your Institutional Gmail. Your job is to help student club leaders navigate room booking, funding applications, and event risk forms.
-1. **Ground your answers strictly** in the uploaded club handbooks. Never guess policies.
-2. Provide direct, step-by-step instructions (e.g., 'To book the Student Common Room, follow these 3 steps...').
-3. Cite the section number of the policy you are referencing.
-4. If a query is highly complex or requires manual human approval, use your integrated Email Connector to automatically draft a detailed escalation email directly in the user's Gmail Drafts folder for the Student Affairs Officer, then notify the user that the draft is ready for review.
-5. Maintain a professional, supportive, and efficient tone.`,
-    proTip: "In Standalone mode, the agent provides pre-formatted drafts directly inside the chat window for easy copy-pasting.",
-    advancedProTip: "By configuring the Email Connector, the agent can automatically draft escalation emails directly in your Gmail draft folder when manual intervention is needed.",
-    connectorGuide: {
-      name: "Email Connector",
-      steps: [
-        "Go to Google Cloud Console > Data Store > Select Email Connector as source.",
-        "Enter your credentials and grant write-draft access permissions.",
-        "Link the connector to the Student Union Support Agent.",
-        "Set up an automated action to trigger drafts in Email whenever a student asks to escalate a booking dispute."
+    "connectorEssential": false,
+    "role": "Compliance Officer",
+    "level": [
+      "Banking",
+      "Insurance",
+      "Capital Markets",
+      "Generic"
+    ],
+    "steps": [
+      "In NotebookLM, compile all AML, KYC, and internal compliance policy handbooks.",
+      "Use Gemini Agent Designer to build a conversational agent named 'Internal Compliance Officer Bot'.",
+      "Connect the agent to the compliance policy database to serve employee queries.",
+      "Test the agent's ability to handle complex queries (e.g. 'What is the transaction reporting limit for cross-border wire transfers?').",
+      "Embed the agent on the employee compliance portal for 24/7 internal staff assistance."
+    ],
+    "advancedSteps": [
+      "In NotebookLM, compile all AML, KYC, and internal compliance policy handbooks.",
+      "Use Gemini Agent Designer to build a conversational agent named 'Internal Compliance Officer Bot'.",
+      "Connect the agent to the compliance database and configure custom escalate-by-email instructions via the Email Connector.",
+      "Test the agent's ability to automatically draft audit escalation emails when users report potential compliance violations.",
+      "Embed the agent on the compliance portal for automated audit trail integration."
+    ],
+    "prompt": "You are the 'Internal Compliance Assistant Bot.' Your objective is to help bank employees navigate KYC, AML, and reporting rules.\n1. **Ground your answers strictly** in the uploaded compliance guidelines. Never guess policy rules.\n2. Provide direct, step-by-step procedures (e.g., 'To report a suspicious wire transfer above $10,000, follow these 3 steps...').\n3. Cite the exact handbook section or regulation number you are referencing.\n4. If a query indicates an active fraud incident or a complex regulatory issue, draft a formal escalation message directly on-screen for the employee to copy and send to the Chief Compliance Officer.\nMaintain an objective, formal, and risk-aware tone.",
+    "advancedPrompt": "You are the 'Internal Compliance Assistant Bot' integrated with your corporate email. Your objective is to help employees navigate KYC, AML, and reporting rules.\n1. **Ground your answers strictly** in the uploaded compliance guidelines. Never guess policy rules.\n2. Provide direct, step-by-step procedures.\n3. Cite the exact handbook section or regulation number.\n4. If a query indicates an active fraud incident or requires manual override, use your integrated Email Connector to automatically draft a detailed audit escalation email directly in the user's Drafts folder for the Chief Compliance Officer, then notify the user that the draft is ready for review.",
+    "proTip": "In standard mode, the compliance bot renders precise, ready-to-copy email escalation templates directly inside the chat interface.",
+    "advancedProTip": "By connecting the Email Connector, the compliance bot can automatically inject audit drafts directly into your corporate Outlook/Gmail Drafts folder, speeding up regulatory report cycles.",
+    "connectorGuide": {
+      "name": "Email Connector",
+      "steps": [
+        "Go to your Google Cloud Console > Data Store > Select Email Connector.",
+        "Authorize email read/write-draft permissions for your compliance service account.",
+        "Link the Email Connector to the Compliance Assistant Agent.",
+        "Configure the trigger to draft emails when a user reports active compliance alerts."
       ]
     }
   },
   {
-    id: "visual_campaign",
-    title: "Interactive Story Game & Visual Campaign",
-    category: "student",
-    summary: "Brainstorm and execute an immersive, gamified campus scavenger hunt with AI-generated riddles and visuals.",
-    features: ["Agent Designer", "Image Generation", "Video Generation"],
-    connectors: [],
-    role: "Student",
-    level: ["University & College", "High School"],
-    steps: [
-      "Open Gemini Enterprise and prompt the AI to co-create a branching story narrative for a campus Scavenger Hunt.",
-      "Generate 5 cryptic, rhyming riddles that lead students to distinct physical campus landmarks.",
-      "Use built-in image generation (Image Generation) to design futuristic checkpoint graphics and poster backgrounds.",
-      "Script a 30-second promotional video using Video Generation assets to drive student sign-ups on social media.",
-      "Configure a custom Agent that students must interact with at checkpoints to unlock clues."
+    "id": "financial_literacy_campaign",
+    "title": "Financial Literacy Digital Marketing Campaign",
+    "category": "student",
+    "summary": "Brainstorm and design high-fidelity client-facing wealth planning campaigns with AI-generated visual graphics and copy.",
+    "features": [
+      "Agent Designer",
+      "Image Generation",
+      "Video Generation"
     ],
-    prompt: `You are the 'Gemini Gatekeeper' for a campus-wide Scavenger Hunt. Your role is to test student teams before giving them the next checkpoint clue.
-1. **Game Narrative**: The theme is 'A Time-Traveler's Campus Tour'.
-2. When a team approaches, welcome them enthusiastically and present Riddle #3.
-3. Riddle: 'I hold thousands of voices but speak in absolute silence. I have four levels but no feet. Where am I?' (Answer: The Campus Library).
-4. If the team submits the correct answer, congratulate them and generate a personalized digital badge (e.g. 'You have unlocked the Codex checkpoint!').
-5. If they submit an incorrect answer, provide a small, mysterious clue without giving away the answer.
-Never break character. Keep the tone playful, cryptic, and highly engaging.`,
-    proTip: "Ground the riddle generation in university history or campus map documents to ensure riddles are location-accurate and achievable by students.",
-    connectorGuide: null
+    "connectors": [],
+    "role": "Relationship Manager",
+    "level": [
+      "Banking",
+      "Insurance",
+      "Capital Markets"
+    ],
+    "steps": [
+      "Open Gemini Enterprise and prompt the AI to co-create a cohesive layout for a 'Wealth Building & Compound Interest' digital marketing campaign.",
+      "Generate 5 engaging, compliance-checked narrative posts simplifying compound interest curves.",
+      "Use built-in image generation to design clean, professional banner graphics for the marketing materials.",
+      "Script a 30-second promotional short video using Video Generation assets to drive wealth planning sign-ups.",
+      "Configure a custom advisory agent that potential clients can interact with to calculate mock compound schedules."
+    ],
+    "prompt": "You are the 'Wealth Advisor Assistant Agent' for a digital marketing advisory campaign. Your goal is to explain compound interest in simple, engaging terms.\n1. Campaign Narrative: 'The Compounding Curve'.\n2. When a client interacts, welcome them warmly and explain the rule of 72.\n3. Example: 'If you invest $10,000 at a 6% annual return, your money will double in 12 years!'\n4. If they submit their current savings, generate a customized, supportive financial compounding projection.\nNever guarantee exact stock market returns. Keep the tone warm, educational, and professional.",
+    "proTip": "Ground the campaign content in your bank's approved investment parameters to ensure compliance with financial advertising regulations.",
+    "connectorGuide": null
   },
-
-  // HUB 3: OPERATIONAL COMMAND (Education Leaders & IT)
   {
-    id: "at_risk_cohort",
-    title: "At-Risk Student Early Warning System",
-    category: "operational",
-    summary: "Connect Gemini to LMS and SIS database metrics to analyze engagement anomalies and flag struggling students.",
-    features: ["Deep Research"],
-    connectors: ["LMS Connector", "SIS Database Connector"],
-    role: "IT Admin",
-    level: ["Generic"],
-    steps: [
-      "Configure secure API connections from Gemini Enterprise to your school's LMS and SIS database.",
-      "Set up an analytical data store containing anonymized student logs, login frequencies, quiz scores, and forum engagement metrics.",
-      "Configure a secure workflow that maps data attributes, ensuring strict compliance with student data privacy laws like FERPA.",
-      "Use Gemini to run multi-dimensional predictive modeling, highlighting student cohorts exhibiting a precipitous drop in engagement.",
-      "Trigger automated, personalized advisor check-in drafts to provide timely academic support."
+    "id": "credit_risk_assessment",
+    "title": "Applicant Risk Portfolio & CRM Analyzer",
+    "category": "operational",
+    "summary": "Monitor commercial loan risk portfolios by analyzing customer CRM profiles and financial accounts to identify warning signs.",
+    "features": [
+      "Deep Research"
     ],
-    prompt: `Analyze the attached anonymized LMS and Student Information System dataset for the current semester.
-We want to identify students who are at risk of failing or dropping out before midterm exams.
-Tasks:
-1. **Anomaly Detection**: Flag all students who have shown a >50% drop in login frequency and quiz scores over the past 3 weeks compared to their baseline.
-2. **Correlation Analysis**: Identify if there is a statistically significant correlation between forum participation rates and final assignment scores in this cohort.
-3. **Draft Advisory Alerts**: For each flagged student category, generate a highly supportive, personalized academic check-in email draft from their advisor, suggesting tutoring resources.`,
-    proTip: "Never upload student Names or Social Security numbers. Maintain rigorous compliance with privacy laws by utilizing fully de-identified student IDs during data store ingestion.",
-    connectorGuide: {
-      name: "LMS & SIS Database Connectors",
-      steps: [
-        "In Google Cloud Console, enable the Discovery Engine API.",
-        "Create an authorized OAuth2 credentials profile for your LMS platform.",
-        "Provide read-only API access endpoints for gradebook, enrollment, and activity logs.",
-        "Establish an encrypted SQL database connection to the Student Information System (SIS).",
-        "Set up data masking rules to de-identify student PII before it reaches the AI analysis layer."
+    "connectors": [
+      "CRM Connector",
+      "Document Store Connector"
+    ],
+    "connectorEssential": true,
+    "role": "Loan Officer",
+    "level": [
+      "Banking",
+      "Generic"
+    ],
+    "steps": [
+      "Establish secure connections from Gemini Enterprise to your corporate Salesforce / Wealthbox CRM and SQL database.",
+      "Configure a secure CRM dataset containing applicant credit histories, payment frequencies, and portfolio values.",
+      "Configure a secure data privacy layer, ensuring strict compliance with financial regulations and client privacy laws.",
+      "Use Gemini to run multi-dimensional portfolio diagnostic risk checks, flagging accounts with payment warning anomalies.",
+      "Trigger automated, personalized relationship manager alert emails in your corporate draft folder to suggest portfolio restructuring."
+    ],
+    "prompt": "Analyze the provided customer portfolio and credit CRM dataset for the current quarter.\nWe want to identify commercial accounts displaying heightened credit risk before their quarterly amortization dates.\nTasks:\n1. **Risk Flagging**: Identify all client accounts that show a >30% drop in balance sheet liquidity and delayed payments over the past 30 days.\n2. **Correlation Analysis**: Evaluate if there is a statistically significant correlation between credit defaults and recent margin calls in this cohort.\n3. **Draft Advisory Check-ins**: For each flagged account, generate a supportive, highly professional check-in email draft from their Relationship Manager, proposing debt-restructuring options.",
+    "proTip": "Never upload customer social security numbers. Ensure total regulatory compliance by utilizing anonymized customer UUID hashes during data store checks.",
+    "connectorGuide": {
+      "name": "CRM & Document Store Connectors",
+      "steps": [
+        "In Google Cloud Console, authorize connection scopes for your CRM (Salesforce / Wealthbox) API endpoints.",
+        "Link your secure customer financial Document Store containing balance sheet forms.",
+        "Set up data-masking rules to automatically sanitize PII before transmitting data to the Gemini evaluation layer."
       ]
     }
   },
   {
-    id: "accreditation_reports",
-    title: "Accreditation Self-Study Report Synthesizer",
-    category: "operational",
-    summary: "Synthesize years of course syllabi, student surveys, and meeting minutes to draft institutional accreditation reports.",
-    features: ["NotebookLM", "Deep Research"],
-    connectors: ["Drive Connector"],
-    role: "Program Leader",
-    level: ["University & College"],
-    steps: [
-      "Upload 3 years of school syllabi, assurance of learning rubrics, student exit surveys, and advisory board minutes to SharePoint.",
-      "Establish a federated search connection from Gemini Enterprise to the Drive folder.",
-      "In NotebookLM, prompt the model to cross-reference your curriculum data against specific accreditation standards.",
-      "Generate structured, professional accreditation narrative drafts, complete with inline source evidence and citations.",
-      "Review the drafts and collaborate with deans using shared Google Docs to finalize the institutional report."
+    "id": "portfolio_sentiment_tracker",
+    "title": "Market News & Portfolio Sentiment Tracker",
+    "category": "academic",
+    "summary": "Analyze massive market news databases, financial blogs, and earnings call transcripts in NotebookLM to track sentiment trends.",
+    "features": [
+      "NotebookLM",
+      "Deep Research"
     ],
-    prompt: `You are an institutional research officer preparing a self-study report for a university business school accreditation.
-Your task is to synthesize the uploaded student surveys, curriculum syllabi, and learning assessment records to draft the narrative for 'Standard 3: Assurance of Learning (AoL)'.
-The narrative must include:
-1. **Executive Summary**: A high-level overview of how the program measures and achieves learning goals.
-2. **Methodology**: Explain the direct and indirect assessment tools used.
-3. **Data Synthesis**: Analyze 3 years of quantitative data, highlighting key improvements in areas where learning caps were identified.
-4. **Action Plan**: Outline a 2-year strategic plan for curriculum refinement, mapped directly to survey insights.
-Maintain a highly formal, academic, and objective tone.`,
-    proTip: "By selecting 'Federated Search' for the Drive Connector, your data remains safely stored within your institutional tenant, ensuring absolute data security and sovereignty.",
-    connectorGuide: {
-      name: "Drive Connector",
-      steps: [
-        "Create secure authorization rules specifically for the Drive Connector.",
-        "Configure delegated API permissions for files and folders access.",
-        "In Gemini Enterprise Console, create a new Data Store, select Drive as source, and provide credentials.",
-        "Run an initial synchronization scan to verify all folder access rules are correctly honored."
+    "connectors": [
+      "Drive Connector"
+    ],
+    "role": "Financial Analyst",
+    "level": [
+      "Capital Markets"
+    ],
+    "steps": [
+      "Consolidate hundreds of public sector reports, regulatory filings, and market news articles in your cloud drive.",
+      "Link your corporate Drive folder using the secure Document Store Connector.",
+      "In NotebookLM, prompt the model to scan the files and compute aggregated market sentiment scores (Bullish, Neutral, Bearish).",
+      "Generate structured, professional research reports summarizing the impact of emerging trends on your client portfolios.",
+      "Review the synthesized reports and collaborate with portfolio teams using shared Google Docs to finalize the recommendations."
+    ],
+    "prompt": "Act as a Senior Market Strategist. Analyze the uploaded articles, transcripts, and financial news reports from the past week.\nGenerate a high-fidelity market sentiment analysis report containing:\n1. **Sector-Level Sentiment Matrix**: Provide sentiment ratings (Bullish, Bearish, Neutral) for the Tech, Healthcare, and Energy sectors, referencing articles.\n2. **Emerging Catalyst Clusters**: Identify and group the top 3 macroeconomic factors driving asset reallocations.\n3. **Draft Investment Briefs**: Propose 2 strategic rebalancing actions for RM teams to discuss with conservative and aggressive client portfolios.",
+    "proTip": "By connecting your market data folders via the Document Store Connector, you establish an automated feed that updates NotebookLM analysis boards automatically.",
+    "connectorGuide": {
+      "name": "Document Store Connector",
+      "steps": [
+        "Link your market research cloud folders using the Document Store Connector in the integrations menu.",
+        "Grant read-only access to authorized financial news folders.",
+        "Link the synchronized database to your NotebookLM research workspace."
       ]
     }
   },
   {
-    id: "workforce_federation",
-    title: "Workforce Identity Federation Setup Guide",
-    category: "operational",
-    summary: "Establish a secure trust relationship between Google Cloud and institutional identity providers for single sign-on authentication.",
-    features: ["Deep Research"],
-    connectors: ["Drive Connector"],
-    role: "IT Admin",
-    level: ["Generic"],
-    steps: [
-      "Register a new enterprise identity application on your centralized SSO portal.",
-      "Configure SAML 2.0 or OIDC single sign-on settings and record the Metadata XML/Endpoints.",
-      "In Google Cloud Console, navigate to IAM & Admin > Workforce Identity Federation and create a new workforce pool.",
-      "Create an OIDC Provider linking your Google workforce pool to the identity provider's enterprise application.",
-      "Configure Attribute Mapping, mapping 'google.subject' to the user's email and mapping security groups to 'google.groups'."
+    "id": "it_service_desk",
+    "title": "IT Support Incident Router",
+    "category": "operational",
+    "summary": "Automate corporate IT incident ticket categorization, severity routing, and compliance logging using Agent Builder.",
+    "features": [
+      "Agent Designer",
+      "NotebookLM"
     ],
-    prompt: `Act as a senior cloud solutions architect. Write a detailed, step-by-step technical implementation guide to set up Workforce Identity Federation (WIF) between Google Cloud and corporate identity systems.
-The guide must cover:
-1. **SSO Identity App Registration**: Mandatory configuration settings, single sign-on URL, and client secret management.
-2. **GCP Workforce Pool Configuration**: CLI (gcloud) commands to create the pool and provider.
-3. **Attribute Mapping Rules**: Precise Common Expression Language (CEL) syntax to map user groups and emails securely.
-4. **Security Best Practices**: Best practices for secret rotation, federated role binding, and auditing logs.`,
-    proTip: "Using OIDC with Authorization Code Flow is significantly more secure than SAML 2.0 for mobile environments and ensures smooth token exchanges during API calls.",
-    connectorGuide: {
-      name: "Workforce Identity Federated Single Sign-On",
-      steps: [
-        "Sign in to your centralized Identity Provider administrative center.",
-        "Navigate to Applications > Register New Enterprise Application.",
-        "Select OIDC client configurations and input authorization redirection rules.",
-        "Set up single sign-on via SAML, adding the Google Cloud Workforce Provider ACS URL.",
-        "Add claim mappings for user emails and directory groups to ensure Google IAM receives correct attributes."
-      ]
-    }
-  },
-
-  // HUB 4: ADMINISTRATIVE SUPPORT (Finance, Security, SAO)
-  {
-    id: "sao_scavenger_hunt",
-    title: "Digital Cultural Fair Red Packet Game",
-    category: "administrative",
-    summary: "Orchestrate an interactive cultural trivia game on campus that distributes digital red packets and bookstore vouchers.",
-    features: ["Agent Designer", "Image Generation"],
-    connectors: [],
-    role: "SAO",
-    level: ["Generic"],
-    steps: [
-      "In Agent Designer, build a custom conversational Agent named 'Lunar New Year Assistant'.",
-      "Upload short articles detailing cultural traditions, zodiac histories, and celebratory foods to the Agent's knowledge base.",
-      "Use built-in image generation to design festive digital card templates and red envelope backgrounds.",
-      "Program a simple randomizer script within your student portal that triggers small bookstore voucher codes.",
-      "Have students interact with the Agent; answering cultural riddles correctly awards them a code."
+    "connectors": [],
+    "role": "IT Operator",
+    "level": [
+      "Generic"
     ],
-    prompt: `You are the 'Lunar New Year Cultural Guide,' a festive, polite, and highly enthusiastic AI host for our digital university fair.
-Your objective is to test students on Lunar New Year traditions and award them digital 'red packets' containing celebratory blessings.
-1. Welcome the student warmly, wishing them prosperity.
-2. Ask them 1 fun trivia question about Lunar New Year (e.g., 'What zodiac animal represents leadership and courage?').
-3. If they answer correctly, celebrate their success and generate a beautiful, poetic blessing in the form of a classic Chinese couplet, customized to their stated wish (e.g., success in exams, finding good friends).
-4. Direct them to copy the coupon code 'CNY-BOOKSTORE-10' to redeem a discount at the campus book shop.
-5. If they answer incorrectly, explain the tradition gently and give them a second chance with a different question.`,
-    proTip: "By connecting this Agent to your student portal, you can make the distribution of campus store vouchers gamified, educational, and highly engaging.",
-    connectorGuide: null
+    "steps": [
+      "In NotebookLM, compile all corporate IT incident handbooks, security protocols, and software compliance manuals.",
+      "Use Gemini Agent Designer to construct a supportive conversational assistant named 'IT Operator Assistance Agent'.",
+      "Instruct the agent on incident severity tiers (Sev 1 - System Down, Sev 2 - Degraded Service, Sev 3 - Low priority) and routing paths.",
+      "Test the agent's ability to analyze system logs and classify incidents under the correct corporate guidelines.",
+      "Deploy the custom IT assistance bot on the internal portal to automate internal help desk operations."
+    ],
+    "prompt": "You are the 'IT Helpdesk Incident Dispatcher Bot' for a banking tenant. Your objective is to classify and route IT service requests.\n1. **Ground your routing logic strictly** in the uploaded company IT service handbooks.\n2. When a user submits an issue (e.g. 'The teller workstation is failing to load database queries'), classify the severity (Sev 1, Sev 2, Sev 3).\n3. If an issue is classified as Sev 1 (Active Security Incident or teller system downtime), draft a Sev 1 emergency dispatch template for the Network Operations Team on-screen and flag immediate escalation protocols.\n4. If an issue is Sev 3, guide the employee through the automated self-service guides in your knowledge base.\nMaintain an efficient, highly technical, and professional tone.",
+    "proTip": "Ground the agent designer in software error log templates to allow the bot to read log stack-traces directly, saving IT operator analysis time.",
+    "connectorGuide": null
   },
   {
-    id: "finance_compliance",
-    title: "Student Expense Compliance Auditor",
-    category: "administrative",
-    summary: "Automatically cross-reference student club purchase receipts and expense reports against school purchasing guidelines.",
-    features: ["NotebookLM", "Deep Research"],
-    connectors: ["Drive Connector"],
-    role: "Finance",
-    level: ["Generic"],
-    steps: [
-      "Upload all school purchasing guidelines, vendor policies, and standard accounting codes to a secure folder.",
-      "Use the Drive Connector to ground your NotebookLM workspace in this policy archive.",
-      "Upload a student club's submitted annual expense spreadsheet and digital PDF receipts.",
-      "Prompt NotebookLM to cross-reference each expense item with the approved guidelines to verify compliance.",
-      "Generate an automated compliance audit report, highlighting non-compliant spending and budget overruns."
+    "id": "trade_settlement_reconciliation",
+    "title": "T+1 Trade Settlement Reconciliation Agent",
+    "category": "operational",
+    "summary": "Reconcile daily transaction ledgers against clearinghouse logs to identify trade settlement discrepancies automatically.",
+    "features": [
+      "Agent Designer",
+      "NotebookLM"
     ],
-    prompt: `Acting as an school financial auditor, conduct a compliance review of the attached student club expense report.
-Compare each expense item with the uploaded university procurement guidelines.
-Your audit report must highlight:
-1. **Compliance Violations**: Identify any items that violate the policies (e.g., unapproved software subscriptions, exceeding maximum food limits per person). Cite the specific policy page.
-2. **Accounting Code Verification**: Verify if correct accounting codes were applied to each expense category.
-3. **Draft Advisory Memo**: Write a professional, polite advisory email to the club treasurer explaining the flagged violations and the steps required to resolve them.`,
-    proTip: "This tool does not automate financial payouts, maintaining the strict 'human-in-the-loop' standard. It acts as an elite assistant that saves hours of manual policy cross-referencing.",
-    connectorGuide: {
-      name: "Drive Connector",
-      steps: [
-        "In Google Cloud, set up secure authorization to M365/Drive storages.",
-        "Ground the Finance Assistant Agent in the procurement policy storage path.",
-        "Activate federated access to ensure the AI can query guidelines but never saves student bank info or sensitive personal data."
+    "connectors": [],
+    "role": "IT Operator",
+    "level": [
+      "Banking",
+      "Capital Markets"
+    ],
+    "steps": [
+      "Compile clearinghouse transaction templates, transaction compliance codes, and ledger handbooks in your private database.",
+      "Use Gemini Agent Designer to build a conversational agent named 'Trade Settlement Reconciliation Analyst'.",
+      "Upload transaction CSVs and clearinghouse reports directly into the agent sandboxed session.",
+      "Prompt the agent to cross-reference settlement amounts, transaction timestamps, and client account IDs.",
+      "Extract anomalous transaction line items and review the generated clearinghouse dispatch reports."
+    ],
+    "prompt": "You are the 'Trade Settlement Reconciliation Agent.' Your goal is to audit daily trading accounts and clearinghouse ledgers.\n1. **Compare daily trade records** and clearinghouse logs. Highlight any transaction discrepancy.\n2. Identify any transaction matching failure (e.g. Price mismatch, missing ISIN, incorrect settlement date).\n3. Generate a structured Reconciliation Exception Report detailing: Transaction ID, Client Account, Clearinghouse Code, Discrepancy Margin.\n4. Provide a professional clearinghouse correction dispatch email draft on-screen for the operations manager to review.\nMaintain absolute accuracy and compliance-focused rigor.",
+    "proTip": "Grounding your agent in Swift MT548 settlement status message standards enables the AI to automatically parse clearinghouse message payloads without manual translation.",
+    "connectorGuide": null
+  },
+  {
+    "id": "fraud_incident_responder",
+    "title": "Fraud and AML Incident Audit Responder",
+    "category": "admin",
+    "summary": "Audit massive collections of transaction histories, audit logs, and firewall event records in NotebookLM to identify anomalies.",
+    "features": [
+      "NotebookLM",
+      "Deep Research"
+    ],
+    "connectors": [
+      "Document Store Connector"
+    ],
+    "role": "Risk Manager",
+    "level": [
+      "Banking",
+      "Insurance",
+      "Capital Markets",
+      "Generic"
+    ],
+    "steps": [
+      "Upload institutional security protocols, transaction guidelines, and regulatory reporting forms to NotebookLM.",
+      "Connect your secure network event records and transaction logs directory using the Document Store Connector.",
+      "Prompt the AI to cross-reference log entries with standard AML/KYC warning patterns to isolate fraud risks.",
+      "Synthesize structured compliance incident reports complete with precise activity timestamps for submission to risk boards."
+    ],
+    "prompt": "Act as a Lead Financial Crime and Fraud Investigator. Analyze the attached server event sheets and transaction logs.\nGenerate a high-fidelity AML audit report:\n1. **Anomaly Isolation**: Highlight all transactions that violate geographical parameters, single-day limits, or structural limits.\n2. **Log Correlation**: Evaluate if there is a correlation between the IP addresses used in flagged transactions and past known brute-force server attempts.\n3. **Regulatory Draft**: Compile a formatted Suspicious Activity Report (SAR) template with timestamps and transaction hashes.",
+    "proTip": "Compiling guidelines and event logs in a secure, sandboxed NotebookLM instance maintains compliance with international security standards and prevents log data leakage.",
+    "connectorGuide": {
+      "name": "Document Store Connector",
+      "steps": [
+        "In Google Cloud Console, enable the Document Store Connector for audit logs.",
+        "Set strict read-only access controls, restricting data queries to authorized security logs.",
+        "Ground your NotebookLM workspace in the secure logging directory."
       ]
     }
   },
   {
-    id: "security_simulator",
-    title: "Campus Safety Drill Simulator",
-    category: "administrative",
-    summary: "Simulate complex emergency response drills to train campus security marshals and test response protocols.",
-    features: ["Agent Designer", "Video Generation"],
-    connectors: ["Drive Connector"],
-    role: "Security",
-    level: ["Generic"],
-    steps: [
-      "Ground a custom Security Drill Agent in your campus safety handbook, building layouts, and emergency protocols.",
-      "Configure the Agent to role-play as an Emergency Dispatcher during a simulated crisis scenario (e.g., power outage, severe storm).",
-      "Generate high-fidelity instructional video clips and animated scenario prompts using Video Generation features.",
-      "Have security staff interact with the simulator, typing real-time responses to evolving scenario prompts.",
-      "Generate a post-simulation feedback report, assessing the staff's compliance with safety handbooks."
+    "id": "hr_onboarding_wizard",
+    "title": "Employee Compliance Onboarding & Training Agent",
+    "category": "admin",
+    "summary": "Build an interactive employee compliance training agent to guide staff through regulatory onboarding and tests.",
+    "features": [
+      "Agent Designer",
+      "Video Generation"
     ],
-    prompt: `You are the 'Emergency Response Coordinator Simulator.' Your role is to guide campus security personnel through a high-stakes, real-time crisis drill.
-Scenario: A severe typhoon has caused a localized power failure in the science laboratory building, and a critical backup generator has failed.
-1. Present the scenario details clearly, including building floorplans and chemical storage risks.
-2. Ask the user: 'What is your first priority protocol?'
-3. Based on their input, evolve the scenario realistically (e.g., 'Correct, evacuation initiated. However, a laboratory TA reports one student is trapped in room 302...').
-4. Grade their decisions strictly against the uploaded Campus Safety Handbook.
-5. Provide detailed feedback, highlighting strengths and critical compliance gaps at the end of the simulation.`,
-    proTip: "Use Video Generation tools to create short, 15-second simulation briefings. Visual prompts increase engagement and make the training feel incredibly realistic to staff.",
-    connectorGuide: {
-      name: "Drive Connector",
-      steps: [
-        "Ground the Security Agent in your locked, secure 'Crisis Management' directory path.",
-        "Restrict access to authorized Security and Facilities personnel only, utilizing centralized SSO group bindings mapped in your Workforce Identity Pool."
+    "connectors": [
+      "Document Store Connector"
+    ],
+    "role": "HR Consultant",
+    "level": [
+      "Generic"
+    ],
+    "steps": [
+      "Upload your company's code of conduct, anti-harassment regulations, and AML guidelines to your document store.",
+      "Link your document folder using the Document Store Connector in Agent Designer.",
+      "Configure the custom Agent to role-play as a Training Coordinator to guide new employees through training steps.",
+      "Utilize Video Generation features to automatically script and produce custom 60-second instructional micro-learning videos.",
+      "Deploy the onboarding bot to help employees prepare for and complete standard compliance quizzes."
+    ],
+    "prompt": "You are the 'Compliance Training Advisor Bot' for employee onboarding. Your objective is to guide new hires through regulatory standards.\n1. **Ground your onboarding checkpoints strictly** in the uploaded company code of conduct.\n2. Guide the employee step-by-step through the compliance modules (e.g. Anti-Bribery, Insider Trading, Security Best Practices).\n3. Present interactive scenario-based quiz questions at the end of each module to test retention (e.g. 'If a vendor offers an expensive dinner during an active RFP, what is the standard protocol?').\n4. Grade their answers and provide clear compliance explanations.\nKeep the tone welcoming, instructional, and professional.",
+    "proTip": "By connecting the training agent to your secure Document Store, compliance training programs are updated automatically whenever HR uploads a revised code of conduct.",
+    "connectorGuide": {
+      "name": "Document Store Connector",
+      "steps": [
+        "Select the Document Store Connector in the integrations console.",
+        "Authorize read-only access to your employee onboarding files and compliance handbooks.",
+        "Link the document folder to your custom training agent."
+      ]
+    }
+  },
+  {
+    "id": "email_priority_digest",
+    "title": "Advisor Daily Correspondence Summary & Digest",
+    "category": "student",
+    "summary": "Connect Gemini directly to your advisory mailbox to summarize client emails and schedule follow-ups automatically.",
+    "features": [
+      "NotebookLM"
+    ],
+    "connectors": [
+      "Email Connector",
+      "Calendar Connector"
+    ],
+    "connectorEssential": true,
+    "role": "Relationship Manager",
+    "level": [
+      "Banking",
+      "Capital Markets",
+      "Generic"
+    ],
+    "steps": [
+      "Connect your institutional mailbox using the secure corporate Email Connector.",
+      "Link your work calendar to Gemini using the secure Calendar Connector.",
+      "Prompt Gemini to analyze all incoming client messages received in the past 24 hours.",
+      "Generate a structured, priority-ranked digest of customer wealth inquiries and meeting requests.",
+      "Ask Gemini to automatically draft professional client replies and suggest open calendar time slots for scheduling."
+    ],
+    "prompt": "You are the 'Advisor Personal Assistant Agent'. Analyze all client emails received in the past 24 hours.\nGenerate a structured daily advisor brief:\n1. **Urgent Client Inquiries**: Extract and highlight any urgent buy/sell requests, withdrawal notices, or margin alerts in bold.\n2. **Advisory Meeting Requests**: Synthesize client requests for face-to-face consultations, matching open slots in your corporate calendar.\n3. **Action Items Checklist**: Provide a prioritized checklist of 3 immediate actions.\n4. **Draft Client Correspondence**: For each client query, draft a formal, compliance-checked draft reply (e.g. confirming meeting dates, confirming transaction receipts) directly in Outlook/Gmail Drafts.\nMaintain an extremely professional, polite, and risk-compliant tone.",
+    "proTip": "Using the Email Connector maintains absolute data confidentiality, ensuring sensitive client wealth planning emails are never transmitted outside your organization's boundaries.",
+    "connectorGuide": {
+      "name": "Email & Calendar Connectors",
+      "steps": [
+        "In the integrations sidebar, enable both the Email Connector and Calendar Connector.",
+        "Authorize secure access tokens to read email headers and query open calendar time slots.",
+        "Ground your NotebookLM digest dashboard in the synchronized email and scheduling pipelines."
       ]
     }
   }
 ];
 
-// UI STATIC TRANSLATIONS (EN, zh-TW, zh-CN)
 const uiTranslations = {
-  en: {
-    wizardTitle: "Google Gemini Enterprise",
-    wizardSubtitle: "Education Adoption & Playbook Portal",
-    wizardDesc: "Unlock specialized AI agent templates, prompt sandboxes, and administrative integration guides customized to your role and school level.",
-    labelRole: "Identify Your Role",
-    labelLevel: "Institution / School Level",
-    labelLang: "Select Language / 選擇語言",
-    btnStart: "Access My Adoption Hub",
-    sidebarProfileTitle: "My Context Profile",
-    sidebarConnectorsTitle: "Active GE Connectors",
-    sidebarFeaturesTitle: "Filter by GE Feature",
-    sidebarStatusTitle: "Integration Status",
-    btnChangeContextText: "Switch Profile",
-    allCapabilities: "All Capabilities",
-    showAllCases: "Show All Cases",
-    standardToolsOnly: "Standard Tools Only",
-    integrationRequired: "Integration Required",
-    inactiveAccessRestricted: "Inactive (Access Restricted)",
-    linkedAndActive: "Linked and Active",
-    linkConnector: "Link Connector",
-    encryptedFederatedActive: "Encrypted Federated Search Active",
-    operationalSteps: "Operational Steps & Workflow",
-    promptSandbox: "Agent Prompt Sandbox",
-    adoptionProTip: "Adoption Pro-Tip",
-    overviewLabel: "Use Case Overview",
-    enterpriseIntegrationLabel: "Enterprise Data Integration",
-    copied: "Copied!",
-    copyPrompt: "Copy Prompt",
-    noUseCasesTitle: "No Use Cases Match Your Current Settings",
-    noUseCasesDesc: "Try loosening your search query or enabling Google/M365 connectors in the active controller panel to unlock integration workflows.",
-    btnResetFilters: "Clear Active Search",
-    simulatedConnect: "Simulated Connect",
-    profileSetSuccess: "Profile set successfully!",
-    connectorLinkedSuccess: "connector linked. Card unlocked!",
-    promptCopiedSuccess: "Prompt copied to clipboard!",
-    levelHelperText: "Institution level is not applicable for support roles.",
-    roles: {
-      "Lecturer": "Lecturer / Educator",
-      "TA": "Teaching Assistant (TA)",
-      "Student": "Student / Club Leader",
-      "Security": "Campus Security Officer",
-      "Finance": "Financial Administrator",
-      "IT Admin": "IT Administrator / SysAdmin",
-      "SAO": "Student Affairs Officer (SAO)",
-      "Program Leader": "Program Leader / Department Head",
-      "Dean": "Dean / Educational Leader"
+  "en": {
+    "wizardTitle": "Google Gemini Enterprise",
+    "wizardSubtitle": "Financial Services Adoption & Playbook Portal",
+    "wizardDesc": "Unlock specialized AI agent templates, prompt sandboxes, and administrative integration guides customized to your institutional role and industry segment.",
+    "labelRole": "Identify Your Role",
+    "labelLevel": "Industry Sector / Segment",
+    "labelLang": "Select Language / 選擇語言",
+    "btnStart": "Access My Adoption Hub",
+    "sidebarProfileTitle": "My Context Profile",
+    "sidebarConnectorsTitle": "Active GE Connectors",
+    "sidebarFeaturesTitle": "Filter by CE Features",
+    "filterLiked": "My Saved Playbooks",
+    "filterDeployed": "My Deployed Solutions",
+    "linkedAndActive": "Linked and Active",
+    "profileSetSuccess": "Profile loaded successfully! Welcome to the FSI Adoption Portal.",
+    "roles": {
+      "Financial Analyst": "Financial Analyst",
+      "Relationship Manager": "Relationship Manager",
+      "Claims Processor": "Claims Processor",
+      "Customer Service": "Customer Service",
+      "HR Consultant": "HR Consultant",
+      "IT Operator": "IT Operator",
+      "Compliance Officer": "Compliance Officer",
+      "Loan Officer": "Loan Officer",
+      "Underwriter": "Underwriter",
+      "Risk Manager": "Risk Manager",
+      "Investment Banker": "Investment Banker",
+      "Security Officer": "Security Officer"
     },
-    levels: {
-      "Generic": "Generic (Cross-Level Adaptable)",
-      "University & College": "University & College (Higher Edu)",
-      "High School": "High School (Grades 6-12)",
-      "Primary School": "Primary School (Grades K-5)"
+    "levels": {
+      "Banking": "Retail & Commercial Banking",
+      "Insurance": "Life & Property Insurance",
+      "Capital Markets": "Capital Markets & Wealth Management",
+      "Generic": "Cross-Sector Adaptable"
     },
-    hubs: {
-      academic: "Academic Portal",
-      student: "Student Center",
-      operational: "Operational Command",
-      administrative: "Administrative Support"
-    },
-    adminBrandText: "Admin Control",
-    adminMenuNavigationTitle: "Menu Navigation",
-    adminPortalTitle: "GEMINI EDUCATION MANAGEMENT",
-    adminPortalSubtitle: "Configure users, update learning playbooks, and analyze the last 6 months deployment metrics.",
-    adminTabUsersText: "Users Provisioning",
-    adminTabAnalyticsText: "System Analytics",
-    adminTabCasesText: "Use Cases CRUD",
-    btnAdminBackToPortalText: "Learning Portal",
-    btnAdminLogoutText: "Log Out",
-    adminProvisionTitle: "Provision New Account",
-    adminProvisionDesc: "This generates a <strong>random 10-character</strong> temporary password. You can provision multiple accounts at once by separating email addresses with commas; in that case, the default temporary password for all of them will be <strong>\"ChangeMe\"</strong>. All users are forced to reset their password on first login.",
-    adminProvisionLabelEmail: "User Email Address",
-    adminBtnProvision: "Provision",
-    adminRegisteredUsersTitle: "Registered Portal Users",
-    adminThUserEmail: "User Email",
-    adminThPasswordStatus: "Password Status",
-    adminThCreatedDate: "Created Date",
-    adminThAdminActions: "Administrative Actions",
-    adminLabelTotalUsers: "Total Registered Users",
-    adminLabelTotalUseCases: "Total Use Cases",
-    adminLabelTotalLikes: "User Liked Counts",
-    adminLabelTotalDeployments: "Cases Deployed Counts",
-    adminChartTitle: "6-Month Portal Adoption Metrics",
-    adminChartDesc: "Detailed aggregation charting Views, Likes, and Deployed actions across the academic term.",
-    adminLabelViewsLegend: "PAGE VIEWS",
-    adminLabelLikesLegend: "USER LIKES",
-    adminLabelDeploymentsLegend: "DEPLOYMENTS",
-    adminCrudTitle: "Playbook Content Master Management",
-    adminBtnExportText: "Extract All (JSON)",
-    adminBtnCreateCaseText: "Add Use Case",
-    adminCrudThId: "ID",
-    adminCrudThTitle: "Title",
-    adminCrudThCategory: "Category Hub",
-    adminCrudThRole: "Primary Role",
-    adminCrudThActions: "Actions",
-    adminFormLabelId: "ID (Unique, Immutable)",
-    adminFormLabelCategory: "Category Hub",
-    adminFormLabelTitle: "Template Title",
-    adminFormLabelRole: "Primary Role Context",
-    adminFormLabelSummary: "Brief Summary Description",
-    adminFormLabelFeatures: "Required Gemini Features",
-    adminFormLabelConnectors: "Required Connectors",
-    adminFormLabelLevel: "Applicable Institution Levels",
-    adminFormLabelSteps: "Procedural Guide Steps (One step per line)",
-    adminFormLabelPrompt: "System Prompt sandbox instruction",
-    adminFormLabelProTip: "Pro Tip",
-    adminFormLabelAdvancedSteps: "Advanced Procedural Steps - Active-Integration Mode (One step per line)",
-    adminFormLabelAdvancedPrompt: "Advanced System Prompt - Active-Integration Mode",
-    adminFormLabelAdvancedProTip: "Advanced Pro Tip - Active-Integration Mode",
-    adminFormLabelZhtwHeader: "Traditional Chinese (繁體中文) Translations",
-    adminFormLabelZhtwTitle: "Translated Title",
-    adminFormLabelZhtwSummary: "Translated Summary",
-    adminFormLabelZhtwSteps: "Translated Steps (One per line)",
-    adminFormLabelZhtwPrompt: "Translated Prompt",
-    adminFormLabelZhtwProTip: "Translated Pro Tip",
-    adminFormLabelZhtwAdvancedSteps: "Translated Advanced Steps (One per line)",
-    adminFormLabelZhtwAdvancedPrompt: "Translated Advanced Prompt",
-    adminFormLabelZhtwAdvancedProTip: "Translated Advanced Pro Tip",
-    adminFormLabelZhcnHeader: "Simplified Chinese (简体中文) Translations",
-    adminFormLabelZhcnTitle: "Translated Title",
-    adminFormLabelZhcnSummary: "Translated Summary",
-    adminFormLabelZhcnSteps: "Translated Steps (One per line)",
-    adminFormLabelZhcnPrompt: "Translated Prompt",
-    adminFormLabelZhcnProTip: "Translated Pro Tip",
-    adminFormLabelZhcnAdvancedSteps: "Translated Advanced Steps (One per line)",
-    adminFormLabelZhcnAdvancedPrompt: "Translated Advanced Prompt",
-    adminFormLabelZhcnAdvancedProTip: "Translated Advanced Pro Tip",
-    btnAdminFormCancel: "Cancel",
-    btnAdminFormSave: "Save Changes",
-    sidebarFeaturesTitle: "Filter by GE Feature",
-    filterLiked: "My Liked Cases",
-    filterDeployed: "My Deployed Cases",
-    adminFormLabelDualModeCheckbox: "Enable Dual-Mode Template (Supports Standalone & Advanced workflows)",
-    adminFormDescDualModeCheckbox: "When enabled, this playbook supports both standard manual file workflows and advanced integration modes, automatically managing standard prompt variables."
+    "adminPortalTitle": "GEMINI FSI PORTAL MANAGEMENT",
+    "adminRegisteredUsersTitle": "Registered Portal Users",
+    "adminFormLabelSteps": "Procedural Guide Steps (One step per line)",
+    "adminFormLabelAdvancedSteps": "Advanced Procedural Steps - Active-Integration Mode (One step per line)",
+    "adminFormLabelDualModeCheckbox": "Enable Dual-Mode Template (Supports Standalone & Advanced Connector flows)",
+    "adminFormDescDualModeCheckbox": "When enabled, this playbook supports both offline manual uploads and live advanced connector flows."
   },
   "zh-TW": {
-    wizardTitle: "Google Gemini Enterprise",
-    wizardSubtitle: "Education Adoption & Playbook Portal",
-    wizardDesc: "解鎖專為您的角色和學校級別定制的 AI Agent 模板、提示詞沙盒和管理集成指南。",
-    labelRole: "確認您的角色",
-    labelLevel: "學校 / 機構級別",
-    labelLang: "選擇語言",
-    btnStart: "進入我的導入中心",
-    sidebarProfileTitle: "我的背景檔案",
-    sidebarConnectorsTitle: "啟用中的 GE 連接器",
-    sidebarFeaturesTitle: "按 GE 功能篩選",
-    sidebarStatusTitle: "集成狀態",
-    btnChangeContextText: "切換檔案",
-    allCapabilities: "所有功能",
-    showAllCases: "顯示所有案例",
-    standardToolsOnly: "僅限標準工具",
-    integrationRequired: "需要集成連線",
-    inactiveAccessRestricted: "未啟用 (存取受限)",
-    linkedAndActive: "已連結並啟用",
-    linkConnector: "連結連接器",
-    encryptedFederatedActive: "加密聯邦搜尋已啟用",
-    operationalSteps: "操作步驟與工作流程",
-    promptSandbox: "Agent 提示詞沙盒",
-    adoptionProTip: "導入心法",
-    overviewLabel: "使用案例概述",
-    enterpriseIntegrationLabel: "企業數據集成",
-    copied: "已複製！",
-    copyPrompt: "複製提示詞",
-    noUseCasesTitle: "無符合當前設定的使用案例",
-    noUseCasesDesc: "請嘗試放寬搜尋關鍵字，或在控制面板中啟用連接器以解鎖集成工作流程。",
-    btnResetFilters: "清除搜尋",
-    simulatedConnect: "模擬連線",
-    profileSetSuccess: "設定檔更新成功！",
-    connectorLinkedSuccess: "連接器已連結，卡片已解鎖！",
-    promptCopiedSuccess: "提示詞已複製到剪貼簿！",
-    levelHelperText: "行政與支援角色不需選擇學校級別。",
-    roles: {
-       "Lecturer": "講師 / 教育工作者",
-       "TA": "助教 (TA)",
-       "Student": "學生 / 社團幹部",
-       "Security": "校園安全官",
-       "Finance": "財務管理員",
-       "IT Admin": "IT 系統管理員",
-       "SAO": "學生事務官 (SAO)",
-       "Program Leader": "學程負責人 / 系主任",
-       "Dean": "院長 / 教育領導者"
+    "wizardTitle": "Google Gemini 企業級",
+    "wizardSubtitle": "金融服務行業 (FSI) 應用導入與案例門戶",
+    "wizardDesc": "解鎖專為您的金融機構角色與行業細分定製的 AI Agent 範本、提示詞沙盒與系統整合指南。",
+    "labelRole": "識別您的角色",
+    "labelLevel": "行業細分 / 領域",
+    "labelLang": "選擇語言 / Select Language",
+    "btnStart": "進入我的應用中心",
+    "sidebarProfileTitle": "我的角色檔案",
+    "sidebarConnectorsTitle": "已啟用企業級連接器",
+    "sidebarFeaturesTitle": "按 CE 功能篩選",
+    "filterLiked": "我的收藏案例",
+    "filterDeployed": "我的部署案例",
+    "linkedAndActive": "已成功連接並啟用",
+    "profileSetSuccess": "檔案載入成功！歡迎使用 FSI 應用導入門戶。",
+    "roles": {
+      "Financial Analyst": "金融分析師 (Financial Analyst)",
+      "Relationship Manager": "客戶關係經理 (Relationship Manager)",
+      "Claims Processor": "理賠審核員 (Claims Processor)",
+      "Customer Service": "客戶服務專員 (Customer Service)",
+      "HR Consultant": "人力資源顧問 (HR Consultant)",
+      "IT Operator": "IT 運維專員 (IT Operator)",
+      "Compliance Officer": "合規審查官 (Compliance Officer)",
+      "Loan Officer": "信貸業務官 (Loan Officer)",
+      "Underwriter": "核保與風險評估師 (Underwriter)",
+      "Risk Manager": "風險管理經理 (Risk Manager)",
+      "Investment Banker": "投資銀行家 (Investment Banker)",
+      "Security Officer": "資訊安全官 (Security Officer)"
     },
-    levels: {
-      "Generic": "通用 (跨級別適用)",
-      "University & College": "大學與大專院校 (高等教育)",
-      "High School": "中學 (6-12 年級)",
-      "Primary School": "小學 (K-5 年級)"
+    "levels": {
+      "Banking": "零售與商業銀行 (Retail & Commercial Banking)",
+      "Insurance": "人壽與財產保險 (Life & Property Insurance)",
+      "Capital Markets": "資本市場與財富管理 (Capital Markets)",
+      "Generic": "通用跨行業模版"
     },
-    hubs: {
-      academic: "學術教學門戶 (Academic Portal)",
-      student: "學生與社團中心 (Student Center)",
-      operational: "運營管理指揮 (Operational Command)",
-      administrative: "行政支援與安全 (Administrative Support)"
-    },
-    adminBrandText: "管理者控制台",
-    adminMenuNavigationTitle: "選單導覽",
-    adminPortalTitle: "GEMINI 教育管理控制台",
-    adminPortalSubtitle: "配置帳號權限、維護學習案例，並分析近 6 個月的導入統計數據。",
-    adminTabUsersText: "帳號帳戶管理",
-    adminTabAnalyticsText: "系統數據分析",
-    adminTabCasesText: "案例內容維護",
-    btnAdminBackToPortalText: "返回學習中心",
-    btnAdminLogoutText: "登出系統",
-    adminProvisionTitle: "開通新帳戶",
-    adminProvisionDesc: "系統將自動生成一組 <strong>10 位字元</strong>的臨時隨機密碼。您可以通過用逗號分隔電子郵件地址來一次性開通多個帳戶；在這種情況下，所有帳戶的預設臨時密碼將為 <strong>\"ChangeMe\"</strong>。所有使用者於首次登入時必須強制重設密碼。",
-    adminProvisionLabelEmail: "使用者電子郵件地址",
-    adminBtnProvision: "開通帳戶",
-    adminRegisteredUsersTitle: "已註冊門戶使用者",
-    adminThUserEmail: "使用者電子郵件",
-    adminThPasswordStatus: "密碼重設狀態",
-    adminThCreatedDate: "建立日期",
-    adminThAdminActions: "帳戶管理權限",
-    adminLabelTotalUsers: "已註冊使用者總數",
-    adminLabelTotalUseCases: "學習案例總數",
-    adminLabelTotalLikes: "使用者按讚計數",
-    adminLabelTotalDeployments: "部署案例計數",
-    adminChartTitle: "近 6 個月門戶導入分析圖表",
-    adminChartDesc: "詳細彙整整個學期期間的使用者瀏覽量、按讚次數與實際部署操作統計。",
-    adminLabelViewsLegend: "頁面瀏覽量",
-    adminLabelLikesLegend: "使用者按讚",
-    adminLabelDeploymentsLegend: "案例部署數",
-    adminCrudTitle: "學習案例內容主檔管理 (CRUD)",
-    adminBtnExportText: "匯出案例 (JSON)",
-    adminBtnCreateCaseText: "新增使用案例",
-    adminCrudThId: "案例 ID",
-    adminCrudThTitle: "案例標題",
-    adminCrudThCategory: "所屬分類中心",
-    adminCrudThRole: "主要角色定位",
-    adminCrudThActions: "編輯操作",
-    adminFormLabelId: "案例 ID (唯一、不可變更)",
-    adminFormLabelCategory: "所屬分類中心",
-    adminFormLabelTitle: "範本標題名稱",
-    adminFormLabelRole: "主要套用角色定位",
-    adminFormLabelSummary: "簡短摘要描述",
-    adminFormLabelFeatures: "所需 Gemini 核心功能",
-    adminFormLabelConnectors: "所需企業數據連接器",
-    adminFormLabelLevel: "適用學校 / 機構級別",
-    adminFormLabelSteps: "引導操作步驟說明 (每行一步驟)",
-    adminFormLabelPrompt: "沙盒系統提示詞 (System Prompt)",
-    adminFormLabelProTip: "導入心法 (Pro Tip)",
-    adminFormLabelAdvancedSteps: "進階主動整合步驟 (僅適用於連接器連線模式)",
-    adminFormLabelAdvancedPrompt: "進階主動整合系統提示詞 (System Prompt)",
-    adminFormLabelAdvancedProTip: "進階主動整合導入心法 (Pro Tip)",
-    adminFormLabelZhtwHeader: "繁體中文 (Traditional Chinese) 翻譯對應",
-    adminFormLabelZhtwTitle: "翻譯標題 (繁體)",
-    adminFormLabelZhtwSummary: "翻譯摘要描述 (繁體)",
-    adminFormLabelZhtwSteps: "翻譯步驟 (每行一步驟)",
-    adminFormLabelZhtwPrompt: "翻譯系統提示詞 (繁體)",
-    adminFormLabelZhtwProTip: "翻譯導入心法 (繁體)",
-    adminFormLabelZhtwAdvancedSteps: "翻譯進階整合步驟 (每行一步驟)",
-    adminFormLabelZhtwAdvancedPrompt: "翻譯進階整合提示詞 (繁體)",
-    adminFormLabelZhtwAdvancedProTip: "翻譯進階整合導入心法 (繁體)",
-    adminFormLabelZhcnHeader: "簡體中文 (Simplified Chinese) 翻譯對應",
-    adminFormLabelZhcnTitle: "翻譯標題 (简体)",
-    adminFormLabelZhcnSummary: "翻譯摘要描述 (简体)",
-    adminFormLabelZhcnSteps: "翻譯步驟 (每行一步骤)",
-    adminFormLabelZhcnPrompt: "翻譯系統提示詞 (简体)",
-    adminFormLabelZhcnProTip: "翻譯導入心法 (简体)",
-    adminFormLabelZhcnAdvancedSteps: "翻譯进阶整合步骤 (每行一步骤)",
-    adminFormLabelZhcnAdvancedPrompt: "翻譯进阶整合提示词 (简体)",
-    adminFormLabelZhcnAdvancedProTip: "翻譯进阶整合导入心法 (简体)",
-    btnAdminFormCancel: "取消",
-    btnAdminFormSave: "儲存變更",
-    sidebarFeaturesTitle: "按 CE 功能篩選",
-    filterLiked: "我的收藏案例",
-    filterDeployed: "我的部署案例",
-    adminFormLabelDualModeCheckbox: "啟用雙重模式範本 (支援獨立與進階連接器工作流程)",
-    adminFormDescDualModeCheckbox: "啟用後，此案例同時支援手動上傳與進階連接器模式，標準提示詞與步驟將由系統自動處理。"
+    "adminPortalTitle": "GEMINI FSI 門戶管理後台",
+    "adminRegisteredUsersTitle": "已註冊門戶使用者",
+    "adminFormLabelSteps": "標準模式操作步驟 (每行一步驟)",
+    "adminFormLabelAdvancedSteps": "進階整合模式操作步驟 (每行一步驟)",
+    "adminFormLabelDualModeCheckbox": "啟用雙重模式範本 (支持獨立與進階連接器工作流程)",
+    "adminFormDescDualModeCheckbox": "啟用後，此案例同時支持手動上傳與進階連接器模式，標準提示詞與步驟將由系統自動處理。"
   },
   "zh-CN": {
-    wizardTitle: "Google Gemini Enterprise",
-    wizardSubtitle: "Education Adoption & Playbook Portal",
-    wizardDesc: "解锁专为您的角色和学校级别定制的 AI Agent 模板、提示词沙箱和管理集成指南。",
-    labelRole: "确认您的角色",
-    labelLevel: "学校 / 机构级别",
-    labelLang: "选择语言",
-    btnStart: "进入我的导入中心",
-    sidebarProfileTitle: "我的背景档案",
-    sidebarConnectorsTitle: "启用中的 GE 连接器",
-    sidebarFeaturesTitle: "按 GE 功能筛选",
-    sidebarStatusTitle: "集成状态",
-    btnChangeContextText: "切换档案",
-    allCapabilities: "所有功能",
-    showAllCases: "显示所有案例",
-    standardToolsOnly: "仅限标准工具",
-    integrationRequired: "需要集成连线",
-    inactiveAccessRestricted: "未启用 (访问受限)",
-    linkedAndActive: "已链接并启用",
-    linkConnector: "链接连接器",
-    encryptedFederatedActive: "加密联邦搜索已启用",
-    operationalSteps: "操作步骤与工作流程",
-    promptSandbox: "Agent 提示词沙箱",
-    adoptionProTip: "导入心法",
-    overviewLabel: "使用案例概述",
-    enterpriseIntegrationLabel: "企业数据集成",
-    copied: "已复制！",
-    copyPrompt: "复制提示词",
-    noUseCasesTitle: "无符合当前设置的使用案例",
-    noUseCasesDesc: "请尝试放宽搜索关键字，或在控制面板中启用连接器以解锁集成工作流。",
-    btnResetFilters: "清除搜索",
-    simulatedConnect: "模拟连线",
-    profileSetSuccess: "档案设置成功！",
-    connectorLinkedSuccess: "连接器已链接，卡片已解锁！",
-    promptCopiedSuccess: "提示词已复制到剪贴簿！",
-    levelHelperText: "行政与支持角色不需要选择学校级别。",
-    roles: {
-      "Lecturer": "讲师 / 教育工作者",
-      "TA": "助教 (TA)",
-      "Student": "学生 / 社团干部",
-      "Security": "校园安全官",
-      "Finance": "财务管理员",
-      "IT Admin": "IT 系统管理员",
-      "SAO": "学生事务官 (SAO)",
-      "Program Leader": "学程负责人 / 系主任",
-      "Dean": "院长 / 教育领导者"
+    "wizardTitle": "Google Gemini 企业级",
+    "wizardSubtitle": "金融服务行业 (FSI) 应用导入与案例门户",
+    "wizardDesc": "解锁专为您的金融机构角色与行业细分定制的 AI Agent 模板、提示词沙盒与系统整合指南。",
+    "labelRole": "识别您的角色",
+    "labelLevel": "行业细分 / 领域",
+    "labelLang": "选择语言 / Select Language",
+    "btnStart": "进入我的应用中心",
+    "sidebarProfileTitle": "我的角色档案",
+    "sidebarConnectorsTitle": "已启用企业级连接器",
+    "sidebarFeaturesTitle": "按 CE 功能筛选",
+    "filterLiked": "我的收藏案例",
+    "filterDeployed": "我的部署案例",
+    "linkedAndActive": "已成功连接并启用",
+    "profileSetSuccess": "档案载入成功！欢迎使用 FSI 应用导入门户。",
+    "roles": {
+      "Financial Analyst": "金融分析师 (Financial Analyst)",
+      "Relationship Manager": "客户关系经理 (Relationship Manager)",
+      "Claims Processor": "理赔审核员 (Claims Processor)",
+      "Customer Service": "客户服务专员 (Customer Service)",
+      "HR Consultant": "人力资源顾问 (HR Consultant)",
+      "IT Operator": "IT 运维专员 (IT Operator)",
+      "Compliance Officer": "合规审查官 (Compliance Officer)",
+      "Loan Officer": "信贷业务员 (Loan Officer)",
+      "Underwriter": "核保与风险评估师 (Underwriter)",
+      "Risk Manager": "风险管理经理 (Risk Manager)",
+      "Investment Banker": "投资银行家 (Investment Banker)",
+      "Security Officer": "信息安全官 (Security Officer)"
     },
-    levels: {
-      "Generic": "通用 (跨级别适用)",
-      "University & College": "大学与大专院校 (高等教育)",
-      "中学": "中学 (6-12 年级)",
-      "High School": "中学 (6-12 年级)",
-      "Primary School": "小学 (K-5 年级)"
+    "levels": {
+      "Banking": "零售与商业银行 (Retail & Commercial Banking)",
+      "Insurance": "人寿与财产保险 (Life & Property Insurance)",
+      "Capital Markets": "资本市场与财富管理 (Capital Markets)",
+      "Generic": "通用跨行业模板"
     },
-    hubs: {
-      academic: "学术教学门户 (Academic Portal)",
-      student: "学生与社团中心 (Student Center)",
-      operational: "运营管理指挥 (Operational Command)",
-      administrative: "行政支持与安全 (Administrative Support)"
-    },
-    adminBrandText: "管理者控制台",
-    adminMenuNavigationTitle: "菜单导航",
-    adminPortalTitle: "GEMINI 教育管理控制台",
-    adminPortalSubtitle: "配置账号权限、维护学习案例，并分析近 6 个月的导入统计数据。",
-    adminTabUsersText: "账号账户管理",
-    adminTabAnalyticsText: "系统数据分析",
-    adminTabCasesText: "案例内容维护",
-    btnAdminBackToPortalText: "返回学习中心",
-    btnAdminLogoutText: "登出系统",
-    adminProvisionTitle: "开通新账户",
-    adminProvisionDesc: "系统将自动生成一组 <strong>10 位字符</strong>的临时随机密码。您可以通过用逗号分隔电子邮件地址来一次性开通多个账户；在这种情况下，所有账户的默认临时密码将为 <strong>\"ChangeMe\"</strong>。所有使用者于首次登录时必须强制重设密码。",
-    adminProvisionLabelEmail: "使用者电子邮件地址",
-    adminBtnProvision: "开通账户",
-    adminRegisteredUsersTitle: "已注册门户使用者",
-    adminThUserEmail: "使用者电子邮件",
-    adminThPasswordStatus: "密码重设状态",
-    adminThCreatedDate: "建立日期",
-    adminThAdminActions: "账户管理权限",
-    adminLabelTotalUsers: "已注册使用者总数",
-    adminLabelTotalUseCases: "学习案例总数",
-    adminLabelTotalLikes: "使用者点赞计数",
-    adminLabelTotalDeployments: "部署案例计数",
-    adminChartTitle: "近 6 个月门户导入分析图表",
-    adminChartDesc: "详细汇总整个学期期间的使用者浏览量、点赞次数与实际部署操作统计。",
-    adminLabelViewsLegend: "页面浏览量",
-    adminLabelLikesLegend: "使用者点赞",
-    adminLabelDeploymentsLegend: "案例部署数",
-    adminCrudTitle: "学习案例内容主档管理 (CRUD)",
-    adminBtnExportText: "导出案例 (JSON)",
-    adminBtnCreateCaseText: "新增使用案例",
-    adminCrudThId: "案例 ID",
-    adminCrudThTitle: "案例标题",
-    adminCrudThCategory: "所属分类中心",
-    adminCrudThRole: "主要角色定位",
-    adminCrudThActions: "编辑操作",
-    adminFormLabelId: "案例 ID (唯一、不可变更)",
-    adminFormLabelCategory: "所属分类中心",
-    adminFormLabelTitle: "范本标题名称",
-    adminFormLabelRole: "主要套用角色定位",
-    adminFormLabelSummary: "简短摘要描述",
-    adminFormLabelFeatures: "所需 Gemini 核心功能",
-    adminFormLabelConnectors: "所需企业数据连接器",
-    adminFormLabelLevel: "适用学校 / 机构级别",
-    adminFormLabelSteps: "引导操作步骤说明 (每行一步骤)",
-    adminFormLabelPrompt: "沙盒系统提示词 (System Prompt)",
-    adminFormLabelProTip: "导入心法 (Pro Tip)",
-    adminFormLabelAdvancedSteps: "进阶主动整合步骤 (仅适用于连接器连线模式)",
-    adminFormLabelAdvancedPrompt: "进阶主动整合系统提示词 (System Prompt)",
-    adminFormLabelAdvancedProTip: "进阶主动整合导入心法 (Pro Tip)",
-    adminFormLabelZhtwHeader: "繁体中文 (Traditional Chinese) 翻译对应",
-    adminFormLabelZhtwTitle: "翻译标题 (繁体)",
-    adminFormLabelZhtwSummary: "翻译摘要描述 (繁体)",
-    adminFormLabelZhtwSteps: "翻译步骤 (每行一步骤)",
-    adminFormLabelZhtwPrompt: "翻译系统提示词 (繁體)",
-    adminFormLabelZhtwProTip: "翻译导入心法 (繁體)",
-    adminFormLabelZhtwAdvancedSteps: "翻译进阶整合步骤 (每行一步骤)",
-    adminFormLabelZhtwAdvancedPrompt: "翻译进阶整合提示词 (繁體)",
-    adminFormLabelZhtwAdvancedProTip: "翻译进阶整合导入心法 (繁體)",
-    adminFormLabelZhcnHeader: "简体中文 (Simplified Chinese) 翻译对应",
-    adminFormLabelZhcnTitle: "翻译标题 (简体)",
-    adminFormLabelZhcnSummary: "翻译摘要描述 (简体)",
-    adminFormLabelZhcnSteps: "翻译步骤 (每行一步骤)",
-    adminFormLabelZhcnPrompt: "翻译系统提示词 (简体)",
-    adminFormLabelZhcnProTip: "翻译导入心法 (简体)",
-    adminFormLabelZhcnAdvancedSteps: "翻译进阶整合步骤 (每行一步骤)",
-    adminFormLabelZhcnAdvancedPrompt: "翻译进阶整合提示词 (简体)",
-    adminFormLabelZhcnAdvancedProTip: "翻译进阶整合导入心法 (简体)",
-    btnAdminFormCancel: "取消",
-    btnAdminFormSave: "保存变更",
-    sidebarFeaturesTitle: "按 CE 功能筛选",
-    filterLiked: "我的点赞案例",
-    filterDeployed: "我的部署案例",
-    adminFormLabelDualModeCheckbox: "启用双重模式范本 (支持独立与进阶连接器工作流程)",
-    adminFormDescDualModeCheckbox: "启用后，此案例同时支持手动上传与进阶连接器模式，标准提示词与步骤将由系统自动处理。"
+    "adminPortalTitle": "GEMINI FSI 门户管理后台",
+    "adminRegisteredUsersTitle": "已注册门户使用者",
+    "adminFormLabelSteps": "标准模式操作步骤 (每行一步骤)",
+    "adminFormLabelAdvancedSteps": "进阶整合模式操作步骤 (每行一步骤)",
+    "adminFormLabelDualModeCheckbox": "启用双重模式范本 (支持独立与进阶连接器工作流程)",
+    "adminFormDescDualModeCheckbox": "启用后，此案例同时支持手动上传与进阶连接器模式，标准提示词与步骤将由系统自动处理。"
   }
 };
 
-// DYNAMIC USE CASE CONTENT TRANSLATIONS
 const useCasesTranslations = {
-  socratic_tutor: {
+  "equity_research_copilot": {
     "en": {
-      title: "Socratic AI Tutor Agent Creation",
-      summary: "Ground a custom course Agent in your lecture notes and syllabi to act as a 24/7 Socratic learning companion.",
-      steps: [
-        "In NotebookLM, create a 'Read-Only Course Hub' and upload all syllabus documents, lecture slides, and key readings.",
-        "Navigate to Gemini Enterprise Agent Designer and create a new Custom Agent. Name it '[Course Name] Coach'.",
-        "Copy the Socratic persona instructions into the Agent prompt window and link the read-only NotebookLM hub in the data configuration.",
-        "Test the Agent by asking basic syllabus questions (e.g. 'What is mitosis?') and ensuring it guides you to find the answer rather than directly giving it.",
-        "Generate a shareable link for the Agent and post it prominently on your school LMS (Canvas, Moodle, etc.) for student access."
+      "title": "Equity Research Analyst Copilot",
+      "summary": "Ground an equity research Agent in 10-K filings, annual statements, and earnings call transcripts to build a financial analyst assistant.",
+      "steps": [
+        "In NotebookLM, upload your target public company's latest 10-K statement, balance sheet, and earnings call transcripts.",
+        "Navigate to Gemini Enterprise Agent Designer and build a custom Agent named '[Company Ticker] Analyst Agent'.",
+        "Insert the specialized equity research persona instructions into the Agent's prompt guidelines and link the read-only NotebookLM folder.",
+        "Conduct query testing by asking the Agent to synthesize debt-to-equity ratios and key risks mentioned in the transcript.",
+        "Share the custom analyst agent link with your advisory or portfolio team for real-time market analysis."
       ],
-      prompt: `You are the '[Course Code] Coach,' a friendly and encouraging Socratic tutor for this course. Your sole objective is to guide students to find answers themselves.
-Follow these rules strictly:
-1. **Ground all your responses** in the provided course materials only.
-2. When a student asks a question (e.g., 'What is the answer to question 3?'), do NOT give the direct answer. Instead, respond with a probing, contextual question that helps them think critically.
-3. Reference specific files/pages in the course materials (e.g., 'Can you look at slide 4 of Lecture 2 and tell me what the first stage is called?').
-4. If a student demonstrates correct understanding, praise them and provide a complete, rich explanation.
-5. If asked about topics outside this course, politely decline, stating: 'I can only assist you with [Course Name] topics.'
-6. Cite your sources for every answer.`,
-      proTip: "By connecting NotebookLM as the grounding layer, you ensure the Agent never hallucinates answers, restricts responses to authorized curriculum text, and provides verified inline citations."
+      "prompt": "You are a Senior Equity Research Analyst Agent. Your objective is to assist analysts with deep company financial assessments.\nFollow these rules strictly:\n1. **Ground all answers** exclusively in the provided 10-K, balance sheet, and transcript sources.\n2. If asked for a ratio or metric, provide the exact calculation, referencing the page and source file.\n3. Call out any discrepancies between management's remarks in the earnings call and the actual figures in the 10-K balance sheet.\n4. If a query is outside the scope of the provided sources, state: 'I can only analyze the provided filings.'\n5. Provide professional financial citations for all data points.",
+      "proTip": "By connecting NotebookLM as the grounding layer, you ensure the research assistant never hallucinates calculations and restricts responses to authorized compliance-checked filing text."
     },
     "zh-TW": {
-      title: "Socratic AI Tutor Agent 創建",
-      summary: "將客製化的課程 Agent 植基於您的授課筆記與教學大綱，打造 24/7 的 Socratic 學習導師。",
-      steps: [
-        "在 NotebookLM 中，建立一個「唯讀課程中心」，並上傳所有教學大綱、講義投影片及重要讀物。",
-        "進入 Gemini Enterprise Agent Designer 並新建一個 Custom Agent。命名為「[Course Name] Coach」。",
-        "將 Socratic 角色特徵指令複製到 Agent 提示詞視窗，並於數據設定中連結唯讀的 NotebookLM 課程中心。",
-        "藉由詢問教學大綱中的基本問題（例如：「什麼是細胞分裂？」）來測試 Agent，確保它扮演引導角色，而非直接給出答案。",
-        "產生該 Agent 的公開分享連結，並置頂張貼於學校的 LMS（Canvas、Moodle 等），供學生隨時存取。"
+      "title": "金融研究分析師 AI 助理 (Equity Research Analyst Copilot)",
+      "summary": "將金融分析師 Agent 植基於 10-K 年報、財務報表與法說會對話錄音檔，建立企業級金融分析與研究助理。",
+      "steps": [
+        "在 NotebookLM 中建立一個安全的專案空間，上傳目標上市公司最新的 10-K 年報、資產負債表與法說會對話文本。",
+        "前往 Gemini Enterprise Agent Designer（智能體設計器）並建立一個名為「[公司代號] 分析師 Agent」的客製化智能體。",
+        "將專屬的證券研究分析師角色指引貼入 Agent 提示詞設定中，並將其連結至唯讀的 NotebookLM 資料目錄夾。",
+        "進行對話測試，引導 Agent 分析與計算該公司的債務股本比 (Debt-to-Equity Ratio)，並總結法說會對話中的核心市場風險。",
+        "將此專屬分析師 Agent 連結分享給您的投資顧問與資產管理團隊，供其進行即時、高度合規的市場與財報分析。"
       ],
-      prompt: `你是一位親切且循循善誘的 Socratic 學習導師。你的唯一目標是引導學生靠自己找到問題的答案。
-請嚴格遵守以下準則：
-1. **所有回答均須植基於**提供的課程教材中，絕不可編造。
-2. 當學生問及特定答案時，不要直接告知。請回覆一個具探究性、情境式的反問，幫助他們進行批判性思考。
-3. 具體指出課程材料中的文件或頁數（例如：「你可以參考 Lecture 2 的第 4 張投影片，然後告訴我第一個階段叫什麼名字嗎？」）。
-4. 當學生展現正確的理解時，給予肯定並提供完整、豐富的補充說明。
-5. 若問及本課程以外的主題，請禮貌地拒絕並回答：「我只能協助你解答關於 [Course Name] 的問題。」
-6. 每次回答皆須引用出處。`,
-      proTip: "連結 NotebookLM 作為知識地基，可確保 Agent 絕不胡言亂語（Hallucinate），且其所有答覆均受限於核准的教材，並提供真實可信的內文引用。"
+      "prompt": "你是一位資深證券研究分析師 Agent。你的任務是協助分析師團隊進行深入的企業財務評估與合規查核。\n請嚴格遵守以下準則：\n1. **所有回答必須完全植基於** 提供之 10-K 申報書、資產負債表與法說會對話等指定來源。\n2. 在回答任何財務指標或比例時，必須列出精確的計算過程，並標註來源文檔與具體頁碼。\n3. 如果法說會中管理階層的言論與 10-K 財務報告中的實際數據存在任何落差或不一致，必須主動標註並提出警示。\n4. 如果查詢範圍超出所提供的文檔，請禮貌地回答：『我只能分析您所提供的財務申報檔案。』\n5. 為所有引用的數據提供專業的金融資訊來源標記。",
+      "proTip": "透過將 NotebookLM 設為數據接地層，可確保此研究助理絕不憑空捏造計算數據，並將所有回答嚴格限制於已通過合規審查的官方申報文本內。"
     },
     "zh-CN": {
-      title: "Socratic AI Tutor Agent 创建",
-      summary: "将定制的课程 Agent 植基于您的授课笔记与教学大纲，打造 24/7 的 Socratic 学习导师。",
-      steps: [
-        "在 NotebookLM 中，创建一个“只读课程中心”，并上传所有教学大纲、讲义幻灯片及重要读物。",
-        "进入 Gemini Enterprise Agent Designer 并新建一个 Custom Agent。命名为“[Course Name] Coach”。",
-        "将 Socratic 角色特征指令复制到 Agent 提示词窗口，并在数据设置中链接只读的 NotebookLM 课程中心。",
-        "通过询问教学大纲中的基本问题（例如：“什么是细胞分裂？”）来测试 Agent，确保它扮演引导角色，而非直接给出答案。",
-        "生成该 Agent 的公开分享链接，并置顶张贴于学校的 LMS（Canvas、Moodle 等），供学生随时访问。"
+      "title": "金融研究分析师 AI 助理 (Equity Research Analyst Copilot)",
+      "summary": "将金融分析师 Agent 植基于 10-K 年报、财务报表与法说会对话录音档，建立企业级金融分析与研究助理。",
+      "steps": [
+        "在 NotebookLM 中创建一个安全的项目空间，上传目标上市公司最新的 10-K 年报、资产负债表与法说会对话文本。",
+        "前往 Gemini Enterprise Agent Designer（智能体设计器）并建立一个名为「[公司代号] 分析师 Agent」的定制化智能体。",
+        "将专属的证券研究分析师角色指引贴入 Agent 提示词设定中，并将其链接至唯读的 NotebookLM 资料目录夹。",
+        "进行对话测试，引导 Agent 分析与计算该公司的债务股本比 (Debt-to-Equity Ratio)，并总结法说会对话中的核心市场风险。",
+        "将此专属分析师 Agent 链接分享给您的投资顾问与资产管理团队，供其进行即时、高度合规的市场与财报分析。"
       ],
-      prompt: `你是一位亲切且循循善诱的 Socratic 学习导师。你的唯一目标是引导学生靠自己找到问题的答案。
-请严格遵守以下准则：
-1. **所有回答均须植基于**提供的课程教材中，绝不可编造。
-2. 当学生问及特定答案时，不要直接告知。请回复一个具探究性、情境式的反问，帮助他们进行批判性思考。
-3. 具体指出课程材料中的文件或页数（例如：“你可以参考 Lecture 2 的第 4 张幻灯片，然后告诉我第一个阶段叫什么名字吗？”）。
-4. 当学生展现正确的理解时，给予肯定并提供完整、丰富 pale 的补充说明。
-5. 若问及本课程以外的主题，请礼貌地拒绝并回答：“我只能协助你解答关于 [Course Name] 的问题。”
-6. 每次回答皆须引用出处。`,
-      proTip: "链接 NotebookLM 作为知识地基，可确保 Agent 绝不胡言乱语（Hallucinate），且其所有答复均受限于核准的教材，并提供真实可信的内文引用。"
+      "prompt": "你是一位资深证券研究分析师 Agent。你的任务是协助分析师团队进行深入的企业财务评估与合规查核。\n请严格遵守以下准则：\n1. **所有回答必须完全植基于** 提供之 10-K 申报书、资产负债表与法说会对话等指定来源。\n2. 在回答任何财务指标或比例时，必须列出精确的计算过程，并传统来源文档与具体页码。\n3. 如果法说会中管理阶层的言论与 10-K 财务报告中的实际数据存在任何落差或不一致，必须主动标注并提出警示。\n4. 如果查询范围超出所提供的文档，请礼貌地回答：『我只能分析您所提供的财务申报档案。』\n5. 为所有引用的数据提供专业的金融信息来源标记。",
+      "proTip": "通过将 NotebookLM 设为数据接地层，可确保此研究助理绝不凭空捏造计算数据，并将所有回答严格限制于已通过合规审查的官方申报文本内。"
     }
   },
-  rubric_grading: {
+  "client_meeting_brief": {
     "en": {
-      title: "Rubric-Aligned Essay Feedback Assistant",
-      summary: "Analyze student essays against a complex grading rubric in NotebookLM and generate formative constructive feedback.",
-      steps: [
-        "Create a private, secure workspace in NotebookLM dedicated to the assignment.",
-        "Upload the detailed grading rubric (PDF/Doc) and the assignment instructions as the primary source documents.",
-        "Upload a student's submission (Word or PDF). To protect data privacy, strip student names or use anonymized IDs.",
-        "Paste the rubric-alignment prompt in the chat. NotebookLM will review the essay against each rubric criterion.",
-        "Review the generated feedback. Add your personal pedagogical insights and adjust the tone to maintain the critical 'human-in-the-loop' standard."
+      "title": "Client Portfolio Briefing Assistant",
+      "summary": "Synthesize client asset positions, previous interaction notes, and financial objectives in NotebookLM to draft custom meeting briefs.",
+      "steps": [
+        "Create a private, secure workspace in NotebookLM dedicated to your high-net-worth client portfolio.",
+        "Upload past meeting memos, wealth objective notes, and current portfolio spreadsheets as primary documents.",
+        "Switch to Canvas Mode in Gemini Enterprise to compile a comprehensive, polished client meeting prep brief.",
+        "Ask the model to draft a customized pre-meeting checklist and wealth allocation suggestions tailored to the client's risk profile.",
+        "Export the completed briefing sheet directly to Google Docs to prepare for the live client advisory meeting."
       ],
-      prompt: `Acting as an expert academic teaching assistant, analyze the attached student essay against the uploaded grading rubric. Generate a first draft of constructive, high-quality feedback.
-The feedback MUST adhere to the following structure:
-1. **Rubric Performance Summary**: Provide a tentative level/score for each rubric criterion, directly referencing specific evidence from the student's submission.
-2. **Key Strengths (1-2)**: Identify specific aspects of the paper that were executed exceptionally well, quoting 1-2 examples from the text.
-3. **Areas for Growth (2-3)**: Identify specific logical, grammatical, or structural issues. Explain how they relate to the rubric requirements.
-4. **Actionable Recommendations**: Provide 2-3 specific, progressive steps the student can take in their next draft to improve.
-Maintain a supportive, pedagogical, and highly encouraging tone throughout.`,
-      proTip: "Because NotebookLM operates in a secure cloud tenant, student intellectual property and data remain completely confidential and are never used to train public LLM models."
+      "prompt": "Acting as an elite Relationship Manager Assistant, analyze the provided client wealth portfolio and past interaction history.\nGenerate a high-fidelity client briefing document structured as follows:\n1. **Executive Profile & Wealth Summary**: Synthesize the client's current asset allocations, investment horizons, and risk tolerance.\n2. **Key Discussion Goals**: Propose 3 major objectives for the upcoming meeting based on previous goals (e.g. tax planning, trust setups).\n3. **Tailored Recommendations**: Propose 2-3 specific portfolio adjustments aligned with their risk profile (conservative, balanced, aggressive).\n4. **Objection Handling**: Anticipate 2 objections they might raise regarding market volatility or fee structures and draft persuasive, compliant advisor responses.",
+      "proTip": "Because NotebookLM operates in a secure enterprise cloud tenant, high-net-worth client financial records remain strictly confidential and are never used to train public LLM models."
     },
     "zh-TW": {
-      title: "符合評分規準的作文回饋助手",
-      summary: "在 NotebookLM 中根據複雜的評分規準分析學生作文，並生成具建設性的形成性評語。",
-      steps: [
-        "在 NotebookLM 中建立一個專屬於此作業的私密安全工作空間。",
-        "將詳細的評分規準 (Rubric) PDF/Word 檔和作業說明上傳為主要的資料來源文件。",
-        "上傳學生的作文。為了保護個人隱私，請預先隱去學生真實姓名，改用匿名 ID 代替。",
-        "將評分對齊提示詞貼入對話視窗。NotebookLM 將根據每個評分指標逐項審查作文內容。",
-        "審查生成的回饋。加入您的教學洞察並調整語氣，以維持教學上關鍵的「人機協同 (Human-in-the-loop)」原則。",
-        "產生該 Agent 的公開分享連結，並置頂張貼於學校的 LMS（Canvas、Moodle 等），供學生隨時存取。"
+      "title": "客戶資產組合簡報助理 (Client Portfolio Briefing Assistant)",
+      "summary": "在 NotebookLM 中整合客戶的資產部位、歷史互動紀錄與財富管理目標，自動生成量身定製的客戶晤談簡報。",
+      "steps": [
+        "在 NotebookLM 中建立一個私密且高安全防護的工作空間，專門存放該高淨值客戶的資產組合資料。",
+        "上傳客戶過往的晤談備忘錄、個人理財目標紀錄以及最新的資產部位試算表作為主要對照文檔。",
+        "開啟 Gemini Enterprise 並切換至 Canvas Mode，著手彙整一份結構清晰、設計精美的客戶會前準備簡報。",
+        "引導模型根據客戶的風險偏好與理財目標，擬定專屬的會前確認清單與資產配置優化建議。",
+        "將撰寫完成的簡報直接匯出至 Google Docs，以便在與客戶進行實體或線上財富諮詢會議前做好萬全準備。"
       ],
-      prompt: `請扮演專業的大專院校教學助理。針對上傳的學生作文，依據提供的評分規準進行分析。請起草一份高質量的建設性教學回饋。
-回饋內容必須遵循以下結構：
-1. **評分規準表現摘要**：提供作業各項指標的建議得分或表現等級，並引述作文中的具體細節作為評分證據。
-2. **核心優勢 (1-2點)**：指出寫作中表現特別出色的方面，並引用1-2處原文。
-3. **改進空間 (2-3點)**：明確點出邏輯、語法或結構上的具體問題，並解釋這些問題如何影響其評分。
-4. **具體行動建議**：提供2-3個具體且漸進的步驟，指引學生如何在下一版草稿中進行修改與提升。
-通篇請保持溫和、正面且富有教育引導意義的語氣。`,
-      proTip: "由於 NotebookLM 運作於安全的雲端企業租戶中，學生的智慧財產權與個人隱私數據將得到完全保密，絕不會被用於訓練公開的大型語言模型。"
+      "prompt": "請扮演頂尖的「理財客戶關係經理助理」。分析所提供之客戶資產組合數據與歷史晤談紀錄。\n生成一份專業、合規且結構完整的客戶會前準備簡報：\n1. **客戶畫像與資產總覽**：彙整客戶目前的資產配置比例、投資期限、資金流動性需求與風險承受能力。\n2. **晤談焦點目標**：根據客戶上次提出的理財期許（如稅務規劃、家族信託架構），擬定本次會議的 3 大討論核心。\n3. **客製化資產配置建議**：根據客戶的風險等級（保守、平衡、積極），提出 2-3 個具體的資產組合調整建議。\n4. **異議處理預案**：預判客戶可能針對近期市場波動或信託管理費率提出的 2 項質質疑，並編寫符合金融合規的專業答覆指引。",
+      "proTip": "由於 NotebookLM 運行於安全的企業雲端租戶中，高淨值客戶的敏感資產與個人資料將受到最嚴密的隱私保護，絕不被用於訓練公開的大型語言模型。"
     },
     "zh-CN": {
-      title: "符合评分规准的作文反馈助手",
-      summary: "在 NotebookLM 中根据复杂的评分规准分析学生作文，并生成具建设性的形成性评语。",
-      steps: [
-        "在 NotebookLM 中创建一个专属于此作业的私密安全空间。",
-        "将详细的评分规准 (Rubric) PDF/Word 档和作业说明上传为主要的资料来源文件。",
-        "上传学生的作文。为了保护个人隐私，请预先隐去学生真实姓名，改用匿名 ID 代替。",
-        "将评分对齐提示词贴入对话窗口。NotebookLM 将根据每个评分指标逐项审查作文内容。",
-        "审查生成的反馈。加入您的教学洞察并调整语气，以维持教学上关键的“人机协同 (Human-in-the-loop)”原则。"
+      "title": "客户资产组合简报助理 (Client Portfolio Briefing Assistant)",
+      "summary": "在 NotebookLM 中整合客户的资产部位、历史互动纪录与财富管理目标，自动生成量身定制的客户晤谈简报。",
+      "steps": [
+        "In NotebookLM 中创建一个私密且高安全防护的工作空间，专门存放该高净值客户的资产组合资料。",
+        "上传客户过往的晤谈备忘录、个人理财目标纪录以及最新的资产部位电子表格作为主要对照文档。",
+        "开启 Gemini Enterprise 并切换至 Canvas Mode，着手汇整一份结构清晰、设计精美的客户会前准备简报。",
+        "引导模型根据客户的风险偏好与理财目标，拟定专属的会前确认清单与资产配置优化建议。",
+        "将撰写完成的简报直接导出至 Google Docs，以便在与客户进行实体或线上财富咨询会议前做好万全准备。"
       ],
-      prompt: `请扮演专业的大专院校教学助理。针对上传的学生作文，依据提供的评分规准进行分析。请起草一份高质量的建设性教学反馈。
-反馈内容必须遵循以下结构：
-1. **评分规准表现摘要**：提供作业各项指标的建议得分或表现等级，并引述作文中的具体细节作为评分证据。
-2. **核心优势 (1-2点)**：指出写作中表现特别出色的方面，并引用1-2处原文。
-3. **改进空间 (2-3点)**：明确点出逻辑、语法或结构上的具体问题，并解释这些问题如何影响其评分。
-4. **具体行动建议**：提供2-3个具体且渐进的步骤，指引学生如何在下一版草稿中进行修改与提升。
-通篇请保持温和、正面且富有教育引导意义的语气。`,
-      proTip: "由于 NotebookLM 运作于安全的云端企业租户中，学生的知识产权与个人隐私数据将得到完全保密，绝不会被用于训练公开的大型语言模型。"
+      "prompt": "请扮演顶尖的「理财客户关系经理助理」。分析所提供之客户资产组合数据与历史晤谈纪录。\n生成一份专业、合规且结构完整的客户会前准备简报：\n1. **客户画像与资产总览**：汇整客户目前的资产配置比例、投资期限、资金流动性需求与风险承受能力。\n2. **晤谈焦点目标**：根据客户上次提出的理财期许（如税务规划、家族信托架构），拟定本次会议的 3 大讨论核心。\n3. **定制化资产配置建议**：根据客户的风险等级（保守、平衡、积极），提出 2-3 个具体的资产组合调整建议。\n4. **异议处理预案**：预判客户可能针对近期市场波动或信托管理费率提出的 2 项质质疑，并编写符合金融合规的专业答复指引。",
+      "proTip": "由于 NotebookLM 运行于安全的企业云端租户中，高净值客户的敏感资产与个人资料将受到最严密的隐私保护，绝不被用于训练公开的大型语言模型。"
     }
   },
-  curriculum_design: {
+  "portfolio_advisory_architect": {
     "en": {
-      title: "Industry-Aligned Curriculum Architect",
-      summary: "Conduct market research and analyze industry trends to design a comprehensive, modern course syllabus from scratch.",
-      steps: [
-        "Open Gemini Enterprise and launch a 'Deep Research' session targeting emerging skills in your course domain.",
-        "Prompt the model to synthesize job market reports, professional certifications, and academic publications into core competency outcomes.",
-        "Transfer the results to Canvas Mode to brainstorm the week-by-week syllabus content, recommended textbook readings, and project briefs.",
-        "Co-create interactive grading rubrics directly inside Canvas Mode, then export the completed syllabus package to Google Docs."
+      "title": "Strategic Asset Allocation & Portfolio Architect",
+      "summary": "Conduct secure, real-time market research and analyze macroeconomic trends to design customized investment portfolios.",
+      "steps": [
+        "Open Gemini Enterprise and launch a 'Deep Research' session targeting emerging market sectors and bond yield curves.",
+        "Prompt the model to synthesize macroeconomic trends, inflation adjustments, and index performance metrics.",
+        "Transfer the researched market trends to Canvas Mode to draft a tailored asset allocation model.",
+        "Co-create a diversified portfolio recommendation table inside Canvas Mode and export the final brief to Google Sheets."
       ],
-      prompt: `Act as a senior instructional designer. I want to build a brand new, highly modern course syllabus for [Course Title].
-Phase 1: Research. Search the web for the top 5 most in-demand technical and soft skills requested by employers in this field over the past 12 months.
-Phase 2: Learning Outcomes. Design 5 measurable learning outcomes mapped directly to Bloom's Taxonomy based on these skills.
-Phase 3: Syllabus Draft. Create a comprehensive 14-week topic outline, specifying major lecture themes, in-class active learning tasks, and project milestones.
-Phase 4: Assessment. Propose a project-based grading framework that bypasses traditional exam formats in favor of authentic proof-of-work assignments.`,
-      proTip: "Use Deep Research's capability to search hundreds of academic and corporate portals simultaneously, providing you with a high-fidelity summary report citing actual job-post statistics."
+      "prompt": "Act as a Senior Investment Advisor and Portfolio Architect. I want to build a modern investment portfolio recommendations document.\nPhase 1: Research. Search the web for the top 5 macroeconomic drivers and asset class trends over the past 3 months.\nPhase 2: Asset Allocation. Design 3 distinct allocation profiles (Conservative Income, Balanced Growth, Capital Appreciation) mapped to these drivers.\nPhase 3: Portfolio Draft. Create a comprehensive asset class breakdown, specifying equity ratios, fixed-income yields, and alternative assets.\nPhase 4: Risk Analysis. Propose a downside stress-testing framework simulating a 10% market correction scenario.",
+      "proTip": "Deep Research enables you to scan hundreds of corporate filings, central bank statements, and analyst briefs simultaneously, outputting a high-fidelity summary report."
     },
     "zh-TW": {
-      title: "產業對齊課程架構師",
-      summary: "進行市場調研並分析產業趨勢，從零開始設計出一套全面、現代化的課程大綱。",
-      steps: [
-        "開啟 Gemini Enterprise，啟動一個針對您學科領域內新興技能的 'Deep Research'（深度研究）對話。",
-        "指示模型綜合就業市場報告、專業證照指標及學術期刊，歸納出核心專業能力指標。",
-        "將調研結果匯入 Canvas Mode（畫布模式），共同腦力激盪出每週授課主題、推薦教科書章節與專案任務書。",
-        "直接在 Canvas Mode 中協同設計互動式評分規準，隨後將完成的整套教學大綱方案導出至 Google Docs。"
+      "title": "戰略資產配置與組合規劃師 (Strategic Asset Allocation & Portfolio Architect)",
+      "summary": "利用 Deep Research 進行即時且高安全性的市場調研，並結合總體經濟趨勢設計高度客製化的資產配置藍圖。",
+      "steps": [
+        "開啟 Gemini Enterprise 並發起一個「Deep Research (深度研究)」對話，鎖定近期新興市場版塊輪動與國債收益率曲線走勢。",
+        "引導模型全面檢索、篩選並彙整總體經濟指標、通貨膨脹預期調整與各類股指在過去一段期間的表現指標。",
+        "將深度調研得到的市場趨勢無縫導入 Canvas Mode，著手設計一個極具說服力的資產配置模型。",
+        "在 Canvas Mode 中協同建立一個多元分散的投資組合推薦表，並將最終成果一鍵匯出至 Google Sheets 進行資產配置模擬。"
       ],
-      prompt: `請扮演資深課程設計專家。我想為 [Course Title] 打造一套全新的、符合產業前沿的教學大綱。
-第一階段：深度調研。請搜尋網頁，總結過去12個月內該學術領域雇主最常要求的前5大技術與軟實力。
-第二階段：學習成效。依據這些需求，設計5項直接對齊布魯姆認知分類（Bloom's Taxonomy）的可量化學習成效。
-第三階段：教學大綱草案。規劃一個完整的14週主題大綱，詳細列出每週講授重點、課堂主動學習任務與專案里程碑。
-第四階段：成效評估。提出一個專案導向的評估架構，以實作證明（Proof of work）代替傳統筆試。`,
-      proTip: "善用 Deep Research 同步檢索數百個學術與產業入口網站的能力，為您提供包含真實徵才統計數據的高保真綜合摘要報告。"
+      "prompt": "請扮演資深投資顧問與資產配置專家。協助團隊編寫一份前瞻性的多元資產配置建議書。\n請依照以下四個階段展開：\n第一階段：宏觀調研。檢索過去 3 個月內對全球市場影響最深遠的 5 大總體經濟驅動因子與主要資產類別趨勢。\n第二階段：配置模型設計。針對上述宏觀因子，設計 3 種截然不同的資產配置權重組合（保守收益型、平衡增長型、積極成長型）。\n第三階段：資產類別細分。建立一個詳盡的表格，拆解股票、固定收益債券、貨幣基金及黃金等另類資產的分配佔比與預期殖利率。\n第四階段：極端市況壓力測試。設計一個應變測試框架，模擬當市場發生 10% 突發性修正時，各資產配置組合的潛在最大回撤與風險抵禦表現。",
+      "proTip": "利用 Deep Research（深度研究）功能，您可以瞬間掃描並分析成百上千份上市公司申報、央行貨幣政策白皮書及權威分析師簡報，生成極具洞察力的決策報告。"
     },
     "zh-CN": {
-      title: "产业对齐课程架构师",
-      summary: "进行市场调研并分析产业趋势，从零开始设计出一套全面、现代化的课程大纲。",
-      steps: [
-        "开启 Gemini Enterprise，启动一个针对您学科领域内新兴技能的 'Deep Research'（深度研究）对话。",
-        "指示模型综合就业市场报告、专业证照指标及学术期刊，归纳出核心专业能力指标。",
-        "将调研结果汇入 Canvas Mode（画布模式），共同脑力激荡出每周授课主题、推荐教科书章节与专案任务书。",
-        "直接在 Canvas Mode 中协同设计互动式评分规准，随后将完成的整套教学大纲方案导出至 Google Docs。"
+      "title": "战略资产配置与组合规划师 (Strategic Asset Allocation & Portfolio Architect)",
+      "summary": "利用 Deep Research 进行即时且高安全性的市场调研，并结合总体经济趋势设计高度定制化的资产配置蓝图。",
+      "steps": [
+        "开启 Gemini Enterprise 并发起一个「Deep Research (深度研究)」对话，锁定近期新兴市场板块轮动与国债收益率曲线走势。",
+        "引导模型全面检索、筛选并汇报总体经济指标、通货膨胀预期调整与各类股指在过去一段期间的表现指标。",
+        "将深度调研得到的市场趋势无缝导入 Canvas Mode，着手设计一个极具说服力的资产配置模型。",
+        "在 Canvas Mode 中协同建立一个多元分散的投资组合推荐表，并将最终成果一键导出至 Google Sheets 进行资产配置模拟。"
       ],
-      prompt: `请扮演资深课程设计专家。我想为 [Course Title] 打造一套全新的、符合产业前沿的教学大纲。
-第一阶段：深度调研。请搜索网页，总结过去12个月内该学术领域雇主最常要求的前5大技术与软实力。
-第二阶段：学习成效。依据这些需求，设计5项直接对齐布鲁姆认知分类（Bloom's Taxonomy）的可量化学习成效。
-第三阶段：教学大纲草案。规划一个完整的14周主题大纲，详细列出每周讲授重点、课堂主动学习任务与专案里程碑。
-第四阶段：成效评估。提出一个专案导向的评估架构，以实作证明（Proof of work）代替传统笔试。`,
-      proTip: "善用 Deep Research 同步检索数百个学术与产业入口网站的能力，为您提供包含真实征才统计数据的高保真综合摘要报告。"
+      "prompt": "请扮演资深投资顾问与资产配置专家。协助团队编写一份前瞻性的多元资产配置建议书。\n请依照以下四个阶段展开：\n第一阶段：宏观调研。检索过去 3 个月内对全球市场影响最深远的 5 大总体经济驱动因子与主要资产类别趋势。\n第二阶段：配置模型设计。针对上述宏观因子，设计 3 种截然不同的资产配置权重组合（保守收益型、平衡增长型、积极成长型）。\n第三阶段：资产类别细分。建立一个详尽的表格，拆解股票、固定收益债券、货币基金及黄金等另类资产的分配占比与预期殖利率。\n第四阶段：极端市况压力测试。设计一个应变测试框架，模拟当市场发生 10% 突发性修正时，各资产配置组合的潜在最大回撤与风险防御表现。",
+      "proTip": "利用 Deep Research（深度研究）功能，您可以瞬间扫描并分析成百上千份上市公司申报、央行货币政策白皮书及权威分析师简报，生成极具洞察力的决策报告。"
     }
   },
-  lab_manual_creator: {
+  "underwriting_manual_creator": {
     "en": {
-      title: "Interactive Lab Guide & Safety Manual",
-      summary: "Create student-facing lab manuals with step-by-step procedures, safety icons, and visual layout prompts in Canvas mode.",
-      steps: [
-        "Open Gemini Enterprise Canvas Mode and outline the learning objectives for your chemistry or computer science lab session.",
-        "Prompt the AI to write clear, step-by-step experimental procedures and corresponding safety hazard alerts.",
-        "Use the 'Help me visualize' feature (Image Generation) to generate custom, clear illustrations of laboratory equipment layouts.",
-        "Co-create a lab observation sheet table inside Canvas Mode and export the final guide as an interactive student worksheet."
+      "title": "Commercial Credit Underwriting Standards Manual",
+      "summary": "Generate standardized credit underwriting manuals with step-by-step audit procedures, checklist tables, and risk indicators.",
+      "steps": [
+        "Open Gemini Enterprise Canvas Mode and outline the standard credit risk assessment criteria for commercial loan applicants.",
+        "Prompt the AI to write clear, step-by-step financial ratio checks (DSCR, leverage, quick ratio) and safety buffer thresholds.",
+        "Use built-in image generation to create clean visual diagrams representing risk warning levels (Green, Amber, Red).",
+        "Co-create an underwriting evaluation checklist table directly inside Canvas Mode and export the guide as an interactive PDF manual."
       ],
-      prompt: `You are a university biology lab coordinator. Write an engaging, student-facing lab guide for a 'DNA Extraction' experiment.
-The document should include:
-1. **Introduction**: A brief, captivating summary of the biological relevance of DNA extraction.
-2. **Learning Objectives**: 3 clear outcomes.
-3. **Safety First Box**: Explicit hazards, clothing requirements, and chemical disposal protocols.
-4. **Step-by-step Procedure**: An easy-to-follow, numbered checklist of steps.
-5. **Observation & Reflection Journal**: Propose a set of 3 thought-provoking prediction prompts and blank tables for students to record measurements.`,
-      proTip: "Use bold text and alerts (e.g. [!CAUTION]) inside Canvas Mode to ensure safety steps stand out visually to prevent accidents during high-risk physical labs."
+      "prompt": "You are a Commercial Credit Risk Officer. Draft a clear, professional Credit Underwriting and Evaluation Manual for loan processors.\nThe manual must include:\n1. **Introduction**: A concise explanation of the corporate credit underwriting mandate and standard leverage compliance.\n2. **Core Ratios Directory**: Formulas and compliance thresholds for Debt Service Coverage Ratio (DSCR), debt-to-equity, and current ratio.\n3. **Risk Warning Framework**: A highly formatted visual representation of warning levels, detailing Amber and Red thresholds.\n4. **Underwriting Checklist**: A multi-step structured evaluation grid for auditing applicant balance sheets and corporate tax filings.\nMaintain a precise, risk-focused, and highly compliant tone throughout.",
+      "proTip": "Utilize structured markdown lists and caution alerts inside Canvas Mode to ensure high-risk credit assessment steps stand out to loan auditing teams."
     },
     "zh-TW": {
-      title: "互動式實驗指南與安全手冊",
-      summary: "利用 Canvas Mode 建立包含步驟程序、安全圖示與實驗配置圖的互動式實驗指南。",
-      steps: [
-        "開啟 Gemini Enterprise Canvas Mode，勾勒出本次化學或資訊工程實驗課的學習目標。",
-        "引導 AI 撰寫清晰詳盡、條理分明的實驗操作步驟，並在關鍵處加上安全警示圖示。",
-        "使用內建的「幫我可視化」功能（Image Generation），生成精確的實驗儀器排布與管線連接示意圖。",
-        "在 Canvas Mode 中協同設計實驗觀察記錄表，最後將完整的實驗手冊導出為互動式學生學習單。"
+      "title": "商業信貸核貸與核保標準手冊 (Commercial Credit Underwriting Standards Manual)",
+      "summary": "在 Canvas Mode 中協同撰寫標準化的信貸核貸評估指南，包含比率查核、流程圖以及風險警戒指標。",
+      "steps": [
+        "開啟 Gemini Enterprise Canvas Mode，規劃針對企業融資與商業貸款申請人的標準信用風險評估框架。",
+        "引導 AI 撰寫清晰、嚴謹的財務比率審查指標（如 DSCR、槓桿比率、速動比率）以及核貸合規安全臨界值。",
+        "利用內建的 Image Generation 功能，繪製精美且合規的圖表，直觀呈現信用風險的三色警戒機制 (Green, Amber, Red)。",
+        "直接在 Canvas Mode 中共同設計出一個完整的核貸評估檢核表，並將最終手冊匯出成高畫質的交互式 PDF 手冊。"
       ],
-      prompt: `你是一位大學生物實驗協調員。請為「DNA 提取實驗」撰寫一份引人入勝、面向學生的實驗手冊。
-文件內容必須包含：
-1. **實驗引言**：簡短而有趣的說明 DNA 提取在現代生物學中的重要性。
-2. **學習目標**：3項明確的學習成效。
-3. **安全防護須知**：列出潛在危害、穿著規定（護目鏡/手套）及化學廢棄物處置流程。
-4. **實驗操作指南**：使用編號列表，設計出易於操作的防呆步驟。
-5. **觀察與反思日誌**：提供3個啟發性的結果預測引導問題，以及空白的實驗記錄表格。`,
-      proTip: "在 Canvas Mode 中善用粗體字與警示區塊（如 [!CAUTION]），可使安全操作程序在視覺上極為突出，有效預防實體實驗中的操作安全事故。"
+      "prompt": "你是一位資深商業信用風險核決官。請為信貸審查與核貸人員編寫一份專業、嚴謹且高度合規的商業信用核貸與風險評估操作手冊。\n手冊必須包含以下核心章節：\n1. **核貸基本原則**：簡述企業信貸核准的核心授信準則、合規要求以及對還款來源的第一重防線要求。\n2. **核心財務比率審核指南**：詳細列出償債備付率 (DSCR)、資產負債率、速動比率的計算公式，並給出銀行官方設定的授信底線。\n3. **風險警戒與分級處置框架**：採用表格與視覺描述，定義綠色、黃色與紅色風險警戒線，以及在各警戒級別下核貸人員應執行的加強調查措施。\n4. **信用審查標準檢核清單**：設計一個結構化的查核矩陣，指導如何系統化地稽核申請企業的資產負債表與稅務申報紀錄。\n請始終保持極度專業、精確且注重風險與合規的行文語氣。",
+      "proTip": "在 Canvas Mode 中靈活運用結構化的 Markdown 條列式說明與警告框（如 [!WARNING]），能使高風險的信用審核步驟在信貸審計團隊閱讀時顯得格外醒目。"
     },
     "zh-CN": {
-      title: "互动式实验指南与安全手册",
-      summary: "利用 Canvas Mode 建立包含步骤程序、安全图示与实验配置图的互动式实验指南。",
-      steps: [
-        "开启 Gemini Enterprise Canvas Mode，勾勒出本次化学或信息工程实验课的学习目标。",
-        "引导 AI 撰写清晰详尽、条理分明的实验操作步骤，并在关键处加上安全警示图示。",
-        "使用内建的“帮我可视化”功能（Image Generation），生成精确的实验仪器排布与管线连接示意图。",
-        "在 Canvas Mode 中协同设计实验观察记录表，最后将完整的实验手册导出为互动式学生学习单。"
+      "title": "商业信贷核贷与核保标准手册 (Commercial Credit Underwriting Standards Manual)",
+      "summary": "在 Canvas Mode 中协同撰写标准化的信贷核贷评估指南，包含比率查核、流程图以及风险警戒指标。",
+      "steps": [
+        "开启 Gemini Enterprise Canvas Mode，规划针对企业融资与商业贷款申请人的标准信用风险评估框架。",
+        "引导 AI 撰写清晰、严谨的财务比率审查指标（如 DSCR、杠杆比率、速动比率）以及核贷合规安全临界值。",
+        "利用内置的 Image Generation 功能，绘制精美且合规的图表，直观呈现信用风险的三色警戒机制 (Green, Amber, Red)。",
+        "直接在 Canvas Mode 中共同设计出一个完整的核贷评估检核表，并将最终手册导出成高画质的交互式 PDF 手册。"
       ],
-      prompt: `你是一位大学生物实验协调员。请为“DNA 提取实验”撰写一份引人入胜、面向学生的实验手册。
-文件内容必须包含：
-1. **实验引言**：简短而有趣的说明 DNA 提取在现代生物学中的重要性。
-2. **学习目标**：3项明确的学习成效。
-3. **安全防护须知**：列出潜在危害、穿着规定（护目镜/手套）及化学废弃物处置流程。
-4. **实验操作指南**：使用编号列表，设计出易于操作的防呆步骤。
-5. **观察与反思日志**：提供3个启发性的结果预测引导问题，以及空白的实验记录表格。`,
-      proTip: "在 Canvas Mode 中善用粗体字与警示区块（如 [!CAUTION]），可使安全操作程序在视觉上极为突出，有效预防实体实验中的操作安全事故。"
+      "prompt": "你是一位资深商业信用风险核决官。请为信贷审查与核贷人员编写一份专业、严谨且高度合规的商业信用核贷与风险评估操作手册。\n手册必须包含以下核心章节：\n1. **核贷基本原则**：简述企业信贷核准的核心授信准则、合规要求以及对还款来源的第一重防线要求。\n2. **核心财务比率审核指南**：详细列出偿债备付率 (DSCR)、资产负债率、速动比率的计算公式，并给出银行官方设定得授信底线。\n3. **风险警戒与分级处置框架**：采用表格与视觉描述，定义绿色、黄色与红色风险警戒线，以及在各警戒级别下核贷人员应执行的加强调查措施。\n4. **信用审查标准检核清单**：设计一个结构化的查核矩阵，指导如何系统化地稽核申请企业的资产负债表与税务申报纪录。\n请始终保持极度专业、精确且注重风险与合规的行文语气。",
+      "proTip": "在 Canvas Mode 中灵活运用结构化的 Markdown 条列式说明与警告框（如 [!WARNING]），能使高风险的信用审核步骤在信贷审计团队阅读时显得格外醒目。"
     }
   },
-  su_advocacy: {
+  "customer_sentiment_auditor": {
     "en": {
-      title: "Student Feedback Sentiment Dashboard",
-      summary: "Consolidate massive volumes of unstructured student feedback from surveys and town halls to synthesize advocacy data.",
-      steps: [
-        "Consolidate unstructured student feedback text files, town hall audio recordings, and survey responses in a folder.",
-        "Ground a NotebookLM workspace directly on this folder using the secure Drive Connector.",
-        "Query NotebookLM to extract the top 5 pressing student concerns (e.g., dining hours, library quiet spaces) and compute overall sentiment.",
-        "Use Gemini in Google Docs to write a structured, data-driven advocacy proposal to submit to the school administration."
+      "title": "Client Service Sentiment & Feedback Auditor",
+      "summary": "Consolidate volumes of unstructured client call transcripts and support tickets to identify service issues and sentiment trends.",
+      "steps": [
+        "Store client interaction records, email tickets, and call transcripts in a secure folder.",
+        "Ground your NotebookLM workspace in this folder using the secure Document Store Connector.",
+        "Query NotebookLM to extract the top 5 recurring service friction points and customer sentiment scores.",
+        "Use Gemini in Google Docs to draft an operational service improvement proposal for banking heads."
       ],
-      prompt: `Acting as the Student Union Advocacy Director, analyze the uploaded collection of town hall transcripts and anonymous student survey comments.
-Generate a comprehensive, evidence-based report that includes:
-1. **Thematic Clustering**: Identify and group the top 5 most frequently complained-about campus issues.
-2. **Sentiment Assessment**: For each issue, categorize the emotional tone (highly negative, frustrated, neutral) and extract 3 powerful, representative anonymized student quotes.
-3. **Data-Driven Solutions**: Based on successful practices at benchmark peer schools, suggest 2 realistic, low-cost policy changes for each issue.
-4. **Negotiation Preparation**: Draft a list of 5 anticipated objections from school deans regarding budget constraints, and provide persuasive, data-backed rebuttals.`,
-      proTip: "Linking your student feedback database directly via the Drive Connector keeps the data federated, secure, and up-to-the-minute without copying local files."
+      "prompt": "Acting as a Client Experience and Service Improvement Director, analyze the collection of customer support tickets and chat transcripts.\nGenerate a structured, evidence-backed service assessment report:\n1. **Friction Clustering**: Identify and group the top 5 most frequent client complaints or platform difficulties.\n2. **Sentiment Assessment**: For each category, identify the customer pain level and cite 3 anonymized client quotes as evidence.\n3. **Operational Solutions**: Suggest 2 actionable service improvements or bot training tweaks for each issue based on industry best practices.\n4. **Management Presentation**: Draft a list of 5 executive questions regarding cost-to-benefit ratio, and provide persuasive responses.",
+      "proTip": "Linking your client service logs directly via the Document Store Connector ensures that analytics dashboards always display live sentiment trends without copying sensitive logs."
     },
     "zh-TW": {
-      title: "學生回饋情感分析儀表板",
-      summary: "整合問卷與公聽會等海量非結構化學生回饋，轉化為具數據說服力的權益倡議提案。",
-      steps: [
-        "將非結構化的學生意見純文字、公聽會錄音檔和問卷回饋整合在同一個雲端資料夾中。",
-        "藉由安全的 Drive Connector 將 NotebookLM 工作空間直接連接至此資料夾。",
-        "向 NotebookLM 提問，提煉出前 5 大最受學生關注的痛點（如食堂營業時間、圖書館自習區），並計算整體情感傾向。",
-        "在 Google Docs 中使用 Gemini 編寫結構嚴謹、數據支持的權益倡議書，提交給學校行政層級。"
+      "title": "Client Service Sentiment & Feedback Auditor",
+      "summary": "Consolidate volumes of unstructured client call transcripts and support tickets to identify service issues and sentiment trends.",
+      "steps": [
+        "Store client interaction records, email tickets, and call transcripts in a secure folder.",
+        "Ground your NotebookLM workspace in this folder using the secure Document Store Connector.",
+        "Query NotebookLM to extract the top 5 recurring service friction points and customer sentiment scores.",
+        "Use Gemini in Google Docs to draft an operational service improvement proposal for banking heads."
       ],
-      prompt: `請扮演學生會權益倡議長。請針對上傳的公聽會會議記錄和匿名問卷意見進行全面分析。
-起草一份結構完整的數據導向倡議報告，包含以下部分：
-1. **核心主題歸類**：識別並歸納出排名前 5 大最常被反映的校園生活痛點。
-2. **情感傾向評估**：針對每項痛點評估學生的沮喪/憤怒程度，並摘錄3條具代表性且完全匿名的學生原話。
-3. **標竿解決方案**：借鑑其他同級標竿學校的成功做法，針對每項痛點提出2個可行且低成本的具體政策改善建議。
-4. **協商抗辯準備**：列出 5 個學校行政主管可能會提出的反對理由（如預算不足、人力吃緊），並寫出有數據說服力的駁斥論點。`,
-      proTip: "透過 Drive Connector 直接連結學生回饋資料夾，可讓分析過程完全符合權限安全機制，無需在本地儲存重複檔案即可讀取最新意見。"
+      "prompt": "Acting as a Client Experience and Service Improvement Director, analyze the collection of customer support tickets and chat transcripts.\nGenerate a structured, evidence-backed service assessment report:\n1. **Friction Clustering**: Identify and group the top 5 most frequent client complaints or platform difficulties.\n2. **Sentiment Assessment**: For each category, identify the customer pain level and cite 3 anonymized client quotes as evidence.\n3. **Operational Solutions**: Suggest 2 actionable service improvements or bot training tweaks for each issue based on industry best practices.\n4. **Management Presentation**: Draft a list of 5 executive questions regarding cost-to-benefit ratio, and provide persuasive responses.",
+      "proTip": "Linking your client service logs directly via the Document Store Connector ensures that analytics dashboards always display live sentiment trends without copying sensitive logs."
     },
     "zh-CN": {
-      title: "学生反馈情感分析仪表板",
-      summary: "整合问卷与公听会等海量非结构化学生反馈，转化为具数据说服力的权益倡议提案。",
-      steps: [
-        "将非结构化的学生意见纯文字、公听会录音档和问卷反馈整合在同一个云端文件夹中。",
-        "借由安全的 Drive Connector 将 NotebookLM 工作空间直接连接至此文件夹。",
-        "向 NotebookLM 提问，提炼出前 5 大最受学生关注的痛点（如食堂营业时间、图书馆自习区），并计算整体情感倾向。",
-        "在 Google Docs 中使用 Gemini 编写结构严谨、数据支持的权益倡议书，提交给学校行政层级。"
+      "title": "Client Service Sentiment & Feedback Auditor",
+      "summary": "Consolidate volumes of unstructured client call transcripts and support tickets to identify service issues and sentiment trends.",
+      "steps": [
+        "Store client interaction records, email tickets, and call transcripts in a secure folder.",
+        "Ground your NotebookLM workspace in this folder using the secure Document Store Connector.",
+        "Query NotebookLM to extract the top 5 recurring service friction points and customer sentiment scores.",
+        "Use Gemini in Google Docs to draft an operational service improvement proposal for banking heads."
       ],
-      prompt: `请扮演学生会权益倡议长。请针对上传的公听会会议记录和匿名问卷意见进行全面分析。
-起草一份结构完整的数据导向倡议报告，包含以下部分：
-1. **核心主题归类**：识别并归纳出排名前 5 大最常被反映的校园生活痛点。
-2. **情感倾向评估**：针对每项痛点评估学生的沮丧/愤怒程度，并摘录3条具代表性且完全匿名的学生原话。
-3. **标杆解决方案**：借鉴其他同级标杆学校的成功做法，针对每项痛点提出2个可行且低成本的具体政策改善建议。
-4. **协商抗辩准备**：列出 5 个学校行政主管可能会提出的反对理由（如预算不足、人力吃紧），并写出有数据说服力的驳斥论点。`,
-      proTip: "通过 Drive Connector 直接链接学生反馈文件夹，可让分析过程完全符合权限安全机制，无需在本地存储重复文件即可读取最新意见。"
+      "prompt": "Acting as a Client Experience and Service Improvement Director, analyze the collection of customer support tickets and chat transcripts.\nGenerate a structured, evidence-backed service assessment report:\n1. **Friction Clustering**: Identify and group the top 5 most frequent client complaints or platform difficulties.\n2. **Sentiment Assessment**: For each category, identify the customer pain level and cite 3 anonymized client quotes as evidence.\n3. **Operational Solutions**: Suggest 2 actionable service improvements or bot training tweaks for each issue based on industry best practices.\n4. **Management Presentation**: Draft a list of 5 executive questions regarding cost-to-benefit ratio, and provide persuasive responses.",
+      "proTip": "Linking your client service logs directly via the Document Store Connector ensures that analytics dashboards always display live sentiment trends without copying sensitive logs."
     }
   },
-  club_funding: {
+  "commercial_loan_proposal": {
     "en": {
-      title: "Annual Club Calendar & Budget Justifier",
-      summary: "Brainstorm an annual activities calendar and draft detailed, compliant student government funding proposals.",
-      steps: [
-        "Open NotebookLM and upload your club's past event templates and the official Student Union funding guidelines.",
-        "In Canvas Mode, prompt Gemini to brainstorm a calendar of 12 highly engaging club activities aligned with your club's core mission.",
-        "Feed the calendar and past expense records from your shared Drive spreadsheet into the prompt to generate a formatted budget table.",
-        "Ask Gemini to write a formal budget justification narrative, detailing how each event benefits the wider campus student community."
+      "title": "Commercial Loan Credit Proposal Builder",
+      "summary": "Draft comprehensive, regulatory-compliant commercial credit proposals and financial justifications using historical templates.",
+      "steps": [
+        "Open NotebookLM and upload your bank's approved credit proposal templates and corporate debt guidelines.",
+        "In Canvas Mode, prompt Gemini to draft a structured credit proposal outline for a commercial applicant.",
+        "Link your secure Document Store containing the applicant's historical tax forms and financial statements to extract details.",
+        "Generate a formatted credit assessment table and write a professional debt justification statement.",
+        "Export the completed proposal directly to Google Docs to submit to the Underwriting Committee."
       ],
-      prompt: `Act as a professional grant and proposal writer. Help our university [Club Name] draft a detailed funding proposal for the upcoming academic year.
-Inputs:
-- Annual activities calendar: [List of 4 major workshops, 1 public exhibition, 2 guest lectures, and 1 social event]
-- Approved funding guidelines: [Max $200 per workshop, Max $500 for exhibition, strict food and beverage limits]
-Task:
-1. Create an **Executive Summary** detailing the club's mission and how these events boost student engagement.
-2. Compile a detailed **Line-Item Budget Table**, calculating total costs and verifying compliance with the provided funding rules.
-3. Write a compelling **Impact Statement** justifying why the Student Union should allocate resources to our club, detailing student outcomes.`,
-      proTip: "Upload the Student Union's official constitutional funding guidelines to NotebookLM first. This prevents your proposal from getting rejected for violating obscure spend-limit policies."
+      "prompt": "Act as an expert Commercial Loan Officer and proposal writer. Help our commercial banking division draft a detailed credit proposal.\nInputs:\n- Applicant financials: [Corporate assets, annual revenue, requested debt amount, current interest cover]\n- Credit risk parameters: [Max leverage ratio of 3.5x, minimum DSCR of 1.25x, collateral requirements]\nTask:\n1. Write an **Executive Summary** detailing the applicant's business model and the purpose of the credit facility.\n2. Compile a detailed **Credit Assessment Table**, verifying debt-to-equity compliance with the bank's criteria.\n3. Write a compelling **Risk Mitigation Statement** explaining why the credit committee should authorize this loan, outlining collateral buffers.",
+      "proTip": "First upload your bank's credit risk guidelines to NotebookLM to prevent the AI from generating recommendations that violate loan concentration policies."
     },
     "zh-TW": {
-      title: "年度社團活動行事曆與預算審查",
-      summary: "腦力激盪出年度社團活動規劃，並撰寫符合學生會補助規範的預算申請計畫書。",
-      steps: [
-        "開啟 NotebookLM 並上傳社團以往的辦理活動範本及官方補助章程。",
-        "在 Canvas Mode 中，引導 Gemini 規劃出12個高度契合社團宗旨、且能吸引同學踴躍參與的年度活動。",
-        "將該活動行事曆與雲端硬碟試算表中的歷年支出明細輸入對話，以自動生成精密的預算表。",
-        "讓 Gemini 撰寫正式的預算合理性論述，詳加說明每場活動能為校園學生社群帶來何種正面影響。"
+      "title": "Commercial Loan Credit Proposal Builder",
+      "summary": "Draft comprehensive, regulatory-compliant commercial credit proposals and financial justifications using historical templates.",
+      "steps": [
+        "Open NotebookLM and upload your bank's approved credit proposal templates and corporate debt guidelines.",
+        "In Canvas Mode, prompt Gemini to draft a structured credit proposal outline for a commercial applicant.",
+        "Link your secure Document Store containing the applicant's historical tax forms and financial statements to extract details.",
+        "Generate a formatted credit assessment table and write a professional debt justification statement.",
+        "Export the completed proposal directly to Google Docs to submit to the Underwriting Committee."
       ],
-      prompt: `請扮演專業的計畫書撰寫專家。協助我們學校的 [社團名稱] 撰寫一份下學年度的經費補助申請書。
-輸入條件：
-- 年度活動規劃：[包含 4 場大型工作坊、1 場成果展發表會、2 場名家講座和 1 場聯誼活動]
-- 審查補助標準：[每場工作坊補貼上限 $200 元、成果展補助上限 $500 元，嚴格限制餐飲費用比例]
-任務：
-1. 撰寫一份**執行摘要**，闡述社團本質及這些活動如何實質提升學生的校園參與度。
-2. 編製詳細的**預算科目表**，精算各活動總支出並檢驗是否完全符合補助限制。
-3. 撰寫一份有說服力的**社會影響力聲明**，證明此筆預算撥付將為全校學生創造最大化價值。`,
-      proTip: "優先將學生會的官方經費補助細則上傳至 NotebookLM。這樣能預先篩除不合規的支出項目，避免提案因違反隱蔽的預算上限而直接被退件。"
+      "prompt": "Act as an expert Commercial Loan Officer and proposal writer. Help our commercial banking division draft a detailed credit proposal.\nInputs:\n- Applicant financials: [Corporate assets, annual revenue, requested debt amount, current interest cover]\n- Credit risk parameters: [Max leverage ratio of 3.5x, minimum DSCR of 1.25x, collateral requirements]\nTask:\n1. Write an **Executive Summary** detailing the applicant's business model and the purpose of the credit facility.\n2. Compile a detailed **Credit Assessment Table**, verifying debt-to-equity compliance with the bank's criteria.\n3. Write a compelling **Risk Mitigation Statement** explaining why the credit committee should authorize this loan, outlining collateral buffers.",
+      "proTip": "First upload your bank's credit risk guidelines to NotebookLM to prevent the AI from generating recommendations that violate loan concentration policies."
     },
     "zh-CN": {
-      title: "年度社团活动行事历与预算审查",
-      summary: "脑力激荡出年度社团活动规划，并撰写符合学生会补助规范的预算申请计划书。",
-      steps: [
-        "开启 NotebookLM 并上传社团以往的办理活动范本及官方补助章程。",
-        "在 Canvas Mode 中，引导 Gemini 规划出12个高度契合社团宗旨、且能吸引同学踊跃参与的年度活动。",
-        "将该活动行事历与云端硬盘试算表中的历年支出明细输入对话，以自动生成精密的预算表。",
-        "让 Gemini 撰写正式的预算合理性论述，详加说明每场活动能为校园学生社群带来何种正面影响。"
+      "title": "Commercial Loan Credit Proposal Builder",
+      "summary": "Draft comprehensive, regulatory-compliant commercial credit proposals and financial justifications using historical templates.",
+      "steps": [
+        "Open NotebookLM and upload your bank's approved credit proposal templates and corporate debt guidelines.",
+        "In Canvas Mode, prompt Gemini to draft a structured credit proposal outline for a commercial applicant.",
+        "Link your secure Document Store containing the applicant's historical tax forms and financial statements to extract details.",
+        "Generate a formatted credit assessment table and write a professional debt justification statement.",
+        "Export the completed proposal directly to Google Docs to submit to the Underwriting Committee."
       ],
-      prompt: `请扮演专业的计划书撰写专家。协助我们学校的 [社团名称] 撰写一份下学年度的经费补助申请书。
-输入条件：
-- 年度活动规划：[包含 4 场大型工作坊、1 场成果展发表会、2 场名家讲座和 1 场联谊活动]
-- 审查补助标准：[每场工作坊补贴上限 $200 元、成果展补助上限 $500 元，严格限制餐饮费用比例]
-任务：
-1. 撰写一份**执行摘要**，阐述社团本质及这些活动如何实质提升学生的校园参与度。
-2. 编制详细的**预算科目表**，精算各活动总支出并检验是否完全符合补助限制。
-3. 撰写一份有说服力的**社会影响力声明**，证明此笔预算拨付将为全校学生创造最大化价值。`,
-      proTip: "优先将学生会的官方经费补助细则上传至 NotebookLM。这样能预先筛除不合规的支出项目，避免提案因违反隐蔽的预算上限而直接被退件。"
+      "prompt": "Act as an expert Commercial Loan Officer and proposal writer. Help our commercial banking division draft a detailed credit proposal.\nInputs:\n- Applicant financials: [Corporate assets, annual revenue, requested debt amount, current interest cover]\n- Credit risk parameters: [Max leverage ratio of 3.5x, minimum DSCR of 1.25x, collateral requirements]\nTask:\n1. Write an **Executive Summary** detailing the applicant's business model and the purpose of the credit facility.\n2. Compile a detailed **Credit Assessment Table**, verifying debt-to-equity compliance with the bank's criteria.\n3. Write a compelling **Risk Mitigation Statement** explaining why the credit committee should authorize this loan, outlining collateral buffers.",
+      "proTip": "First upload your bank's credit risk guidelines to NotebookLM to prevent the AI from generating recommendations that violate loan concentration policies."
     }
   },
-  su_helpdesk: {
+  "compliance_assistance_bot": {
     "en": {
-      title: "24/7 Student Union Policy Agent",
-      summary: "Build an AI support bot trained on club policy handbooks to answer operational and venue booking questions.",
-      steps: [
-        "In NotebookLM, compile all Student Union club policies, room booking rules, and equipment reservation forms.",
-        "Use Gemini Agent Designer to build a conversational agent named 'Student Union Support Assistant'.",
-        "Connect the agent to the policy knowledge base to serve static queries.",
-        "Test the agent's ability to handle complex queries (e.g. 'Can we book a room after 9 PM?').",
-        "Embed the agent on the Student Union portal or social media page for 24/7 club leader support."
+      "title": "Regulatory Compliance & Audit Assistance Agent",
+      "summary": "Build an internal regulatory compliance chatbot trained on standard banking guidelines to answer policy queries.",
+      "steps": [
+        "In NotebookLM, compile all AML, KYC, and internal compliance policy handbooks.",
+        "Use Gemini Agent Designer to build a conversational agent named 'Internal Compliance Officer Bot'.",
+        "Connect the agent to the compliance policy database to serve employee queries.",
+        "Test the agent's ability to handle complex queries (e.g. 'What is the transaction reporting limit for cross-border wire transfers?').",
+        "Embed the agent on the employee compliance portal for 24/7 internal staff assistance."
       ],
-      advancedSteps: [
-        "In NotebookLM, compile all Student Union club policies, room booking rules, and equipment reservation forms.",
-        "Use Gemini Agent Designer to build a conversational agent named 'Student Union Support Assistant'.",
-        "Connect the agent to the policy knowledge base and configure custom escalate-by-email instructions via the Email Connector.",
-        "Test the agent's ability to automatically draft escalation messages.",
-        "Embed the agent on the Student Union portal for automated, end-to-end integration."
-      ],
-      prompt: `You are the 'Student Union Support Assistant.' Your job is to help student club leaders navigate room booking, funding applications, and event risk forms.
-1. **Ground your answers strictly** in the uploaded club handbooks. Never guess policies.
-2. Provide direct, step-by-step instructions (e.g., 'To book the Student Common Room, follow these 3 steps...').
-3. Cite the section number of the policy you are referencing.
-4. If a query is highly complex, involves sensitive disputes, or requires manual human approval, provide a clear, pre-formatted draft escalation email on-screen for the user to copy and send manually to the Student Affairs Officer.
-5. Maintain a professional, supportive, and efficient tone.`,
-      advancedPrompt: `You are the 'Student Union Support Assistant' integrated with your Institutional Gmail. Your job is to help student club leaders navigate room booking, funding applications, and event risk forms.
-1. **Ground your answers strictly** in the uploaded club handbooks. Never guess policies.
-2. Provide direct, step-by-step instructions (e.g., 'To book the Student Common Room, follow these 3 steps...').
-3. Cite the section number of the policy you are referencing.
-4. If a query is highly complex or requires manual human approval, use your integrated Email Connector to automatically draft a detailed escalation email directly in the user's Gmail Drafts folder for the Student Affairs Officer, then notify the user that the draft is ready for review.
-5. Maintain a professional, supportive, and efficient tone.`,
-      proTip: "In Standalone mode, the agent provides pre-formatted drafts directly inside the chat window for easy copy-pasting.",
-      advancedProTip: "By configuring the Email Connector, the agent can automatically draft escalation emails directly in your Gmail draft folder when manual intervention is needed."
+      "prompt": "You are the 'Internal Compliance Assistant Bot.' Your objective is to help bank employees navigate KYC, AML, and reporting rules.\n1. **Ground your answers strictly** in the uploaded compliance guidelines. Never guess policy rules.\n2. Provide direct, step-by-step procedures (e.g., 'To report a suspicious wire transfer above $10,000, follow these 3 steps...').\n3. Cite the exact handbook section or regulation number you are referencing.\n4. If a query indicates an active fraud incident or a complex regulatory issue, draft a formal escalation message directly on-screen for the employee to copy and send to the Chief Compliance Officer.\nMaintain an objective, formal, and risk-aware tone.",
+      "proTip": "In standard mode, the compliance bot renders precise, ready-to-copy email escalation templates directly inside the chat interface."
     },
     "zh-TW": {
-      title: "24/7 學生會政策諮詢 Agent",
-      summary: "建立一個專門解答社團場地借用、活動報備及預算補助政策的校園智能客服 Agent。",
-      steps: [
-        "在 NotebookLM 中匯整所有學生會規章、課外活動組場地租借細則與活動安全切結書。",
-        "使用 Gemini Agent Designer 創建一個名為「Student Union Support Assistant」的對話型 Agent。",
-        "將此 Agent 連結規章知識庫，在本地回答學生的靜態規定查詢。",
-        "測試 Agent 對複雜規定的解答能力（例如：「我們可以在晚上9點後租用活動中心大禮堂嗎？」）。",
-        "將該 Agent 的對話框嵌入至學生會官網或社團通訊軟體中，提供 24 小時不打烊的諮詢服務。"
+      "title": "金融法規與反洗錢諮詢助理 (Regulatory Compliance Bot)",
+      "summary": "利用 Agent Designer 打造內部的法規與反洗錢 (AML) 諮詢機器人，支援手動上傳合規檔案或連結 Email 自動化升級審查機制。",
+      "steps": [
+        "在 NotebookLM 中，匯整最新版的反洗錢 (AML)、客戶盡職調查 (KYC) 以及銀行內部合規政策手冊。",
+        "前往 Gemini Enterprise Agent Designer（智能體設計器）並建立一個名為「內部合規諮詢助理」的對話式智能體。",
+        "將此智能體連結至已建立的法規知識庫，以答覆內部行員的日常合規查詢與報備流程。",
+        "測試智能體對複雜法規查詢的答覆能力（例如：「跨境電匯超過多少金額需要申報大額交易？」）。",
+        "將此合規 Agent 嵌入至行內員工入口網站，提供 24/7 的即時內部政策與合規諮詢支持。"
       ],
-      advancedSteps: [
-        "在 NotebookLM 中匯整所有學生會規章、課外活動組場地租借細則與活動安全切結書。",
-        "使用 Gemini Agent Designer 創建一個名為「Student Union Support Assistant」的對話型 Agent。",
-        "將此 Agent 連結規章知識庫，並透過 Email Connector 設定背景電子郵件自動草稿升級機制。",
-        "測試 Agent 自動於使用者的寄件夾起草升級郵件之整合功能。",
-        "將該 Agent 的對話框嵌入至學生會官網，提供自動化、端到端的整合。"
-      ],
-      prompt: `你是一位全天候在線的「學生會政策諮詢助手」。你的工作是引導學生社團幹部順利完成場地預約、經費申請與活動企劃安全備查。
-請遵循以下準則：
-1. **回答內容必須嚴格依據**上傳的社團法規手冊，絕不可憑空揣測。
-2. 提供清晰的、步驟化的操作指示（例如：「要預約學生交誼廳，請依照以下 3 個步驟進行...」）。
-3. 必須詳細引用手冊中的法規條款編號（例如：參見《社團活動管理辦法》第三條）。
-4. 面對極為複雜、涉及敏感爭議或必須由人工審批的案件，請直接於對話框中提供一份預先格式化的申訴電子郵件草稿，方便使用者自行複製並手動發送給學生事務官。
-5. 全程保持專業、禮貌且高效的服務語氣。`,
-      advancedPrompt: `你是一位與學校 Gmail 系統整合的全天候「學生會政策諮詢助手」。你的工作是引導學生社團幹部順利完成場地預約、經費申請與活動企劃安全備查。
-請遵循以下準則：
-1. **回答內容必須嚴格依據**上傳的社團法規手冊，絕不可憑空揣測。
-2. 提供清晰的、步驟化的操作指示（例如：「要預約學生交誼廳，請依照以下 3 個步驟進行...」）。
-3. 必須詳細引用手冊中的法規條款編號（例如：參見《社團活動管理辦法》第三條）。
-4. 面對極為複雜、涉及敏感爭議或必須由人工介入的案件，請使用已整合的 Email Connector（郵件連接器）在背景為使用者自動起草一封發給學生事務官的詳細申訴郵件，並保存在使用者的 Gmail 寄件夾草稿夾，隨後提醒使用者前往草稿夾確認。
-5. 全程保持專業、禮貌且高效的服務語氣。`,
-      proTip: "在標準/手動模式下，Agent 將直接在聊天視窗中提供格式完整的郵件草稿，方便您直接複製與貼上使用。",
-      advancedProTip: "配置 Email Connector 後，Agent 可在需要人工審批時，直接在用戶的 Gmail 草稿信箱中擬好一封結構完整的升級審查信，大幅減少行政耗時。"
+      "prompt": "你是一位資深銀行法規與反洗錢合規專員。你的任務是協助銀行行內同仁正確理解並遵循 KYC、AML 與交易申報規範。\n請嚴格遵循以下運營準則：\n1. **所有答覆必須嚴格植基於** 內部提供的法規與合規政策手冊。絕對不可憑空猜測或假設政策。\n2. 提供清晰、步驟化的操作導引（例如：『若要申報大於等值 1 萬美元的疑似洗錢交易，請遵循以下 3 個步驟...』）。\n3. 務必在回答末尾，精確標註您引用的內部合規手冊或外部法規條文編號。\n4. 如果行員查詢的情境涉及明確的欺詐、洗錢跡象，或者屬於極為複雜的法規案件，請直接在對話中擬定好一封結構嚴謹、現成的諮詢升級電子郵件範本，供行員複製並手動發送給合規主管。\n行文請務必保持客觀、嚴謹且具備高度風險防範意識。",
+      "proTip": "在標準（Standalone）模式下，合規助理能直接在聊天介面中擬定結構完整、現成的升級信件範本，行員只需一鍵複製即可使用。"
     },
     "zh-CN": {
-      title: "24/7 学生会政策咨询 Agent",
-      summary: "建立一个专门解答社团场地借用、活动报备及预算补助政策的校园智能客服 Agent。",
-      steps: [
-        "在 NotebookLM 中汇整所有学生会规章、课外活动组场地租借细则与活动安全切结书。",
-        "使用 Gemini Agent Designer 创建一个名为“Student Union Support Assistant”的对话型 Agent。",
-        "将此 Agent 链接规章知识库，在本地回答学生的静态规定查询。",
-        "测试 Agent 对复杂规定的解答能力（例如：“我们可以在晚上9点后租用活动中心大礼堂吗？”）。",
-        "将该 Agent 的对话框嵌入至学生会官网或社团通讯软件中，提供 24 小时不打烊的咨询服务。"
+      "title": "金融法规与反洗钱咨询助理 (Regulatory Compliance Bot)",
+      "summary": "利用 Agent Designer 打造内部的法规与反洗钱 (AML) 咨询机器人，支持手动上传合规档案或链接 Email 自动化升级审查机制。",
+      "steps": [
+        "在 NotebookLM 中，汇整最新版的反洗钱 (AML)、客户尽职调查 (KYC) 以及银行内部合规政策手册。",
+        "前往 Gemini Enterprise Agent Designer（智能体设计器）并建立一个名为「内部合规咨询助理」的对话式智能体。",
+        "将此智能体链接至已建立的法规知识库，以答复内部行员的日常合规查询与报备流程。",
+        "测试智能体对复杂法规查询的答复能力（例如：「跨境电汇超过多少金额需要申报大额交易？」）。",
+        "将此合规 Agent 嵌入至行内员工入口网站，提供 24/7 的即时内部政策与合规咨询支持。"
       ],
-      advancedSteps: [
-        "在 NotebookLM 中汇整所有学生会规章、课外活动组场地租借细则与活动安全切结书。",
-        "使用 Gemini Agent Designer 创建一个名为“Student Union Support Assistant”的对话型 Agent。",
-        "将此 Agent 链接规章知识库，并通过 Email Connector 设置背景电子邮件自动草稿升级机制。",
-        "测试 Agent 自动于使用者的寄件夹起草升级邮件之整合功能。",
-        "将该 Agent 的对话框嵌入至学生会官网，提供自动化、端到端的整合。"
-      ],
-      prompt: `你是一位全天候在线的“学生会政策咨询助手”。你的工作是引导学生社团干部顺利完成场地预约、经费申请与活动策划安全备查。
-请遵循以下准则：
-1. **回答内容必须严格依据**上传的社团法规手册，绝不可凭空猜测。
-2. 提供清晰的、步骤化的操作指示（例如：“要预约学生交谊厅，请依照以下 3 个步骤进行...”）。
-3. 必须详细引用手册中的法规条款编号（例如：参见《社团活动管理办法》第三条）。
-4. 面对极为复杂、涉及敏感争议或必须由人工审批的案件，请直接于对话框中提供一份预先格式化的申诉电子邮件草稿，方便使用者自行复制并手动发送给学生事务官。
-5. 全程保持专业、礼貌且高效的服务语气。`,
-      advancedPrompt: `你是一位与学校 Gmail 系统整合的全天候“学生会政策咨询助手”。你的工作是引导学生社团干部顺利完成场地预约、经费申请与活动策划安全备查。
-请遵循以下准则：
-1. **回答内容必须严格依据**上传的社团法规手册，绝不可凭空猜测。
-2. 提供清晰的、步骤化的操作指示（例如：“要预约学生交谊厅，请依照以下 3 个步骤进行...”）。
-3. 必须详细引用手册中的法规条款编号（例如：参见《社团活动管理办法》第三条）。
-4. 面对极为复杂、涉及敏感争议或必须由人工介入的案件，请使用已整合的 Email Connector（邮件连接器）在背景为使用者自动起草一封发送给学生事务官的详细申诉邮件，并保存在使用者的 Gmail 寄件夹草稿夹，随后提醒使用者前往草稿夹确认。
-5. 全程保持专业、礼貌且高效的服务语气。`,
-      proTip: "在标准/手动模式下，Agent 将直接在聊天窗口中提供格式完整的邮件草稿，方便您直接复制与贴上使用。",
-      advancedProTip: "配置 Email Connector 后，Agent 可在需要人工审批时，直接在用户的 Gmail 草稿信箱中拟好一封结构完整的升级审查信，大幅减少行政耗时。"
+      "prompt": "你是一位资深银行法规与反洗钱合规专员。你的任务是协助银行行内同仁正确理解并遵循 KYC、AML 与交易申报规范。\n请严格遵循以下运营准则：\n1. **所有答复必须严格植基于** 内部提供的法规与合规政策手册。绝对不可凭空猜测或假设政策。\n2. 提供清晰、步骤化的操作引导（例如：『若要申报大于等值 1 万美元的疑似洗钱交易，请遵循以下 3 个步骤...』）。\n3. 务必在回答末尾，精确标注您引用的内部合规手册或外部法规条文编号。\n4. 如果行员查询的情境涉及明确的欺诈、洗钱迹象，或者属于极为复杂的法规案件，请直接在对话中拟定好一封结构严谨、现成的咨询升级电子邮件模板，供行员复制并手动发送给合规主管。\n行文请务必保持客观、严谨且具备高度风险防范意识。",
+      "proTip": "在标准（Standalone）模式下，合规助理能直接在聊天界面中拟定结构完整、现成的升级信件模板，行员只需一键复制即可使用。"
     }
   },
-  visual_campaign: {
+  "financial_literacy_campaign": {
     "en": {
-      title: "Interactive Story Game & Visual Campaign",
-      summary: "Brainstorm and execute an immersive, gamified campus scavenger hunt with AI-generated riddles and visuals.",
-      steps: [
-        "Open Gemini Enterprise and prompt the AI to co-create a branching story narrative for a campus Scavenger Hunt.",
-        "Generate 5 cryptic, rhyming riddles that lead students to distinct physical campus landmarks.",
-        "Use built-in image generation (Image Generation) to design futuristic checkpoint graphics and poster backgrounds.",
-        "Script a 30-second promotional video using Video Generation assets to drive student sign-ups on social media.",
-        "Configure a custom Agent that students must interact with at checkpoints to unlock clues."
+      "title": "Financial Literacy Digital Marketing Campaign",
+      "summary": "Brainstorm and design high-fidelity client-facing wealth planning campaigns with AI-generated visual graphics and copy.",
+      "steps": [
+        "Open Gemini Enterprise and prompt the AI to co-create a cohesive layout for a 'Wealth Building & Compound Interest' digital marketing campaign.",
+        "Generate 5 engaging, compliance-checked narrative posts simplifying compound interest curves.",
+        "Use built-in image generation to design clean, professional banner graphics for the marketing materials.",
+        "Script a 30-second promotional short video using Video Generation assets to drive wealth planning sign-ups.",
+        "Configure a custom advisory agent that potential clients can interact with to calculate mock compound schedules."
       ],
-      prompt: `You are the 'Gemini Gatekeeper' for a campus-wide Scavenger Hunt. Your role is to test student teams before giving them the next checkpoint clue.
-1. **Game Narrative**: The theme is 'A Time-Traveler's Campus Tour'.
-2. When a team approaches, welcome them enthusiastically and present Riddle #3.
-3. Riddle: 'I hold thousands of voices but speak in absolute silence. I have four levels but no feet. Where am I?' (Answer: The Campus Library).
-4. If the team submits the correct answer, congratulate them and generate a personalized digital badge (e.g. 'You have unlocked the Codex checkpoint!').
-5. If they submit an incorrect answer, provide a small, mysterious clue without giving away the answer.
-Never break character. Keep the tone playful, cryptic, and highly engaging.`,
-      proTip: "Ground the riddle generation in university history or campus map documents to ensure riddles are location-accurate and achievable by students."
+      "prompt": "You are the 'Wealth Advisor Assistant Agent' for a digital marketing advisory campaign. Your goal is to explain compound interest in simple, engaging terms.\n1. Campaign Narrative: 'The Compounding Curve'.\n2. When a client interacts, welcome them warmly and explain the rule of 72.\n3. Example: 'If you invest $10,000 at a 6% annual return, your money will double in 12 years!'\n4. If they submit their current savings, generate a customized, supportive financial compounding projection.\nNever guarantee exact stock market returns. Keep the tone warm, educational, and professional.",
+      "proTip": "Ground the campaign content in your bank's approved investment parameters to ensure compliance with financial advertising regulations."
     },
     "zh-TW": {
-      title: "互動式故事遊戲與視覺宣傳",
-      summary: "構思並落實一個全校性質、結合實體景標與 AI 猜謎的尋寶闖關（Scavenger Hunt）遊戲。",
-      steps: [
-        "登入 Gemini Enterprise，引導 AI 共同編撰一齣名為「時空旅人的校園巡禮」分支劇情腳本。",
-        "自動生成 5 道富有詩意與線索的韻腳謎題，分別暗指校園內 5 個代表性實體景點。",
-        "利用內建的 Image Generation 生成科幻感十足的關卡數位勳章與海報美術素材。",
-        "使用 Video Generation 工具合成一段 30 秒的短影音預告片，發布在社群媒體吸引同學組隊報名。",
-        "設計一個在各關卡守候的專屬 AI 關主 Agent，供參賽學生在現場互動猜謎以獲取下一關地圖。"
+      "title": "Financial Literacy Digital Marketing Campaign",
+      "summary": "Brainstorm and design high-fidelity client-facing wealth planning campaigns with AI-generated visual graphics and copy.",
+      "steps": [
+        "Open Gemini Enterprise and prompt the AI to co-create a cohesive layout for a 'Wealth Building & Compound Interest' digital marketing campaign.",
+        "Generate 5 engaging, compliance-checked narrative posts simplifying compound interest curves.",
+        "Use built-in image generation to design clean, professional banner graphics for the marketing materials.",
+        "Script a 30-second promotional short video using Video Generation assets to drive wealth planning sign-ups.",
+        "Configure a custom advisory agent that potential clients can interact with to calculate mock compound schedules."
       ],
-      prompt: `請扮演尋寶遊戲的專屬「AI 時空關主」。你的任務是測試抵達關卡的學生隊伍，並在他們答對後給予下一關的線索。
-請遵循以下設定：
-1. **故事背景**：本次遊戲主題為「時空旅人的校園巡禮」。
-2. 當有隊伍前來互動時，熱情地歡迎他們，並當場念出第三關的謎題。
-3. 謎題：「我收容了上萬種聲音，卻在絕對的寂靜中對話。我有四個樓層，卻沒有雙腳。我在哪裡？」（答案：圖書館）。
-4. 如果他們提交正確答案，讚美他們的智慧並生成一段專屬數位成就解鎖敘述（例如：「恭喜解鎖古籍守衛者勳章！」）。
-5. 如果答案錯誤，絕不可直接透露，請提供一個充滿神秘感的小提示。
-全程必須堅守角色設定，語氣請保持神秘、趣味且富有沈浸感。`,
-      proTip: "生成線索與謎題時，可上傳校園地圖或校史館文獻作為地基，能確保生成的謎題內容絕對符合地標特徵且無事實謬誤。"
+      "prompt": "You are the 'Wealth Advisor Assistant Agent' for a digital marketing advisory campaign. Your goal is to explain compound interest in simple, engaging terms.\n1. Campaign Narrative: 'The Compounding Curve'.\n2. When a client interacts, welcome them warmly and explain the rule of 72.\n3. Example: 'If you invest $10,000 at a 6% annual return, your money will double in 12 years!'\n4. If they submit their current savings, generate a customized, supportive financial compounding projection.\nNever guarantee exact stock market returns. Keep the tone warm, educational, and professional.",
+      "proTip": "Ground the campaign content in your bank's approved investment parameters to ensure compliance with financial advertising regulations."
     },
     "zh-CN": {
-      title: "互动式故事游戏与视觉宣传",
-      summary: "构思并落实一个全校性质、结合实体景标与 AI 猜谜的寻宝闯关（Scavenger Hunt）游戏。",
-      steps: [
-        "登入 Gemini Enterprise，引导 AI 共同编撰一出名为“时空旅人的校园巡礼”分支剧情脚本。",
-        "自动生成 5 道富有诗意与线索的韵脚谜题，分别暗指校园内 5 个代表性实体景点。",
-        "利用内建的 Image Generation 生成科幻感十足的关卡数字勋章与海报美术素材。",
-        "使用 Video Generation 工具合成一段 30 秒的短视频预告片，发布在社交媒体吸引同学组队报名。",
-        "设计一个在各关卡守候的专属 AI 关主 Agent，供参赛学生在现场互动猜谜以获取下一关地图。"
+      "title": "Financial Literacy Digital Marketing Campaign",
+      "summary": "Brainstorm and design high-fidelity client-facing wealth planning campaigns with AI-generated visual graphics and copy.",
+      "steps": [
+        "Open Gemini Enterprise and prompt the AI to co-create a cohesive layout for a 'Wealth Building & Compound Interest' digital marketing campaign.",
+        "Generate 5 engaging, compliance-checked narrative posts simplifying compound interest curves.",
+        "Use built-in image generation to design clean, professional banner graphics for the marketing materials.",
+        "Script a 30-second promotional short video using Video Generation assets to drive wealth planning sign-ups.",
+        "Configure a custom advisory agent that potential clients can interact with to calculate mock compound schedules."
       ],
-      prompt: `请扮演寻宝游戏的专属“AI 时空关主”。你的任务是测试抵达关卡的学生队伍，并在他们答对后给予下一关的线索。
-请遵循以下设定：
-1. **故事背景**：本次游戏主题为“时空旅人的校园巡礼”。
-2. 当有队伍前来互动时，热情地欢迎他们，并当场念出第三关的谜题。
-3. 谜题：“我收容了上万种声音，却在绝对的寂静中对话。我有四个楼层，却没有双脚。我在哪里？”（答案：图书馆）。
-4. 如果他们提交正确答案，赞美他们的智慧并生成一段专属数字成就解锁叙述（例如：“恭喜解锁古籍守卫者勋章！”）。
-5. 如果答案错误，绝不可直接透露，请提供一个充满神秘感的小提示。
-全程必须坚守角色设定，语气请保持神秘、趣味且富有沉浸感。`,
-      proTip: "生成线索与谜题时，可上传校园地图或校史馆文献作为地基，能确保生成的谜题内容绝对符合地标特征且无事实谬误。"
+      "prompt": "You are the 'Wealth Advisor Assistant Agent' for a digital marketing advisory campaign. Your goal is to explain compound interest in simple, engaging terms.\n1. Campaign Narrative: 'The Compounding Curve'.\n2. When a client interacts, welcome them warmly and explain the rule of 72.\n3. Example: 'If you invest $10,000 at a 6% annual return, your money will double in 12 years!'\n4. If they submit their current savings, generate a customized, supportive financial compounding projection.\nNever guarantee exact stock market returns. Keep the tone warm, educational, and professional.",
+      "proTip": "Ground the campaign content in your bank's approved investment parameters to ensure compliance with financial advertising regulations."
     }
   },
-  at_risk_cohort: {
+  "credit_risk_assessment": {
     "en": {
-      title: "At-Risk Student Early Warning System",
-      summary: "Connect Gemini to LMS and SIS database metrics to analyze engagement anomalies and flag struggling students.",
-      steps: [
-        "Configure secure API connections from Gemini Enterprise to your school's LMS and SIS database.",
-        "Set up an analytical data store containing anonymized student logs, login frequencies, quiz scores, and forum engagement metrics.",
-        "Configure a secure workflow that maps data attributes, ensuring strict compliance with student data privacy laws like FERPA.",
-        "Use Gemini to run multi-dimensional predictive modeling, highlighting student cohorts exhibiting a precipitous drop in engagement.",
-        "Trigger automated, personalized advisor check-in drafts to provide timely academic support."
+      "title": "Applicant Risk Portfolio & CRM Analyzer",
+      "summary": "Monitor commercial loan risk portfolios by analyzing customer CRM profiles and financial accounts to identify warning signs.",
+      "steps": [
+        "Establish secure connections from Gemini Enterprise to your corporate Salesforce / Wealthbox CRM and SQL database.",
+        "Configure a secure CRM dataset containing applicant credit histories, payment frequencies, and portfolio values.",
+        "Configure a secure data privacy layer, ensuring strict compliance with financial regulations and client privacy laws.",
+        "Use Gemini to run multi-dimensional portfolio diagnostic risk checks, flagging accounts with payment warning anomalies.",
+        "Trigger automated, personalized relationship manager alert emails in your corporate draft folder to suggest portfolio restructuring."
       ],
-      prompt: `Analyze the attached anonymized LMS and Student Information System dataset for the current semester.
-We want to identify students who are at risk of failing or dropping out before midterm exams.
-Tasks:
-1. **Anomaly Detection**: Flag all students who have shown a >50% drop in login frequency and quiz scores over the past 3 weeks compared to their baseline.
-2. **Correlation Analysis**: Identify if there is a statistically significant correlation between forum participation rates and final assignment scores in this cohort.
-3. **Draft Advisory Alerts**: For each flagged student category, generate a highly supportive, personalized academic check-in email draft from their advisor, suggesting tutoring resources.`,
-      proTip: "Never upload student Names or Social Security numbers. Maintain rigorous compliance with privacy laws by utilizing fully de-identified student IDs during data store ingestion."
+      "prompt": "Analyze the provided customer portfolio and credit CRM dataset for the current quarter.\nWe want to identify commercial accounts displaying heightened credit risk before their quarterly amortization dates.\nTasks:\n1. **Risk Flagging**: Identify all client accounts that show a >30% drop in balance sheet liquidity and delayed payments over the past 30 days.\n2. **Correlation Analysis**: Evaluate if there is a statistically significant correlation between credit defaults and recent margin calls in this cohort.\n3. **Draft Advisory Check-ins**: For each flagged account, generate a supportive, highly professional check-in email draft from their Relationship Manager, proposing debt-restructuring options.",
+      "proTip": "Never upload customer social security numbers. Ensure total regulatory compliance by utilizing anonymized customer UUID hashes during data store checks."
     },
     "zh-TW": {
-      title: "高風險學生預警系統",
-      summary: "將 Gemini 連接至 LMS 與學籍系統，深度分析學習足跡與成績異常，提前關懷高風險學生。",
-      steps: [
-        "配置 Gemini Enterprise 與學校 LMS（如 Canvas、Moodle）和學籍數據庫（SIS）的安全 API 管道。",
-        "建立包含去識別化學習足跡、登入頻率、小考表現與論壇互動率的安全數據儲存庫。",
-        "在數據對齊與屏蔽配置中，嚴格遵守 FERPA 或個人資料保護法，徹底過濾個人隱私資訊。",
-        "指示 Gemini 執行多維度預測建模，標記出在學習參與度上呈現斷崖式下降的學生群組。",
-        "觸發自動化機制，為導師預先生成客製化、充滿溫度與關懷的諮詢信件草稿。"
+      "title": "授信戶信用風險評估與 CRM 監控 (Applicant Risk Portfolio Analyzer)",
+      "summary": "透過 CRM 系統與授信數據連接器，分析客戶的信用歷史、還款軌跡與流動性，在關鍵Amortization前自動識別風險授信戶。",
+      "steps": [
+        "在 Google Cloud Console 中，授權並啟用與您行內 Salesforce 或 Wealthbox CRM 系統的安全 API 介接。",
+        "建立一個包含授信戶歷年還款明細、現有信用額度、資產負債狀況及 margin 記錄的去識別化數據倉庫。",
+        "配置嚴密的敏感數據去識別化與隱私遮蔽層，確保數據全程符合國際金融監管與隱私法規。",
+        "引導 Gemini 執行多維度的投資與信貸風險預測診斷，精確識別出可能存在違約風險的授信戶群組。",
+        "自動在 Relationship Manager (RM) 的工作草稿信箱中擬定好客戶關懷與資產重組諮詢信件，主動化解潛在壞賬風險。"
       ],
-      prompt: `請分析本學期已匿名化的 LMS 與學籍系統綜合數據集。
-我們的目標是在期中考前，篩選出可能面臨不及格或有輟學風險的高關注學生。
-任務要求：
-1. **學習足跡異動分析**：篩選出過去3週內，登入頻率和小考分數較其前段基線下降超過 50% 的所有學生匿名標記。
-2. **多維度關聯分析**：分析該群組中，課堂論壇互動率與最終作業成績是否存在顯著統計學正相關。
-3. **起草導師關懷信**：針對標記出的高風險群體，起草一封語氣誠懇、富有支持溫度的導師諮詢信草稿，並主動列出學校的心理諮商與課後輔導資源。`,
-      proTip: "絕不可上傳學生姓名或身份證字號等個人隱私。請落實去識別化代碼，確保數據分析在完全合規的前提下進行。"
+      "prompt": "請扮演資深信貸分析與信用風險專家。評估所提供之企業客戶本季度的信貸與 CRM 還款歷程數據。\n我們的核心目標是在下一個攤銷日 (Amortization Date) 來臨前，主動標記出資產流動性急劇惡化、面臨潛在信用危機的授信戶。\n任務如下：\n1. **風險等級標記**：過濾並標記出在過去 30 天內資產負債流動性比率下跌超過 30%、或在 CRM 中被記錄有多次逾期付款警示的授信客戶。\n2. **多維相關性分析**：探討此風險授信戶群組的违约概率與近期資本市場波動、大宗商品價格走勢或行業政策調整之間是否存在統計顯著的關聯性。\n3. **客戶關懷與資產重組預案**：針對被標記的高風險授信戶，為其對應的 Relationship Manager 一對一起草一封極具專業素養、旨在協助解決資金難難關的客戶關懷郵件草稿，提議開展客製化的債務重組、再融資或展期諮詢會議。",
+      "proTip": "在不介接動態 API 的離線（Standalone）模式下，分析師可以手動上傳去識別化的客戶還款 CSV 報表到 Gemini 沙盒中，同樣能享受到極高準確度的風險診斷。"
     },
     "zh-CN": {
-      title: "高风险学生预警系统",
-      summary: "将 Gemini 连接至 LMS 与学籍系统，深度分析学习足迹与成绩异常，提前关怀高风险学生。",
-      steps: [
-        "配置 Gemini Enterprise 与学校 LMS（如 Canvas、Moodle）和学籍数据库（SIS）的安全 API 管道。",
-        "建立包含去识别化学习足迹、登入频率、小考表现与论坛互动率的安全数据存储库。",
-        "在数据对齐与屏蔽配置中，严格遵守 FERPA 或个人资料保护法，彻底过滤个人隐私信息。",
-        "指示 Gemini 执行多维度预测建模，标记出在学习参与度上呈现断崖式下降的学生群组。",
-        "触发自动化机制，为导师预先生成客制化、充满温度与关怀的咨询信件草稿。"
+      "title": "授信户信用风险评估与 CRM 监控 (Applicant Risk Portfolio Analyzer)",
+      "summary": "通过 CRM 系统与授信数据连接器，分析客户的信用历史、还款轨迹与流动性，在关键Amortization前自动识别风险授信户。",
+      "steps": [
+        "在 Google Cloud Console 中，授权并启用与您行内 Salesforce 或 Wealthbox CRM 系统的安全 API 介接。",
+        "建立一个包含授信户历年还款明细、现有信用额度、资产负债状况及 margin 记录的去识别化数据仓库。",
+        "配置严密的敏感数据去识别化与隐私遮蔽层，确保数据全程符合国际金融监管与隐私法规。",
+        "引导 Gemini 执行多维度的投资与信贷风险预测诊断，精确识别出可能存在违约风险的授信户群组。",
+        "自动在 Relationship Manager (RM) 的工作草稿信箱中拟定好客户关怀与资产重组咨询信件，主动化解潜在坏账风险。"
       ],
-      prompt: `请分析本学期已匿名化的 LMS 与学籍系统综合数据集。
-我们的目标是在期中考前，筛选出可能面临不及格或有辍学风险的高关注学生。
-任务要求：
-1. **学习足迹异动分析**：筛选出过去3周内，登入频率和小考分数较其前段基线下降超过 50% 的所有学生匿名标记。
-2. **多维度关联分析**：分析该群组中，课堂论坛互动率与最终作业成绩是否存在显著统计学正相关。
-3. **起草导师关怀信**：针对标记出的高风险群体，起草一封语气诚恳、富有支持温度的导师咨询信草稿，并主动列出学校的心理咨询与课后辅导资源。`,
-      proTip: "绝不可上传学生姓名或身份证字号等个人隐私。请落实去识别化代码，确保数据分析在完全合规的前提下进行。"
+      "prompt": "请扮演资深信贷分析与信用风险专家。评估所提供之企业客户本季度的信贷与 CRM 还款历程数据。\n我们的核心目标是在下一个摊销日 (Amortization Date) 来临前，主动标记出资产流动性急剧恶化、面临潜在信用危机的授信户。\n任务如下：\n1. **风险等级标记**：过滤并标记出在过去 30 天内资产负债流动性比率下跌超过 30%、或在 CRM 中被记录有多次逾期付款警示的授信客户。\n2. **多维相关性分析**：探讨此风险授信户群组的违约概率与近期资本市场波动、大宗商品价格走势或行业政策调整之间是否存在统计显著的关联性。\n3. **客户关怀与资产重组预案**：针对被标记的高风险授信户，为其对应的 Relationship Manager 一对一起草一封极具专业素养、旨在协助解决资金难难关的客户关怀邮件草稿，建议开展定制化的债务重组、再融资或展期咨询会议。",
+      "proTip": "在不介接动态 API 的离线（Standalone）模式下，分析师可以手动上传去识别化的客户还款 CSV 报表到 Gemini 沙盒中，同样能享受到极高准确度的风险诊断。"
     }
   },
-  accreditation_reports: {
+  "portfolio_sentiment_tracker": {
     "en": {
-      title: "Accreditation Self-Study Report Synthesizer",
-      summary: "Synthesize years of course syllabi, student surveys, and meeting minutes to draft institutional accreditation reports.",
-      steps: [
-        "Upload 3 years of school syllabi, assurance of learning rubrics, student exit surveys, and advisory board minutes to SharePoint.",
-        "Establish a federated search connection from Gemini Enterprise to the Drive folder.",
-        "In NotebookLM, prompt the model to cross-reference your curriculum data against specific accreditation standards.",
-        "Generate structured, professional accreditation narrative drafts, complete with inline source evidence and citations.",
-        "Review the drafts and collaborate with deans using shared Google Docs to finalize the institutional report."
+      "title": "Market News & Portfolio Sentiment Tracker",
+      "summary": "Analyze massive market news databases, financial blogs, and earnings call transcripts in NotebookLM to track sentiment trends.",
+      "steps": [
+        "Consolidate hundreds of public sector reports, regulatory filings, and market news articles in your cloud drive.",
+        "Link your corporate Drive folder using the secure Document Store Connector.",
+        "In NotebookLM, prompt the model to scan the files and compute aggregated market sentiment scores (Bullish, Neutral, Bearish).",
+        "Generate structured, professional research reports summarizing the impact of emerging trends on your client portfolios.",
+        "Review the synthesized reports and collaborate with portfolio teams using shared Google Docs to finalize the recommendations."
       ],
-      prompt: `You are an institutional research officer preparing a self-study report for a university business school accreditation.
-Your task is to synthesize the uploaded student surveys, curriculum syllabi, and learning assessment records to draft the narrative for 'Standard 3: Assurance of Learning (AoL)'.
-The narrative must include:
-1. **Executive Summary**: A high-level overview of how the program measures and achieves learning goals.
-2. **Methodology**: Explain the direct and indirect assessment tools used.
-3. **Data Synthesis**: Analyze 3 years of quantitative data, highlighting key improvements in areas where learning caps were identified.
-4. **Action Plan**: Outline a 2-year strategic plan for curriculum refinement, mapped directly to survey insights.
-Maintain a highly formal, academic, and objective tone.`,
-      proTip: "By selecting 'Federated Search' for the Drive Connector, your data remains safely stored within your institutional tenant, ensuring absolute data security and sovereignty."
+      "prompt": "Act as a Senior Market Strategist. Analyze the uploaded articles, transcripts, and financial news reports from the past week.\nGenerate a high-fidelity market sentiment analysis report containing:\n1. **Sector-Level Sentiment Matrix**: Provide sentiment ratings (Bullish, Bearish, Neutral) for the Tech, Healthcare, and Energy sectors, referencing articles.\n2. **Emerging Catalyst Clusters**: Identify and group the top 3 macroeconomic factors driving asset reallocations.\n3. **Draft Investment Briefs**: Propose 2 strategic rebalancing actions for RM teams to discuss with conservative and aggressive client portfolios.",
+      "proTip": "By connecting your market data folders via the Document Store Connector, you establish an automated feed that updates NotebookLM analysis boards automatically."
     },
     "zh-TW": {
-      title: "機構認證自我評查報告合成器",
-      summary: "整合歷年課程大綱、學生評鑑問卷與會議記錄，自動撰寫高品質的機構級教學認證報告。",
-      steps: [
-        "將過去 3 年的學部教學大綱、AoL 評估表、學生畢業回饋和諮詢委員會會議記錄上傳至雲端儲存。",
-        "透過安全的 Drive Connector 建立聯邦搜尋（Federated Search）連結。",
-        "在 NotebookLM 中，引導模型將上傳的教學龐雜文獻與特定的教育認證標準（如 AACSB、IEET）進行比對。",
-        "自動生成結構完整、格式規範的認證報告草稿，並自動附上對應的文件來源引註與實證出處。",
-        "下載文稿並在 Google Docs 中與學院院長、教學小組成員共同協作，以最終定稿。"
+      "title": "Market News & Portfolio Sentiment Tracker",
+      "summary": "Analyze massive market news databases, financial blogs, and earnings call transcripts in NotebookLM to track sentiment trends.",
+      "steps": [
+        "Consolidate hundreds of public sector reports, regulatory filings, and market news articles in your cloud drive.",
+        "Link your corporate Drive folder using the secure Document Store Connector.",
+        "In NotebookLM, prompt the model to scan the files and compute aggregated market sentiment scores (Bullish, Neutral, Bearish).",
+        "Generate structured, professional research reports summarizing the impact of emerging trends on your client portfolios.",
+        "Review the synthesized reports and collaborate with portfolio teams using shared Google Docs to finalize the recommendations."
       ],
-      prompt: `你是一位大學校務研究員（IR），正在撰寫商學院國際認證的自我評查報告（Self-Study Report）。
-請協助整合上傳的歷年學生滿意度問卷、教學大綱與學習評估數據，撰寫「指標 3：學習保證（Assurance of Learning, AoL）」的自評論述。
-報告結構必須包含：
-1. **摘要**：高層次概述學部如何系統性建立學習成效衡量體系。
-2. **評估方法論**：詳細說明所採取的直接與間接學習評估工具。
-3. **數據綜合分析**：分析連續 3 年的量化 AoL 數據，特別強調在發現學生學術弱點後，課程委員會所採取的「閉環持續改進（Closing the Loop）」具體實效。
-4. **兩年期改進計畫**：提出一份基於問卷洞察的未來 2 年期大綱調整策略藍圖。
-文字風格必須呈現極高的學術嚴謹度、客觀且語氣高度專業。`,
-      proTip: "選擇 Drive Connector 提供的「聯邦搜尋」模式，意即數據不經過任何實體數據轉存，全程安全地留在您學校的雲端環境內，確保學術主權與高度保密性。"
+      "prompt": "Act as a Senior Market Strategist. Analyze the uploaded articles, transcripts, and financial news reports from the past week.\nGenerate a high-fidelity market sentiment analysis report containing:\n1. **Sector-Level Sentiment Matrix**: Provide sentiment ratings (Bullish, Bearish, Neutral) for the Tech, Healthcare, and Energy sectors, referencing articles.\n2. **Emerging Catalyst Clusters**: Identify and group the top 3 macroeconomic factors driving asset reallocations.\n3. **Draft Investment Briefs**: Propose 2 strategic rebalancing actions for RM teams to discuss with conservative and aggressive client portfolios.",
+      "proTip": "By connecting your market data folders via the Document Store Connector, you establish an automated feed that updates NotebookLM analysis boards automatically."
     },
     "zh-CN": {
-      title: "机构认证自我评查报告合成器",
-      summary: "整合历年课程大纲、学生评鉴问卷与会议记录，自动撰写高质量的机构级教学认证报告。",
-      steps: [
-        "将过去 3 年的学部教学大纲、AoL 评估表、学生毕业反馈和咨询委员会会议记录上传至云端储存。",
-        "通过安全的 Drive Connector 建立联邦搜索（Federated Search）链接。",
-        "在 NotebookLM 中，引导模型将上传的教学庞杂文献与特定的教育认证标准（如 AACSB、IEET）进行比对。",
-        "自动生成结构完整、格式规范的认证报告草稿，并自动附上对应的文件来源引注与实证出处。",
-        "下载文稿并在 Google Docs 中与学院院长、教学小组成员共同协作，以最终定稿。"
+      "title": "Market News & Portfolio Sentiment Tracker",
+      "summary": "Analyze massive market news databases, financial blogs, and earnings call transcripts in NotebookLM to track sentiment trends.",
+      "steps": [
+        "Consolidate hundreds of public sector reports, regulatory filings, and market news articles in your cloud drive.",
+        "Link your corporate Drive folder using the secure Document Store Connector.",
+        "In NotebookLM, prompt the model to scan the files and compute aggregated market sentiment scores (Bullish, Neutral, Bearish).",
+        "Generate structured, professional research reports summarizing the impact of emerging trends on your client portfolios.",
+        "Review the synthesized reports and collaborate with portfolio teams using shared Google Docs to finalize the recommendations."
       ],
-      prompt: `你是一位大学校务研究员（IR），正在撰写商学院国际认证的自我评查报告（Self-Study Report）。
-请协助整合上传的历年学生满意度问卷、教学大纲与学习评估数据，撰写“指标 3：学习保证（Assurance of Learning, AoL）”的自评论述。
-报告结构必须包含：
-1. **摘要**：高层次概述学部如何系统性建立学习成效衡量体系。
-2. **评估方法论**：详细说明所采取的直接与间接学习评估工具。
-3. **数据综合分析**：分析连续 3 年的量化 AoL 数据，特别强调在发现学生学术弱点后，课程委员会所采取的“闭环持续改进（Closing the Loop）”具体实效。
-4. **两年期改进计划**：提出一份基于问卷洞察的未来 2 年期大纲调整策略蓝图。
-文字风格必须呈现极高的学术严密性、客观且语气高度专业。`,
-      proTip: "选择 Drive Connector 提供的“联邦搜索”模式，意即数据不经过任何实体数据转存，全程安全地留在您学校的云端环境内，确保学术主权与高度保密性。"
+      "prompt": "Act as a Senior Market Strategist. Analyze the uploaded articles, transcripts, and financial news reports from the past week.\nGenerate a high-fidelity market sentiment analysis report containing:\n1. **Sector-Level Sentiment Matrix**: Provide sentiment ratings (Bullish, Bearish, Neutral) for the Tech, Healthcare, and Energy sectors, referencing articles.\n2. **Emerging Catalyst Clusters**: Identify and group the top 3 macroeconomic factors driving asset reallocations.\n3. **Draft Investment Briefs**: Propose 2 strategic rebalancing actions for RM teams to discuss with conservative and aggressive client portfolios.",
+      "proTip": "By connecting your market data folders via the Document Store Connector, you establish an automated feed that updates NotebookLM analysis boards automatically."
     }
   },
-  workforce_federation: {
+  "it_service_desk": {
     "en": {
-      title: "Workforce Identity Federation Setup Guide",
-      summary: "Establish a secure trust relationship between Google Cloud and institutional identity providers for single sign-on authentication.",
-      steps: [
-        "Register a new enterprise identity application on your centralized SSO portal.",
-        "Configure SAML 2.0 or OIDC single sign-on settings and record the Metadata XML/Endpoints.",
-        "In Google Cloud Console, navigate to IAM & Admin > Workforce Identity Federation and create a new workforce pool.",
-        "Create an OIDC Provider linking your Google workforce pool to the identity provider's enterprise application.",
-        "Configure Attribute Mapping, mapping 'google.subject' to the user's email and mapping security groups to 'google.groups'."
+      "title": "IT Support Incident Router",
+      "summary": "Automate corporate IT incident ticket categorization, severity routing, and compliance logging using Agent Builder.",
+      "steps": [
+        "In NotebookLM, compile all corporate IT incident handbooks, security protocols, and software compliance manuals.",
+        "Use Gemini Agent Designer to construct a supportive conversational assistant named 'IT Operator Assistance Agent'.",
+        "Instruct the agent on incident severity tiers (Sev 1 - System Down, Sev 2 - Degraded Service, Sev 3 - Low priority) and routing paths.",
+        "Test the agent's ability to analyze system logs and classify incidents under the correct corporate guidelines.",
+        "Deploy the custom IT assistance bot on the internal portal to automate internal help desk operations."
       ],
-      prompt: `Act as a senior cloud solutions architect. Write a detailed, step-by-step technical implementation guide to set up Workforce Identity Federation (WIF) between Google Cloud and corporate identity systems.
-The guide must cover:
-1. **SSO Identity App Registration**: Mandatory configuration settings, single sign-on URL, and client secret management.
-2. **GCP Workforce Pool Configuration**: CLI (gcloud) commands to create the pool and provider.
-3. **Attribute Mapping Rules**: Precise Common Expression Language (CEL) syntax to map user groups and emails securely.
-4. **Security Best Practices**: Best practices for secret rotation, federated role binding, and auditing logs.`,
-      proTip: "Using OIDC with Authorization Code Flow is significantly more secure than SAML 2.0 for mobile environments and ensures smooth token exchanges during API calls."
+      "prompt": "You are the 'IT Helpdesk Incident Dispatcher Bot' for a banking tenant. Your objective is to classify and route IT service requests.\n1. **Ground your routing logic strictly** in the uploaded company IT service handbooks.\n2. When a user submits an issue (e.g. 'The teller workstation is failing to load database queries'), classify the severity (Sev 1, Sev 2, Sev 3).\n3. If an issue is classified as Sev 1 (Active Security Incident or teller system downtime), draft a Sev 1 emergency dispatch template for the Network Operations Team on-screen and flag immediate escalation protocols.\n4. If an issue is Sev 3, guide the employee through the automated self-service guides in your knowledge base.\nMaintain an efficient, highly technical, and professional tone.",
+      "proTip": "Ground the agent designer in software error log templates to allow the bot to read log stack-traces directly, saving IT operator analysis time."
     },
     "zh-TW": {
-      title: "與 Microsoft Entra ID 的 Workforce Identity 聯合配置",
-      summary: "在 Google Cloud 與學校單一登入（SSO）身分識別層之間建立安全信任關係，實現無密碼安全登入。",
-      steps: [
-        "在您的學校 SSO 管理中心，註冊一個代表 Google Cloud 平台的企業級單一登入識別服務。",
-        "配置 OIDC 或 SAML 2.0 連線端點，並記錄相應的憑證 Metadata、客戶端 ID 與密鑰。",
-        "登入 GCP 主控台，前往 IAM & Admin > Workforce Identity Federation 建立一個新的員工身分池。",
-        "在此 WIF 身分池中建立一個連線供應商，將其對接您在步驟1中建立的 SSO 身分驗證服務。",
-        "設定嚴格的屬性對應規則（Attribute Mapping），安全地將 SSO 用戶權限與 Google Cloud 角色綁定。"
+      "title": "IT Support Incident Router",
+      "summary": "Automate corporate IT incident ticket categorization, severity routing, and compliance logging using Agent Builder.",
+      "steps": [
+        "In NotebookLM, compile all corporate IT incident handbooks, security protocols, and software compliance manuals.",
+        "Use Gemini Agent Designer to construct a supportive conversational assistant named 'IT Operator Assistance Agent'.",
+        "Instruct the agent on incident severity tiers (Sev 1 - System Down, Sev 2 - Degraded Service, Sev 3 - Low priority) and routing paths.",
+        "Test the agent's ability to analyze system logs and classify incidents under the correct corporate guidelines.",
+        "Deploy the custom IT assistance bot on the internal portal to automate internal help desk operations."
       ],
-      prompt: `請扮演資深雲端架構師。撰寫一份高度詳實的、以命令行（gcloud）為導向的 Workforce Identity Federation 連線手冊。
-指南必須覆蓋：
-1. **SSO 身分終端配置**：應綁定的權限範圍、回調 URI 設定與 OIDC JWT 的生命週期設定。
-2. **GCP 身分池創建語法**：使用 gcloud 命令行建立身分池、以及建立身分供應商（Provider）的具體語法。
-3. **CEL 屬性對應規則**：提供標準的 Common Expression Language 程式碼範例，將 SSO 身分群組（Groups）與 GCP 權限對齊。
-4. **審計與安全規範**：提供生產環境下身分聯邦的憑證自動輪轉、連線失效偵測與活動日誌追蹤的安全建議。`,
-      proTip: "使用基於授權碼（Authorization Code Flow）的 OIDC 連線框架比傳統 SAML 2.0 更契合現代微服務，並能為行動裝置端提供更佳的安全連線驗證體驗。"
+      "prompt": "You are the 'IT Helpdesk Incident Dispatcher Bot' for a banking tenant. Your objective is to classify and route IT service requests.\n1. **Ground your routing logic strictly** in the uploaded company IT service handbooks.\n2. When a user submits an issue (e.g. 'The teller workstation is failing to load database queries'), classify the severity (Sev 1, Sev 2, Sev 3).\n3. If an issue is classified as Sev 1 (Active Security Incident or teller system downtime), draft a Sev 1 emergency dispatch template for the Network Operations Team on-screen and flag immediate escalation protocols.\n4. If an issue is Sev 3, guide the employee through the automated self-service guides in your knowledge base.\nMaintain an efficient, highly technical, and professional tone.",
+      "proTip": "Ground the agent designer in software error log templates to allow the bot to read log stack-traces directly, saving IT operator analysis time."
     },
     "zh-CN": {
-      title: "与 Microsoft Entra ID 的 Workforce Identity 联合配置",
-      summary: "在 Google Cloud 与学校单一登入（SSO）身份识别层之间建立安全信任关系，实现无密码安全登入。",
-      steps: [
-        "在您的学校 SSO 管理中心，注册一个代表 Google Cloud 平台的企业级单一登入识别服务。",
-        "配置 OIDC 或 SAML 2.0 连线端点，并记录相应的凭证 Metadata、客户端 ID 与密钥。",
-        "登入 GCP 控制台，前往 IAM & Admin > Workforce Identity Federation 建立一个新的员工身份池。",
-        "在此 WIF 身份池中建立一个连线供应商，将其对接您在步骤1中建立的 SSO 身份验证服务。",
-        "设定严格的属性对应规则（Attribute Mapping），安全地将 SSO 用户权限与 Google Cloud 角色绑定。"
+      "title": "IT Support Incident Router",
+      "summary": "Automate corporate IT incident ticket categorization, severity routing, and compliance logging using Agent Builder.",
+      "steps": [
+        "In NotebookLM, compile all corporate IT incident handbooks, security protocols, and software compliance manuals.",
+        "Use Gemini Agent Designer to construct a supportive conversational assistant named 'IT Operator Assistance Agent'.",
+        "Instruct the agent on incident severity tiers (Sev 1 - System Down, Sev 2 - Degraded Service, Sev 3 - Low priority) and routing paths.",
+        "Test the agent's ability to analyze system logs and classify incidents under the correct corporate guidelines.",
+        "Deploy the custom IT assistance bot on the internal portal to automate internal help desk operations."
       ],
-      prompt: `请扮演资深云端架构师。撰写一份高度详实的、以命令行（gcloud）为导向的 Workforce Identity Federation 连线手册。
-指南必须覆盖：
-1. **SSO 身份终端配置**：应绑定的权限范围、回调 URI 设定与 OIDC JWT 的生命周期设定。
-2. **GCP 身份池创建语法**：使用 gcloud 命令行建立身份池、以及建立身份供应商（Provider）的具体语法。
-3. **CEL 属性对应规则**：提供标准的 Common Expression Language 代码范例，将 SSO 身份群组（Groups）与 GCP 权限对齐。
-4. **审计与安全规范**：提供生产环境下身份联邦的凭证自动轮转、连线失效侦测与活动日志追踪的安全建议。`,
-      proTip: "使用基于授权码（Authorization Code Flow）的 OIDC 连线框架比传统 SAML 2.0 更契合现代微服务，并能为移动装置端提供更佳的安全连线验证体验。"
+      "prompt": "You are the 'IT Helpdesk Incident Dispatcher Bot' for a banking tenant. Your objective is to classify and route IT service requests.\n1. **Ground your routing logic strictly** in the uploaded company IT service handbooks.\n2. When a user submits an issue (e.g. 'The teller workstation is failing to load database queries'), classify the severity (Sev 1, Sev 2, Sev 3).\n3. If an issue is classified as Sev 1 (Active Security Incident or teller system downtime), draft a Sev 1 emergency dispatch template for the Network Operations Team on-screen and flag immediate escalation protocols.\n4. If an issue is Sev 3, guide the employee through the automated self-service guides in your knowledge base.\nMaintain an efficient, highly technical, and professional tone.",
+      "proTip": "Ground the agent designer in software error log templates to allow the bot to read log stack-traces directly, saving IT operator analysis time."
     }
   },
-  sao_scavenger_hunt: {
+  "trade_settlement_reconciliation": {
     "en": {
-      title: "Digital Cultural Fair Red Packet Game",
-      summary: "Orchestrate an interactive cultural trivia game on campus that distributes digital red packets and bookstore vouchers.",
-      steps: [
-        "In Agent Designer, build a custom conversational Agent named 'Lunar New Year Assistant'.",
-        "Upload short articles detailing cultural traditions, zodiac histories, and celebratory foods to the Agent's knowledge base.",
-        "Use built-in image generation to design festive digital card templates and red envelope backgrounds.",
-        "Program a simple randomizer script within your student portal that triggers small bookstore voucher codes.",
-        "Have students interact with the Agent; answering cultural riddles correctly awards them a code."
+      "title": "T+1 Trade Settlement Reconciliation Agent",
+      "summary": "Reconcile daily transaction ledgers against clearinghouse logs to identify trade settlement discrepancies automatically.",
+      "steps": [
+        "Compile clearinghouse transaction templates, transaction compliance codes, and ledger handbooks in your private database.",
+        "Use Gemini Agent Designer to build a conversational agent named 'Trade Settlement Reconciliation Analyst'.",
+        "Upload transaction CSVs and clearinghouse reports directly into the agent sandboxed session.",
+        "Prompt the agent to cross-reference settlement amounts, transaction timestamps, and client account IDs.",
+        "Extract anomalous transaction line items and review the generated clearinghouse dispatch reports."
       ],
-      prompt: `You are the 'Lunar New Year Cultural Guide,' a festive, polite, and highly enthusiastic AI host for our digital university fair.
-Your objective is to test students on Lunar New Year traditions and award them digital 'red packets' containing celebratory blessings.
-1. Welcome the student warmly, wishing them prosperity.
-2. Ask them 1 fun trivia question about Lunar New Year (e.g., 'What zodiac animal represents leadership and courage?').
-3. If they answer correctly, celebrate their success and generate a beautiful, poetic blessing in the form of a classic Chinese couplet, customized to their stated wish (e.g., success in exams, finding good friends).
-4. Direct them to copy the coupon code 'CNY-BOOKSTORE-10' to redeem a discount at the campus book shop.
-5. If they answer incorrectly, explain the tradition gently and give them a second chance with a different question.`,
-      proTip: "By connecting this Agent to your student portal, you can make the distribution of campus store vouchers gamified, educational, and highly engaging."
+      "prompt": "You are the 'Trade Settlement Reconciliation Agent.' Your goal is to audit daily trading accounts and clearinghouse ledgers.\n1. **Compare daily trade records** and clearinghouse logs. Highlight any transaction discrepancy.\n2. Identify any transaction matching failure (e.g. Price mismatch, missing ISIN, incorrect settlement date).\n3. Generate a structured Reconciliation Exception Report detailing: Transaction ID, Client Account, Clearinghouse Code, Discrepancy Margin.\n4. Provide a professional clearinghouse correction dispatch email draft on-screen for the operations manager to review.\nMaintain absolute accuracy and compliance-focused rigor.",
+      "proTip": "Grounding your agent in Swift MT548 settlement status message standards enables the AI to automatically parse clearinghouse message payloads without manual translation."
     },
     "zh-TW": {
-      title: "數位文化祭紅包抽獎遊戲",
-      summary: "主導一場全校規模的春節/元宵文化問答闖關活動，通過 AI 生成應景對聯並發放校園禮券。",
-      steps: [
-        "在 Agent Designer 中，架構一個富有東方古典應景氛圍的「Lunar New Year Assistant」智能對話 Agent。",
-        "將春節典故、十二生肖歷史及元宵民俗知識文檔上傳為該 Agent 的專屬知識基礎。",
-        "透過 Image Generation 繪製出一批具浮雕質感的虛擬紅色紅包與春聯美術底圖。",
-        "在學生資訊門戶（Student Portal）中配置一組與 Agent 連線的輕量化禮券庫隨機派發 API。",
-        "學生只要在與 Agent 趣味對答中正確回答出傳統典故，便可獲得專屬紅聯祝福及實體書券兌換碼。"
+      "title": "T+1 Trade Settlement Reconciliation Agent",
+      "summary": "Reconcile daily transaction ledgers against clearinghouse logs to identify trade settlement discrepancies automatically.",
+      "steps": [
+        "Compile clearinghouse transaction templates, transaction compliance codes, and ledger handbooks in your private database.",
+        "Use Gemini Agent Designer to build a conversational agent named 'Trade Settlement Reconciliation Analyst'.",
+        "Upload transaction CSVs and clearinghouse reports directly into the agent sandboxed session.",
+        "Prompt the agent to cross-reference settlement amounts, transaction timestamps, and client account IDs.",
+        "Extract anomalous transaction line items and review the generated clearinghouse dispatch reports."
       ],
-      prompt: `你是一位充滿活力、知書達禮、熱愛華夏傳統文化的「新年文化大使兼 AI 關主」。
-你的任務是引導學生完成線上新春文化問答，並針對他們的個人願望，現場提筆寫一幅專屬的賀歲春聯。
-1. 熱情有禮地歡迎前來體驗的學生，向他們恭賀新年，祝其學業進步。
-2. 出1道有趣的傳統民俗問題（例如：「生肖中的龍通常代表何種氣宇與意義？」）。
-3. 如果學生答對了，大加讚賞，並詢問其新學期心願（例如：考高分、脫單、找到好實習），現場為其度身創作一幅充滿詩意、平仄對仗的古典春聯（包含左右聯與橫批）。
-4. 指引他們複製領獎代碼「CNY-BOOKSTORE-10」到校園書店兌換禮物。
-5. 如果答錯了，請溫和地告知其典故，並換個簡單問題給他們第二次答題機會。`,
-      proTip: "透過將問答 Agent 與學生事務入口結合，您可以將原本呆板的校園文化推廣活動，改造成爆款、極具文化沈浸感且互動率極高的數位盛會。"
+      "prompt": "You are the 'Trade Settlement Reconciliation Agent.' Your goal is to audit daily trading accounts and clearinghouse ledgers.\n1. **Compare daily trade records** and clearinghouse logs. Highlight any transaction discrepancy.\n2. Identify any transaction matching failure (e.g. Price mismatch, missing ISIN, incorrect settlement date).\n3. Generate a structured Reconciliation Exception Report detailing: Transaction ID, Client Account, Clearinghouse Code, Discrepancy Margin.\n4. Provide a professional clearinghouse correction dispatch email draft on-screen for the operations manager to review.\nMaintain absolute accuracy and compliance-focused rigor.",
+      "proTip": "Grounding your agent in Swift MT548 settlement status message standards enables the AI to automatically parse clearinghouse message payloads without manual translation."
     },
     "zh-CN": {
-      title: "数字文化祭红包抽奖游戏",
-      summary: "主导一场全校规模的春节/元宵文化问答闯关活动，通过 AI 生成应景对联并发放校园礼券。",
-      steps: [
-        "在 Agent Designer 中，架构一个富有东方古典应景氛围的“Lunar New Year Assistant”智能对话 Agent。",
-        "将春节典故、十二生肖历史及元宵民俗知识文档上传为该 Agent 的专属知识基础。",
-        "通过 Image Generation 绘制出一批具浮雕质感的虚拟红色红包与春联美术底图。",
-        "在学生信息门户（Student Portal）中配置一组与 Agent 连线的轻量化礼券库随机派发 API。",
-        "学生只要在与 Agent 趣味对答中正确回答出传统典故，便可获得专属红联祝福及实体书券兑换码。"
+      "title": "T+1 Trade Settlement Reconciliation Agent",
+      "summary": "Reconcile daily transaction ledgers against clearinghouse logs to identify trade settlement discrepancies automatically.",
+      "steps": [
+        "Compile clearinghouse transaction templates, transaction compliance codes, and ledger handbooks in your private database.",
+        "Use Gemini Agent Designer to build a conversational agent named 'Trade Settlement Reconciliation Analyst'.",
+        "Upload transaction CSVs and clearinghouse reports directly into the agent sandboxed session.",
+        "Prompt the agent to cross-reference settlement amounts, transaction timestamps, and client account IDs.",
+        "Extract anomalous transaction line items and review the generated clearinghouse dispatch reports."
       ],
-      prompt: `你是一位充满活力、知书达礼、热爱华夏传统文化的“新年文化大使兼 AI 关主”。
-你的任务是引导学生完成线上新春文化问答，并针对他们的个人愿望，现场提笔写一幅专属的贺岁春联。
-1. 热情有礼地欢迎前来体验的学生，向他们恭贺新年，祝其学业进步。
-2. 出1道传统的民俗问题（例如：“生肖中的龙通常代表何种气宇与意义？”）。
-3. 如果学生答对了，大加赞赏，并询问其新学期心愿（例如：考高分、脱单、找到好实习），现场为其度身创作一幅充满诗意、平仄对仗的古典春联（包含左右联与横批）。
-4. 指引他们复制领奖代码“CNY-BOOKSTORE-10”到校园书店兑换礼物。
-5. 如果答错了，请温和地告知其典故，并换个简单问题给他们第二次答题机会。`,
-      proTip: "通过将问答 Agent 与学生事务入口结合，您可以将原本呆板的校园文化推广活动，改造成爆款、极具文化沉浸感且互动率极高的数字盛会。"
+      "prompt": "You are the 'Trade Settlement Reconciliation Agent.' Your goal is to audit daily trading accounts and clearinghouse ledgers.\n1. **Compare daily trade records** and clearinghouse logs. Highlight any transaction discrepancy.\n2. Identify any transaction matching failure (e.g. Price mismatch, missing ISIN, incorrect settlement date).\n3. Generate a structured Reconciliation Exception Report detailing: Transaction ID, Client Account, Clearinghouse Code, Discrepancy Margin.\n4. Provide a professional clearinghouse correction dispatch email draft on-screen for the operations manager to review.\nMaintain absolute accuracy and compliance-focused rigor.",
+      "proTip": "Grounding your agent in Swift MT548 settlement status message standards enables the AI to automatically parse clearinghouse message payloads without manual translation."
     }
   },
-  finance_compliance: {
+  "fraud_incident_responder": {
     "en": {
-      title: "Student Expense Compliance Auditor",
-      summary: "Automatically cross-reference student club purchase receipts and expense reports against school purchasing guidelines.",
-      steps: [
-        "Upload all school purchasing guidelines, vendor policies, and standard accounting codes to a secure folder.",
-        "Use the Drive Connector to ground your NotebookLM workspace in this policy archive.",
-        "Upload a student club's submitted annual expense spreadsheet and digital PDF receipts.",
-        "Prompt NotebookLM to cross-reference each expense item with the approved guidelines to verify compliance.",
-        "Generate an automated compliance audit report, highlighting non-compliant spending and budget overruns."
+      "title": "Fraud and AML Incident Audit Responder",
+      "summary": "Audit massive collections of transaction histories, audit logs, and firewall event records in NotebookLM to identify anomalies.",
+      "steps": [
+        "Upload institutional security protocols, transaction guidelines, and regulatory reporting forms to NotebookLM.",
+        "Connect your secure network event records and transaction logs directory using the Document Store Connector.",
+        "Prompt the AI to cross-reference log entries with standard AML/KYC warning patterns to isolate fraud risks.",
+        "Synthesize structured compliance incident reports complete with precise activity timestamps for submission to risk boards."
       ],
-      prompt: `Acting as an school financial auditor, conduct a compliance review of the attached student club expense report.
-Compare each expense item with the uploaded university procurement guidelines.
-Your audit report must highlight:
-1. **Compliance Violations**: Identify any items that violate the policies (e.g., unapproved software subscriptions, exceeding maximum food limits per person). Cite the specific policy page.
-2. **Accounting Code Verification**: Verify if correct accounting codes were applied to each expense category.
-3. **Draft Advisory Memo**: Write a professional, polite advisory email to the club treasurer explaining the flagged violations and the steps required to resolve them.`,
-      proTip: "This tool does not automate financial payouts, maintaining the strict 'human-in-the-loop' standard. It acts as an elite assistant that saves hours of manual policy cross-referencing."
+      "prompt": "Act as a Lead Financial Crime and Fraud Investigator. Analyze the attached server event sheets and transaction logs.\nGenerate a high-fidelity AML audit report:\n1. **Anomaly Isolation**: Highlight all transactions that violate geographical parameters, single-day limits, or structural limits.\n2. **Log Correlation**: Evaluate if there is a correlation between the IP addresses used in flagged transactions and past known brute-force server attempts.\n3. **Regulatory Draft**: Compile a formatted Suspicious Activity Report (SAR) template with timestamps and transaction hashes.",
+      "proTip": "Compiling guidelines and event logs in a secure, sandboxed NotebookLM instance maintains compliance with international security standards and prevents log data leakage."
     },
     "zh-TW": {
-      title: "學生報支合規性審計員",
-      summary: "將課外活動報銷憑證、收據與學校繁瑣的採購規章進行自動化比對，秒級判定報支合規性。",
-      steps: [
-        "將全校採購法規手冊、合格供應商清單及預算會計科目代碼庫上傳至安全的雲端硬碟。",
-        "使用 Drive Connector 將財務審核 NotebookLM 工作區直接對齊此政策庫。",
-        "上傳社團幹部遞交的支出明細 Excel 表格與全部 PDF 收據影本。",
-        "指示 NotebookLM 將每一筆開支條目與採購章程中的限額和允許項目進行自動化交叉比對。",
-        "生成自動化審核報告，醒目標記出任何超支、違反補助目或未附合格發票的疑慮開支。"
+      "title": "Fraud and AML Incident Audit Responder",
+      "summary": "Audit massive collections of transaction histories, audit logs, and firewall event records in NotebookLM to identify anomalies.",
+      "steps": [
+        "Upload institutional security protocols, transaction guidelines, and regulatory reporting forms to NotebookLM.",
+        "Connect your secure network event records and transaction logs directory using the Document Store Connector.",
+        "Prompt the AI to cross-reference log entries with standard AML/KYC warning patterns to isolate fraud risks.",
+        "Synthesize structured compliance incident reports complete with precise activity timestamps for submission to risk boards."
       ],
-      prompt: `請扮演大學課外活動組的專職資深財務審計官。對上傳的學生社團活動報銷憑證與明細表進行合規性核對。
-請依據學校《學生活動經費報支管理辦法》審查所有申報科目。
-生成的財務審計意見書必須明確指明：
-1. **不合規項目清單**：列出所有涉嫌違反報支細則的開支（例如：單人餐飲超標、私自訂閱非核准之商業軟體），並指明其違反了辦法中的哪一條規定或頁數。
-2. **會計科目檢驗**：審視其試算表中所歸類的編號代碼與開支內容是否完全匹配（例如：將辦公用品錯歸至圖書採購）。
-3. **勸導修改公文**：起草一封語氣嚴謹、用詞得體但態度明確的勸導公文，發送給社團財務幹部，指引他們如何在規定期限內補正發票或進行退件修正。`,
-      proTip: "此工具僅扮演高效的「財務決策助手」，絕不介入任何實體款項撥付的自動核發，嚴守財務工作「人機共審」的安全基準線。"
+      "prompt": "Act as a Lead Financial Crime and Fraud Investigator. Analyze the attached server event sheets and transaction logs.\nGenerate a high-fidelity AML audit report:\n1. **Anomaly Isolation**: Highlight all transactions that violate geographical parameters, single-day limits, or structural limits.\n2. **Log Correlation**: Evaluate if there is a correlation between the IP addresses used in flagged transactions and past known brute-force server attempts.\n3. **Regulatory Draft**: Compile a formatted Suspicious Activity Report (SAR) template with timestamps and transaction hashes.",
+      "proTip": "Compiling guidelines and event logs in a secure, sandboxed NotebookLM instance maintains compliance with international security standards and prevents log data leakage."
     },
     "zh-CN": {
-      title: "学生报销合规性审计员",
-      summary: "将课外活动报销凭证、收据与学校繁琐的采购规章进行自动化比对，秒级判定报销合规性。",
-      steps: [
-        "将全校采购法规手册、合格供应商清单及预算会计科目代码库上传至安全的云端硬盘。",
-        "使用 Drive Connector 将财务审核 NotebookLM 工作区直接对齐此政策库。",
-        "上传社团干部递交的支出明细 Excel 表格与全部 PDF 收据影本。",
-        "指示 NotebookLM 将每一笔开支条目与采购章程中的限额和允许项目进行自动化交叉比对。",
-        "生成自动化审核报告，醒目标记出任何超支、违反补助目或未附合格发票的疑虑开支。"
+      "title": "Fraud and AML Incident Audit Responder",
+      "summary": "Audit massive collections of transaction histories, audit logs, and firewall event records in NotebookLM to identify anomalies.",
+      "steps": [
+        "Upload institutional security protocols, transaction guidelines, and regulatory reporting forms to NotebookLM.",
+        "Connect your secure network event records and transaction logs directory using the Document Store Connector.",
+        "Prompt the AI to cross-reference log entries with standard AML/KYC warning patterns to isolate fraud risks.",
+        "Synthesize structured compliance incident reports complete with precise activity timestamps for submission to risk boards."
       ],
-      prompt: `请扮演大学课外活动组的专职资深财务审计官。对上传的学生社团活动报销凭证与明细表进行合规性核对。
-请依据学校《学生活动经费报销管理办法》审查所有申报科目。
-生成的财务审计意见书必须明确指明：
-1. **不合规项目清单**：列出所有涉嫌违反报销细则的开支（例如：单人餐饮超标、私自订阅非核准之商业软件），并指明其违反了办法中的哪一条规定或页数。
-2. **会计科目检验**：审视其试算表中所归类的编号代码与开支内容是否完全匹配（例如：将办公用品错归至图书采购）。
-3. **劝导修改公文**：起草一封语气严谨、用词得体但态度明确的劝导公文，发送给社团财务干部，指引他们如何在规定期限内补正发票或进行退件修正。`,
-      proTip: "此工具仅扮演高效的“财务决策助手”，绝不介入任何实体款项拨付的自动核发，严守财务工作“人机共审”的安全基准线。"
+      "prompt": "Act as a Lead Financial Crime and Fraud Investigator. Analyze the attached server event sheets and transaction logs.\nGenerate a high-fidelity AML audit report:\n1. **Anomaly Isolation**: Highlight all transactions that violate geographical parameters, single-day limits, or structural limits.\n2. **Log Correlation**: Evaluate if there is a correlation between the IP addresses used in flagged transactions and past known brute-force server attempts.\n3. **Regulatory Draft**: Compile a formatted Suspicious Activity Report (SAR) template with timestamps and transaction hashes.",
+      "proTip": "Compiling guidelines and event logs in a secure, sandboxed NotebookLM instance maintains compliance with international security standards and prevents log data leakage."
     }
   },
-  security_simulator: {
+  "hr_onboarding_wizard": {
     "en": {
-      title: "Campus Safety Drill Simulator",
-      summary: "Simulate complex emergency response drills to train campus security marshals and test response protocols.",
-      steps: [
-        "Ground a custom Security Drill Agent in your campus safety handbook, building layouts, and emergency protocols.",
-        "Configure the Agent to role-play as an Emergency Dispatcher during a simulated crisis scenario (e.g., power outage, severe storm).",
-        "Generate high-fidelity instructional video clips and animated scenario prompts using Video Generation features.",
-        "Have security staff interact with the simulator, typing real-time responses to evolving scenario prompts.",
-        "Generate a post-simulation feedback report, assessing the staff's compliance with safety handbooks."
+      "title": "Employee Compliance Onboarding & Training Agent",
+      "summary": "Build an interactive employee compliance training agent to guide staff through regulatory onboarding and tests.",
+      "steps": [
+        "Upload your company's code of conduct, anti-harassment regulations, and AML guidelines to your document store.",
+        "Link your document folder using the Document Store Connector in Agent Designer.",
+        "Configure the custom Agent to role-play as a Training Coordinator to guide new employees through training steps.",
+        "Utilize Video Generation features to automatically script and produce custom 60-second instructional micro-learning videos.",
+        "Deploy the onboarding bot to help employees prepare for and complete standard compliance quizzes."
       ],
-      prompt: `You are the 'Emergency Response Coordinator Simulator.' Your role is to guide campus security personnel through a high-stakes, real-time crisis drill.
-Scenario: A severe typhoon has caused a localized power failure in the science laboratory building, and a critical backup generator has failed.
-1. Present the scenario details clearly, including building floorplans and chemical storage risks.
-2. Ask the user: 'What is your first priority protocol?'
-3. Based on their input, evolve the scenario realistically (e.g., 'Correct, evacuation initiated. However, a laboratory TA reports one student is trapped in room 302...').
-4. Grade their decisions strictly against the uploaded Campus Safety Handbook.
-5. Provide detailed feedback, highlighting strengths and critical compliance gaps at the end of the simulation.`,
-      proTip: "Use Video Generation tools to create short, 15-second simulation briefings. Visual prompts increase engagement and make the training feel incredibly realistic to staff."
+      "prompt": "You are the 'Compliance Training Advisor Bot' for employee onboarding. Your objective is to guide new hires through regulatory standards.\n1. **Ground your onboarding checkpoints strictly** in the uploaded company code of conduct.\n2. Guide the employee step-by-step through the compliance modules (e.g. Anti-Bribery, Insider Trading, Security Best Practices).\n3. Present interactive scenario-based quiz questions at the end of each module to test retention (e.g. 'If a vendor offers an expensive dinner during an active RFP, what is the standard protocol?').\n4. Grade their answers and provide clear compliance explanations.\nKeep the tone welcoming, instructional, and professional.",
+      "proTip": "By connecting the training agent to your secure Document Store, compliance training programs are updated automatically whenever HR uploads a revised code of conduct."
     },
     "zh-TW": {
-      title: "校園安全演練模擬器",
-      summary: "藉由應變角色扮演與多媒體模擬，進行高逼真度的安全哨兵危機演練與合規測試。",
-      steps: [
-        "將自訂的「安全防汛避難演練 Agent」植基於學校的安全防護手冊、建築平面圖與防災流程中。",
-        "配置 Agent 扮演總指揮中心調度員，即時模擬一場校園突發災難情境（如局域大停電、強烈颱風）。",
-        "利用 Video Generation 功能生成包含動態暴風雨、煙霧瀰漫與夜間逃生指示等 15 秒情境短影音。",
-        "要求前來演練的安全警衛人員在終端即時打字輸入其當下的決策、疏散路線與通報程序。",
-        "演練結束後，自動比對安全手冊生成考評報告，具體點出決策中的安全漏洞與卓越表現。"
+      "title": "Employee Compliance Onboarding & Training Agent",
+      "summary": "Build an interactive employee compliance training agent to guide staff through regulatory onboarding and tests.",
+      "steps": [
+        "Upload your company's code of conduct, anti-harassment regulations, and AML guidelines to your document store.",
+        "Link your document folder using the Document Store Connector in Agent Designer.",
+        "Configure the custom Agent to role-play as a Training Coordinator to guide new employees through training steps.",
+        "Utilize Video Generation features to automatically script and produce custom 60-second instructional micro-learning videos.",
+        "Deploy the onboarding bot to help employees prepare for and complete standard compliance quizzes."
       ],
-      prompt: `你是一位全天候在線的「校園危機指揮官模擬器」。你的任務是帶領參訓的校園警衛人員，在高度擬真的極端情境下執行一場即時的安全應變演練。
-今日演練設定：一場超級颱風肆虐校園，導致理科教學大樓局部大停電，且一具關鍵的緊急備用發電機因進水而發生故障。
-請依照以下節奏推動演練：
-1. 播報基本災情與目前大樓內的化學實驗室危險物品分布圖，營造逼真的臨場緊迫感。
-2. 詢問使用者（受訓警衛）：「你的第一個標準處置程序是什麼？」
-3. 依據受訓警衛的回應，即時推進災情（例如：「收到，已下達局部疏散令。但此時實驗室助教緊急通報，理學大樓302室內仍有1名受傷學生被困...」）。
-4. 嚴格對照安全防護手冊規定，評估警衛做出的每一項撤離、求援與封鎖決策。
-5. 演練結尾，給予完整的百分制評分，列出其應變盲點與表現特別符合標準流程的部分。`,
-      proTip: "使用 Video Generation 生產 15 秒的突發場景畫面，能在演練中為受訓人員創造極高張力的視覺氛圍，大幅提升訓練效果與專注度。"
+      "prompt": "You are the 'Compliance Training Advisor Bot' for employee onboarding. Your objective is to guide new hires through regulatory standards.\n1. **Ground your onboarding checkpoints strictly** in the uploaded company code of conduct.\n2. Guide the employee step-by-step through the compliance modules (e.g. Anti-Bribery, Insider Trading, Security Best Practices).\n3. Present interactive scenario-based quiz questions at the end of each module to test retention (e.g. 'If a vendor offers an expensive dinner during an active RFP, what is the standard protocol?').\n4. Grade their answers and provide clear compliance explanations.\nKeep the tone welcoming, instructional, and professional.",
+      "proTip": "By connecting the training agent to your secure Document Store, compliance training programs are updated automatically whenever HR uploads a revised code of conduct."
     },
     "zh-CN": {
-      title: "校园安全演练模拟器",
-      summary: "借由应变角色扮演与多媒体模拟，进行高逼真度的安全哨兵危机演练与合规测试。",
-      steps: [
-        "将自订的“安全防汛避难演练 Agent”植基于学校的安全防护手册、建筑平面图与防灾流程中。",
-        "配置 Agent 扮演总指挥中心调度员，即时模拟一场校园突发灾难情境（如局域大停电、强烈台风）。",
-        "利用 Video Generation 功能生成包含动态暴风雨、烟雾弥漫与夜间逃生指示等 15 秒情境短视频。",
-        "要求前来演练的安全警卫人员在终端即时打字输入其当下的决策、疏散路线与通报程序。",
-        "演练结束后，自动比对安全手册生成考评报告，具体点出决策中的安全漏洞与卓越表现。"
+      "title": "Employee Compliance Onboarding & Training Agent",
+      "summary": "Build an interactive employee compliance training agent to guide staff through regulatory onboarding and tests.",
+      "steps": [
+        "Upload your company's code of conduct, anti-harassment regulations, and AML guidelines to your document store.",
+        "Link your document folder using the Document Store Connector in Agent Designer.",
+        "Configure the custom Agent to role-play as a Training Coordinator to guide new employees through training steps.",
+        "Utilize Video Generation features to automatically script and produce custom 60-second instructional micro-learning videos.",
+        "Deploy the onboarding bot to help employees prepare for and complete standard compliance quizzes."
       ],
-      prompt: `你是一位全天候在线的“校园危机指挥官模拟器”。你的任务是带领参训的校园警卫人员，在高度拟真的极端情境下执行一场即时的安全应变演练。
-今日演练设定：一场超级台风肆虐校园，导致理科教学大楼局部大停电，且一具关键的紧急备用发电机因进水而发生故障。
-请依照以下节奏推动演练：
-1. 播报基本灾情与目前大楼内的化学实验室危险物品分布图，营造逼真的临场紧迫感。
-2. 询问使用者（受训警卫）：“你的第一个标准处置程序是什么？”
-3. 依据受训警卫的回应，即时推进灾情（例如：“收到，已下达局部疏散令。但此时实验室助教紧急通报，理学大楼302室内仍有1名受伤学生被困...”）。
-4. 严格对照安全防护手册规定，评估警卫做出的每一项撤离、求援与封锁决策。
-5. 演练结尾，给予完整的百分制评分，列出其应变盲点与表现特别符合标准流程的部分。`,
-      proTip: "使用 Video Generation 生产 15 秒的突发场景画面，能在演练中为受训人员创造极高张力的视觉氛围，大幅提升训练效果与专注度。"
+      "prompt": "You are the 'Compliance Training Advisor Bot' for employee onboarding. Your objective is to guide new hires through regulatory standards.\n1. **Ground your onboarding checkpoints strictly** in the uploaded company code of conduct.\n2. Guide the employee step-by-step through the compliance modules (e.g. Anti-Bribery, Insider Trading, Security Best Practices).\n3. Present interactive scenario-based quiz questions at the end of each module to test retention (e.g. 'If a vendor offers an expensive dinner during an active RFP, what is the standard protocol?').\n4. Grade their answers and provide clear compliance explanations.\nKeep the tone welcoming, instructional, and professional.",
+      "proTip": "By connecting the training agent to your secure Document Store, compliance training programs are updated automatically whenever HR uploads a revised code of conduct."
+    }
+  },
+  "email_priority_digest": {
+    "en": {
+      "title": "Advisor Daily Correspondence Summary & Digest",
+      "summary": "Connect Gemini directly to your advisory mailbox to summarize client emails and schedule follow-ups automatically.",
+      "steps": [
+        "Connect your institutional mailbox using the secure corporate Email Connector.",
+        "Link your work calendar to Gemini using the secure Calendar Connector.",
+        "Prompt Gemini to analyze all incoming client messages received in the past 24 hours.",
+        "Generate a structured, priority-ranked digest of customer wealth inquiries and meeting requests.",
+        "Ask Gemini to automatically draft professional client replies and suggest open calendar time slots for scheduling."
+      ],
+      "prompt": "You are the 'Advisor Personal Assistant Agent'. Analyze all client emails received in the past 24 hours.\nGenerate a structured daily advisor brief:\n1. **Urgent Client Inquiries**: Extract and highlight any urgent buy/sell requests, withdrawal notices, or margin alerts in bold.\n2. **Advisory Meeting Requests**: Synthesize client requests for face-to-face consultations, matching open slots in your corporate calendar.\n3. **Action Items Checklist**: Provide a prioritized checklist of 3 immediate actions.\n4. **Draft Client Correspondence**: For each client query, draft a formal, compliance-checked draft reply (e.g. confirming meeting dates, confirming transaction receipts) directly in Outlook/Gmail Drafts.\nMaintain an extremely professional, polite, and risk-compliant tone.",
+      "proTip": "Using the Email Connector maintains absolute data confidentiality, ensuring sensitive client wealth planning emails are never transmitted outside your organization's boundaries."
+    },
+    "zh-TW": {
+      "title": "Advisor Daily Correspondence Summary & Digest",
+      "summary": "Connect Gemini directly to your advisory mailbox to summarize client emails and schedule follow-ups automatically.",
+      "steps": [
+        "Connect your institutional mailbox using the secure corporate Email Connector.",
+        "Link your work calendar to Gemini using the secure Calendar Connector.",
+        "Prompt Gemini to analyze all incoming client messages received in the past 24 hours.",
+        "Generate a structured, priority-ranked digest of customer wealth inquiries and meeting requests.",
+        "Ask Gemini to automatically draft professional client replies and suggest open calendar time slots for scheduling."
+      ],
+      "prompt": "You are the 'Advisor Personal Assistant Agent'. Analyze all client emails received in the past 24 hours.\nGenerate a structured daily advisor brief:\n1. **Urgent Client Inquiries**: Extract and highlight any urgent buy/sell requests, withdrawal notices, or margin alerts in bold.\n2. **Advisory Meeting Requests**: Synthesize client requests for face-to-face consultations, matching open slots in your corporate calendar.\n3. **Action Items Checklist**: Provide a prioritized checklist of 3 immediate actions.\n4. **Draft Client Correspondence**: For each client query, draft a formal, compliance-checked draft reply (e.g. confirming meeting dates, confirming transaction receipts) directly in Outlook/Gmail Drafts.\nMaintain an extremely professional, polite, and risk-compliant tone.",
+      "proTip": "Using the Email Connector maintains absolute data confidentiality, ensuring sensitive client wealth planning emails are never transmitted outside your organization's boundaries."
+    },
+    "zh-CN": {
+      "title": "Advisor Daily Correspondence Summary & Digest",
+      "summary": "Connect Gemini directly to your advisory mailbox to summarize client emails and schedule follow-ups automatically.",
+      "steps": [
+        "Connect your institutional mailbox using the secure corporate Email Connector.",
+        "Link your work calendar to Gemini using the secure Calendar Connector.",
+        "Prompt Gemini to analyze all incoming client messages received in the past 24 hours.",
+        "Generate a structured, priority-ranked digest of customer wealth inquiries and meeting requests.",
+        "Ask Gemini to automatically draft professional client replies and suggest open calendar time slots for scheduling."
+      ],
+      "prompt": "You are the 'Advisor Personal Assistant Agent'. Analyze all client emails received in the past 24 hours.\nGenerate a structured daily advisor brief:\n1. **Urgent Client Inquiries**: Extract and highlight any urgent buy/sell requests, withdrawal notices, or margin alerts in bold.\n2. **Advisory Meeting Requests**: Synthesize client requests for face-to-face consultations, matching open slots in your corporate calendar.\n3. **Action Items Checklist**: Provide a prioritized checklist of 3 immediate actions.\n4. **Draft Client Correspondence**: For each client query, draft a formal, compliance-checked draft reply (e.g. confirming meeting dates, confirming transaction receipts) directly in Outlook/Gmail Drafts.\nMaintain an extremely professional, polite, and risk-compliant tone.",
+      "proTip": "Using the Email Connector maintains absolute data confidentiality, ensuring sensitive client wealth planning emails are never transmitted outside your organization's boundaries."
     }
   }
 };
 
-// Application State
-const appState = {
-  userRole: null, // set during onboarding or header switch
-  institutionLevel: null, // set during onboarding or header switch
-  activeConnectors: {
-    outlook: false,
-    onedrive: false,
-    lms: false,
-    google: false
-  },
-  searchQuery: "",
-  activeFilterFeature: "all",
-  activeFilterStatus: "all",
-  activeFilterCategory: "all",
-  activeLanguage: "en" // default language
-};
+function enhanceUseCasesDatabase() {
+  // Mark all connector-dependent use cases as non-essential except when specified
+  useCasesDb.forEach(uc => {
+    if (uc.connectors && uc.connectors.length > 0) {
+      uc.connectorEssential = false;
+    }
+  });
 
-// UI Initialization and Render Functions
-// Obsolete local-only initApp placeholder removed. Unified initialization is handled in the master initApp lifecycle controller below.
+  // Overrides for customer_sentiment_auditor
+  const customer_sentiment_auditor = useCasesDb.find(uc => uc.id === "customer_sentiment_auditor");
+  if (customer_sentiment_auditor) {
+    customer_sentiment_auditor.steps = [
+      "Gather customer support logs, chat records, and call scripts manually from your local directory.",
+      "Directly upload these logs into a secure NotebookLM workspace for private sandbox analysis.",
+      "Query NotebookLM to extract the top 5 recurring friction points and overall client sentiment metrics.",
+      "Draft a professional customer experience improvement report using Gemini in Google Docs."
+    ];
+    customer_sentiment_auditor.advancedSteps = [
+      "Ground a secure NotebookLM workspace in your shared customer feedback cloud folder via the secure Document Store Connector.",
+      "Query NotebookLM to extract the top 5 recurring friction points and overall client sentiment metrics.",
+      "Ensure all analytics respect role-based folder permissions without manual data copying.",
+      "Draft a professional customer experience improvement report using Gemini in Google Docs."
+    ];
+    customer_sentiment_auditor.proTip = "Uploading de-identified chat logs manually to NotebookLM ensures maximum data privacy and sandbox control without complex system configurations.";
+    customer_sentiment_auditor.advancedProTip = "Connecting your feedback directories via the Document Store Connector allows for live sentiment audits, ensuring your experience dashboards are updated in real-time.";
+  }
+
+  // Overrides for compliance_assistance_bot
+  const compliance_assistance_bot = useCasesDb.find(uc => uc.id === "compliance_assistance_bot");
+  if (compliance_assistance_bot) {
+    compliance_assistance_bot.steps = [
+      "In NotebookLM, compile all corporate regulatory manuals, compliance guidelines, and KYC protocols.",
+      "Create a custom conversational agent using Agent Designer and name it 'Internal Compliance Assistant'.",
+      "Draft detailed policy answers on-screen and manually provide escalation templates for complex regulatory queries.",
+      "Deploy the compliance bot on the employee intranet for static policy assistance."
+    ];
+    compliance_assistance_bot.advancedSteps = [
+      "Ground your conversational agent in compliance databases and link the secure corporate Email Connector.",
+      "Configure automated escalation instructions, allowing the agent to write audit drafts directly in your Email folder.",
+      "Test the agent's ability to create compliant, detailed email drafts automatically during suspected AML alerts.",
+      "Deploy the agent for complete end-to-end integration and regulatory tracking."
+    ];
+    compliance_assistance_bot.proTip = "In standalone mode, the compliance bot renders precise, ready-to-copy email escalation templates directly inside the chat interface.";
+    compliance_assistance_bot.advancedProTip = "By connecting the Email Connector, the compliance bot can automatically inject audit drafts directly into your corporate Drafts folder, speeding up report cycles.";
+  }
+
+  // Overrides for credit_risk_assessment
+  const credit_risk_assessment = useCasesDb.find(uc => uc.id === "credit_risk_assessment");
+  if (credit_risk_assessment) {
+    credit_risk_assessment.steps = [
+      "Export an anonymized CSV dataset containing client CRM portfolios and liquidity scores manually.",
+      "Upload this CSV directly to your secure Gemini Advanced prompt window.",
+      "Instruct Gemini to run predictive risk modeling, flagging accounts with payment warning anomalies.",
+      "Generate draft credit check-in emails proposing debt-restructuring options for flagged cohorts."
+    ];
+    credit_risk_assessment.advancedSteps = [
+      "Configure secure API connections from Gemini to your corporate CRM and financial database.",
+      "Run multi-dimensional portfolio diagnostic risk checks, flagging accounts with payment warning anomalies.",
+      "Configure a secure data privacy layer, ensuring strict compliance with financial regulations and client privacy laws.",
+      "Trigger automated, personalized relationship manager alert emails in your corporate draft folder to suggest portfolio restructuring."
+    ];
+    credit_risk_assessment.proTip = "Exporting de-identified customer datasets manually is a quick, high-security way to run diagnostics without complex API setups.";
+    credit_risk_assessment.advancedProTip = "Connecting your CRM database allows for nightly automated risk sweeps, feeding real-time balance metrics directly to relationship manager dashboards.";
+  }
+}
 
 // Theme Initialization & Handling
 function initTheme() {
@@ -4012,7 +3566,7 @@ let currentAdminTab = 'users';
 
 function initAdminPortal() {
   const isAssist = appState.isAssist === true;
-  const isSuperAdmin = (appState.userEmail === 'edu_portal_s_admin');
+  const isSuperAdmin = (appState.userEmail === 'fsi_portal_s_admin');
 
   let savedTab = sessionStorage.getItem("ge_current_admin_tab") || "users";
   if (isAssist && savedTab === "users") {
@@ -5856,306 +5410,757 @@ const VERIFICATION_STORAGE_KEY = "ge_verification_checkpoints_v3";
 
 const defaultTimelineStages = [
   {
-    id: "day0",
-    title: "Day 0 Configuration (IdP & connectors setup)",
-    titleZh: "Day 0 技術配置（IdP與連接器設定）",
-    subtitle: "Setup Phase",
-    subtitleZh: "基礎配置期",
-    color: "#6366f1", // Indigo
-    description: "Initialize backend environments, configure Identity Provider (IdP) authentication loops, and map baseline database structures before the academic year begins.",
-    descriptionZh: "初始化後端環境、配置身份提供商 (IdP) 認證迴路，並在學期前建立基礎資料庫結構。",
-    playbookIds: ["finance_compliance", "workforce_federation"]
+    "id": "day0",
+    "title": "Month 1: Foundation Setup",
+    "titleZh": "第 1 個月：基礎環境建立 (Day 0)",
+    "subtitle": "Tech Provisioning",
+    "subtitleZh": "技術環境配置與部署",
+    "color": "#6366f1",
+    "description": "Initialize backend environments, configure Identity Provider (IdP) authentication loops, and map baseline database structures before the first rollout phase.",
+    "descriptionZh": "初始化後端環境、配置身份提供商 (IdP) 認證迴路，並在首階段推廣前建立基礎資料庫結構。",
+    "playbookIds": [
+      "it_service_desk",
+      "trade_settlement_reconciliation"
+    ]
   },
   {
-    id: "pre",
-    title: "Tech Provisioning & Prep (Syllabi & documents preparation)",
-    titleZh: "學期準備（課程大綱與教材編寫）",
-    subtitle: "Pre-Semester (Aug)",
-    subtitleZh: "學期前（八月）",
-    color: "#f59e0b", // Amber
-    description: "Align core teaching materials, upload syllabus structures, and coordinate initial AI assistant designs ahead of active teaching cohorts.",
-    descriptionZh: "在開學前整理核心教材、上傳教學大綱結構，並協調 AI 輔助助理之基礎設計。",
-    playbookIds: ["socratic_tutor", "lab_manual_creator"]
+    "id": "pre",
+    "title": "Months 2-3: Core Pilots & Launch",
+    "titleZh": "第 2-3 個月：核心試點啟動",
+    "subtitle": "Launch & Onboard",
+    "subtitleZh": "試點啟動與引導",
+    "color": "#f59e0b",
+    "description": "Align core advisory playbooks, upload underwriting criteria, and coordinate initial AI assistant designs ahead of active pilot groups.",
+    "descriptionZh": "整理核心諮詢方案、上傳授信評估標準，並在試點團隊啟用前協調 AI 輔助智能體之基礎設計。",
+    "playbookIds": [
+      "equity_research_copilot",
+      "underwriting_manual_creator"
+    ]
   },
   {
-    id: "sem1",
-    title: "Launch & Onboard (Onboard faculty and cohorts)",
-    titleZh: "正式啟動與引導（教職員工與學生引導）",
-    subtitle: "Sem 1 (Sep)",
-    subtitleZh: "第一學期（九月）",
-    color: "#10b981", // Emerald
-    description: "Onboard students and faculty, establish baseline AI familiarity, and register support queues.",
-    descriptionZh: "引導學生與教職員工、建立對 AI 的基礎熟練度並登記服務支援佇列。",
-    playbookIds: ["curriculum_design", "su_helpdesk"]
+    "id": "sem1",
+    "title": "Months 4-9: Division Expansion",
+    "titleZh": "第 4-9 個月：跨部門擴展",
+    "subtitle": "Evaluation Pilot",
+    "subtitleZh": "擴展與評估試點",
+    "color": "#10b981",
+    "description": "Onboard clients and portfolio managers, establish baseline AI familiarity, and register support queues.",
+    "descriptionZh": "引導客戶與資產經理、建立對 AI 的基礎熟練度並登記服務支援佇列。",
+    "playbookIds": [
+      "portfolio_advisory_architect",
+      "compliance_assistance_bot"
+    ]
   },
   {
-    id: "mid",
-    title: "Evaluation Pilot (Roll out learning evaluations)",
-    titleZh: "期中試點評估（期中考試推廣與學習表現試點）",
-    subtitle: "Mid-Semester (Oct-Nov 15)",
-    subtitleZh: "期中（十月至十一月十五）",
-    color: "#3b82f6", // Blue
-    description: "Launch targeted pilots for course evaluations, rubric-based grading assistance, and classroom performance audits.",
-    descriptionZh: "啟動課程評估、基於量規的評分協助和課堂表現審計的針對性試點。",
-    playbookIds: ["rubric_grading", "at_risk_cohort", "accreditation_reports"]
+    "id": "mid",
+    "title": "Months 10-18+: Enterprise Scale",
+    "titleZh": "第 10-18+ 個月：企業級規模推廣",
+    "subtitle": "Scale & Evaluation",
+    "subtitleZh": "全面規模化評估",
+    "color": "#3b82f6",
+    "description": "Launch targeted pilots for asset evaluations, portfolio-based grading assistance, and operations performance audits.",
+    "descriptionZh": "啟動資產評估、基於組合的分析協助和運營表現審計的針對性試點。",
+    "playbookIds": [
+      "client_meeting_brief",
+      "credit_risk_assessment",
+      "portfolio_sentiment_tracker"
+    ]
   },
   {
-    id: "end",
-    title: "Exam Prep & Audit (Admin audits, secure repositories)",
-    titleZh: "期末準備與審計（行政審核與高安全儲存庫清掃）",
-    subtitle: "End-of-Semester (Nov 16-Jan 15)",
-    subtitleZh: "期末（十一月十六至一月十五）",
-    color: "#ef4444", // Coral/Red
-    description: "Secure data repository sweeps, audit exam papers, compile accreditation data, and lock assessment portals.",
-    descriptionZh: "執行安全數據儲存庫清理、審計考卷、編譯認證數據並鎖定評估門戶。",
-    playbookIds: ["sao_scavenger_hunt"]
+    "id": "end",
+    "title": "Continuous Security & Governance Compliance",
+    "titleZh": "持續性安全與合規監管 (Audit & Security)",
+    "subtitle": "Audit & Security",
+    "subtitleZh": "持續審計與安全合規",
+    "color": "#ef4444",
+    "description": "Secure data repository sweeps, audit financial reporting, compile regulatory analytics, and lock audit portals.",
+    "descriptionZh": "執行安全數據儲存庫清理、審計財務報表、編譯法規分析數據並鎖定審計門戶。",
+    "playbookIds": [
+      "fraud_incident_responder"
+    ]
   },
   {
-    id: "track2",
-    title: "Continuous Initiatives (Student developer hubs, ongoing audits)",
-    titleZh: "持續推進（學生社團與滾動式優化）",
-    subtitle: "Continuous (Track 2)",
-    subtitleZh: "軌道二：滾動式推進",
-    color: "#a855f7", // Purple
-    description: "Ongoing non-semester restricted milestones, student-led co-curricular development, and constant optimization reviews.",
-    descriptionZh: "持續進行的非學期限制里程碑、學生主導的共建計畫以及持續的安全與運營優化審查。",
-    playbookIds: ["club_funding", "security_simulator"]
+    "id": "track2",
+    "title": "Continuous Rolling Security & Governance Compliance",
+    "titleZh": "持續性滾動安全與合規監管 (Track 2)",
+    "subtitle": "Continuous (Track 2)",
+    "subtitleZh": "軌道二：常態性推進",
+    "color": "#a855f7",
+    "description": "Ongoing operational milestones, customer-led co-development, and constant security optimization reviews.",
+    "descriptionZh": "持續進行的運營里程碑、客戶主導的協作計畫以及持續的安全與合規優化審查。",
+    "playbookIds": [
+      "customer_sentiment_auditor",
+      "hr_onboarding_wizard",
+      "email_priority_digest"
+    ]
   }
 ];
 
 let roleVerificationCheckpoints = {
-  "IT Admin": {
-    day0: [
-      { id: "ita_d0_1", text: "Configure federated IdP single sign-on (SSO) loops with university directories", textZh: "與學校帳號目錄配置 IdP 聯邦單一登入 (SSO) 整合" },
-      { id: "ita_d0_2", text: "Establish enterprise workspace secure tenant boundaries for cloud data", textZh: "為雲端數據與 AI 工作空間建立企業級安全租戶隔離邊界" }
+  "IT Operator": {
+    "day0": [
+      {
+        "id": "ita_d0_1",
+        "text": "Configure federated IdP single sign-on (SSO) loops with corporate active directories",
+        "textZh": "與企業活動目錄配置 IdP 聯邦單一登入 (SSO) 整合"
+      },
+      {
+        "id": "ita_d0_2",
+        "text": "Establish enterprise workspace secure tenant boundaries for cloud data security",
+        "textZh": "為雲端數據與 AI 工作空間建立企業級安全租戶隔離邊界"
+      }
     ],
-    pre: [
-      { id: "ita_pre_1", text: "Validate LMS REST API endpoints and webhooks connectivity", textZh: "驗證與測試 LMS 系統 REST API 端點與 Webhooks 連接性" },
-      { id: "ita_pre_2", text: "Verify core cloud drive connector sharing permissions and scope rules", textZh: "審查與驗證雲端硬碟連接器的共用存取規則與範圍設定" }
+    "pre": [
+      {
+        "id": "ita_pre_1",
+        "text": "Validate banking CRM API endpoints and sandbox connectivity",
+        "textZh": "驗證與測試銀行 CRM 系統 API 端點與沙盒連接性"
+      },
+      {
+        "id": "ita_pre_2",
+        "text": "Verify core cloud drive connector sharing permissions and compliance rules",
+        "textZh": "審查與驗證雲端硬碟連接器的共用存取規則與合規設定"
+      }
     ],
-    sem1: [
-      { id: "ita_sem1_1", text: "Monitor system performance and API quota usage logs in cloud console", textZh: "在雲端控制台監控系統效能、請求延遲與 API 配額使用日誌" },
-      { id: "ita_sem1_2", text: "Review onboarding group provisioning metrics for faculty and student bodies", textZh: "審查教職員與學生群體之自動化帳號配置與群組導入指標" }
+    "sem1": [
+      {
+        "id": "ita_sem1_1",
+        "text": "Monitor system performance and API quota usage logs in cloud console",
+        "textZh": "在雲端控制台監控系統效能、請求延遲與 API 配額使用日誌"
+      },
+      {
+        "id": "ita_sem1_2",
+        "text": "Review onboarding group provisioning metrics for corporate employees",
+        "textZh": "審查企業員工之自動化帳號配置與群組導入指標"
+      }
     ],
-    mid: [
-      { id: "ita_mid_1", text: "Audit active workspace sharing metrics and restrict public access links", textZh: "審計活動中的工作區共享指標並限制公開存取連結" },
-      { id: "ita_mid_2", text: "Verify automated LMS enrollment synchronization scripts", textZh: "驗證 LMS 選課名單與 AI 平台之自動化同步排程腳本" }
+    "mid": [
+      {
+        "id": "ita_mid_1",
+        "text": "Audit active workspace sharing metrics and restrict public access links",
+        "textZh": "審計活動中的工作區共享指標並限制公開存取連結"
+      },
+      {
+        "id": "ita_mid_2",
+        "text": "Verify automated banking CRM enrollment synchronization scripts",
+        "textZh": "驗證 CRM 名單與 AI 平台之自動化同步排程腳本"
+      }
     ],
-    end: [
-      { id: "ita_end_1", text: "Coordinate database administrative audit locks on assessment materials", textZh: "協調並鎖定評估與期末考卷檔案之管理稽核權限" },
-      { id: "ita_end_2", text: "Compile platform API usage metrics and generate usage reports", textZh: "彙整平台 API 與運算資源之使用指標並產生使用分析報告" }
+    "end": [
+      {
+        "id": "ita_end_1",
+        "text": "Coordinate database administrative audit locks on customer asset portfolios",
+        "textZh": "協調並鎖定客戶資產包檔案之管理稽核權限"
+      },
+      {
+        "id": "ita_end_2",
+        "text": "Compile platform API usage metrics and generate usage reports",
+        "textZh": "彙整平台 API 與運算資源之使用指標並產生使用分析報告"
+      }
     ],
-    track2: [
-      { id: "ita_t2_1", text: "Conduct rolling security and network routing vulnerability scans", textZh: "定期執行滾動式安全與網路路由弱點掃描" },
-      { id: "ita_t2_2", text: "Maintain and update connector integration frameworks for cloud resources", textZh: "維護並更新各項雲端資源連接器整合框架" }
+    "track2": [
+      {
+        "id": "ita_t2_1",
+        "text": "Conduct rolling security and network routing vulnerability scans",
+        "textZh": "定期執行滾動式安全與網路路由弱點掃描"
+      },
+      {
+        "id": "ita_t2_2",
+        "text": "Maintain and update connector integration frameworks for cloud resources",
+        "textZh": "維護並更新各項雲端資源連接器整合框架"
+      }
     ]
   },
-  "Lecturer": {
-    day0: [
-      { id: "lec_d0_1", text: "Acquire role-based instructor access tokens and verify sign-in loops", textZh: "取得授課教師權限 Token 並驗證登入整合迴路" },
-      { id: "lec_d0_2", text: "Complete teacher-level platform onboarding tutorials", textZh: "完成教師級 AI 平台應用導入教學與教程" }
+  "Financial Analyst": {
+    "day0": [
+      {
+        "id": "lec_d0_1",
+        "text": "Acquire role-based analyst access tokens and verify sign-in loops",
+        "textZh": "取得分析師權限 Token 並驗證登入整合迴路"
+      },
+      {
+        "id": "lec_d0_2",
+        "text": "Complete financial platform onboarding tutorials and sandbox tests",
+        "textZh": "完成金融平台應用導入教學與沙盒演練"
+      }
     ],
-    pre: [
-      { id: "lec_pre_1", text: "Prepare and review lecture slides, readings, and syllabi for LMS upload", textZh: "在 LMS 中整理並審查教學大綱、投影片與課程材料" },
-      { id: "lec_pre_2", text: "Draft classroom prompt recipes and custom Agent instructions in Canvas Mode", textZh: "在 Canvas Mode 中編寫教學專用 Prompt 配方與客製化 Agent 指令" }
+    "pre": [
+      {
+        "id": "lec_pre_1",
+        "text": "Prepare and review corporate filings and transcript sources for upload",
+        "textZh": "整理並審查企業 10-K 申報、財務報告與對話源文件"
+      },
+      {
+        "id": "lec_pre_2",
+        "text": "Draft analyst prompt recipes and custom Agent instructions in Canvas Mode",
+        "textZh": "在 Canvas Mode 中編寫分析專用 Prompt 配方與客製化 Agent 指令"
+      }
     ],
-    sem1: [
-      { id: "lec_sem1_1", text: "Publish Socratic Tutor Agent links on the LMS platform", textZh: "在 LMS 平台顯著位置發布 Socratic 導師 Agent 存取連結" },
-      { id: "lec_sem1_2", text: "Deliver introductory classroom lectures on AI safety and prompting", textZh: "向學生講授關於 AI 使用倫理、限制與 Prompt 技巧之導論課" }
+    "sem1": [
+      {
+        "id": "lec_sem1_1",
+        "text": "Publish Equity Research Copilot Agent links on the research portal",
+        "textZh": "在研究門戶顯著位置發布股權研究 Copilot 智能體存取連結"
+      },
+      {
+        "id": "lec_sem1_2",
+        "text": "Deliver introductory analyst briefings on AI compliance and prompting",
+        "textZh": "向分析團隊講授關於 AI 使用合規、防範幻覺與 Prompt 技巧之導引"
+      }
     ],
-    mid: [
-      { id: "lec_mid_1", text: "Deploy Rubric-Feedback agents to help students review mid-term outlines", textZh: "部署 Rubric-Feedback 評分助理協助學生審查期中作業大綱" },
-      { id: "lec_mid_2", text: "Review student feedback reports regarding Tutor Agent helpfulness", textZh: "收集並審查學生關於 Socratic Tutor 導師助理實用性之問卷" }
+    "mid": [
+      {
+        "id": "lec_mid_1",
+        "text": "Deploy evaluation templates to help analysts review corporate transcripts",
+        "textZh": "部署財務比率評核助理協助同仁審查企業申報材料與報告"
+      },
+      {
+        "id": "lec_mid_2",
+        "text": "Review user feedback reports regarding Equity Research Agent helpfulness",
+        "textZh": "收集並審查分析同仁關於股權研究 Agent 實用性之問卷"
+      }
     ],
-    end: [
-      { id: "lec_end_1", text: "Create structured practice examination study-guides inside NotebookLM", textZh: "在 NotebookLM 中建立結構化的期末溫習與備考學習指南" },
-      { id: "lec_end_2", text: "Audit secure document folders to ensure zero exam-prep leakages", textZh: "稽核安全檔案目錄夾，確保備考資訊零外洩" }
+    "end": [
+      {
+        "id": "lec_end_1",
+        "text": "Create structured market valuation summaries inside NotebookLM",
+        "textZh": "在 NotebookLM 中建立結構化的市場估值與分析備考指南"
+      },
+      {
+        "id": "lec_end_2",
+        "text": "Audit secure document folders to ensure zero financial data leaks",
+        "textZh": "稽核安全檔案目錄夾，確保敏感金融與財報資訊零外洩"
+      }
     ],
-    track2: [
-      { id: "lec_t2_1", text: "Analyze course enrollment and final student participation metrics", textZh: "分析課程註冊、AI 互動率與學生成就轉化指標" },
-      { id: "lec_t2_2", text: "Attend end-of-semester academic AI adoption roundtables", textZh: "出席學期末教職員學術 AI 導入與成效分享圓桌會議" }
+    "track2": [
+      {
+        "id": "lec_t2_1",
+        "text": "Analyze research portal usage and analyst engagement metrics",
+        "textZh": "分析研究門戶註冊、AI 互動率與研究成果轉化指標"
+      },
+      {
+        "id": "lec_t2_2",
+        "text": "Attend end-of-year corporate financial AI adoption roundtables",
+        "textZh": "出席年終企業金融 AI 導入與成效分享圓桌會議"
+      }
     ]
   },
-  "TA": {
-    day0: [
-      { id: "ta_d0_1", text: "Confirm instructor-assistant account provisioning on the platform", textZh: "確認助教帳號權限已在平台上成功配置" },
-      { id: "ta_d0_2", text: "Establish secure collaborative folders for laboratory guidelines", textZh: "為實驗教學與評分建立安全協作雲端目錄" }
+  "Relationship Manager": {
+    "day0": [
+      {
+        "id": "ta_d0_1",
+        "text": "Confirm relationship assistant account provisioning on the platform",
+        "textZh": "確認客戶經理助理帳號權限已在平台上成功配置"
+      },
+      {
+        "id": "ta_d0_2",
+        "text": "Establish secure collaborative folders for client investment profiles",
+        "textZh": "為客戶諮詢、財富目標與資產組合建立安全協作雲端目錄"
+      }
     ],
-    pre: [
-      { id: "ta_pre_1", text: "Draft comprehensive grading rubrics and safety instruction manuals", textZh: "編寫詳細評分量規指南與實驗室安全操作手冊" },
-      { id: "ta_pre_2", text: "Test custom lab manual illustration prompt parameters inside Canvas Mode", textZh: "在 Canvas Mode 中測試實驗手冊專用插圖 Prompt 產生參數" }
+    "pre": [
+      {
+        "id": "ta_pre_1",
+        "text": "Draft wealth management guidelines and client meeting brief templates",
+        "textZh": "編寫詳細財富管理與客製化客戶晤談簡報範本"
+      },
+      {
+        "id": "ta_pre_2",
+        "text": "Test custom asset allocation prompt parameters inside Canvas Mode",
+        "textZh": "在 Canvas Mode 中測試資產配置與回撤模型 Prompt 產生參數"
+      }
     ],
-    sem1: [
-      { id: "ta_sem1_1", text: "Distribute interactive laboratory guides to students", textZh: "向學生分發互動式實驗指南與觀察記錄表" },
-      { id: "ta_sem1_2", text: "Setup active weekly office hour AI assistance support queues", textZh: "建立每週助教 AI 答疑服務佇列與線上諮詢時間" }
+    "sem1": [
+      {
+        "id": "ta_sem1_1",
+        "text": "Distribute interactive financial literacy materials to advisory clients",
+        "textZh": "向諮詢客戶分發互動式理財宣導、計算工具與資產指南"
+      },
+      {
+        "id": "ta_sem1_2",
+        "text": "Setup active weekly office hour AI advisory support queues",
+        "textZh": "建立每週客戶諮詢 AI 答疑服務佇列與線上諮詢時間"
+      }
     ],
-    mid: [
-      { id: "ta_mid_1", text: "Utilize secure NotebookLM instances to aggregate student mid-term progress", textZh: "利用安全 NotebookLM 彙整學生的期中學習表現趨勢" },
-      { id: "ta_mid_2", text: "Calibrate rubric assistant prompt guidelines to align feedback consistency", textZh: "校準評分助理 Prompt 指令，確保多位評分助教反饋一致性" }
+    "mid": [
+      {
+        "id": "ta_mid_1",
+        "text": "Utilize secure NotebookLM instances to aggregate client portfolio progress",
+        "textZh": "利用安全 NotebookLM 彙整客戶理財表現與財富增長趨勢"
+      },
+      {
+        "id": "ta_mid_2",
+        "text": "Calibrate meeting brief prompt guidelines to align advisor consistency",
+        "textZh": "校準晤談簡報 Prompt 指令，確保多位客戶關係經理反饋一致性"
+      }
     ],
-    end: [
-      { id: "ta_end_1", text: "Generate student performance dashboards for teacher evaluations", textZh: "生成學生整體表現儀表板供授課教師教學評估參考" },
-      { id: "ta_end_2", text: "Clean and purge personal TA storage workspaces of student submissions", textZh: "清理與封存個人助教工作空間中的學生作業檔案" }
+    "end": [
+      {
+        "id": "ta_end_1",
+        "text": "Generate client portfolio performance reports for management reviews",
+        "textZh": "生成客戶資產表現綜合分析儀表板供主管與合規審核參考"
+      },
+      {
+        "id": "ta_end_2",
+        "text": "Clean and purge personal RM storage workspaces of sensitive client files",
+        "textZh": "清理與封存個人客戶關係經理工作空間中的客戶財務敏感檔案"
+      }
     ],
-    track2: [
-      { id: "ta_t2_1", text: "Document course AI assistance best practices for departmental handovers", textZh: "撰寫課程 AI 輔導實務指南，留作院系經驗傳承文檔" },
-      { id: "ta_t2_2", text: "Monitor ongoing student compliance with safety and integrity guides", textZh: "持續監控學生在作業中對學術誠信與 AI 引用規則之遵循情況" }
+    "track2": [
+      {
+        "id": "ta_t2_1",
+        "text": "Document advisory best practices for future advisor onboarding handovers",
+        "textZh": "撰寫理財諮詢 AI 輔導實務指南，留作團隊經驗傳承文檔"
+      },
+      {
+        "id": "ta_t2_2",
+        "text": "Monitor ongoing client compliance with risk disclosure guidelines",
+        "textZh": "持續監控客戶在諮詢過程中對風險揭露與 AI 免責規則之遵循情況"
+      }
     ]
   },
-  "Student": {
-    day0: [
-      { id: "stu_d0_1", text: "Confirm registration and activate school-issued platform account", textZh: "確認註冊並啟用學校發放之 AI 平台帳戶" },
-      { id: "stu_d0_2", text: "Register student-led clubs and interest groups in the main directory", textZh: "在學生社團目錄中登記本學期學生活動或社團資訊" }
+  "Claims Processor": {
+    "day0": [
+      {
+        "id": "stu_d0_1",
+        "text": "Confirm registration and activate company-issued platform account",
+        "textZh": "確認註冊並啟用公司發放之 AI 平台帳戶"
+      },
+      {
+        "id": "stu_d0_2",
+        "text": "Register claims operations and interest groups in the main directory",
+        "textZh": "在核賠與理賠目錄中登記本季度理賠案例或活動資訊"
+      }
     ],
-    pre: [
-      { id: "stu_pre_1", text: "Establish secure collaborative cloud folders for club operations", textZh: "為社團日常運營建立安全協作雲端資料夾" },
-      { id: "stu_pre_2", text: "Set up study portals with links to uploaded syllabus guides", textZh: "建立個人學習入口，彙整學科大綱與參考指南" }
+    "pre": [
+      {
+        "id": "stu_pre_1",
+        "text": "Establish secure collaborative cloud folders for claims operations",
+        "textZh": "為理賠日常運營與申報材料建立安全協作雲端資料夾"
+      },
+      {
+        "id": "stu_pre_2",
+        "text": "Set up study portals with links to uploaded underwriting guides",
+        "textZh": "建立理賠操作入口，彙整核保指引與核賠對照手冊"
+      }
     ],
-    sem1: [
-      { id: "stu_sem1_1", text: "Complete student introductory prompt engineering tutorial videos", textZh: "完成學生入門級 Prompt 提示工程與 AI 倫理微課程" },
-      { id: "stu_sem1_2", text: "Link personal course notebooks to verified cloud storage directories", textZh: "將個人學科筆記與校端雲端安全硬碟連結" }
+    "sem1": [
+      {
+        "id": "stu_sem1_1",
+        "text": "Complete claims introductory prompt engineering tutorial videos",
+        "textZh": "完成核賠入門級 Prompt 提示工程與 AI 倫理微課程"
+      },
+      {
+        "id": "stu_sem1_2",
+        "text": "Link personal portfolio files to verified cloud storage directories",
+        "textZh": "將個人理賠申報與公司端雲端安全硬碟連結"
+      }
     ],
-    mid: [
-      { id: "stu_mid_1", text: "Utilize collaborative NotebookLM study hubs for mid-term group study sessions", textZh: "利用 NotebookLM 小組共享學習空間進行期中考小組複習" },
-      { id: "stu_mid_2", text: "Compile student feedback surveys regarding platform utility", textZh: "填寫並整理學生對於平台軟硬體與 AI 助理功能之滿意度問卷" }
+    "mid": [
+      {
+        "id": "stu_mid_1",
+        "text": "Utilize collaborative NotebookLM workspaces for team study sessions",
+        "textZh": "利用 NotebookLM 小組共享理賠與欺詐防範空間進行協作研討"
+      },
+      {
+        "id": "stu_mid_2",
+        "text": "Compile client feedback surveys regarding platform utility",
+        "textZh": "填寫並整理同仁對於理賠平台軟硬體與 AI 助理功能之滿意度問卷"
+      }
     ],
-    end: [
-      { id: "stu_end_1", text: "Verify cloud folders contain correct materials for year-end club audits", textZh: "確認社團雲端資料夾已彙整期末稽核與評鑑所需文檔" },
-      { id: "stu_end_2", text: "Synthesize personal study summaries from verified lecture recordings", textZh: "利用 AI 筆記摘要期末重點，建立學科備考專題" }
+    "end": [
+      {
+        "id": "stu_end_1",
+        "text": "Verify cloud folders contain correct materials for year-end compliance audits",
+        "textZh": "確認理賠雲端資料夾已彙整期末稽核與評鑑所需核賠文檔"
+      },
+      {
+        "id": "stu_end_2",
+        "text": "Synthesize client advisory summaries from verified audio records",
+        "textZh": "利用 AI 筆記摘要核賠重點，建立理賠防範專題"
+      }
     ],
-    track2: [
-      { id: "stu_t2_1", text: "Track and log certificate completions for co-curricular workshops", textZh: "登錄並存檔個人在共建 AI 工作坊中取得之證書" },
-      { id: "stu_t2_2", text: "Participate in student-led hackathons or custom agent competitions", textZh: "參加學生會主導之校園黑客松或客製化 AI 應用競賽" }
+    "track2": [
+      {
+        "id": "stu_t2_1",
+        "text": "Track and log certificate completions for professional training workshops",
+        "textZh": "登錄並存檔個人在 FSI 共建 AI 工作坊中取得之證書"
+      },
+      {
+        "id": "stu_t2_2",
+        "text": "Participate in developer-led hackathons or custom agent competitions",
+        "textZh": "參加企業主導之金融科技黑客松或客製化 AI 應用競賽"
+      }
     ]
   },
-  "Security": {
-    day0: [
-      { id: "sec_d0_1", text: "Initialize active security credentials for safety response teams", textZh: "啟用校園安全應變團隊專用安全登入憑證" },
-      { id: "sec_d0_2", text: "Map secure communications and dispatcher roles in the command system", textZh: "在指揮系統中配置各項緊急安全通訊與值班調度角色" }
+  "Customer Service": {
+    "day0": [
+      {
+        "id": "sec_d0_1",
+        "text": "Initialize active security credentials for emergency CS response teams",
+        "textZh": "啟用客戶服務應變團隊專用安全登入憑證"
+      },
+      {
+        "id": "sec_d0_2",
+        "text": "Map secure communications and dispatcher roles in the CRM system",
+        "textZh": "在客服系統中配置各項緊急事件通訊與值班調度角色"
+      }
     ],
-    pre: [
-      { id: "sec_pre_1", text: "Draft emergency simulator guidelines inside Gemini Canvas Mode", textZh: "在 Gemini Canvas Mode 中編寫緊急狀況模擬訓練大綱" },
-      { id: "sec_pre_2", text: "Establish secure data parameters for campus crisis reference playbooks", textZh: "為校園應變與安全防護操作手冊設定安全邊界" }
+    "pre": [
+      {
+        "id": "sec_pre_1",
+        "text": "Draft customer service simulator guidelines inside Canvas Mode",
+        "textZh": "在 Gemini Canvas Mode 中編寫客服應變與話術模擬訓練大綱"
+      },
+      {
+        "id": "sec_pre_2",
+        "text": "Establish secure data parameters for customer interaction playbooks",
+        "textZh": "為客戶服務應變與隱私防護操作手冊設定安全邊界"
+      }
     ],
-    sem1: [
-      { id: "sec_sem1_1", text: "Run crisis dispatcher roleplay simulations with incoming personnel", textZh: "與新進人員開展緊急應變調度角色扮演與 AI 互動模擬訓練" },
-      { id: "sec_sem1_2", text: "Distribute emergency reference guidelines on the support portal", textZh: "在校端支援門戶發布更新後之緊急事故通報指引" }
+    "sem1": [
+      {
+        "id": "sec_sem1_1",
+        "text": "Run service dispatcher roleplay simulations with incoming personnel",
+        "textZh": "與新進人員開展緊急應變調度角色扮演與 AI 客服模擬訓練"
+      },
+      {
+        "id": "sec_sem1_2",
+        "text": "Distribute customer support reference guidelines on the portal",
+        "textZh": "在客服支援門戶發布更新後之客戶常見問題疑難排解指引"
+      }
     ],
-    mid: [
-      { id: "sec_mid_1", text: "Conduct mid-term physical drills and coordinate AI safety logging", textZh: "進行期中實地演練，並配合 AI 自動化安全事故通報與紀錄" },
-      { id: "sec_mid_2", text: "Extract safety incident trends using secure text summary tools", textZh: "使用安全文本分析工具，彙整分析期中安全事故通報趨勢" }
+    "mid": [
+      {
+        "id": "sec_mid_1",
+        "text": "Conduct midterm audits on physical banking queues and AI routing",
+        "textZh": "進行期中服務渠道審查，並配合 AI 自動化服務紀錄與分類"
+      },
+      {
+        "id": "sec_mid_2",
+        "text": "Extract service incident trends using secure text summary tools",
+        "textZh": "使用安全文本分析工具，彙整分析期中客戶投訴與滿意度趨勢"
+      }
     ],
-    end: [
-      { id: "sec_end_1", text: "Audit physical security systems during winter examination schedules", textZh: "在期末冬季考試週期間加強校園各大考場與設施之實體巡邏安全審計" },
-      { id: "sec_end_2", text: "Audit command hub network routing and verify lines are active", textZh: "對安全指揮中心與警衛通訊網路進行通訊測試與線路稽核" }
+    "end": [
+      {
+        "id": "sec_end_1",
+        "text": "Audit branch security systems during quarter-end transaction spikes",
+        "textZh": "在季度末交易高峰週期間加強各大分行與設施之實體安全審計"
+      },
+      {
+        "id": "sec_end_2",
+        "text": "Audit customer hotlines network routing and verify active status",
+        "textZh": "對客服中心與電話通訊網路進行通訊測試與線路稽核"
+      }
     ],
-    track2: [
-      { id: "sec_t2_1", text: "Collaborate on campus-safety training reviews", textZh: "共同參與校園防護應變教育訓練與案例回顧會議" },
-      { id: "sec_t2_2", text: "Optimize emergency logging custom Agents for faster dispatch", textZh: "優化安全調度 Agent 指令，提高報案分類與派單速度" }
+    "track2": [
+      {
+        "id": "sec_t2_1",
+        "text": "Collaborate on customer experience training reviews",
+        "textZh": "共同參與客戶體驗與服務品質提升教育訓練與案例回顧會議"
+      },
+      {
+        "id": "sec_t2_2",
+        "text": "Optimize customer interaction custom Agents for faster dispatch",
+        "textZh": "優化智能客服 Agent 指令，提高報案分類與工單派單速度"
+      }
     ]
   },
-  "Finance": {
-    day0: [
-      { id: "fin_d0_1", text: "Establish finance-grade credentials and verify local storage boundaries", textZh: "建立財務等級之安全登入憑證並確認本地數據邊界" },
-      { id: "fin_d0_2", text: "Set audit rules for departmental spending ledger checks", textZh: "設定各部門學科建設經費之自動化審計與預算稽核規則" }
+  "HR Consultant": {
+    "day0": [
+      {
+        "id": "fin_d0_1",
+        "text": "Establish HR-grade credentials and verify local data storage boundaries",
+        "textZh": "建立人力資源等級之安全登入憑證並確認本地數據邊界"
+      },
+      {
+        "id": "fin_d0_2",
+        "text": "Set audit rules for departmental workforce ledger checks",
+        "textZh": "設定各部門人力成本支出之自動化審計與預算稽核規則"
+      }
     ],
-    pre: [
-      { id: "fin_pre_1", text: "Draft pre-semester budget spreadsheets inside Gemini Canvas Mode", textZh: "在 Gemini Canvas Mode 中編寫新學年預算籌劃與科目配置表" },
-      { id: "fin_pre_2", text: "Verify approved status of student club and co-curricular projects", textZh: "審查與確認各項社團活動與共建項目之經費核撥許可" }
+    "pre": [
+      {
+        "id": "fin_pre_1",
+        "text": "Draft pre-fiscal-year budget spreadsheets inside Gemini Canvas Mode",
+        "textZh": "在 Gemini Canvas Mode 中編寫新財年人力預算籌劃與科目配置表"
+      },
+      {
+        "id": "fin_pre_2",
+        "text": "Verify approved status of departmental hiring and training projects",
+        "textZh": "審查與確認各項人才引進與培訓項目之經費核撥許可"
+      }
     ],
-    sem1: [
-      { id: "fin_sem1_1", text: "Distribute standard procurement checklists on the admin portal", textZh: "在行政系統發布新版採購與經費報銷電子核對清單" },
-      { id: "fin_sem1_2", text: "Onboard student club treasurers to standard spending forms", textZh: "對學生社團財務負責人開展標準化預算與核銷流程引導" }
+    "sem1": [
+      {
+        "id": "fin_sem1_1",
+        "text": "Distribute standard corporate travel & expense policies on the admin portal",
+        "textZh": "在行政系統發布新版差旅與經費報銷電子核對清單"
+      },
+      {
+        "id": "fin_sem1_2",
+        "text": "Onboard employees to compliant expense forms and HR guidelines",
+        "textZh": "對行內員工開展標準化預算、報銷流程與 HR 政策指引"
+      }
     ],
-    mid: [
-      { id: "fin_mid_1", text: "Conduct midterm budget spending audits across major departments", textZh: "進行期中經費支用與預算執行進度中期稽核" },
-      { id: "fin_mid_2", text: "Compile expenditure summaries and audit logs with data models", textZh: "使用數據模型彙整各類經費支出報表並分析核銷異常值" }
+    "mid": [
+      {
+        "id": "fin_mid_1",
+        "text": "Conduct midterm workforce spend audits across major departments",
+        "textZh": "進行期中人力經費支用與預算執行進度中期稽核"
+      },
+      {
+        "id": "fin_mid_2",
+        "text": "Compile expenditure summaries and audit logs with data models",
+        "textZh": "使用數據模型彙整各類人事支出報表並分析核銷異常值"
+      }
     ],
-    end: [
-      { id: "fin_end_1", text: "Verify spending logs match internal compliance mandates", textZh: "查核各項報銷經費，確保其完全符合校端財務內控制度" },
-      { id: "fin_end_2", text: "Publish year-end budget reconciliation reports", textZh: "彙整並發布年終預算執行與績效審查報告" }
+    "end": [
+      {
+        "id": "fin_end_1",
+        "text": "Verify HR spending logs match internal compliance mandates",
+        "textZh": "查核各項報銷經費，確保其完全符合內部財務與合規控制制度"
+      },
+      {
+        "id": "fin_end_2",
+        "text": "Publish year-end budget reconciliation and forecasting reports",
+        "textZh": "彙整並發布年終人力預算執行與績效審查報告"
+      }
     ],
-    track2: [
-      { id: "fin_t2_1", text: "Run continuous spending audits to check for billing outliers", textZh: "常態化執行經費審查，偵測重複報銷或異常採購數據" },
-      { id: "fin_t2_2", text: "Optimize next-semester budget prediction models", textZh: "優化下學期預算預測模型，提升資金調度效率" }
+    "track2": [
+      {
+        "id": "fin_t2_1",
+        "text": "Run continuous spending audits to check for travel billing outliers",
+        "textZh": "常態化執行經費審查，偵測重複報銷或異常採購數據"
+      },
+      {
+        "id": "fin_t2_2",
+        "text": "Optimize next-semester workforce forecasting models",
+        "textZh": "優化下學期人力預算預測模型，提升調配效率"
+      }
     ]
   },
-  "SAO": {
-    day0: [
-      { id: "sao_d0_1", text: "Initialize counselor accounts with high-security privacy controls", textZh: "啟用學務與心理輔導專用高隱私安全等級登入帳戶" },
-      { id: "sao_d0_2", text: "Verify secure student-activity storage repositories are active", textZh: "驗證學生活動檔案與敏感名單安全存儲目錄已正常啟用" }
+  "Compliance Officer": {
+    "day0": [
+      {
+        "id": "sao_d0_1",
+        "text": "Initialize compliance accounts with high-security privacy controls",
+        "textZh": "啟用合規與風險審查專用高隱私安全等級登入帳戶"
+      },
+      {
+        "id": "sao_d0_2",
+        "text": "Verify secure customer data repositories are active and partitioned",
+        "textZh": "驗證客群敏感檔案與交易紀錄安全存儲目錄已正常隔離與啟用"
+      }
     ],
-    pre: [
-      { id: "sao_pre_1", text: "Draft student orientation guidance packages inside Gemini Canvas Mode", textZh: "在 Gemini Canvas Mode 中編寫新生生活指引與輔導指南手冊" },
-      { id: "sao_pre_2", text: "Upload scavenger hunt interactive check-point rules and clues", textZh: "上傳新生迎新宿營 scavenger hunt 互動關卡規則與提示線索" }
+    "pre": [
+      {
+        "id": "sao_pre_1",
+        "text": "Draft regulatory guidelines and checklist items inside Canvas Mode",
+        "textZh": "在 Gemini Canvas Mode 中編寫金融法規政策與合規操守查核手冊"
+      },
+      {
+        "id": "sao_pre_2",
+        "text": "Upload transaction compliance interactive check-point rules and alerts",
+        "textZh": "上傳法規諮詢、反洗錢 (AML) 交互式合規關卡規則與警戒提示"
+      }
     ],
-    sem1: [
-      { id: "sao_sem1_1", text: "Activate Campus Scavenger Hunt Agent for freshman onboarding", textZh: "發布並啟用新生專用校園探索解謎 Scavenger Hunt 導覽 Agent" },
-      { id: "sao_sem1_2", text: "Deploy active support hotline contacts on the counselor page", textZh: "在學務輔導網頁發布最新的心理與生活支援熱線聯絡資訊" }
+    "sem1": [
+      {
+        "id": "sao_sem1_1",
+        "text": "Activate Compliance Assistance Bot for banking staff",
+        "textZh": "發布並啟用行員專用金融法規與 AML 諮詢智能助理"
+      },
+      {
+        "id": "sao_sem1_2",
+        "text": "Deploy active support hotline contacts on the risk page",
+        "textZh": "在合規網頁發布最新的風險通報與法規支持熱線聯絡資訊"
+      }
     ],
-    mid: [
-      { id: "sao_mid_1", text: "Review counselor service engagement statistics using text-summary metrics", textZh: "利用學務數據工具摘要分析期中輔導個案與活動反饋趨勢" },
-      { id: "sao_mid_2", text: "Verify orientation event log archives and compile feedback responses", textZh: "歸檔迎新活動之問卷調查與互動指標數據" }
+    "mid": [
+      {
+        "id": "sao_mid_1",
+        "text": "Review compliance incident statistics using text-summary metrics",
+        "textZh": "利用合規數據工具摘要分析期中違規通報與反洗錢審查趨勢"
+      },
+      {
+        "id": "sao_mid_2",
+        "text": "Verify active audit log archives and compile feedback responses",
+        "textZh": "歸檔合規審查之卷宗記錄與行員互動指標數據"
+      }
     ],
-    end: [
-      { id: "sao_end_1", text: "Coordinate stress-relief resources for student final examination periods", textZh: "協調並提供期末考週減壓資源與心理諮詢急診服務" },
-      { id: "sao_end_2", text: "Audit and purge sensitive orientation personal detail temporary logs", textZh: "清理與刪除迎新活動暫存檔案中涉及學生個人隱私之臨時紀錄" }
+    "end": [
+      {
+        "id": "sao_end_1",
+        "text": "Coordinate stress-testing on internal accounting and transaction pipelines",
+        "textZh": "協調並執行內部核數與結算管道之壓力測試與風險防範"
+      },
+      {
+        "id": "sao_end_2",
+        "text": "Audit and purge sensitive client PII data temporary logs",
+        "textZh": "清理與刪除合規演練暫存檔案中涉及客戶隱私之臨時紀錄"
+      }
     ],
-    track2: [
-      { id: "sao_t2_1", text: "Analyze co-curricular workshop and club certificate completion stats", textZh: "統計並分析通識教育工作坊與社團幹部認證完成率" },
-      { id: "sao_t2_2", text: "Maintain custom student mental wellness supportive bots", textZh: "維護並微調客製化學生生活支持與暖心輔導 AI 機器人" }
+    "track2": [
+      {
+        "id": "sao_t2_1",
+        "text": "Analyze corporate compliance workshop and AML certificate stats",
+        "textZh": "統計並分析行內合規教育訓練與反洗錢證照通過率"
+      },
+      {
+        "id": "sao_t2_2",
+        "text": "Maintain custom supportive regulatory compliance chatbots",
+        "textZh": "維護並微調客製化金融合規、誠信執業與暖心諮詢 AI 機器人"
+      }
     ]
   },
-  "Program Leader": {
-    day0: [
-      { id: "pl_d0_1", text: "Confirm departmental platform licensing quotas and supervisor identities", textZh: "確認系所平台授權配額與管理人員識別" },
-      { id: "pl_d0_2", text: "Initialize curriculum templates and syllabus guidelines for the department", textZh: "初始化系所課程模板與大綱指引" }
+  "Loan Officer": {
+    "day0": [
+      {
+        "id": "pl_d0_1",
+        "text": "Confirm lending platform licensing quotas and manager credentials",
+        "textZh": "確認信貸授信平台授權配額與管理人員帳號安全"
+      },
+      {
+        "id": "pl_d0_2",
+        "text": "Initialize lending guidelines and credit proposal templates",
+        "textZh": "初始化企業信貸範本、授信指引與合規審核流程"
+      }
     ],
-    pre: [
-      { id: "pl_pre_1", text: "Draft course curriculum guidelines and alignment checklists inside Canvas Mode", textZh: "在 Canvas Mode 中撰寫課程大綱指引與對齊清單" },
-      { id: "pl_pre_2", text: "Organize teacher training workshops for departmental AI tools adoptions", textZh: "組織系所教師 AI 工具應用導入訓練工作坊" }
+    "pre": [
+      {
+        "id": "pl_pre_1",
+        "text": "Draft credit proposal guidelines and alignment checklists inside Canvas Mode",
+        "textZh": "在 Canvas Mode 中撰寫授信審查指引與合規查核清單"
+      },
+      {
+        "id": "pl_pre_2",
+        "text": "Organize training workshops for departmental AI credit tool adoptions",
+        "textZh": "組織授信與信貸部門 AI 輔助審查工具應用導入培訓工作坊"
+      }
     ],
-    sem1: [
-      { id: "pl_sem1_1", text: "Approve individual course playbook configurations and LMS links", textZh: "審查並核准個別課程之 AI 案例配置與 LMS 連結" },
-      { id: "pl_sem1_2", text: "Distribute student AI-use integrity manuals across all courses", textZh: "向所有學位課程分發學術誠信與 AI 引用規範" }
+    "sem1": [
+      {
+        "id": "pl_sem1_1",
+        "text": "Approve individual credit proposal configurations and CRM links",
+        "textZh": "審查並核准個別信貸案件之 AI 案例配置與 CRM 介接"
+      },
+      {
+        "id": "pl_sem1_2",
+        "text": "Distribute credit integrity and compliance manuals across all branches",
+        "textZh": "向所有融資網點分發授信合規與誠信放貸管理規範"
+      }
     ],
-    mid: [
-      { id: "pl_mid_1", text: "Review mid-term course evaluation feedback and academic satisfaction logs", textZh: "審查系所期中教學意見調查與 AI 學習滿意度指標" },
-      { id: "pl_mid_2", text: "Audit alignment of course delivery with departmental guidelines", textZh: "查核課程教學進度與系所 AI 導入指引之對齊情況" }
+    "mid": [
+      {
+        "id": "pl_mid_1",
+        "text": "Review loan portfolio performance and customer credit satisfaction logs",
+        "textZh": "審查信貸部門期中資產質量調查與客戶信貸滿意度指標"
+      },
+      {
+        "id": "pl_mid_2",
+        "text": "Audit alignment of credit delivery with corporate lending policies",
+        "textZh": "查核放貸進度與銀行信用集中度、風險政策之對齊情況"
+      }
     ],
-    end: [
-      { id: "pl_end_1", text: "Review student performance data and compile course grade statistics", textZh: "審查學生學習表現數據並分析期末成績統計" },
-      { id: "pl_end_2", text: "Archive course portfolios and document successful adoption case-studies", textZh: "封存課程檔案並記錄成功的 AI 導入與應用案例" }
+    "end": [
+      {
+        "id": "pl_end_1",
+        "text": "Review credit performance data and compile bad-debt statistics",
+        "textZh": "審查授信資產質量表現數據並分析期末壞賬與資產減值統計"
+      },
+      {
+        "id": "pl_end_2",
+        "text": "Archive credit dossiers and document successful adoption case-studies",
+        "textZh": "封存授信卷宗並記錄成功的信貸 AI 導入與風險控制案例"
+      }
     ],
-    track2: [
-      { id: "pl_t2_1", text: "Optimize department curriculum structure for future semesters", textZh: "優化下學期系所課程結構與教學大綱" },
-      { id: "pl_t2_2", text: "Facilitate cross-disciplinary research and teaching resource sharing", textZh: "促進跨學科 AI 協作、研究與教研資源共享" }
+    "track2": [
+      {
+        "id": "pl_t2_1",
+        "text": "Optimize credit pipeline structure for future funding cycles",
+        "textZh": "優化下一期信貸審核管道結構、流程與信用集中度指引"
+      },
+      {
+        "id": "pl_t2_2",
+        "text": "Facilitate cross-departmental risk and corporate lending resource sharing",
+        "textZh": "促進跨部門風險協作、融資研究與信貸資源共享"
+      }
     ]
   },
-  "Dean": {
-    day0: [
-      { id: "dn_d0_1", text: "Establish college-wide strategic adoption indicators and data boundaries", textZh: "確立學院級 AI 戰略導入指標與數據合規邊界" },
-      { id: "dn_d0_2", text: "Confirm institutional budgets and verify funding lines are allocated", textZh: "確認學校專項經費與學院建設預算已核撥到位" }
+  "Underwriter": {
+    "day0": [
+      {
+        "id": "dn_d0_1",
+        "text": "Establish institutional risk frameworks and data compliance boundaries",
+        "textZh": "確立銀行級信用核保與風險管理 AI 戰略指標與數據合規邊界"
+      },
+      {
+        "id": "dn_d0_2",
+        "text": "Confirm credit funding allocations and verify budget lines are active",
+        "textZh": "確認授信專項撥備資金與核保預算已核撥到位"
+      }
     ],
-    pre: [
-      { id: "dn_pre_1", text: "Draft college-wide strategic roadmap inside Gemini Canvas Mode", textZh: "在 Gemini Canvas Mode 中編寫學院 AI 發展戰略規劃" },
-      { id: "dn_pre_2", text: "Establish academic steering committees for quality assurance audits", textZh: "成立學術諮詢與審查委員會，推動教學質量保證" }
+    "pre": [
+      {
+        "id": "dn_pre_1",
+        "text": "Draft comprehensive risk strategy roadmaps inside Gemini Canvas Mode",
+        "textZh": "在 Gemini Canvas Mode 中編寫全面風險管理與核保戰略規劃"
+      },
+      {
+        "id": "dn_pre_2",
+        "text": "Establish credit risk steering committees for quality assurance audits",
+        "textZh": "成立信用風險諮詢與審查委員會，推動核保質量保證"
+      }
     ],
-    sem1: [
-      { id: "dn_sem1_1", text: "Approve department adoption milestones and resource distribution schedules", textZh: "核定各學系之 AI 導入里程碑與軟硬體資源分配" },
-      { id: "dn_sem1_2", text: "Deliver college welcome address on educational innovation and AI ethics", textZh: "發表關於教育創新、AI 倫理與未來學術願景之院長迎新致詞" }
+    "sem1": [
+      {
+        "id": "dn_sem1_1",
+        "text": "Approve lending quotas and risk management welcome address",
+        "textZh": "核定各區域與分行之授信放款配額與核保授權額度"
+      },
+      {
+        "id": "dn_sem1_2",
+        "text": "Deliver risk welcome address on financial innovation and AI ethics",
+        "textZh": "發表關於金融創新、風險控制、AI 倫理與未來核保願景之主管致詞"
+      }
     ],
-    mid: [
-      { id: "dn_mid_1", text: "Review college-wide adoption telemetry dashboards and budget executions", textZh: "審查學院 AI 導入數據儀表板與期中預算執行進度" },
-      { id: "dn_mid_2", text: "Conduct inter-departmental progress reviews with Program Leaders", textZh: "與各系主任召開期中工作協調會，評估導入成效" }
+    "mid": [
+      {
+        "id": "dn_mid_1",
+        "text": "Review credit telemetry dashboards and active risk portfolios",
+        "textZh": "審查全行信貸資產質量 AI 數據儀表板與期中撥備執行進度"
+      },
+      {
+        "id": "dn_mid_2",
+        "text": "Conduct inter-departmental risk reviews with Loan Officers",
+        "textZh": "與各信貸主管召開信用風險協調會，評估授信與核保成效"
+      }
     ],
-    end: [
-      { id: "dn_end_1", text: "Receive academic audit reports and verify compliance with standards", textZh: "審閱學術審計報告，確保各項教學完全符合質量標準" },
-      { id: "dn_end_2", text: "Publish annual college education innovation reports and success stories", textZh: "發布學院年度教育創新成果報告與最佳實務案例" }
+    "end": [
+      {
+        "id": "dn_end_1",
+        "text": "Receive external regulatory audit reports and verify compliance",
+        "textZh": "審閱外規與審計報告，確保各項放貸完全符合金管與質量標準"
+      },
+      {
+        "id": "dn_end_2",
+        "text": "Publish annual financial risk & compliance reports and success stories",
+        "textZh": "發布年度信用核保與風險管理成果報告與最佳實務案例"
+      }
     ],
-    track2: [
-      { id: "dn_t2_1", text: "Maintain and update strategic collaboration frameworks with enterprise partners", textZh: "維護並更新與企業夥伴之產學合作與策略聯盟框架" },
-      { id: "dn_t2_2", text: "Drive continuous faculty capacity building and research center setups", textZh: "持續推動教職員 AI 能力提升與教學研究中心建設" }
+    "track2": [
+      {
+        "id": "dn_t2_1",
+        "text": "Maintain and update strategic collaboration frameworks with regulatory partners",
+        "textZh": "維護並更新與同業夥伴、監管機構之策略聯盟與風險防範框架"
+      },
+      {
+        "id": "dn_t2_2",
+        "text": "Drive continuous advisor risk capacity building and research center setups",
+        "textZh": "持續推動行員信用分析、核保與風險計量 AI 能力提升"
+      }
     ]
   }
 };
