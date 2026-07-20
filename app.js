@@ -541,6 +541,12 @@ const uiTranslations = {
       "Capital Markets": "Capital Markets & Wealth Management",
       "Generic": "Cross-Sector Adaptable"
     },
+    "hubs": {
+      "academic": "Investment Research",
+      "student": "Client Advisory",
+      "operational": "Credit & Operations",
+      "administrative": "Risk & Compliance"
+    },
     "adminPortalTitle": "GEMINI FSI PORTAL MANAGEMENT",
     "adminRegisteredUsersTitle": "Registered Portal Users",
     "adminFormLabelSteps": "Procedural Guide Steps (One step per line)",
@@ -583,6 +589,12 @@ const uiTranslations = {
       "Capital Markets": "資本市場與財富管理 (Capital Markets)",
       "Generic": "通用跨行業模版"
     },
+    "hubs": {
+      "academic": "投資研究 (Investment Research)",
+      "student": "客戶諮詢 (Client Advisory)",
+      "operational": "授信與營運 (Credit & Operations)",
+      "administrative": "風險與合規 (Risk & Compliance)"
+    },
     "adminPortalTitle": "GEMINI FSI 門戶管理後台",
     "adminRegisteredUsersTitle": "已註冊門戶使用者",
     "adminFormLabelSteps": "標準模式操作步驟 (每行一步驟)",
@@ -624,6 +636,12 @@ const uiTranslations = {
       "Insurance": "人寿与财产保险 (Life & Property Insurance)",
       "Capital Markets": "资本市场与财富管理 (Capital Markets)",
       "Generic": "通用跨行业模板"
+    },
+    "hubs": {
+      "academic": "投资研究 (Investment Research)",
+      "student": "客户咨询 (Client Advisory)",
+      "operational": "授信与营运 (Credit & Operations)",
+      "administrative": "风险与合规 (Risk & Compliance)"
     },
     "adminPortalTitle": "GEMINI FSI 门户管理后台",
     "adminRegisteredUsersTitle": "已注册门户使用者",
@@ -1516,7 +1534,7 @@ function updateUILanguage() {
   if (adminBrand) {
     adminBrand.textContent = t.adminBrandText || "Admin Control";
     safeSetText("adminMenuNavigationTitle", t.adminMenuNavigationTitle || "Menu Navigation");
-    safeSetText("adminPortalTitle", t.adminPortalTitle || "GEMINI EDUCATION MANAGEMENT");
+    safeSetText("adminPortalTitle", t.adminPortalTitle || "GEMINI FSI PORTAL MANAGEMENT");
     safeSetText("adminPortalSubtitle", t.adminPortalSubtitle || "Configure users, update learning playbooks, and analyze the last 6 months deployment metrics.");
     safeSetText("adminTabUsersText", t.adminTabUsersText || "Users Provisioning");
     safeSetText("adminTabAnalyticsText", t.adminTabAnalyticsText || "System Analytics");
@@ -1634,10 +1652,10 @@ function updateUILanguage() {
 }
 
 function getCategoryByRole(role) {
-  if (["Lecturer", "TA"].includes(role)) return "academic";
-  if (["Student"].includes(role)) return "student";
-  if (["Security", "Finance", "SAO"].includes(role)) return "administrative";
-  return "operational";
+  if (["Financial Analyst", "Investment Banker"].includes(role)) return "academic";
+  if (["Relationship Manager", "Customer Service"].includes(role)) return "student";
+  if (["Compliance Officer", "Risk Manager", "Security Officer", "HR Consultant"].includes(role)) return "administrative";
+  return "operational"; // Underwriter, Loan Officer, Claims Processor, IT Operator
 }
 
 // Handle Wizard Role Selector Change (Disable institution level if administrative support role)
@@ -1647,8 +1665,8 @@ function handleWizardRoleChange() {
   const lang = appState.activeLanguage || "en";
   const t = uiTranslations[lang];
   
-  // Administrative support roles do not apply to school levels (Primary, High School, Higher Edu)
-  const isSupportRole = ["Security", "Finance", "IT Admin", "SAO"].includes(selectedRole);
+  // Administrative support roles do not apply to specific FSI sectors (Retail Banking, Insurance, Capital Markets)
+  const isSupportRole = ["Security Officer", "IT Operator", "HR Consultant"].includes(selectedRole);
   
   if (isSupportRole) {
     levelSelect.value = "Generic";
@@ -1712,17 +1730,17 @@ function updateSidebarContextUI() {
     const levelEl = document.getElementById("sidebarLevel") || document.getElementById("profileInstitutionName");
     if (levelEl) levelEl.textContent = "Simulation Mode";
   } else {
-    document.title = "Gemini Enterprise - Edu Portal";
+    document.title = "Gemini Enterprise - FSI Adoption Portal";
 
     const roleText = t.roles[appState.userRole] || appState.userRole;
     const roleEl = document.getElementById("sidebarRole") || document.getElementById("profileRoleName");
     if (roleEl) roleEl.textContent = roleText;
     
-    const isSupportRole = ["Security", "Finance", "IT Admin", "SAO"].includes(appState.userRole);
+    const isSupportRole = ["Security Officer", "IT Operator", "HR Consultant"].includes(appState.userRole);
     const levelEl = document.getElementById("sidebarLevel") || document.getElementById("profileInstitutionName");
     if (levelEl) {
       if (isSupportRole) {
-        levelEl.textContent = lang === "en" ? "Global (All Levels)" : (lang === "zh-TW" ? "全局 (所有級別)" : "全局 (所有级别)");
+        levelEl.textContent = lang === "en" ? "Global (All Sectors)" : (lang === "zh-TW" ? "全局 (所有細分)" : "全局 (所有细分)");
       } else {
         const levelText = t.levels[appState.institutionLevel] || appState.institutionLevel;
         levelEl.textContent = levelText;
@@ -1826,26 +1844,15 @@ function renderUseCases() {
 
   // Filter use cases from db based on state
   const filteredUseCases = useCasesDb.filter(useCase => {
-    // 1. Role Filter Mapping: Show academic support cases to everyone, but specialize core hubs
-    // A. Role match
+    // 1. Role Filter Mapping: Show playbooks matching the selected FSI role or default category hub
     let matchesRole = false;
-    const isSupportRole = ["Security", "Finance", "IT Admin", "SAO"].includes(appState.userRole);
+    const isSupportRole = ["Security Officer", "IT Operator", "HR Consultant"].includes(appState.userRole);
     
     if (appState.isAdmin === true) {
       matchesRole = true;
-    } else if (appState.userRole === "Lecturer") {
-      matchesRole = ["Lecturer", "TA"].includes(useCase.role) || useCase.category === "academic";
-    } else if (appState.userRole === "TA") {
-      matchesRole = ["Lecturer", "TA"].includes(useCase.role) || useCase.category === "academic";
-    } else if (appState.userRole === "Student") {
-      matchesRole = useCase.role === "Student" || useCase.category === "student";
-    } else if (isSupportRole) {
-      matchesRole = [appState.userRole, "IT Admin", "Program Leader", "Dean", "SAO"].includes(useCase.role) || 
-                    ["operational", "administrative"].includes(useCase.category);
-    } else if (appState.userRole === "Program Leader" || appState.userRole === "Dean") {
-      matchesRole = ["Lecturer", "Program Leader", "Dean"].includes(useCase.role) || useCase.category === "operational";
     } else {
-      matchesRole = true;
+      const userCategory = getCategoryByRole(appState.userRole);
+      matchesRole = (useCase.role === appState.userRole) || (useCase.category === userCategory);
     }
 
     // 2. Institution Level Filter: Support roles ignore this completely.
@@ -2873,7 +2880,7 @@ function enhanceUseCasesDatabase() {
     connectors: ["Email Connector"],
     connectorEssential: true,
     role: "Student",
-    level: ["University & College", "High School", "Generic"],
+    level: ["Banking", "Insurance", "Capital Markets", "Generic"],
     steps: [
       "Connect your institutional email inbox using the secure, encrypted Email Connector.",
       "Navigate to NotebookLM and create a new secure notebook titled 'Daily Academic Digests'.",
@@ -3158,8 +3165,8 @@ async function initApp() {
           document.getElementById("appLayout").style.display = "flex";
           injectAdminBackButton();
           
-          appState.userRole = "Lecturer";
-          appState.institutionLevel = "University & College";
+          appState.userRole = "Financial Analyst";
+          appState.institutionLevel = "Banking";
           updateSidebarContextUI();
           
           updateUILanguage(); // Make sure admin headers are drawn!
@@ -3694,8 +3701,8 @@ function initAdminPortal() {
     injectAdminBackButton();
 
     // Default simulation load
-    appState.userRole = "Lecturer";
-    appState.institutionLevel = "University & College";
+    appState.userRole = "Financial Analyst";
+    appState.institutionLevel = "Banking";
     updateSidebarContextUI();
     updateUILanguage(); // Make sure admin headers are drawn!
     loadUseCasesFromServer().then(() => renderUseCases());
@@ -3781,7 +3788,7 @@ function initAdminPortal() {
         summary: uc.summary || "",
         features: typeof uc.features === 'string' ? JSON.parse(uc.features) : (uc.features || []),
         connectors: typeof uc.connectors === 'string' ? JSON.parse(uc.connectors) : (uc.connectors || []),
-        role: uc.role || "Lecturer",
+        role: uc.role || "Financial Analyst",
         level: typeof uc.level === 'string' ? JSON.parse(uc.level) : (uc.level || ["Generic"]),
         steps: typeof uc.steps === 'string' ? JSON.parse(uc.steps) : (uc.steps || []),
         prompt: uc.prompt || "",
@@ -3855,7 +3862,7 @@ function initAdminPortal() {
               summary: uc.summary || "",
               features: uc.features || [],
               connectors: uc.connectors || [],
-              role: uc.role || "Lecturer",
+              role: uc.role || "Financial Analyst",
               level: uc.level || ["Generic"],
               steps: uc.steps || [],
               prompt: uc.prompt || "",
@@ -4544,7 +4551,7 @@ function openAdminEditModal(uc) {
 
     document.getElementById("formCaseCategory").value = uc.category || "";
     document.getElementById("formCaseTitle").value = uc.title || "";
-    const roleVal = uc.role || "Lecturer";
+    const roleVal = uc.role || "Financial Analyst";
     const selectEl = document.getElementById("formCaseRole");
     let optionExists = false;
     if (selectEl) {
@@ -4554,7 +4561,7 @@ function openAdminEditModal(uc) {
           break;
         }
       }
-      selectEl.value = optionExists ? roleVal : "Lecturer";
+      selectEl.value = optionExists ? roleVal : "Financial Analyst";
     }
     document.getElementById("formCaseSummary").value = uc.summary || "";
     
@@ -4646,7 +4653,7 @@ function openAdminEditModal(uc) {
     // Clear all form text inputs
     document.getElementById("formCaseCategory").value = "academic";
     document.getElementById("formCaseTitle").value = "";
-    document.getElementById("formCaseRole").value = "Lecturer";
+    document.getElementById("formCaseRole").value = "Financial Analyst";
     document.getElementById("formCaseSummary").value = "";
     document.getElementById("formCaseSteps").value = "";
     document.getElementById("formCasePrompt").value = "";
@@ -4853,7 +4860,7 @@ async function triggerGeminiPlaybookGeneration() {
 
   // Gather current inputs
   const category = document.getElementById("formCaseCategory").value;
-  const role = document.getElementById("formCaseRole").value.trim() || "Lecturer";
+  const role = document.getElementById("formCaseRole").value.trim() || "Financial Analyst";
   const isDualMode = document.getElementById("formCaseDualMode").checked;
 
   const features = [];
@@ -4982,26 +4989,30 @@ function applyGeminiSuggestions(aiRes, isDualMode) {
       }
       if (!found) {
         const lower = rVal.toLowerCase();
-        if (lower.includes("lecturer") || lower.includes("teacher") || lower.includes("educator") || lower.includes("faculty")) {
-          select.value = "Lecturer";
-        } else if (lower.includes("assistant") || lower.includes("ta")) {
-          select.value = "TA";
-        } else if (lower.includes("student") || lower.includes("club")) {
-          select.value = "Student";
-        } else if (lower.includes("leader") || lower.includes("head") || lower.includes("director")) {
-          select.value = "Program Leader";
-        } else if (lower.includes("dean") || lower.includes("educational")) {
-          select.value = "Dean";
-        } else if (lower.includes("it") || lower.includes("admin") || lower.includes("sysadmin")) {
-          select.value = "IT Admin";
-        } else if (lower.includes("affairs") || lower.includes("sao")) {
-          select.value = "SAO";
-        } else if (lower.includes("security") || lower.includes("safety") || lower.includes("officer")) {
-          select.value = "Security";
-        } else if (lower.includes("finance") || lower.includes("audit") || lower.includes("accountant")) {
-          select.value = "Finance";
+        if (lower.includes("analyst") || lower.includes("research") || lower.includes("equity")) {
+          select.value = "Financial Analyst";
+        } else if (lower.includes("advisor") || lower.includes("relationship") || lower.includes("manager")) {
+          select.value = "Relationship Manager";
+        } else if (lower.includes("claims") || lower.includes("adjuster") || lower.includes("insurance")) {
+          select.value = "Claims Processor";
+        } else if (lower.includes("customer") || lower.includes("support") || lower.includes("service")) {
+          select.value = "Customer Service";
+        } else if (lower.includes("hr") || lower.includes("human") || lower.includes("people") || lower.includes("recruitment")) {
+          select.value = "HR Consultant";
+        } else if (lower.includes("it") || lower.includes("operator") || lower.includes("tech") || lower.includes("operations")) {
+          select.value = "IT Operator";
+        } else if (lower.includes("compliance") || lower.includes("audit") || lower.includes("legal")) {
+          select.value = "Compliance Officer";
+        } else if (lower.includes("loan") || lower.includes("lending") || lower.includes("credit")) {
+          select.value = "Loan Officer";
+        } else if (lower.includes("underwriter") || lower.includes("risk")) {
+          select.value = "Underwriter";
+        } else if (lower.includes("security") || lower.includes("cyber")) {
+          select.value = "Security Officer";
+        } else if (lower.includes("banker") || lower.includes("corporate") || lower.includes("finance")) {
+          select.value = "Investment Banker";
         } else {
-          select.value = "Lecturer";
+          select.value = "Financial Analyst";
         }
       }
     }
@@ -6220,31 +6231,9 @@ function isUsecaseRelatedToRole(useCase, role) {
   if (!role) return true;
   if (appState.isAdmin === true) return true;
   
-  // IT Admins have administrative rights to map all cases
-  if (role === "IT Admin") return true;
-  
-  // Lecturer has academic-level supervisor responsibilities (includes TAs)
-  if (role === "Lecturer") {
-    return useCase.role === "Lecturer" || useCase.role === "TA" || useCase.category === "academic";
-  }
-  // TAs see their own and academic tasks
-  if (role === "TA") {
-    return useCase.role === "TA" || useCase.role === "Lecturer" || useCase.category === "academic";
-  }
-  // Student sees Student & club operations
-  if (role === "Student") {
-    return useCase.role === "Student" || useCase.category === "student";
-  }
-  // Program Leader has departmental supervisor capabilities
-  if (role === "Program Leader") {
-    return useCase.role === "Program Leader" || useCase.role === "Lecturer" || useCase.role === "TA" || useCase.category === "academic";
-  }
-  // Dean has college-wide strategic oversight capabilities (sees academic and operational)
-  if (role === "Dean") {
-    return useCase.role === "Dean" || useCase.role === "Program Leader" || useCase.role === "Lecturer" || useCase.role === "TA" || useCase.category === "academic" || useCase.category === "operational";
-  }
-  // Support roles see their exact roles
-  return useCase.role === role;
+  // Show playbooks matching the selected FSI role or default category hub
+  const userCategory = getCategoryByRole(role);
+  return (useCase.role === role) || (useCase.category === userCategory);
 }
 
 // Core Roadmap Rendering Router
@@ -6254,7 +6243,7 @@ function renderTimeline() {
   if (!container) return;
 
   const isZh = appState.activeLanguage === "zh-TW" || appState.activeLanguage === "zh-CN";
-  const role = appState.userRole || "Lecturer";
+  const role = appState.userRole || "Financial Analyst";
 
   // Calculate stats for each stage
   const stageStats = {};
@@ -6497,7 +6486,7 @@ function renderRoadmapDashboardDetails() {
   if (!stage) return;
 
   const isZh = appState.activeLanguage === "zh-TW" || appState.activeLanguage === "zh-CN";
-  const role = appState.userRole || "Lecturer";
+  const role = appState.userRole || "Financial Analyst";
 
   const stageTitle = isZh ? stage.titleZh : stage.title;
   const stageDesc = isZh ? stage.descriptionZh : stage.description;
@@ -6681,7 +6670,7 @@ function renderRoadmapDashboardDetails() {
 
 // Checkbox change handler
 window.handleRoadmapTaskToggle = function(stageId, taskId, checkboxEl) {
-  const role = appState.userRole || "Lecturer";
+  const role = appState.userRole || "Financial Analyst";
   const key = `ge_roadmap_chk_${role}_${stageId}_${taskId}`;
   localStorage.setItem(key, checkboxEl.checked ? "true" : "false");
 

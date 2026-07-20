@@ -415,7 +415,7 @@ async function seedDatabase() {
       const hash = await bcrypt.hash('12345678', salt);
       await query(
         'INSERT INTO users (email, password_hash, is_temp_password, role, institution_level) VALUES (?, ?, ?, ?, ?)',
-        ['test-user@google.com', hash, 0, 'Lecturer', 'University & College']
+        ['test-user@google.com', hash, 0, 'Financial Analyst', 'Banking']
       );
     }
 

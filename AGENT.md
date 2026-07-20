@@ -176,9 +176,14 @@ To compile and deploy updates or new releases of the portal to the live producti
 * **Global `appState` Declaration in Client Logic (100% Complete):**
   * Discovered that the global client-side state manager `appState` was completely undeclared, throwing severe `ReferenceError` crashes in the browser console when writing authenticated session properties immediately after a successful login.
   * Declared and initialized the complete `appState` schema cleanly at the top of `app.js`, restoring login dashboard navigation and correcting the visual freeze.
+* **Resolved Playbook Grid, Checklist, and Language Mismatches (100% Complete):**
+  * **Interactive Role Filtering:** Replaced legacy filter logic in `renderUseCases()` and `isUsecaseRelatedToRole()` to correctly evaluate and display playbooks based on FSI category hubs and roles, eliminating the empty playbook grid bug.
+  * **Simulation and Onboarding Defaults:** Changed all old academic default fallbacks (e.g. `"Lecturer"`, `"University & College"`) inside `initApp()`, admin dashboard view restoration, and new playbook template forms to `"Financial Analyst"` and `"Banking"`.
+  * **AI Draft Parsing:** Upgraded the custom template CSV/AI drafting parser in `applyGeminiSuggestions()` to map key role descriptors to the correct FSI roles (e.g. analyst, advisor, claims, compliance, risk, security).
+  * **Profile Context and Header Sync:** Patched `updateSidebarContextUI()` to display the document title as `Gemini Enterprise - FSI Adoption Portal` and support FSI support roles (`Security Officer`, `IT Operator`, `HR Consultant`).
+  * **Database Seeding and Onboarding Fix:** Modified `server.js`'s test-user seeding function to configure default `test-user@google.com` with role `"Financial Analyst"` and sector `"Banking"`, resolving the missing default role dropdown on onboarding.
+  * **Zero Client-Side Render Crashes:** Fixed the uncaught `TypeError` crash caused by missing `hubs` dictionary in language translations, restoring fully functional real-time language switching across English, Traditional Chinese (`zh-TW`), and Simplified Chinese (`zh-CN`) for both User and Admin portals.
 
 ### Next Steps & Continuous Polish
-1. **Interactive UI Verification & Testing:** Run manual navigation tests across the 12 FSI roles and 4 category hubs (Investment Research, Client Advisory, Credit & Operations, Risk & Compliance).
-2. **Terraform Integration Verification:** Initiate dry-run Terraform runs to verify variables and PostgreSQL environment structures on GCP.
-3. **Connectors Integration Demo:** Connect live document stores or active calendars to evaluate CRM and Email draft generation loops.
-
+1. **Interactive Sandbox & Connector Evaluation:** Set up and test specific manual file uploads or mock API outputs for FSI-specific connectors (Document Store, Calendar, CRM, Email, Service Desk).
+2. **Continuous Deployment Verification:** Verify live revision updates on Cloud Run to guarantee seamless, zero-downtime releases.
