@@ -2,6 +2,9 @@
 
 This document serves as the persistent single source of truth for the **Google Gemini Enterprise FSI Adoption & Playbook Portal**. It outlines the technology stack, specific coding and terminology preferences, design guidelines, and the current implementation state.
 
+> [!IMPORTANT]
+> **Bug-Fixing & Troubleshooting Rule:** For any future bug fixing or troubleshooting, you MUST try to read from the live server/container logs first to pinpoint the exact error before making guesses about what is wrong.
+
 ---
 
 ## 1. Technology Stack & Architecture
@@ -167,6 +170,9 @@ To compile and deploy updates or new releases of the portal to the live producti
   * Set up `trust proxy` inside Express when running on Google Cloud Run to correctly parse SSL headers.
   * Migrated the session configuration to dynamically enable `secure` cookies in production HTTPS.
   * Updated `/api/auth/login` and `/api/auth/reset-password` endpoints to use explicit, blocking `req.session.save()` operations, guaranteeing the browser successfully receives and persists the active cookie before client-side page reload.
+* **Log-First Bug-Fixing Rule Integration (100% Complete):**
+  * Enforced a strict debugging standard inside `AGENT.md` to always read live container logs (using `gcloud logging read`) before guessing or deploying code changes.
+  * Extracted and audited latest Google Cloud Run request logs and startup logs to guide future diagnostics.
 
 ### Next Steps & Continuous Polish
 1. **Interactive UI Verification & Testing:** Run manual navigation tests across the 12 FSI roles and 4 category hubs (Investment Research, Client Advisory, Credit & Operations, Risk & Compliance).
