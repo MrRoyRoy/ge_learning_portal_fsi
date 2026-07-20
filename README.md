@@ -295,22 +295,39 @@ cd terraform
 terraform init
 ```
 
-#### 3. Customize Your Variables:
-Create a custom `terraform.tfvars` file to override default settings (GCP project, region, database password):
+#### 3. Customize Your Non-Sensitive Variables:
+Create a custom `terraform.tfvars` file to override default settings for non-sensitive configurations (GCP project, region, database name). 
+
+> [!IMPORTANT]
+> **Credential Security Best Practices (Terraform 1.10+):**
+> We configure all secret parameters (`db_password`, `super_admin_password`, and `admin_password`) with `sensitive = true` and `ephemeral = true` in `variables.tf`. This ensures that they are **never stored or persisted inside your `terraform.tfstate` state file**.
+>
+> To maintain strict hygiene, **never store passwords inside your `.tfvars` files**. Instead, choose one of the following secure options to inject them during runtime:
+
+##### Option A: Secure Shell Environment Variables (Recommended)
+Export the credentials as in-memory environment variables prefixed with `TF_VAR_` in your terminal. They remain in shell memory and are never written to disk:
+```bash
+export TF_VAR_db_password="YourSecurePostgresMasterPassword"
+export TF_VAR_super_admin_password="YourSecureMasterSuperAdminPassword"
+export TF_VAR_admin_password="YourSecureAdminAssistantPassword"
+```
+
+##### Option B: Dynamic CLI Prompts
+Simply omit the passwords from your `.tfvars` file entirely. When you run `terraform plan` or `terraform apply`, Terraform will securely and interactively prompt you to input each password.
+
+Your local `.tfvars` file should only house public metadata variables:
 ```hcl
-project_id           = "ge-fsi-demo"
-region               = "asia-east2"
-service_name         = "fsi-ge-learning-portal"
-db_instance_name     = "fsi-portal-db"
-db_password          = "your-postgres-master-password"
-super_admin_password = "your-master-superadmin-password"
-admin_password       = "your-admin-assistant-password"
+project_id       = "ge-fsi-demo"
+region           = "asia-east2"
+service_name     = "fsi-ge-learning-portal"
+db_instance_name = "fsi-portal-db"
 ```
 
 #### 4. Preview the Provisioning Infrastructure Plan:
 ```bash
 terraform plan
 ```
+*(If you used Option B, Terraform will prompt you to input the credentials here.)*
 
 #### 5. Apply and Provision Infrastructure:
 ```bash
