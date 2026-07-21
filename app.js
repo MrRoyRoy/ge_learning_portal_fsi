@@ -521,6 +521,23 @@ const uiTranslations = {
     "filterDeployed": "My Deployed Solutions",
     "linkedAndActive": "Linked and Active",
     "profileSetSuccess": "Profile loaded successfully! Welcome to the FSI Adoption Portal.",
+    "showAllCases": "Show All",
+    "standardToolsOnly": "Ready to Deploy",
+    "integrationRequired": "Requires Connectors",
+    "allCapabilities": "All Capabilities",
+    "navAll": "All Templates",
+    "navExplorePlaybooks": "Explore Playbooks",
+    "navAdoptionTimeline": "Adoption Roadmap",
+    "sidebarConnectorsTitleText": "Data Integrations",
+    "labelConnectorDocumentStore": "Document Store Connector",
+    "labelConnectorEmail": "Email Connector",
+    "labelConnectorCRM": "CRM Connector",
+    "labelConnectorCalendar": "Calendar Connector",
+    "labelConnectorServiceDesk": "Service Desk & KB Connector",
+    "titleContextProfile": "Active Context",
+    "titlePrimaryViews": "Portal Views",
+    "titleNavigation": "Navigation",
+    "titleFilters": "Requirement Filter",
     "roles": {
       "Financial Analyst": "Financial Analyst",
       "Relationship Manager": "Relationship Manager",
@@ -562,38 +579,55 @@ const uiTranslations = {
     "labelLevel": "行業細分 / 領域",
     "labelLang": "選擇語言 / Select Language",
     "btnStart": "進入我的應用中心",
-    "sidebarProfileTitle": "我的角色檔案",
+    "sidebarProfileTitle": "個人角色檔案",
     "sidebarConnectorsTitle": "已啟用企業級連接器",
-    "sidebarFeaturesTitle": "按 CE 功能篩選",
+    "sidebarFeaturesTitle": "依技術功能篩選",
     "filterLiked": "我的收藏案例",
     "filterDeployed": "我的部署案例",
     "linkedAndActive": "已成功連接並啟用",
     "profileSetSuccess": "檔案載入成功！歡迎使用 FSI 應用導入門戶。",
+    "showAllCases": "顯示所有案例",
+    "standardToolsOnly": "標準部署模式",
+    "integrationRequired": "進階整合模式",
+    "allCapabilities": "所有技術功能",
+    "navAll": "所有應用範本",
+    "navExplorePlaybooks": "探索案例庫",
+    "navAdoptionTimeline": "導入路線圖",
+    "sidebarConnectorsTitleText": "數據整合連線",
+    "labelConnectorDocumentStore": "文件庫連接器",
+    "labelConnectorEmail": "電子郵件連接器",
+    "labelConnectorCRM": "CRM 連接器",
+    "labelConnectorCalendar": "行事曆連接器",
+    "labelConnectorServiceDesk": "服務台與知識庫連接器",
+    "titleContextProfile": "目前個人檔案",
+    "titlePrimaryViews": "門戶視圖",
+    "titleNavigation": "業務導航中心",
+    "titleFilters": "依部署需求篩選",
     "roles": {
-      "Financial Analyst": "金融分析師 (Financial Analyst)",
-      "Relationship Manager": "客戶關係經理 (Relationship Manager)",
-      "Claims Processor": "理賠審核員 (Claims Processor)",
-      "Customer Service": "客戶服務專員 (Customer Service)",
-      "HR Consultant": "人力資源顧問 (HR Consultant)",
-      "IT Operator": "IT 運維專員 (IT Operator)",
-      "Compliance Officer": "合規審查官 (Compliance Officer)",
-      "Loan Officer": "信貸業務官 (Loan Officer)",
-      "Underwriter": "核保與風險評估師 (Underwriter)",
-      "Risk Manager": "風險管理經理 (Risk Manager)",
-      "Investment Banker": "投資銀行家 (Investment Banker)",
-      "Security Officer": "資訊安全官 (Security Officer)"
+      "Financial Analyst": "金融分析師",
+      "Relationship Manager": "客戶關係經理",
+      "Claims Processor": "理賠審核員",
+      "Customer Service": "客戶服務專員",
+      "HR Consultant": "人力資源顧問",
+      "IT Operator": "IT 運維專員",
+      "Compliance Officer": "合規審查官",
+      "Loan Officer": "信貸業務官",
+      "Underwriter": "核保與風險評估師",
+      "Risk Manager": "風險管理經理",
+      "Investment Banker": "投資銀行家",
+      "Security Officer": "資訊安全官"
     },
     "levels": {
-      "Banking": "零售與商業銀行 (Retail & Commercial Banking)",
-      "Insurance": "人壽與財產保險 (Life & Property Insurance)",
-      "Capital Markets": "資本市場與財富管理 (Capital Markets)",
+      "Banking": "零售與商業銀行",
+      "Insurance": "人壽與財產保險",
+      "Capital Markets": "資本市場與財富管理",
       "Generic": "通用跨行業模版"
     },
     "hubs": {
-      "academic": "投資研究 (Investment Research)",
-      "student": "客戶諮詢 (Client Advisory)",
-      "operational": "授信與營運 (Credit & Operations)",
-      "administrative": "風險與合規 (Risk & Compliance)"
+      "academic": "投資研究",
+      "student": "客戶諮詢",
+      "operational": "授信與營運",
+      "administrative": "風險與合規"
     },
     "adminPortalTitle": "GEMINI FSI 門戶管理後台",
     "adminRegisteredUsersTitle": "已註冊門戶使用者",
@@ -610,38 +644,55 @@ const uiTranslations = {
     "labelLevel": "行业细分 / 领域",
     "labelLang": "选择语言 / Select Language",
     "btnStart": "进入我的应用中心",
-    "sidebarProfileTitle": "我的角色档案",
+    "sidebarProfileTitle": "个人角色档案",
     "sidebarConnectorsTitle": "已启用企业级连接器",
-    "sidebarFeaturesTitle": "按 CE 功能筛选",
+    "sidebarFeaturesTitle": "按技术功能筛选",
     "filterLiked": "我的收藏案例",
     "filterDeployed": "我的部署案例",
     "linkedAndActive": "已成功连接并启用",
     "profileSetSuccess": "档案载入成功！欢迎使用 FSI 应用导入门户。",
+    "showAllCases": "显示所有案例",
+    "standardToolsOnly": "标准部署模式",
+    "integrationRequired": "进阶整合模式",
+    "allCapabilities": "所有技术功能",
+    "navAll": "所有应用模板",
+    "navExplorePlaybooks": "探索案例库",
+    "navAdoptionTimeline": "导入路线图",
+    "sidebarConnectorsTitleText": "数据集成连线",
+    "labelConnectorDocumentStore": "文件库连接器",
+    "labelConnectorEmail": "电子邮件连接器",
+    "labelConnectorCRM": "CRM 连接器",
+    "labelConnectorCalendar": "日历连接器",
+    "labelConnectorServiceDesk": "服务台与知识库连接器",
+    "titleContextProfile": "目前个人档案",
+    "titlePrimaryViews": "门户视图",
+    "titleNavigation": "业务导航中心",
+    "titleFilters": "依部署需求筛选",
     "roles": {
-      "Financial Analyst": "金融分析师 (Financial Analyst)",
-      "Relationship Manager": "客户关系经理 (Relationship Manager)",
-      "Claims Processor": "理赔审核员 (Claims Processor)",
-      "Customer Service": "客户服务专员 (Customer Service)",
-      "HR Consultant": "人力资源顾问 (HR Consultant)",
-      "IT Operator": "IT 运维专员 (IT Operator)",
-      "Compliance Officer": "合规审查官 (Compliance Officer)",
-      "Loan Officer": "信贷业务员 (Loan Officer)",
-      "Underwriter": "核保与风险评估师 (Underwriter)",
-      "Risk Manager": "风险管理经理 (Risk Manager)",
-      "Investment Banker": "投资银行家 (Investment Banker)",
-      "Security Officer": "信息安全官 (Security Officer)"
+      "Financial Analyst": "金融分析师",
+      "Relationship Manager": "客户关系经理",
+      "Claims Processor": "理赔审核员",
+      "Customer Service": "客户服务专员",
+      "HR Consultant": "人力资源顾问",
+      "IT Operator": "IT 运维专员",
+      "Compliance Officer": "合规审查官",
+      "Loan Officer": "信贷业务员",
+      "Underwriter": "核保与风险评估师",
+      "Risk Manager": "风险管理经理",
+      "Investment Banker": "投资银行家",
+      "Security Officer": "信息安全官"
     },
     "levels": {
-      "Banking": "零售与商业银行 (Retail & Commercial Banking)",
-      "Insurance": "人寿与财产保险 (Life & Property Insurance)",
-      "Capital Markets": "资本市场与财富管理 (Capital Markets)",
+      "Banking": "零售与商业银行",
+      "Insurance": "人寿与财产保险",
+      "Capital Markets": "资本市场与财富管理",
       "Generic": "通用跨行业模板"
     },
     "hubs": {
-      "academic": "投资研究 (Investment Research)",
-      "student": "客户咨询 (Client Advisory)",
-      "operational": "授信与营运 (Credit & Operations)",
-      "administrative": "风险与合规 (Risk & Compliance)"
+      "academic": "投资研究",
+      "student": "客户咨询",
+      "operational": "授信与营运",
+      "administrative": "风险与合规"
     },
     "adminPortalTitle": "GEMINI FSI 门户管理后台",
     "adminRegisteredUsersTitle": "已注册门户使用者",
@@ -1435,17 +1486,48 @@ function updateUILanguage() {
   safeSetHTML("btnStart", `<span class="material-symbols-outlined">rocket_launch</span> ${t.btnStart}`);
   
   // Sidebar titles (with robust fallback selectors to match index.html elements)
-  const sidebarProfileTitle = document.getElementById("sidebarProfileTitle") || document.getElementById("titleContextProfile");
+  safeSetText("titleContextProfile", t.titleContextProfile || "Active Context");
+  safeSetText("titlePrimaryViews", t.titlePrimaryViews || "Portal Views");
+  safeSetText("titleNavigation", t.titleNavigation || "Navigation");
+  safeSetText("titleFilters", t.titleFilters || "Requirement Filter");
+  safeSetText("sidebarConnectorsTitleText", t.sidebarConnectorsTitleText || "Data Integrations");
+  safeSetText("sidebarFeaturesTitle", t.sidebarFeaturesTitle || "Filter by GE Feature");
+  
+  // Translate individual connector spans
+  safeSetText("labelConnectorDocumentStore", t.labelConnectorDocumentStore || "Document Store Connector");
+  safeSetText("labelConnectorEmail", t.labelConnectorEmail || "Email Connector");
+  safeSetText("labelConnectorCRM", t.labelConnectorCRM || "CRM Connector");
+  safeSetText("labelConnectorCalendar", t.labelConnectorCalendar || "Calendar Connector");
+  safeSetText("labelConnectorServiceDesk", t.labelConnectorServiceDesk || "Service Desk & KB Connector");
+
+  // Primary page views navigation items
+  safeSetText("navExplorePlaybooks", t.navExplorePlaybooks || "Explore Playbooks");
+  safeSetText("navAdoptionTimeline", t.navAdoptionTimeline || "Adoption Roadmap");
+
+  // Category navigation tabs
+  safeSetText("navAll", t.navAll || "All Templates");
+  safeSetText("navAcademic", t.hubs.academic || "Investment Research");
+  safeSetText("navStudent", t.hubs.student || "Client Advisory");
+  safeSetText("navOperational", t.hubs.operational || "Credit & Operations");
+  safeSetText("navAdmin", t.hubs.administrative || "Risk & Compliance");
+
+  // Dynamic Search Input Placeholder
+  const searchInput = document.getElementById("searchInput");
+  if (searchInput) {
+    searchInput.placeholder = lang === "en" 
+      ? "Search prompts, templates, roles..." 
+      : (lang === "zh-TW" ? "搜尋提示詞、案例範本、工作角色..." : "搜索提示词、案例模板、工作角色...");
+  }
+
+  const sidebarProfileTitle = document.getElementById("sidebarProfileTitle");
   if (sidebarProfileTitle) sidebarProfileTitle.textContent = t.sidebarProfileTitle;
   
   const sidebarConnectorsTitle = document.getElementById("sidebarConnectorsTitle");
-  if (sidebarConnectorsTitle) sidebarConnectorsTitle.textContent = t.sidebarConnectorsTitle;
-  
-  const sidebarFeaturesTitle = document.getElementById("sidebarFeaturesTitle") || document.getElementById("titleNavigation");
-  if (sidebarFeaturesTitle) sidebarFeaturesTitle.textContent = t.sidebarFeaturesTitle || "Filter by GE Feature";
-  
-  const sidebarStatusTitle = document.getElementById("sidebarStatusTitle") || document.getElementById("titleFilters");
-  if (sidebarStatusTitle) sidebarStatusTitle.textContent = t.sidebarStatusTitle;
+  if (sidebarConnectorsTitle) {
+    // Keep text content updated without stripping children if any exist
+    const spanText = document.getElementById("sidebarConnectorsTitleText");
+    if (spanText) spanText.textContent = t.sidebarConnectorsTitleText || "Data Integrations";
+  }
 
   safeSetText("btnChangeContextText", t.btnChangeContextText);
 
@@ -1999,10 +2081,10 @@ function renderUseCases() {
       let connectorLabelHtml = "";
       if (uc.connectors.length > 0) {
         const connectorsListText = uc.connectors.map(c => {
-          if (c.toLowerCase().includes("drive")) return lang === "en" ? "Drive Connector" : "Drive 連接器";
-          if (c.toLowerCase().includes("email")) return lang === "en" ? "Email Connector" : "Email 連接器";
-          if (c.toLowerCase().includes("lms")) return lang === "en" ? "LMS Connector" : "LMS 連接器";
-          if (c.toLowerCase().includes("calendar") || c.toLowerCase().includes("google")) return lang === "en" ? "Calendar Connector" : "Calendar 連接器";
+          if (c.toLowerCase().includes("drive")) return t.labelConnectorDocumentStore || "Document Store Connector";
+          if (c.toLowerCase().includes("email")) return t.labelConnectorEmail || "Email Connector";
+          if (c.toLowerCase().includes("lms")) return t.labelConnectorCRM || "CRM Connector";
+          if (c.toLowerCase().includes("calendar") || c.toLowerCase().includes("google")) return t.labelConnectorCalendar || "Calendar Connector";
           return c;
         }).join(', ');
         
@@ -2057,10 +2139,10 @@ function renderUseCases() {
 
         // Map to a pretty local name
         let prettyMissing = missing;
-        if (missing.toLowerCase().includes("drive")) prettyMissing = lang === "en" ? "Drive Connector" : "Drive 連接器";
-        else if (missing.toLowerCase().includes("email")) prettyMissing = lang === "en" ? "Email Connector" : "Email 連接器";
-        else if (missing.toLowerCase().includes("lms")) prettyMissing = lang === "en" ? "LMS Connector" : "LMS 連接器";
-        else if (missing.toLowerCase().includes("calendar") || missing.toLowerCase().includes("google")) prettyMissing = lang === "en" ? "Calendar Connector" : "Calendar 連接器";
+        if (missing.toLowerCase().includes("drive")) prettyMissing = t.labelConnectorDocumentStore || "Document Store Connector";
+        else if (missing.toLowerCase().includes("email")) prettyMissing = t.labelConnectorEmail || "Email Connector";
+        else if (missing.toLowerCase().includes("lms")) prettyMissing = t.labelConnectorCRM || "CRM Connector";
+        else if (missing.toLowerCase().includes("calendar") || missing.toLowerCase().includes("google")) prettyMissing = t.labelConnectorCalendar || "Calendar Connector";
 
         const lockOverlay = document.createElement("div");
         lockOverlay.className = "card-lock-overlay";

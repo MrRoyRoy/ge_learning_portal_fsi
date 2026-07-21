@@ -189,7 +189,12 @@ To compile and deploy updates or new releases of the portal to the live producti
   * **Tactile Button Sinks:** Configured `.nav-button` and `.nav-button-primary` as mechanical tactile buttons that float when idle, rise on hover, and sink recessed into the board (`inset` shadow) on click.
   * **Sunken Form Fields & Sockets:** Redesigned `.select-control`, `.search-input`, and checkbox indicators (`.roadmap-checkbox-indicator`) to look physically recessed into the canvas with soft shadow contours.
   * **Physical Toggle Slider Channels:** Refactored toggles into beautiful hollowed inset track slots with high-contrast convex spherical knobs.
+  * **Cohesive Desktop Floating Sidebar:** Programmed `.sidebar` as a floating rounded console plate that floats beautifully over the workspace background with deep tactile shadow depth on desktop screens, falling back cleanly to responsive full-screen menus on mobile.
+  * **Skeuomorphic Circular Brand Indicator Logo:** Upgraded the brand mark to a beautiful circular technical lens dial with outer and inner shadow maps, glowing on hover.
+  * **Full Localized Side Panel Translations:** Dynamically integrated all static sidebar title headers, portal view selectors, category filter tabs, requirement filter links, search bar placeholder, and individual connector description toggles across English, Traditional Chinese (`zh-TW`), and Simplified Chinese (`zh-CN`), fixing the translation gaps.
+  * **Brackets / Parentheses Polish:** Cleaned up all dynamic and static Chinese texts inside `uiTranslations` to strip duplicate English parenthesized name repetitions, restoring absolute visual cleanliness.
+  * **Card Badge Synchronisation:** Synced usecase card tags and lockout warnings to look up same premium localized connector names.
 
 ### Next Steps & Continuous Polish
-1. **Visual Walkthrough & Aesthetic Review:** Click through Light and Dark mode styles to verify high-contrast contour readability.
-2. **Container Build Verification:** Compile and push updated stylesheets to production via Cloud Run.
+1. **Container Build & Live Production Release:** Compile, verify, and push changes live to Google Cloud Run and verify access.
+2. **Review User Feedback:** Review user interactions with the newly released soft-instrument design.
