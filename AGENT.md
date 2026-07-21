@@ -213,7 +213,14 @@ To compile and deploy updates or new releases of the portal to the live producti
     * Toned down the excessively bright drop shadows and focus glows on the `continuous-pipeline-capsule`, `.timeline-node-joint:hover`, and `.floating-feedback-button` to perfectly balance the soft-instrument aesthetic.
   * **Backend "Draft with Gemini" IAM Infrastructure (100% Complete):**
     * Enabled the GCP Vertex AI platform APIs (`"aiplatform.googleapis.com"`) and bound the Vertex AI User role (`"roles/aiplatform.user"`) to the dedicated Cloud Run runner service account (`"fsi-portal-runner"`) inside `terraform/main.tf` to resolve authorization errors.
+  * **FSI Timeline Milestones & Checkpoints Alignments (100% Complete):**
+    * Refactored legacy educational stage labels (e.g., Pre-Semester, Sem 1 Launch, Exam Audit) inside `app.js`'s horizontal alternating roadmap loop to display specialized finance-aligned milestones (e.g., Pilot Prep, Expansion, Enterprise Scale, and Security Compliance).
+    * Aligned both the User Role dropdown (IT Operator, Underwriter, Financial Analyst, Claims Processor) and Timeline Phase dropdown (Pilot Prep, Enterprise Scale) in the administration verification checkpoint modal inside `index.html` to perfectly match FSI naming conventions.
+  * **Dynamic Missing Translations Inject (100% Complete):**
+    * Discovered that the Empty Filter view inside `renderUseCases()` attempted to render localized keys `noUseCasesTitle`, `noUseCasesDesc`, and `btnResetFilters` which were completely absent inside the global translations database.
+    * Added full English, Traditional Chinese (`zh-TW`), and Simplified Chinese (`zh-CN`) translation profiles inside `uiTranslations` in `app.js`, resolving the `undefined` visual rendering error and restoring a clean, localized fallback UI when no playbooks are found.
 
 ### Next Steps & Continuous Polish
-1. **Infrastructure Application & Re-deployment:** Execute Terraform updates to apply Vertex AI API and service account IAM bindings, then run standard `gcloud run deploy` to push the containerized code changes.
-2. **Post-Deployment Validation:** Authenticate in the live portal, verify checklist action visibility, navigate sidebar tabs, and run a live mock generative test using "Draft with Gemini" to confirm smooth operations.
+1. **Live Production Release Verification:** Let the Cloud Run background builder process finish and verify access to the newly deployed live URL.
+2. **Interactive UI Walkthrough:** Verify that searching for arbitrary terms or selecting inactive connectors displays the beautiful localized empty status card rather than the legacy `undefined` strings.
+
