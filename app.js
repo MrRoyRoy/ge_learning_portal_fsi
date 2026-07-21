@@ -1874,6 +1874,20 @@ function setupConnectorToggles() {
       renderUseCases();
     });
   });
+
+  // Make the entire connector item container clickable
+  document.querySelectorAll(".connector-item").forEach(item => {
+    item.addEventListener("click", (e) => {
+      if (e.target.tagName === "INPUT" || e.target.closest(".switch") || e.target.closest("label")) {
+        return;
+      }
+      const checkbox = item.querySelector("input[type='checkbox']");
+      if (checkbox) {
+        checkbox.checked = !checkbox.checked;
+        checkbox.dispatchEvent(new Event("change"));
+      }
+    });
+  });
 }
 
 // Search input handling

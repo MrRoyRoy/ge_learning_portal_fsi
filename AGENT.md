@@ -194,6 +194,17 @@ To compile and deploy updates or new releases of the portal to the live producti
   * **Full Localized Side Panel Translations:** Dynamically integrated all static sidebar title headers, portal view selectors, category filter tabs, requirement filter links, search bar placeholder, and individual connector description toggles across English, Traditional Chinese (`zh-TW`), and Simplified Chinese (`zh-CN`), fixing the translation gaps.
   * **Brackets / Parentheses Polish:** Cleaned up all dynamic and static Chinese texts inside `uiTranslations` to strip duplicate English parenthesized name repetitions, restoring absolute visual cleanliness.
   * **Card Badge Synchronisation:** Synced usecase card tags and lockout warnings to look up same premium localized connector names.
+  * **Ultra-Bright Slate & White Light Mode Theme (100% Complete):**
+    * Refactored light mode base background to pristine pure white `#ffffff` and container surfaces to sleek off-white `#f8fafc`.
+    * Upgraded light mode shadow maps to crisp soft-slate `#e2e8f0` and white `#ffffff`, making Neumorphism contours incredibly bright and readable.
+  * **Royal Tech Blue Base Theme Accent (100% Complete):**
+    * Shifted base component accents from purple/indigo to high-contrast Royal Tech Blue (`#2563eb` in dark, `#1d4ed8` in light) across all dials, glowing markers, buttons, loading animations, and toggle slider knobs.
+  * **Interactive Skeuomorphic Roadmap Redesign (100% Complete):**
+    * Redesigned the horizontal alternating timeline track into a deeply recessed molded track groove (`box-shadow: var(--shadow-neumorphic-in-sm)`) containing physical convex nodes and raised flag schedule cards that react with high-fidelity mechanical transitions on hover and active click states.
+  * **Entire Sidebar Connector Card Clickability (100% Complete):**
+    * Upgraded the event dispatcher in `app.js` and styled `.connector-item` in `style.css` so clicking *any portion of the connector card* triggers the integration toggle, with a pointer cursor and disabled text selection.
+  * **Static Non-Clickable Brand Icon (100% Complete):**
+    * Removed confusing scale-up and glowing color transition mouse effects from the non-clickable brand logo icon next to "FSI Adoption Hub", keeping it clean, premium, and static.
 
 ### Next Steps & Continuous Polish
 1. **Container Build & Live Production Release:** Compile, verify, and push changes live to Google Cloud Run and verify access.
