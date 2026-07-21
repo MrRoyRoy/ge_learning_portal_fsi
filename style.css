@@ -8,165 +8,178 @@
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
 
-  /* Color Palette - Swiss Carbon & Muted Slate Dark Mode */
-  --bg-dark-base: #09090b;       /* Pure ink black background */
-  --bg-dark-surface: #121214;    /* Flat solid obsidian surface */
-  --bg-dark-card: #121214;       /* Flat solid card */
-  --bg-dark-modal: #121214;      /* Pure solid modal surface */
+  /* Color Palette - Premium Tactile Obsidian Neumorphism (Dark Mode) */
+  --bg-dark-base: #1e222b;       /* Soft matte charcoal-blue base */
+  --bg-dark-surface: #1e222b;    /* Same as base to blend with shadows */
+  --bg-dark-card: #1e222b;
+  --bg-dark-modal: #1e222b;
 
   --color-primary: #6366f1;       /* Deep brand Indigo */
-  --color-primary-glow: rgba(99, 102, 241, 0.05);
+  --color-primary-glow: rgba(99, 102, 241, 0.15);
   --color-primary-hover: #4f46e5;
   --color-secondary: #0ea5e9;     /* Tech Cyan */
-  --color-secondary-glow: rgba(14, 165, 233, 0.05);
+  --color-secondary-glow: rgba(14, 165, 233, 0.15);
   --color-accent: #a855f7;        /* Violet */
-  --color-accent-glow: rgba(168, 85, 247, 0.05);
+  --color-accent-glow: rgba(168, 85, 247, 0.15);
   --color-success: #10b981;       /* Emerald */
-  --color-success-glow: rgba(16, 185, 129, 0.05);
+  --color-success-glow: rgba(16, 185, 129, 0.15);
   --color-warning: #f59e0b;       /* Amber */
-  --color-warning-glow: rgba(245, 158, 11, 0.05);
+  --color-warning-glow: rgba(245, 158, 11, 0.15);
   --color-danger: #ef4444;        /* Rose */
-  --color-danger-glow: rgba(239, 68, 68, 0.05);
+  --color-danger-glow: rgba(239, 68, 68, 0.15);
 
-  --text-primary: #fafafa;        /* Clean, high-contrast off-white */
-  --text-secondary: #a1a1aa;      /* Soft silver slate */
-  --text-muted: #52525b;          /* Muted dark metal */
+  --text-primary: #fafafa;        /* Clean off-white */
+  --text-secondary: #cbd5e1;      /* Crisp soft silver */
+  --text-muted: #64748b;          /* Slate grey icon accents */
 
-  --border-glass: rgba(255, 255, 255, 0.07); /* Precise hairline divider */
-  --border-glass-focused: rgba(255, 255, 255, 0.18);
-  --border-glow-primary: rgba(99, 102, 241, 0.25);
+  --border-glass: rgba(255, 255, 255, 0.03); /* Extremely soft guidelines */
+  --border-glass-focused: rgba(255, 255, 255, 0.08);
+  --border-glow-primary: rgba(99, 102, 241, 0.35);
 
-  --blur-glass: 0px;              /* Pure flat minimalism - zero heavy glass blurs */
-  --transition-smooth: all 0.22s cubic-bezier(0.16, 1, 0.3, 1); /* Modern instant ease-out */
-  --transition-fast: all 0.12s cubic-bezier(0.16, 1, 0.3, 1);
+  --blur-glass: 0px;
+  --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Neumorphic Shadows and Radii (Dark Mode) */
+  --shadow-neumorphic-out: 10px 10px 20px rgba(0, 0, 0, 0.45), -10px -10px 20px rgba(255, 255, 255, 0.035);
+  --shadow-neumorphic-out-sm: 5px 5px 10px rgba(0, 0, 0, 0.45), -5px -5px 10px rgba(255, 255, 255, 0.035);
+  --shadow-neumorphic-in: inset 10px 10px 20px rgba(0, 0, 0, 0.45), inset -10px -10px 20px rgba(255, 255, 255, 0.035);
+  --shadow-neumorphic-in-sm: inset 5px 5px 10px rgba(0, 0, 0, 0.45), inset -5px -5px 10px rgba(255, 255, 255, 0.035);
+  --border-radius-neumorphic: 24px;
+  --border-radius-neumorphic-sm: 12px;
+  --border-radius-neumorphic-lg: 32px;
 
   /* Sidebar, Navbar, and Lock Layers */
-  --bg-sidebar: #0e0e10;
-  --bg-navbar: rgba(9, 9, 11, 0.85);
+  --bg-sidebar: #171b22;         /* Slightly darker for outline layout separation */
+  --bg-navbar: rgba(30, 34, 43, 0.85);
   --brand-text-start: #ffffff;
   --brand-text-end: #ffffff;
   --welcome-msg-start: #ffffff;
-  --welcome-msg-end: #a1a1aa;
-  --bg-lock-overlay: rgba(9, 9, 11, 0.94);
-  --bg-modal-overlay: rgba(0, 0, 0, 0.6);
-  --bg-prompt-box: #18181b;       /* Dark grey prompt background */
-  --text-prompt-box: #cbd5e1;
-  --bg-copy-btn: rgba(255, 255, 255, 0.04);
+  --welcome-msg-end: #cbd5e1;
+  --bg-lock-overlay: rgba(30, 34, 43, 0.94);
+  --bg-modal-overlay: rgba(0, 0, 0, 0.65);
+  --bg-prompt-box: #171b22;       /* Inset prompt panel background */
+  --text-prompt-box: #e2e8f0;
+  --bg-copy-btn: rgba(255, 255, 255, 0.02);
 
   /* Interactive Elements */
-  --border-tag: rgba(255, 255, 255, 0.05);
-  --bg-tag-feature: rgba(255, 255, 255, 0.03);
-  --bg-tag-level: rgba(14, 165, 233, 0.06);
-  --border-tag-level: rgba(14, 165, 233, 0.15);
-  --bg-toggle-inactive: #27272a;
-  --bg-toggle-circle: #a1a1aa;
-  --bg-filter-hover: rgba(255, 255, 255, 0.03);
-  --bg-search-input: rgba(255, 255, 255, 0.02);
-  --bg-search-input-focus: rgba(255, 255, 255, 0.04);
+  --border-tag: rgba(255, 255, 255, 0.03);
+  --bg-tag-feature: rgba(255, 255, 255, 0.02);
+  --bg-tag-level: rgba(14, 165, 233, 0.08);
+  --border-tag-level: rgba(14, 165, 233, 0.2);
+  --bg-toggle-inactive: #171b22;
+  --bg-toggle-circle: #64748b;
+  --bg-filter-hover: rgba(255, 255, 255, 0.01);
+  --bg-search-input: rgba(0, 0, 0, 0.2);
+  --bg-search-input-focus: rgba(0, 0, 0, 0.25);
   --bg-profile-card: rgba(255, 255, 255, 0.01);
-  --border-profile-card: rgba(255, 255, 255, 0.04);
-  --bg-nav-btn: rgba(255, 255, 255, 0.02);
-  --bg-nav-btn-hover: rgba(255, 255, 255, 0.04);
-  --border-nav-btn-hover: rgba(255, 255, 255, 0.12);
-  --bg-connector-item: rgba(255, 255, 255, 0.01);
-  --bg-connector-item-hover: rgba(255, 255, 255, 0.03);
-  --modal-title-gradient: linear-gradient(to right, #ffffff, #e4e4e7);
-  --bg-copy-btn-hover: rgba(255, 255, 255, 0.08);
-  --border-copy-btn-hover: rgba(255, 255, 255, 0.15);
+  --border-profile-card: rgba(255, 255, 255, 0.02);
+  --bg-nav-btn: rgba(255, 255, 255, 0.01);
+  --bg-nav-btn-hover: rgba(255, 255, 255, 0.03);
+  --border-nav-btn-hover: rgba(255, 255, 255, 0.08);
+  --bg-connector-item: rgba(0, 0, 0, 0.05);
+  --bg-connector-item-hover: rgba(0, 0, 0, 0.1);
+  --modal-title-gradient: linear-gradient(to right, #ffffff, #e2e8f0);
+  --bg-copy-btn-hover: rgba(255, 255, 255, 0.05);
+  --border-copy-btn-hover: rgba(255, 255, 255, 0.1);
 
-  --border-badge-primary: rgba(99, 102, 241, 0.15);
-  --border-badge-secondary: rgba(14, 165, 233, 0.15);
-  --border-badge-accent: rgba(168, 85, 247, 0.15);
-  --border-badge-success: rgba(16, 185, 129, 0.15);
+  --border-badge-primary: rgba(99, 102, 241, 0.2);
+  --border-badge-secondary: rgba(14, 165, 233, 0.2);
+  --border-badge-accent: rgba(168, 85, 247, 0.2);
+  --border-badge-success: rgba(16, 185, 129, 0.2);
 
   /* Engineering Grid Line Color */
-  --grid-line: rgba(255, 255, 255, 0.015);
+  --grid-line: rgba(255, 255, 255, 0.01);
 
   /* Timeline Core Adaptive Variables */
-  --timeline-track-bg: rgba(255, 255, 255, 0.15);
-  --timeline-pin-color: rgba(255, 255, 255, 0.25);
-  --timeline-flag-bg: #18181b;
-  --timeline-flag-bg-hover: #27272a;
-  --timeline-flag-border: rgba(255, 255, 255, 0.15);
-  --timeline-flag-shadow: rgba(0, 0, 0, 0.4);
+  --timeline-track-bg: rgba(255, 255, 255, 0.05);
+  --timeline-pin-color: rgba(255, 255, 255, 0.1);
+  --timeline-flag-bg: #1e222b;
+  --timeline-flag-bg-hover: #171b22;
+  --timeline-flag-border: rgba(255, 255, 255, 0.03);
+  --timeline-flag-shadow: rgba(0, 0, 0, 0.35);
 }
 
 html[data-theme="light"] {
-  --bg-dark-base: #fcfcfc;        /* Elegant pure architectural paper */
-  --bg-dark-surface: #ffffff;     /* Pure flat white cards */
-  --bg-dark-card: #ffffff;
-  --bg-dark-modal: #ffffff;
+  /* Color Palette - Medical/Industrial Matte Slate-Grey (Light Mode) */
+  --bg-dark-base: #e6eef4;        /* Beautiful clinical light-grey-blue background */
+  --bg-dark-surface: #e6eef4;     /* Matches base background for smooth contour curves */
+  --bg-dark-card: #e6eef4;
+  --bg-dark-modal: #e6eef4;
 
-  --color-primary: #4338ca;        /* Solid Deep Indigo */
-  --color-primary-glow: rgba(67, 56, 202, 0.04);
+  --color-primary: #4338ca;        /* Deep tactical Indigo */
+  --color-primary-glow: rgba(67, 56, 202, 0.08);
   --color-primary-hover: #3730a3;
   --color-secondary: #0369a1;      /* Deep Ocean Blue */
-  --color-secondary-glow: rgba(3, 105, 161, 0.04);
+  --color-secondary-glow: rgba(3, 105, 161, 0.08);
   --color-accent: #6d28d9;         /* Plum */
-  --color-accent-glow: rgba(109, 40, 217, 0.04);
+  --color-accent-glow: rgba(109, 40, 217, 0.08);
   --color-success: #047857;        /* Forest Emerald */
-  --color-success-glow: rgba(4, 120, 87, 0.04);
+  --color-success-glow: rgba(4, 120, 87, 0.08);
   --color-warning: #b45309;        /* Warm Amber */
-  --color-warning-glow: rgba(180, 83, 9, 0.04);
+  --color-warning-glow: rgba(180, 83, 9, 0.08);
   --color-danger: #b91c1c;         /* Deep Crimson */
-  --color-danger-glow: rgba(185, 28, 28, 0.04);
+  --color-danger-glow: rgba(185, 28, 28, 0.08);
 
-  --text-primary: #18181b;        /* Pure ink black */
-  --text-secondary: #52525b;      /* Structured concrete grey */
-  --text-muted: #a1a1aa;          /* Muted sandstone */
+  --text-primary: #1e293b;        /* High contrast deep slate */
+  --text-secondary: #475569;      /* Smooth body text slate */
+  --text-muted: #94a3b8;          /* Muted slate blue icon color */
 
-  --border-glass: rgba(24, 24, 27, 0.06); /* Precise soft guidelines */
-  --border-glass-focused: rgba(24, 24, 27, 0.14);
-  --border-glow-primary: rgba(67, 56, 202, 0.08);
+  --border-glass: rgba(148, 163, 184, 0.15);
+  --border-glass-focused: rgba(148, 163, 184, 0.3);
+  --border-glow-primary: rgba(67, 56, 202, 0.12);
 
-  --bg-sidebar: #f4f4f5;          /* Cool grey light sidebar background */
-  --bg-navbar: rgba(252, 252, 252, 0.85);
-  --brand-text-start: #18181b;
-  --brand-text-end: #18181b;
-  --welcome-msg-start: #18181b;
-  --welcome-msg-end: #52525b;
-  --bg-lock-overlay: rgba(252, 252, 252, 0.94);
-  --bg-modal-overlay: rgba(24, 24, 27, 0.25);
-  --bg-prompt-box: #f4f4f5;        /* Soft paper background for prompt code */
-  --text-prompt-box: #18181b;
-  --bg-copy-btn: rgba(24, 24, 27, 0.03);
+  /* Neumorphic Shadows (Light Mode) */
+  --shadow-neumorphic-out: 10px 10px 20px #cbd5e1, -10px -10px 20px #ffffff;
+  --shadow-neumorphic-out-sm: 5px 5px 10px #cbd5e1, -5px -5px 10px #ffffff;
+  --shadow-neumorphic-in: inset 10px 10px 20px #cbd5e1, inset -10px -10px 20px #ffffff;
+  --shadow-neumorphic-in-sm: inset 5px 5px 10px #cbd5e1, inset -5px -5px 10px #ffffff;
 
-  /* Light Theme Variables */
-  --border-tag: rgba(24, 24, 27, 0.05);
-  --bg-tag-feature: rgba(24, 24, 27, 0.02);
-  --bg-tag-level: rgba(3, 105, 161, 0.04);
-  --border-tag-level: rgba(3, 105, 161, 0.1);
-  --bg-toggle-inactive: #e4e4e7;
-  --bg-toggle-circle: #71717a;
-  --bg-filter-hover: rgba(24, 24, 27, 0.02);
-  --bg-search-input: rgba(24, 24, 27, 0.01);
-  --bg-search-input-focus: rgba(24, 24, 27, 0.03);
-  --bg-profile-card: rgba(24, 24, 27, 0.01);
-  --border-profile-card: rgba(24, 24, 27, 0.04);
-  --bg-nav-btn: rgba(24, 24, 27, 0.02);
-  --bg-nav-btn-hover: rgba(24, 24, 27, 0.04);
-  --border-nav-btn-hover: rgba(24, 24, 27, 0.1);
-  --bg-connector-item: rgba(24, 24, 27, 0.01);
-  --bg-connector-item-hover: rgba(24, 24, 27, 0.03);
-  --modal-title-gradient: linear-gradient(to right, #18181b, #3f3f46);
-  --bg-copy-btn-hover: rgba(24, 24, 27, 0.06);
-  --border-copy-btn-hover: rgba(24, 24, 27, 0.12);
+  --bg-sidebar: #dce5ec;          /* Slightly indented tone for sidebar */
+  --bg-navbar: rgba(230, 238, 244, 0.85);
+  --brand-text-start: #1e293b;
+  --brand-text-end: #1e293b;
+  --welcome-msg-start: #1e293b;
+  --welcome-msg-end: #475569;
+  --bg-lock-overlay: rgba(230, 238, 244, 0.94);
+  --bg-modal-overlay: rgba(15, 23, 42, 0.2);
+  --bg-prompt-box: #dce5ec;        /* Inset container on light paper console */
+  --text-prompt-box: #1e293b;
+  --bg-copy-btn: rgba(148, 163, 184, 0.08);
 
-  --border-badge-primary: rgba(67, 56, 202, 0.1);
-  --border-badge-secondary: rgba(3, 105, 161, 0.1);
-  --border-badge-accent: rgba(109, 40, 217, 0.1);
-  --border-badge-success: rgba(4, 120, 87, 0.1);
+  --border-tag: rgba(148, 163, 184, 0.1);
+  --bg-tag-feature: rgba(148, 163, 184, 0.05);
+  --bg-tag-level: rgba(3, 105, 161, 0.06);
+  --border-tag-level: rgba(3, 105, 161, 0.15);
+  --bg-toggle-inactive: #dce5ec;
+  --bg-toggle-circle: #475569;
+  --bg-filter-hover: rgba(148, 163, 184, 0.05);
+  --bg-search-input: rgba(148, 163, 184, 0.12);
+  --bg-search-input-focus: rgba(148, 163, 184, 0.18);
+  --bg-profile-card: rgba(148, 163, 184, 0.03);
+  --border-profile-card: rgba(148, 163, 184, 0.08);
+  --bg-nav-btn: rgba(148, 163, 184, 0.05);
+  --bg-nav-btn-hover: rgba(148, 163, 184, 0.1);
+  --border-nav-btn-hover: rgba(148, 163, 184, 0.18);
+  --bg-connector-item: rgba(148, 163, 184, 0.1);
+  --bg-connector-item-hover: rgba(148, 163, 184, 0.18);
+  --modal-title-gradient: linear-gradient(to right, #1e293b, #334155);
+  --bg-copy-btn-hover: rgba(148, 163, 184, 0.15);
+  --border-copy-btn-hover: rgba(148, 163, 184, 0.22);
 
-  /* Engineering Grid Line Color */
-  --grid-line: rgba(24, 24, 27, 0.015);
+  --border-badge-primary: rgba(67, 56, 202, 0.15);
+  --border-badge-secondary: rgba(3, 105, 161, 0.15);
+  --border-badge-accent: rgba(109, 40, 217, 0.15);
+  --border-badge-success: rgba(4, 120, 87, 0.15);
 
-  /* Timeline Core Adaptive Variables */
-  --timeline-track-bg: rgba(24, 24, 27, 0.12);
-  --timeline-pin-color: rgba(24, 24, 27, 0.18);
-  --timeline-flag-bg: #ffffff;
-  --timeline-flag-bg-hover: #f4f4f5;
-  --timeline-flag-border: rgba(24, 24, 27, 0.15);
-  --timeline-flag-shadow: rgba(24, 24, 27, 0.08);
+  --grid-line: rgba(148, 163, 184, 0.03);
+
+  --timeline-track-bg: rgba(148, 163, 184, 0.2);
+  --timeline-pin-color: rgba(148, 163, 184, 0.25);
+  --timeline-flag-bg: #e6eef4;
+  --timeline-flag-bg-hover: #dce5ec;
+  --timeline-flag-border: rgba(148, 163, 184, 0.15);
+  --timeline-flag-shadow: #cbd5e1;
 }
 
 /* Base Reset & Scrollbar Styling */
@@ -240,14 +253,15 @@ p {
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   border: 1px solid var(--border-glass);
-  border-radius: 4px; /* Crisp, architectural structure */
-  box-shadow: none;   /* Flat layout */
+  border-radius: var(--border-radius-neumorphic);
+  box-shadow: var(--shadow-neumorphic-out);
   transition: var(--transition-smooth);
 }
 
 .glass-panel:hover {
   border-color: var(--border-glass-focused);
-  box-shadow: none;
+  box-shadow: var(--shadow-neumorphic-out);
+  transform: translateY(-2px);
 }
 
 /* Core Layout Container */
@@ -319,21 +333,13 @@ p {
 /* User Context Profile Card (Sidebar) */
 .context-profile-card {
   padding: 14px 16px;
-  background: var(--bg-profile-card);
-  border: 1px solid var(--border-profile-card);
-  border-radius: 4px;
+  background: var(--bg-search-input);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--border-radius-neumorphic-sm);
   margin-bottom: 24px;
+  box-shadow: var(--shadow-neumorphic-in-sm);
   position: relative;
-}
-
-.context-profile-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 2px;
-  height: 100%;
-  background: var(--color-primary);
+  overflow: hidden;
 }
 
 .profile-role-name {
@@ -357,17 +363,25 @@ p {
   align-items: center;
   justify-content: space-between;
   padding: 8px 10px;
-  background: var(--bg-connector-item);
+  background: var(--bg-dark-surface);
   border: 1px solid var(--border-glass);
-  border-radius: 4px;
-  margin-bottom: 6px;
+  border-radius: var(--border-radius-neumorphic-sm);
+  margin-bottom: 8px;
   font-size: 11px;
+  box-shadow: var(--shadow-neumorphic-out-sm);
   transition: var(--transition-fast);
 }
 
 .connector-item:hover {
   background: var(--bg-connector-item-hover);
   border-color: var(--border-glass-focused);
+  box-shadow: var(--shadow-neumorphic-out-sm);
+  transform: translateY(-1px);
+}
+
+.connector-item:active {
+  box-shadow: var(--shadow-neumorphic-in-sm);
+  transform: translateY(1px);
 }
 
 .connector-item span {
@@ -421,6 +435,7 @@ p {
   right: 0;
   bottom: 0;
   background-color: var(--bg-toggle-inactive);
+  box-shadow: var(--shadow-neumorphic-in-sm);
   transition: .15s ease-out;
   border-radius: 10px;
 }
@@ -433,7 +448,7 @@ p {
   left: 2px;
   bottom: 2px;
   background-color: var(--bg-toggle-circle);
-  box-shadow: none;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.35);
   transition: .15s ease-out;
   border-radius: 50%;
 }
@@ -457,12 +472,12 @@ input:checked + .slider:before {
   align-items: center;
   gap: 10px;
   padding: 8px 12px;
-  border-radius: 4px;
+  border-radius: var(--border-radius-neumorphic-sm);
   cursor: pointer;
   font-size: 13px;
   color: var(--text-secondary);
   transition: var(--transition-fast);
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 
 .filter-menu-item:hover {
@@ -481,12 +496,12 @@ input:checked + .slider:before {
 }
 
 .filter-menu-item.active {
-  background: var(--color-primary-glow);
+  background: var(--bg-search-input);
+  box-shadow: var(--shadow-neumorphic-in-sm);
   color: var(--color-primary);
   font-weight: 600;
-  border-left: 2px solid var(--color-primary);
-  border-radius: 0 4px 4px 0;
-  padding-left: 10px;
+  border-left: none;
+  padding-left: 12px;
 }
 
 .filter-menu-item.active .material-symbols-outlined {
@@ -533,11 +548,12 @@ input:checked + .slider:before {
   height: 38px;
   background: var(--bg-search-input);
   border: 1px solid var(--border-glass);
-  border-radius: 4px; /* Sharp minimalist */
+  border-radius: var(--border-radius-neumorphic-sm);
   padding: 0 12px 0 38px;
   color: var(--text-primary);
   font-family: var(--font-body);
   font-size: 13px;
+  box-shadow: var(--shadow-neumorphic-in-sm);
   transition: var(--transition-smooth);
 }
 
@@ -545,7 +561,7 @@ input:checked + .slider:before {
   outline: none;
   background: var(--bg-search-input-focus);
   border-color: var(--color-primary);
-  box-shadow: none; /* Solid border change only */
+  box-shadow: var(--shadow-neumorphic-in-sm);
 }
 
 .search-icon {
@@ -563,14 +579,14 @@ input:checked + .slider:before {
   gap: 12px;
 }
 
-/* Flat Minimalist Buttons */
+/* Neumorphic Tactile Buttons */
 .nav-button {
-  background: var(--bg-nav-btn);
+  background: var(--bg-dark-surface);
   border: 1px solid var(--border-glass);
   color: var(--text-primary);
   height: 38px;
   padding: 0 14px;
-  border-radius: 4px;
+  border-radius: var(--border-radius-neumorphic-sm);
   font-family: var(--font-body);
   font-size: 12px;
   font-weight: 500;
@@ -578,12 +594,20 @@ input:checked + .slider:before {
   display: flex;
   align-items: center;
   gap: 6px;
+  box-shadow: var(--shadow-neumorphic-out-sm);
   transition: var(--transition-fast);
 }
 
 .nav-button:hover {
   background: var(--bg-nav-btn-hover);
   border-color: var(--border-nav-btn-hover);
+  box-shadow: var(--shadow-neumorphic-out-sm);
+  transform: translateY(-1px);
+}
+
+.nav-button:active {
+  box-shadow: var(--shadow-neumorphic-in-sm);
+  transform: translateY(1px);
 }
 
 .nav-button span.material-symbols-outlined {
@@ -598,7 +622,7 @@ input:checked + .slider:before {
 .nav-button-primary {
   background: var(--color-primary);
   border: 1px solid var(--color-primary);
-  box-shadow: none;
+  box-shadow: var(--shadow-neumorphic-out-sm);
   color: #ffffff !important;
 }
 
@@ -609,7 +633,13 @@ input:checked + .slider:before {
 .nav-button-primary:hover {
   background: var(--color-primary-hover);
   border-color: var(--color-primary-hover);
-  box-shadow: none;
+  box-shadow: var(--shadow-neumorphic-out-sm);
+  transform: translateY(-1px);
+}
+
+.nav-button-primary:active {
+  box-shadow: var(--shadow-neumorphic-in-sm);
+  transform: translateY(1px);
 }
 
 /* Main Dashboard Body Container */
@@ -735,7 +765,7 @@ input:checked + .slider:before {
   gap: 20px;
 }
 
-/* Use Case Card Styling - Premium Structural Minimalism */
+/* Use Case Card Styling - Premium Soft Neumorphism */
 .card {
   padding: 22px;
   cursor: pointer;
@@ -747,14 +777,16 @@ input:checked + .slider:before {
   overflow: hidden;
   background: var(--bg-dark-card);
   border: 1px solid var(--border-glass);
-  border-radius: 4px;
+  border-radius: var(--border-radius-neumorphic);
+  box-shadow: var(--shadow-neumorphic-out);
   transition: var(--transition-smooth);
 }
 
-/* Card hover: sharp, subtle border changes and Left Edge Accent Slide-In */
+/* Card hover: rises gently and glows subtle accent focus */
 .card:hover {
-  transform: none; /* No scaling/lifting rules to preserve Swiss structural grid */
-  border-color: var(--text-secondary);
+  transform: translateY(-4px);
+  border-color: var(--border-glass-focused);
+  box-shadow: var(--shadow-neumorphic-out);
 }
 
 /* Hide glass flash effects */
@@ -963,12 +995,12 @@ input:checked + .slider:before {
   max-height: 700px;
   background: var(--bg-dark-modal);
   border: 1px solid var(--border-glass-focused);
-  border-radius: 4px; /* Crisp minimal corners */
-  box-shadow: none;   /* Flat aesthetic */
+  border-radius: var(--border-radius-neumorphic-lg) !important;
+  box-shadow: var(--shadow-neumorphic-out);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transform: translateY(15px); /* Slick modernist upward slide */
+  transform: translateY(15px);
   transition: var(--transition-smooth);
 }
 
@@ -1227,8 +1259,8 @@ input:checked + .slider:before {
   max-width: 520px;
   background: var(--bg-dark-surface);
   border: 1px solid var(--border-glass-focused);
-  border-radius: 4px; /* Crisp and solid */
-  box-shadow: none;
+  border-radius: var(--border-radius-neumorphic);
+  box-shadow: var(--shadow-neumorphic-out);
   padding: 36px;
   display: flex;
   flex-direction: column;
@@ -1251,12 +1283,12 @@ input:checked + .slider:before {
   width: 44px;
   height: 44px;
   background: var(--color-primary);
-  border-radius: 4px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 12px auto;
-  box-shadow: none;
+  box-shadow: var(--shadow-neumorphic-out-sm);
 }
 
 .wizard-logo .material-symbols-outlined {
@@ -1305,19 +1337,20 @@ input:checked + .slider:before {
   height: 40px;
   background: var(--bg-search-input);
   border: 1px solid var(--border-glass);
-  border-radius: 4px;
+  border-radius: var(--border-radius-neumorphic-sm);
   color: var(--text-primary);
   font-family: var(--font-body);
   font-size: 13px;
   padding: 0 12px;
   cursor: pointer;
+  box-shadow: var(--shadow-neumorphic-in-sm);
   transition: var(--transition-smooth);
 }
 
 .select-control:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: none;
+  box-shadow: var(--shadow-neumorphic-in-sm);
 }
 
 .select-control option {
@@ -2222,10 +2255,11 @@ textarea:focus::placeholder {
   width: 18px;
   height: 18px;
   border-radius: 5px;
-  border: 2px solid var(--text-muted);
-  background: var(--bg-card);
+  border: 1.5px solid var(--border-glass-focused);
+  background: var(--bg-search-input);
   flex-shrink: 0;
   margin-top: 1px;
+  box-shadow: var(--shadow-neumorphic-in-sm);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -2236,6 +2270,7 @@ textarea:focus::placeholder {
 .roadmap-task-label input[type="checkbox"]:checked + .roadmap-checkbox-indicator {
   background: #10b981;
   border-color: #10b981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.45);
 }
 
 .roadmap-checkbox-indicator::after {
@@ -2496,14 +2531,15 @@ textarea:focus::placeholder {
 .select-add-playbook {
   width: 100%;
   height: 38px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-search-input);
   border: 1px dashed var(--border-glass-focused);
-  border-radius: 6px;
+  border-radius: var(--border-radius-neumorphic-sm);
   color: var(--text-secondary);
   font-size: 12px;
   font-weight: 600;
   padding: 0 12px;
   cursor: pointer;
+  box-shadow: var(--shadow-neumorphic-in-sm);
   transition: all 0.2s ease;
   outline: none;
 }
