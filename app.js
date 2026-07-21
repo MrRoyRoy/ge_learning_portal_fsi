@@ -569,7 +569,10 @@ const uiTranslations = {
     "adminFormLabelSteps": "Procedural Guide Steps (One step per line)",
     "adminFormLabelAdvancedSteps": "Advanced Procedural Steps - Active-Integration Mode (One step per line)",
     "adminFormLabelDualModeCheckbox": "Enable Dual-Mode Template (Supports Standalone & Advanced Connector flows)",
-    "adminFormDescDualModeCheckbox": "When enabled, this playbook supports both offline manual uploads and live advanced connector flows."
+    "adminFormDescDualModeCheckbox": "When enabled, this playbook supports both offline manual uploads and live advanced connector flows.",
+    "noUseCasesTitle": "No Matching Playbooks Found",
+    "noUseCasesDesc": "We couldn't find any financial playbooks matching your current active filters, search queries, or connector requirements.",
+    "btnResetFilters": "Reset All Search Filters"
   },
   "zh-TW": {
     "wizardTitle": "Google Gemini 企業級",
@@ -634,7 +637,10 @@ const uiTranslations = {
     "adminFormLabelSteps": "標準模式操作步驟 (每行一步驟)",
     "adminFormLabelAdvancedSteps": "進階整合模式操作步驟 (每行一步驟)",
     "adminFormLabelDualModeCheckbox": "啟用雙重模式範本 (支持獨立與進階連接器工作流程)",
-    "adminFormDescDualModeCheckbox": "啟用後，此案例同時支持手動上傳與進階連接器模式，標準提示詞與步驟將由系統自動處理。"
+    "adminFormDescDualModeCheckbox": "啟用後，此案例同時支持手動上傳與進階連接器模式，標準提示詞與步驟將由系統自動處理。",
+    "noUseCasesTitle": "未找到符合的應用案例",
+    "noUseCasesDesc": "目前沒有任何金融應用案例符合您當前的篩選條件、搜尋字詞或連接器要求。",
+    "btnResetFilters": "重設所有篩選條件"
   },
   "zh-CN": {
     "wizardTitle": "Google Gemini 企业级",
@@ -699,7 +705,10 @@ const uiTranslations = {
     "adminFormLabelSteps": "标准模式操作步骤 (每行一步骤)",
     "adminFormLabelAdvancedSteps": "进阶整合模式操作步骤 (每行一步骤)",
     "adminFormLabelDualModeCheckbox": "启用双重模式范本 (支持独立与进阶连接器工作流程)",
-    "adminFormDescDualModeCheckbox": "启用后，此案例同时支持手动上传与进阶连接器模式，标准提示词与步骤将由系统自动处理。"
+    "adminFormDescDualModeCheckbox": "启用后，此案例同时支持手动上传与进阶连接器模式，标准提示词与步骤将由系统自动处理。",
+    "noUseCasesTitle": "未找到符合的应用案例",
+    "noUseCasesDesc": "目前没有任何金融应用案例符合您当前的筛选条件、搜索词或连接器要求。",
+    "btnResetFilters": "重置所有筛选条件"
   }
 };
 
@@ -6437,10 +6446,10 @@ function renderTimeline() {
     
     // Custom label inside card
     let shortName = id === "day0" ? (isZh ? "Day 0 配置" : "Day 0 Setup")
-                  : id === "pre" ? (isZh ? "學期準備" : "Pre-Semester")
-                  : id === "sem1" ? (isZh ? "正式啟動" : "Sem 1 Launch")
-                  : id === "mid" ? (isZh ? "期中試點" : "Mid-Term Pilot")
-                  : (isZh ? "期末審計" : "Exam Audit");
+                  : id === "pre" ? (isZh ? "試點準備" : "Pilot Prep")
+                  : id === "sem1" ? (isZh ? "擴展部署" : "Expansion")
+                  : id === "mid" ? (isZh ? "全面規模化" : "Enterprise Scale")
+                  : (isZh ? "持續安全合規" : "Security Compliance");
 
     desktopHtml += `
       <!-- Node Joint ${id} -->
