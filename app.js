@@ -4502,9 +4502,17 @@ async function loadAdminUseCases() {
         <td style="padding: 12px 8px; text-transform: capitalize; color: var(--text-secondary);">${uc.category}</td>
         <td style="padding: 12px 8px; color: var(--text-muted);">${uc.role}</td>
         <td style="padding: 12px 8px;">${verifiedLabel}</td>
-        <td style="padding: 12px 8px; text-align: right; display: flex; gap: 8px; justify-content: flex-end;">
-          <button class="nav-button btn-edit-case" style="height: 28px; padding: 0 10px; font-size: 11px;">${isAssist ? 'View' : 'Edit'}</button>
-          ${isAssist ? '' : '<button class="nav-button btn-delete-case" style="height: 28px; padding: 0 10px; font-size: 11px; background: var(--color-danger); border-color: var(--color-danger); color: #ffffff !important;">Delete</button>'}
+        <td style="padding: 12px 8px; text-align: right; display: flex; gap: 8px; justify-content: flex-end; align-items: center;">
+          <button class="nav-button btn-edit-case" style="height: 28px; padding: 0 10px; font-size: 11px; display: inline-flex; align-items: center; gap: 4px; color: var(--text-primary) !important;">
+            <span class="material-symbols-outlined" style="font-size: 14px; color: var(--text-secondary);">edit</span>
+            <span>${isAssist ? 'View' : 'Edit'}</span>
+          </button>
+          ${isAssist ? '' : `
+            <button class="nav-button btn-delete-case" style="height: 28px; padding: 0 10px; font-size: 11px; display: inline-flex; align-items: center; gap: 4px; background: var(--color-danger); border-color: var(--color-danger); color: #ffffff !important;">
+              <span class="material-symbols-outlined" style="font-size: 14px; color: white !important;">delete</span>
+              <span>Delete</span>
+            </button>
+          `}
         </td>
       `;
 
@@ -7017,9 +7025,17 @@ async function loadAdminChecklists() {
         <td style="padding: 12px 8px; line-height: 1.4;">${cp.text}</td>
         <td style="padding: 12px 8px; line-height: 1.4; color: var(--text-secondary);">${cp.text_zh}</td>
         <td style="padding: 12px 8px; line-height: 1.4; color: var(--text-secondary);">${cp.text_cn || cp.text_zh || cp.text}</td>
-        <td style="padding: 12px 8px; text-align: right; display: flex; gap: 8px; justify-content: flex-end;">
-          <button class="nav-button btn-edit-checkpoint" style="height: 28px; padding: 0 10px; font-size: 11px;">${isAssist ? 'View' : 'Edit'}</button>
-          ${isAssist ? '' : '<button class="nav-button btn-delete-checkpoint" style="height: 28px; padding: 0 10px; font-size: 11px; background: var(--color-danger); border-color: var(--color-danger); color: #ffffff !important;">Delete</button>'}
+        <td style="padding: 12px 8px; text-align: right; display: flex; gap: 8px; justify-content: flex-end; align-items: center;">
+          <button class="nav-button btn-edit-checkpoint" style="height: 28px; padding: 0 10px; font-size: 11px; display: inline-flex; align-items: center; gap: 4px; color: var(--text-primary) !important;">
+            <span class="material-symbols-outlined" style="font-size: 14px; color: var(--text-secondary);">edit</span>
+            <span>${isAssist ? 'View' : 'Edit'}</span>
+          </button>
+          ${isAssist ? '' : `
+            <button class="nav-button btn-delete-checkpoint" style="height: 28px; padding: 0 10px; font-size: 11px; display: inline-flex; align-items: center; gap: 4px; background: var(--color-danger); border-color: var(--color-danger); color: #ffffff !important;">
+              <span class="material-symbols-outlined" style="font-size: 14px; color: white !important;">delete</span>
+              <span>Delete</span>
+            </button>
+          `}
         </td>
       `;
 

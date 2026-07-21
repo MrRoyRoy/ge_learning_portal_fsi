@@ -205,7 +205,15 @@ To compile and deploy updates or new releases of the portal to the live producti
     * Upgraded the event dispatcher in `app.js` and styled `.connector-item` in `style.css` so clicking *any portion of the connector card* triggers the integration toggle, with a pointer cursor and disabled text selection.
   * **Static Non-Clickable Brand Icon (100% Complete):**
     * Removed confusing scale-up and glowing color transition mouse effects from the non-clickable brand logo icon next to "FSI Adoption Hub", keeping it clean, premium, and static.
+  * **High-Contrast Admin Action Buttons (100% Complete):**
+    * Refactored both Use Cases and Checklist verification row action templates inside `app.js` to use inline-flex button containers with custom Material edit/delete icons, explicit text spans, and clear accessibility.
+  * **Obvious Sidebar Menu Selected States (100% Complete):**
+    * Styled `.filter-menu-item.active` (like "Explore Playbooks") with a striking vertical left-edge accent border in brand Royal Tech Blue, a flush corner radius, and an elegant 8% primary tech blue glow background tint.
+  * **Subtly Refined Soft Neumorphic Glows (100% Complete):**
+    * Toned down the excessively bright drop shadows and focus glows on the `continuous-pipeline-capsule`, `.timeline-node-joint:hover`, and `.floating-feedback-button` to perfectly balance the soft-instrument aesthetic.
+  * **Backend "Draft with Gemini" IAM Infrastructure (100% Complete):**
+    * Enabled the GCP Vertex AI platform APIs (`"aiplatform.googleapis.com"`) and bound the Vertex AI User role (`"roles/aiplatform.user"`) to the dedicated Cloud Run runner service account (`"fsi-portal-runner"`) inside `terraform/main.tf` to resolve authorization errors.
 
 ### Next Steps & Continuous Polish
-1. **Container Build & Live Production Release:** Compile, verify, and push changes live to Google Cloud Run and verify access.
-2. **Review User Feedback:** Review user interactions with the newly released soft-instrument design.
+1. **Infrastructure Application & Re-deployment:** Execute Terraform updates to apply Vertex AI API and service account IAM bindings, then run standard `gcloud run deploy` to push the containerized code changes.
+2. **Post-Deployment Validation:** Authenticate in the live portal, verify checklist action visibility, navigate sidebar tabs, and run a live mock generative test using "Draft with Gemini" to confirm smooth operations.

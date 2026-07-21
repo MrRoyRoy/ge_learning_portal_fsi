@@ -13,7 +13,8 @@ resource "google_project_service" "apis" {
     "artifactregistry.googleapis.com",
     "cloudresourcemanager.googleapis.com",
     "iam.googleapis.com",
-    "compute.googleapis.com"
+    "compute.googleapis.com",
+    "aiplatform.googleapis.com"
   ])
   project            = var.project_id
   service            = each.key
@@ -85,6 +86,13 @@ resource "google_service_account" "run_sa" {
 resource "google_project_iam_member" "cloudsql_client" {
   project = var.project_id
   role    = "roles/cloudsql.client"
+  member  = "serviceAccount:${google_service_account.run_sa.email}"
+}
+
+# Grant Cloud Run Service Account Vertex AI User Access to query Gemini
+resource "google_project_iam_member" "vertex_user" {
+  project = var.project_id
+  role    = "roles/aiplatform.user"
   member  = "serviceAccount:${google_service_account.run_sa.email}"
 }
 
